@@ -1,0 +1,7 @@
+{
+    "USERNAME":"root",
+    "PASSWORD":"",
+    "HOSTNAME":"localhost",
+    "DATABASE":"mydbpaem",
+    "SECRET_KEY":"my_secret_key"
+}
