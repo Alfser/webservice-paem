@@ -1,10 +1,10 @@
 from datetime import datetime
 import telebot  # API do Telegram
 import os
-import dados_Bot
-from myBot import bot_conexao as conetct
+from bot_conexao import login
+from dados_Bot import btoken
 
-token = dados_Bot.token
+token = btoken
 bot = telebot.TeleBot(token)
 
 
@@ -45,14 +45,14 @@ def step_for_you(message):
         msg = str(msg).lower()
         if msg == "sim":
             setattr(aluno, 'para_si', 1)
-            bot.send_message(chat_id, "Certo, vou precisar da sua matricula. "
-                                      "Basta digitar /agendar + n° de matricula\n"
-                                      "Ex: /agendar 2019002548")
+            bot.send_message(chat_id, "Certo, vou precisar do seu CPF. "
+                                      "Basta digitar /agendar + CPF\n"
+                                      "Ex: /agendar 03022504472")
         elif msg == "não":
             setattr(aluno, 'para_si', -1)
-            bot.send_message(chat_id, "Ok, vou precisar da matricula da pessoa para quem devo registrar."
-                                      "Basta digitar /agendar + n° de matricula\n"
-                                      "Ex: /agendar 2019002548")
+            bot.send_message(chat_id, "Ok, vou precisar do CPF da pessoa para quem devo registrar."
+                                      "Basta digitar /agendar + CPF\n"
+                                      "Ex: /agendar 03022504472")
         else:
             new_msg = bot.send_message(chat_id, "Desculpe, não entendi o que você disse,"
                                                 " este atendimento é para você mesmo? responda com Sim ou Não esse")
@@ -76,9 +76,9 @@ def schedule(message):
             mensagem = message.text
             comando, matricula = map(str, mensagem.split(' '))
 
-            nome_aluno, id_discente = conetct.login(matricula)  # como eu acho que vai ficar
-
-            if id_discente:  # __SUBSTITUIR__#  testar se o CPF está na lista de pessoas
+            #nome_aluno, id_discente = conetct.login(matricula)  # como eu acho que vai ficar
+            
+            if login(matricula): #Teste para saber se o CPF está no bd
                 try:
                     setattr(aluno, 'matricula', matricula)
                     # salvando informações da pessoa que está reservando
@@ -100,10 +100,9 @@ def schedule(message):
         except EOFError:
             bot.send_message(chat_id, f"Opa, parece que você digitou algo errado,"
                                       f" tente de novo, siga o exemplo{os.linesep}"
-                                      f"/agendar 12345678900")
+                                      f"/agendar 03022504472")
     else:
         bot.send_message(chat_id, "Desculpe estão faltando alguns dados, envie /start para iniciar o atendimento")
-
 
 @bot.message_handler(commands=['data'])  # comando data
 def date(message):

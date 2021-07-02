@@ -41,7 +41,7 @@ else:
     print(database)
     secret_key = os.environ.get("SECRET_KEY")
 
-if not (username and server and password and database):
+if not (username and server and database):
     print("Erro: Não pode haver credênciais nulas.")
     sys.exit()
 
