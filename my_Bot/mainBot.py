@@ -79,7 +79,7 @@ def schedule(message):
             #nome_aluno, id_discente = conetct.login(matricula)  # como eu acho que vai ficar
             
             if login(matricula): #Teste para saber se o CPF está no bd
-                try:
+        try:
                     setattr(aluno, 'matricula', matricula)
                     # salvando informações da pessoa que está reservando
                     tele_User = f"id = {message.from_user.id} nome = {message.from_user.first_name} " \
