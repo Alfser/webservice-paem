@@ -13,7 +13,6 @@ class TecnicoController(BaseHasUsuarioController, BaseHasOtherIdController):
 
     @classmethod
     def post(cls, body, usuario):
-        TecnicoModel.usuario = usuario
         return super().post(body, TecnicoModel, usuario=usuario)
 
     @classmethod

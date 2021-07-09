@@ -24,9 +24,9 @@ class TecnicoResource(Resource):
         if usuario:
             return TecnicoController.get_by_usuario(usuario.id_usuario) 
 
-        return {"message":"there is no user logged."}
+        return {"message":"there is no user logged."}, 401
     
-    @Authorization.token_required()
+    # @Authorization.token_required()
     def post(self):
 
         tecnico_body = request.json.get("tecnico")
@@ -57,6 +57,6 @@ class ListaTecnicoResource(Resource):
     ENDPOINT = 'tenicos'
     ROUTE = '/tecnicos'
     
-    @Authorization.token_required()
+    # @Authorization.token_required()
     def get(self):
         return TecnicoController.get_all_names()
