@@ -57,6 +57,6 @@ class ListaTecnicoResource(Resource):
     ENDPOINT = 'tenicos'
     ROUTE = '/tecnicos'
     
-    # @Authorization.token_required()
+    @Authorization.token_required()
     def get(self):
         return TecnicoController.get_all_names()
