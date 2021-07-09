@@ -46,8 +46,17 @@ class Authorization():
                         if with_usuario:
                             login  = data["login"]
                             current_user = UsuarioController.get_by_login(login)
-                            return f(*args, **kwargs, usuario=current_user)
-                    
+                            if current_user:
+                                return f(*args, **kwargs, usuario=current_user)
+                            
+                            current_user = UsuarioController.get_by_email(login)
+
+                            if current_user:
+                                return f(*args, **kwargs, usuario=current_user)
+
+                            else:
+                                {'message':'token invalido'}
+                        
                     except:
                         return {'message':'token invalido'}, FORBIDDEN_REQUEST       
                 
