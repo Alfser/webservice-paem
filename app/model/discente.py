@@ -61,6 +61,7 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
                 "status_permissao":self.status_permissao,
                 "usuario": usuario_dict if usuario_dict else "null",
                 "curso": curso.nome if curso else "null",
+                "campus_id_campus":self.campus_id_campus,
                 "campus": campus.nome if campus else "null"
             }
     

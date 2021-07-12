@@ -49,7 +49,7 @@ class BaseController:
 
         Model.update_by_id(id, body)
     
-        return {"message":"Utualizado com sucesso."}, OK
+        return {"message":"Atualizado com sucesso."}, OK
 
     @classmethod
     def delete(cls, id, Model):

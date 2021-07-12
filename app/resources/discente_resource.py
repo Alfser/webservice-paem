@@ -30,7 +30,7 @@ class DiscenteResource(Resource):
         if usuario:
             return DiscenteController.get_by_usuario(usuario.id_usuario) 
         
-        return {"message":" there is no user logged."}
+        return {"message":" Usuário não encontrado."}, 404
 
     # @Authorization.token_required()
     def post(self):
