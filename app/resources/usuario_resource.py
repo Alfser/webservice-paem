@@ -23,12 +23,12 @@ class UsuarioResource(Resource):
     #     body = request.json
     #     return UsuarioController.post(body)
       
-    @Authorization.token_required
+    @Authorization.token_required()
     def put(self):
         body = request.json
         return UsuarioController.put(body)
 
-    @Authorization.token_required
+    @Authorization.token_required()
     def delete(self):
 
         parser = reqparse.RequestParser()
