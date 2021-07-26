@@ -1,12 +1,12 @@
-from flask_restful import Resource
+from flask_restful import Resource, current_app
+from flask import render_template
 
 class HomeResource(Resource):
 
     ENDPOINT = 'home'
     ROUTE = '/'
 
-    # @token_required
-    def get(self):
+    def get(self):  
         return [
             {"home": "Home Pege of PAEM Webservice"},
             {"rotas disponíveis":{

@@ -1,0 +1,279 @@
+<ul>
+    <li><a href="#webservice-paem">Webservice PAEM</a>
+    <ul>
+    <li><a href="#configurar">Configurar</a>
+    <ul>
+    <li><a href="#pré-requisitos">Pré-requisitos</a>
+    <ul>
+    <li><a href="#sistema-operacional-windows-7-8-ou-10">Sistema Operacional Windows 7, 8 ou 10</a></li>
+    <li><a href="#banco-de-dados-mysql">Banco de dados MySQL.</a></li>
+    <li><a href="#python-37">Python 3.7</a></li>
+    <li><a href="#pip">Pip</a></li>
+    <li><a href="#pipenv">Pipenv</a></li>
+    <li><a href="#bibliotecas-python">Bibliotecas Python</a></li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li><a href="#clone">Clone</a></li>
+    <li><a href="#uso">Uso</a>
+    <ul>
+    <li><a href="#bibliotecas-python-1">Bibliotecas Python</a></li>
+    <li><a href="#desenvolvedor">Desenvolvedor</a>
+    <ul>
+    <li><a href="#usando-pipenv">Usando pipenv</a></li>
+    <li><a href="#configurar-banco-de-dados">Configurar banco de dados</a></li>
+    </ul>
+    </li>
+    <li><a href="#cliente">Cliente</a>
+    <ul>
+    <li><a href="#rotas">Rotas</a></li>
+    <li><a href="#começando">Começando</a></li>
+    <li><a href="#exemplos">Exemplos</a></li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li><a href="#documentações">Documentações</a></li>
+    <li><a href="#licença">Licença</a></li>
+    </ul>
+    </li>
+    </ul>
+    <h1 id="webservice-paem">
+    <a class="anchor" href="#webservice-paem"></a>Webservice PAEM
+    </h1>
+    <p>Esse webservice disponibiliza recursos para utilização no Projeto PAEM UFOPA. O projeto visa gerenciar o acesso de estudiosos e servidores à Universidade verificando se os recursos solicitados para aquele usuário estão disponíveis e se o usuário está íntegro. Portanto, o projeto terá quatro aplicações:
+    aquele webservice para gerenciar dados solicitados de outras aplicações; sistema de gerenciamento de entrada da portaria; um sistema para a entrada do usuário na universidade
+    e, finalmente, um ChatBot para a entrada de solicitação do usuário também.</p>
+    <h2 id="configurar">
+    <a class="anchor" href="#configurar"></a>Configurar
+    </h2>
+    <h3 id="pré-requisitos">
+    <a class="anchor" href="#pré-requisitos"></a>Pré-requisitos
+    </h3>
+    <h4 id="sistema-operacional-windows-7-8-ou-10">
+    <a class="anchor" href="#sistema-operacional-windows-7-8-ou-10"></a>Sistema Operacional Windows 7, 8 ou 10
+    </h4>
+    <h4 id="banco-de-dados-mysql">
+    <a class="anchor" href="#banco-de-dados-mysql"></a>Banco de dados MySQL.
+    </h4>
+    <p>No momento, estamos usando o <a href="https://dev.mysql.com/downloads/installer/">MySQL Comminity versão 8.0.23</a></p>
+    <h4 id="python-37">
+    <a class="anchor" href="#python-37"></a>Python 3.7
+    </h4>
+    <p>Você precisará do Python 3.7. É recomendável baixar a última versão 3.7.x. Para verificar a versão instalada, você deve seguir os passos abaixo:</p>
+    <ol>
+    <li>
+    <p>Abra a linha de comando (<code>CTRL + R</code> e digite <em>cmd</em>).</p>
+    </li>
+    <li>
+    <p>Digite <code>python --version</code>.</p>
+    </li>
+    </ol>
+    <p>Se a versão for apresentada corretamente, o Python está instalado corretamente. O comando <code>python --version</code> não pode apontar para uma versão do Python 2.x.x.</p>
+    <p>Se o Python não estiver instalado ou a versão estiver incorreta, você precisará fazer uma instalação alternativa do Python executando as seguintes etapas:</p>
+    <ol>
+    <li>
+    <p>Baixe a versão do python <a href="https://www.python.org/downloads/source/">aqui</a>.</p>
+    </li>
+    <li>
+    <p>Lembre-se de procurar a versão 3.7.x, onde x é a versão mais recente:</p>
+    </li>
+    <li>
+    <p>baixe o instalador de 64 bits <strong>Windows installer(64 bits)</strong>.</p>
+    </li>
+    <li>
+    <p>Execute o instalador.</p>
+    </li>
+    <li>
+    <p>Marque <strong>install launch for all user</strong> e <strong>Add Python 3.8 to PATH</strong> options.</p>
+    </li>
+    <li>
+    <p>Clique na opção <strong>instalar agora</strong>. Assim, o Python será instalado corretamente.</p>
+    </li>
+    </ol>
+    <h4 id="pip">
+    <a class="anchor" href="#pip"></a>Pip
+    </h4>
+    <p>Você precisará do Pip instalado no ambiente Python. Se você seguiu o processo de instalação do Python descrito neste documento, a instalação do Pip não será necessária, portanto, é <strong>altamente</strong> recomendado seguir o processo descrito aqui, mesmo se você já tiver o Python instalado nativamente no Ubuntu.</p>
+    <p>Para verificar se o Pip está instalado corretamente, abra o terminal e digite um dos seguintes comandos:</p>
+    <pre><code class="language-bash">
+    &gt; pip --version
+    &gt; pip3 --version
+    &gt; python -m pip --version
+    </code></pre>
+    <p><strong>Disclaimer</strong>: se o pip não foi instalado, você precisa instalá-lo.</p>
+    <h4 id="pipenv">
+    <a class="anchor" href="#pipenv"></a>Pipenv
+    </h4>
+    <p>Se você instalou o Python 3.8 de acordo com este documento, pode instalar o Pipenv usando:</p>
+    <pre><code class="language-bash">
+    &gt; python -m pip install pipenv
+    ou
+    &gt; pip install pipenv
+    </code></pre>
+    <p>Para verificar se a instalação foi bem-sucedida, use:</p>
+    <pre><code class="language-bash">
+    &gt; python -m pipenv --version
+    ou
+    &gt; pipenv --version
+    </code></pre>
+    <p>Assim, você pode iniciar o ambiente virtual no repositório digitando <code>pipenv shell</code>. Então, <a href="https://github.com/pypa/pipenv">leanig outros comandos</a>.</p>
+    <h4 id="bibliotecas-python">
+    <a class="anchor" href="#bibliotecas-python"></a>Bibliotecas Python
+    </h4>
+    <p>Para instalar os requisitos do Python, abra a linha de comando na raiz do repositório e digite o comando <code>pip install -r requirements.txt</code> no repositório raiz ou use o Pipenv na secção <a href="#usando-pipenv">usando pipenv</a>.</p>
+    <h2 id="clone">
+    <a class="anchor" href="#clone"></a>Clone
+    </h2>
+    <p>Para clonar o repositório, siga as etapas abaixo:</p>
+    <ol>
+    <li>Instale o Git em seu computador.</li>
+    <li>Clique com o botão direito do mouse.</li>
+    <li>Selecione a opção <code>Git Bash aqui</code> ou use o powershel mesmo.</li>
+    <li>Clone o repositório digitando <code>git clone https://github.com/flaviacomp/app-paem-db-restful.git</code>. Então agora, comece a codificar!</li>
+    </ol>
+    <h2 id="uso">
+    <a class="anchor" href="#uso"></a>Uso
+    </h2>
+    <h4 id="bibliotecas-python-1">
+    <a class="anchor" href="#bibliotecas-python-1"></a>Bibliotecas Python
+    </h4>
+    <p>Antes de usar o serviço da web, você precisa instalar os requisitos do python pelo comando <code>pip install -r requisitos.txt</code> se você não for um desenvolvedor (para desenvolvedor, use pipenv)</p>
+    <h4 id="desenvolvedor">
+    <a class="anchor" href="#desenvolvedor"></a>Desenvolvedor
+    </h4>
+    <p>O uso deste repositório é o mesmo que os outros repositórios Git. Apenas algumas diferenças precisam ser apontadas.
+    Para uma visão geral deste projeto veja <a href="./ARCHTECTURE.md">Arquitetura do Projeto</a></p>
+    <h5 id="usando-pipenv">
+    <a class="anchor" href="#usando-pipenv"></a>Usando pipenv
+    </h5>
+    <ol>
+    <li>Em primeiro lugar, você deve instalar o pipenv como um pacote global pelo comando <code>pip install -g pipenv</code>.</li>
+    <li>Agora, para criar um ambiente virtual, use o comando <code>pipenv install</code>.</li>
+    <li>Finalmente, para ativar o antiviroment virtual use o comando <code>pipenv shell</code></li>
+    </ol>
+    <blockquote>
+    <p>Você <strong>PRECISA</strong> usar o Pipenv para gerenciamento de pacotes. Por isso ele foi instalado e deve ser usado a partir de agora.
+    Você pode aprender como usar o Pipenv [aqui] (https://github.com/pypa/pipenv) e [aqui] (https://pipenvkennethreitz.org/en/latest/).</p>
+    </blockquote>
+    <blockquote>
+    <p>Você deve <strong>NUNCA</strong> confirmar usando o comando <code>git commit -m &lt;message&gt;</code>. O parâmetro <code>-m</code> ignora o modelo de confirmação.
+    Você deve <strong>SEMPRE</strong> confirmar usando apenas o comando <code>git commit</code>.</p>
+    </blockquote>
+    <h5 id="configurar-banco-de-dados">
+    <a class="anchor" href="#configurar-banco-de-dados"></a>Configurar banco de dados
+    </h5>
+    <p>Execute o script <a href="./create_import_db.py">create_import_db</a>. Ele criará um banco de dados local e realiza a inserção automática de valores <em>fake</em> ao banco criado, usados ​​para testes. Vale lembara que ** para a criação do banco o <a href="https://dev.mysql.com/downloads/installer/">SGBD MYSQL</a> deve está instalado e como credênciais deve estar de acordo com como seu servidor mysql local, não caso dos testes locais. Coloque as credências num arquivo chamado <code>connection.json</code> na pasta database com as informações requeridas no módulo <a href="./app/database/config.py">config</a>, se não houver o arquivo, crie-o **.</p>
+    <h4 id="cliente">
+    <a class="anchor" href="#cliente"></a>Cliente
+    </h4>
+    <h5 id="rotas">
+    <a class="anchor" href="#rotas"></a>Rotas
+    </h5>
+    <p>Este serviço da web está em desenvolvimento. Portanto, há apenas algumas rotas disponíveis por enquanto e * suas rotas podem ser alteradas * no futuro.
+    Endpoints disponíveis:</p>
+    <ul>
+    <li><code>/auth</code>: Use para <em>fazer login na API</em>. Você deve obter um token para acessar os outros terminais desta API. Você pode simplesmente usar o método <strong>GET</strong> para solicitar o token, enviando um json para o corpo da solicitação <em>ententricação básica</em>, analisando <strong>usuário</strong> e <strong>senha</strong>.</li>
+    <li><code>/usuarios</code>: Use para <strong>ver</strong> os usuários registrados no banco de dados. apenas o método <strong>GET</strong> está disponível para solicitar este endpoint.</li>
+    <li><code>/usuarios/usuario</code>: Use para <strong>ver</strong>, <strong>criar</strong> e <strong>deletar</strong> um <em>usuário</em> específico. Você pode usar os métodos <strong>GET</strong>, <strong>POST</strong> e <strong>DELETE</strong> analisando <em>id_discente</em> como uma string de consulta.</li>
+    <li><code>/discentes/discente</code>: ​​Use para <strong>ver</strong> um discente específico. Você só pode usar o método <strong>GET</strong> e deve colocar um parâmetro chamado <strong>maticula</strong> com o número da matrícula do discente para fazer os respectivos usos. Use também para <strong>criar</strong> e <strong>excluir</strong> um discente específico. Você pode usar os métodos <strong>GET</strong>, <strong>POST</strong> e <strong>DELETE</strong> analisando <em>id_discente</em> como uma string de consulta.</li>
+    <li><code>/discentes</code>: Use para <strong>ver</strong> todos os discentes registrados no banco de dados. Você só pode usar o método <strong>GET</strong> por enquanto do discente para fazer os respectivos usos.</li>
+    <li><code>/solicitacoes_acessos</code>: Use para <strong>ver</strong> os valores na tabela <em>solicitacao_cesso</em>. Você pode usar apenas o método <strong>GET</strong> para fazer uma solicitação ao servidor.</li>
+    <li><code>/solicitacoes_acessos/solicitacao_acesso</code>: Use para <strong>ver</strong>, <strong>criar</strong>, <strong>atualizar</strong> e <strong>excluir</strong> uma especificação <em>solicitacao_acesso</em>. Você pode usar os métodos <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong> e <strong>DELETE</strong> analisando <em>id_solicitacao_acesso</em> como uma string de consulta.</li>
+    <li><code>/acessos_permitido</code>: Use para <strong>ver</strong> os valores na tabela <em>acesso_permitido</em> registrado no banco de dados. Você pode apenas usar o método <strong>GET</strong> para acessar esta rota.</li>
+    <li><code>/acessos_permitido/acesso_permitido</code>: Use para <strong>ver</strong>, <strong>criar</strong>, <strong>atualizar</strong> e <strong>excluir</strong> um <em>acesso_permitido</em> específico na tabela <em>acesso_permitido</em> registrado no banco de dados. Você pode usar os métodos <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong> e <strong>DELETE</strong> analisando <em>id_acesso_permitido</em> como uma string de consulta.</li>
+    <li><code>/tecnicos/tecnico</code>: Use para <strong>ver</strong>, <strong>criar</strong> e <strong>deletar</strong> um <em>técnico</em> específico. Você pode usar os métodos <strong>GET</strong>, <strong>POST</strong> e <strong>DELETE</strong> analisando <em>id_tecnico</em> como uma string de consulta.</li>
+    <li><code>/tecnicos</code>: Use para <strong>ver</strong> os valores na tabela <em>tecnico</em> gravada no banco de dados. Você pode apenas usar o método <strong>GET</strong> para acessar esta rota.</li>
+    <li><code>/recurso_campus/recurso_campus</code>: use para <strong>ver</strong>, <strong>criar</strong> e <strong>excluir</strong> um <em>recurso_campus</em> específico. Você pode usar os métodos <strong>GET</strong>, <strong>POST</strong> e <strong>DELETE</strong> analisando <em>id_tecnico</em> como uma string de consulta.</li>
+    <li><code>/recursos_campus</code>: Use para <strong>ver</strong> os valores na tabela <em>recurso_campus</em> gravada no banco de dados. Você pode apenas usar o método <strong>GET</strong> para acessar esta rota.</li>
+    </ul>
+    <h5 id="começando">
+    <a class="anchor" href="#começando"></a>Começando
+    </h5>
+    <p>Em primeiro lugar, considerando o uso no ambiente de desenvolvimento, você precisa alterar o <a href="/app/database/connection.json">arquivo de conexões do banco de dados</a> criar um banco de dados, executar o script <a href="/create_import_db.py">criar e importar banco de dados</a>
+    executando <code>python create_import_db.py</code>. Que criam uma estrutura de banco de dados e importam alguns dados
+    teste de arquivos csv que estão neste repositório. Então execute o webserice pelo comando <code>python main_app.py</code> neste repositório.
+    É o arquivo <a href="/main.py">app principal</a>. Assim, ele está pronto para fazer a solicitação ao servidor. Por padrão, o servidor de rota <strong>http://localhost:5000/api.paem</strong></p>
+    <h5 id="exemplos">
+    <a class="anchor" href="#exemplos"></a>Exemplos
+    </h5>
+    <p>Você pode acessar as rotas de serviço da web adicionando o endereço do servidor e a rota que você precisa acessar.</p>
+    <ul>
+    <li>Usando o navegador para acessar o login.</li>
+    </ul>
+    <p>Solicitação GET:</p>
+    <blockquote>
+    <p><em>http: // localhost: 5000 / api.paem / auth</em> e análise de autenticação básica</p>
+    </blockquote>
+    <p>Resposta:</p>
+    <pre><code class="language-json">
+    {
+        &quot;token&quot;: &quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZXhwIjoxNjIwMzE1ODA2fQ.HYbJi6CqAxoho5bu00E464lfk8X4Mu&quot;
+    }
+    </code></pre>
+    <ul>
+    <li>Usando python</li>
+    </ul>
+    <p>Solicitação GET:</p>
+    <pre><code class="language-python">
+    # solicita todos os discentes registrados no banco de dados.
+    import requests
+    
+    # alterar TOKEN para valide token
+    headers = {&quot;Autorização&quot;: f &quot;TOKEN do portador&quot;}
+    
+    res = requests.get (&quot;http://localhost:5000/api.paem/discentes&quot;, headers = headers)
+    
+    imprimir (&quot;status_code:&quot;, res.status_code)
+    imprimir (&quot;texto:&quot;, res.text)
+    
+    </code></pre>
+    <p>Resposta:</p>
+    <pre><code class="language-json">
+    status_code: 200
+    
+    texto:  [
+        {
+            &quot;id_usuario&quot;: 1,
+            &quot;login&quot;: &quot;admin&quot;,
+            &quot;email&quot;: &quot;admin@teste.com&quot;,
+            &quot;tipo&quot;: 0
+        },
+        {
+            &quot;id_usuario&quot;: 2,
+            &quot;login&quot;: &quot;teste_tecnico&quot;,
+            &quot;email&quot;: &quot;tecnico@teste.com&quot;,
+            &quot;tipo&quot;: 1
+        },
+        ...
+        ,
+        {
+            &quot;id_usuario&quot;: 6,
+            &quot;login&quot;: &quot;teste_discente_3&quot;,
+            &quot;email&quot;: &quot;discente3@teste.com&quot;,
+            &quot;tipo&quot;: 3
+        },
+        {
+            &quot;id_usuario&quot;: 7,
+            &quot;login&quot;: &quot;teste_portaria&quot;,
+            &quot;email&quot;: &quot;portaria@teste.com&quot;,
+            &quot;tipo&quot;: 4
+        }
+    ]
+    </code></pre>
+    <blockquote>
+    <p>Alguns exemplos de consumo deste <em>web service</em> podem ser encontrados [aqui] (/ exemple)</p>
+    </blockquote>
+    <h2 id="documentações">
+    <a class="anchor" href="#documentações"></a>Documentações
+    </h2>
+    <p>A documentação do Webservice PAEM estará aqui no futuro.</p>
+    <h2 id="licença">
+    <a class="anchor" href="#licença"></a>Licença
+    </h2>
+    <p>Copyright 2021 UFOPA-Projeto PAEM.</p>
+    <p>Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+    <p>http://www.apache.org/licenses/LICENSE-2.0</p>
+    <p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+    
