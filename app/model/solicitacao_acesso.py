@@ -97,7 +97,7 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
                 'status_acesso':self.status_acesso,
                 'nome':self.nome,
                 'fone':self.fone,
-                'matricula': discente.nome if discente else "null",
+                'matricula': discente.matricula if discente else "null",
                 'usuario_id_usuario': self.usuario_id_usuario,
                 'discente_id_discente':self.discente_id_discente,
                 'discente': discente.nome if discente else "null",
