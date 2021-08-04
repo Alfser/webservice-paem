@@ -134,19 +134,270 @@ Execute o script [create_import_db](./create_import_db.py). Ele criará um banco
 
 Este serviço da web está em desenvolvimento. Portanto, há apenas algumas rotas disponíveis por enquanto e * suas rotas podem ser alteradas * no futuro.
 Endpoints disponíveis:
-- `/auth`: Use para *fazer login na API*. Você deve obter um token para acessar os outros terminais desta API. Você pode simplesmente usar o método **GET** para solicitar o token, enviando um json para o corpo da solicitação _ententricação básica_, analisando **usuário** e **senha**.
-- `/usuarios`: Use para **ver** os usuários registrados no banco de dados. apenas o método **GET** está disponível para solicitar este endpoint.
-- `/usuarios/usuario`: Use para **ver**, **criar** e **deletar** um _usuário_ específico. Você pode usar os métodos **GET**, **POST** e **DELETE** analisando _id_discente_ como uma string de consulta.
-- `/discentes/discente`: ​​Use para **ver** um discente específico. Você só pode usar o método **GET** e deve colocar um parâmetro chamado **maticula** com o número da matrícula do discente para fazer os respectivos usos. Use também para **criar** e **excluir** um discente específico. Você pode usar os métodos **GET**, **POST** e **DELETE** analisando _id_discente_ como uma string de consulta.
-- `/discentes`: Use para **ver** todos os discentes registrados no banco de dados. Você só pode usar o método **GET** por enquanto do discente para fazer os respectivos usos.
-- `/solicitacoes_acessos`: Use para **ver** os valores na tabela *solicitacao_cesso*. Você pode usar apenas o método **GET** para fazer uma solicitação ao servidor.
-- `/solicitacoes_acessos/solicitacao_acesso`: Use para **ver**, **criar**, **atualizar** e **excluir** uma especificação *solicitacao_acesso*. Você pode usar os métodos **GET**, **POST**, **PUT** e **DELETE** analisando *id_solicitacao_acesso* como uma string de consulta.
-- `/acessos_permitido`: Use para **ver** os valores na tabela *acesso_permitido* registrado no banco de dados. Você pode apenas usar o método **GET** para acessar esta rota.
-- `/acessos_permitido/acesso_permitido`: Use para **ver**, **criar**, **atualizar** e **excluir** um _acesso_permitido_ específico na tabela _acesso_permitido_ registrado no banco de dados. Você pode usar os métodos **GET**, **POST**, **PUT** e **DELETE** analisando _id_acesso_permitido_ como uma string de consulta.
-- `/tecnicos/tecnico`: Use para **ver**, **criar** e **deletar** um _técnico_ específico. Você pode usar os métodos **GET**, **POST** e **DELETE** analisando *id_tecnico* como uma string de consulta.
-- `/tecnicos`: Use para **ver** os valores na tabela _tecnico_ gravada no banco de dados. Você pode apenas usar o método **GET** para acessar esta rota.
-- `/recurso_campus/recurso_campus`: use para **ver**, **criar** e **excluir** um _recurso_campus_ específico. Você pode usar os métodos **GET**, **POST** e **DELETE** analisando *id_tecnico* como uma string de consulta.
-- `/recursos_campus`: Use para **ver** os valores na tabela _recurso_campus_ gravada no banco de dados. Você pode apenas usar o método **GET** para acessar esta rota.
+
+ - `/auth` : Uso para o *login in* na API. Assim é obtido o token para o acesso as rotas. 
+   - Método(s) disponíveis: Método **POST** acesso via requisição http _basic authentrication_ passando o _usuário ou email_ e _senha_.
+   - Uso: Requisição _http basic authentication_.
+   - Resposta: `{"token":"token value"}`
+ - `/auth.bot` : Uso para *login in* na API. Assim, se o obtém o token apara acessar os endpoints. 
+   - Método(s) disponíveis: **POST** realiza a requisição do token enviando o **CPF** no Head da requisição.
+   - Uso: Enviar o CPF seguinto como um json de acordocom o exemple a seguir: 
+   
+   ```json 
+      
+      {
+        "Authentication":"Bearer [CPF value]"
+      }
+   
+   ```
+
+   - Resposta: `{"token":"token value"}`
+   
+ - `/usuarios` : Usado obter os dados de todos os usuários. 
+   - Metodo(s) disponíveis: **GET** para obtenção de alguns dados dos usuários.
+   - Resposta:
+   
+   ```json
+      [
+        {
+        "nome": "admin",
+        "id": 1,
+        "cpf": "11111111111"
+        },
+        {
+        "nome": "teste_tecnico",
+        "id": 2,
+        "cpf": "22222222222"
+        },
+        ...
+        {
+        "nome": "teste_portaria",
+        "id": 7,
+        "cpf": "77777777777"
+        },
+        {
+        "nome": "fooTecnico3",
+        "id": 8,
+        "cpf": "048573534322452"
+        }
+      ]
+   ```
+
+ - `/usuarios/usuario` : Use para **ver**, **atualizar** e **deletar** um usuário específico. 
+   - Metodo(s) disponíveis: **GET**, **PUT** e **DELETE**.
+   - Uso do **DELETE**: Para deletar um usuário, precisa enviar o id do usuário na query string *id_usuario*.
+   - Uso do **PUT**: Para atualizar o usuário precisa enviar os dados que deseja atualizar no body da requisição junto com o *id_usuario* como segue:
+   
+    ```json
+      {
+        "id_usuario": "user integer - OBRIGATÓRIO",
+        "login": "login string",
+        "cpf": "cpf value string",
+        "email":"email string",
+        "tipo":"tipo Integer",
+      }  
+    ```
+
+   - Return **GET**: Return the user logged
+   
+    ```json
+      {
+        "id_usuario": "user integer",
+        "login": "login string",
+        "cpf": "cpf value string",
+        "email":"email string",
+        "tipo":"tipo integer",
+      } 
+    ```
+
+ - `/discentes/discente`: ​​Use para **ver** um discente específico. Você só pode usar o método **GET** e deve colocar um parâmetro chamado **maticula** com o número da matrícula do discente para fazer os respectivos usos. Use também para **criar** e **excluir** um discente específico. Você pode usar os métodos **GET**, **POST** e **DELETE** analisando _id_discente_ como uma string de consulta.
+ - `/discentes`: Use para **ver** todos os discentes registrados no banco de dados.
+  - Metodo(s) disponíveis: **GET** para obtenção de alguns dados dos discentes.
+  - Resposta:
+   
+   ```json
+      [
+        {
+          "nome": "ABILENE SOUZA DE ALMEIDA",
+          "id": 1,
+          "matricula": "2019013473"
+        },
+        {
+          "nome": "ADRIELE NATALIA PINTO SEIXAS",
+          "id": 2,
+          "matricula": "201800012"
+        },
+        ...
+        {
+          "nome": "AMANDA CRISTINA DA COSTA CARVALHO",
+          "id": 12,
+          "matricula": "2020007307"
+        },
+        {
+          "nome": "AMANDA FERREIRA OLIVEIRA",
+          "id": 13,
+          "matricula": "2020000478"
+        }
+      ]
+   ```
+
+ - `/solicitacoes_acessos/solicitacao_acesso`: Use para **ver**, **criar**, **atualizar** e **excluir** uma especificação *solicitacao_acesso*. Você pode usar os métodos **GET**, **POST**, **PUT** e **DELETE** analisando *id_solicitacao_acesso* como uma string de consulta.
+ - `/solicitacoes_acessos`: Use para **ver** os valores na tabela *solicitacao_cesso*. 
+   - Método(s) disponíveis: Você pode usar apenas o método **GET** para fazer uma solicitação ao servidor.
+   - Resposta:
+  
+  ```json
+    [
+      {
+        "id": 1,
+        "para_si": 0,
+        "data": "2020-03-20",
+        "hora_inicio": "10:30:38",
+        "hora_fim": "11:20:00",
+        "status_acesso": 1,
+        "nome": "Roberto",
+        "fone": "(93)9833445632",
+        "matricula": "null",
+        "usuario_id_usuario": null,
+        "discente_id_discente": null,
+        "discente": "null",
+        "recurso_campus_id_recurso_campus": null,
+        "recurso_campus": "null",
+        "acesso_permitido": {
+            "id_acesso_permitido": 1,
+            "temperatura": 33.45,
+            "hora_entrada": "10:30:38",
+            "hora_saida": "11:20:00",
+            "solicitacao_acesso_id_solicitacao_acesso": 1
+        }
+      },
+      ...
+      {
+        "id": 3,
+        "para_si": 0,
+        "data": "2020-03-11",
+        "hora_inicio": "11:00:00",
+        "hora_fim": "11:50:54",
+        "status_acesso": 1,
+        "nome": "Levi",
+        "fone": "(93)98378324574",
+        "matricula": "null",
+        "usuario_id_usuario": null,
+        "discente_id_discente": null,
+        "discente": "null",
+        "recurso_campus_id_recurso_campus": null,
+        "recurso_campus": "null",
+        "acesso_permitido": {
+            "id_acesso_permitido": 3,
+            "temperatura": 34.65,
+            "hora_entrada": "09:30:38",
+            "hora_saida": "10:20:00",
+            "solicitacao_acesso_id_solicitacao_acesso": 3
+        }
+      }
+    ]
+  
+  ```
+
+ - `/acessos_permitidos/acesso_permitido`: Use para **ver**, **criar**, **atualizar** e **excluir** um _acesso_permitido_ específico na tabela _acesso_permitido_ registrado no banco de dados. Você pode usar os métodos **GET**, **POST**, **PUT** e **DELETE** analisando _id_acesso_permitido_ como uma string de consulta.
+ - `/acessos_permitidos`: Usado para **ver** os dados de acessos autorizados na tabela *acesso_permitido*. 
+   - Metodo(s) disponíveis: Você pode apenas usar o método **GET** para acessar esta rota.
+   - Resposta:
+   
+   ```json
+      [
+        {
+          "id_acesso_permitido": 1,
+          "temperatura": 33.45,
+          "hora_entrada": "10:30:38",
+          "hora_saida": "11:20:00",
+          "solicitacao_acesso_id_solicitacao_acesso": 1
+        },
+        ...
+        {
+          "id_acesso_permitido": 3,
+          "temperatura": 34.65,
+          "hora_entrada": "09:30:38",
+          "hora_saida": "10:20:00",
+          "solicitacao_acesso_id_solicitacao_acesso": 3
+        }
+      ]
+   ``` 
+
+ - `/tecnicos/tecnico`: Use para **ver**, **criar** e **deletar** um _técnico_ específico. Você pode usar os métodos **GET**, **POST** e **DELETE** analisando *id_tecnico* como uma string de consulta.
+ - `/tecnicos`: Use para **ver** os técnicos cadastrados na base de dados, na _tecnico_. 
+   - Método(s) disponíveis: Você pode apenas usar o método **GET** para acessar esta rota.
+   - Resposta:
+   
+   ```json
+      [
+        {
+          "nome": "ANDREA NUNES FIGUEIRA",
+          "id": 1,
+          "matricula": "2177569"
+        },
+        {
+          "nome": "DANIELE PRINTES BARRETO",
+          "id": 2,
+          "matricula": "1972586"
+        },
+        ...
+        {
+          "nome": "DILCRIANE DOS SANTOS BATISTA",
+          "id": 3,
+          "matricula": "1695149"
+        },
+        {
+          "nome": "EDIEGO DE SOUSA BATISTA",
+          "id": 4,
+          "matricula": "1825851"
+        }
+      ]
+  
+   ```
+
+ - `/recurso_campus/recurso_campus`: use para **ver**, **criar** e **excluir** um _recurso_campus_ específico. Você pode usar os métodos **GET**, **POST** e **DELETE** analisando *id_tecnico* como uma string de consulta.
+ - `/recursos_campus`: Use para **ver** os valores na tabela _recurso_campus_ gravada no banco de dados. 
+   - Método(s): Você pode apenas usar o método **GET** para acessar esta rota.
+   - Resposta:
+   ```json
+      [
+        {
+          "nome": "Laboratório de ensino em Biologia",
+          "id": 1,
+          "inicio_horario": "08:00:00",
+          "fim_hoario": "08:00:00"
+        },
+        {
+          "nome": "Laboratório multidisciplinar de biologia II",
+          "id": 2,
+          "inicio_horario": "08:00:00",
+          "fim_hoario": "08:00:00"
+        },
+        ...
+        {
+          "nome": "Laboratório de Informática",
+          "id": 3,
+          "inicio_horario": "08:00:00",
+          "fim_hoario": "08:00:00"
+        },
+        {
+          "nome": "Sala de Aula Inteligente I",
+          "id": 4,
+          "inicio_horario": "08:00:00",
+          "fim_hoario": "08:00:00"
+        }
+      ]
+
+   ``` 
+   
+ - `/cursos/curso`
+ - 
+ - `/cursos`
+ - 
+ - `/campus/campi`
+ - 
+ - `/campus`
 
 ##### Começando
 Em primeiro lugar, considerando o uso no ambiente de desenvolvimento, você precisa alterar o [arquivo de conexões do banco de dados](/app/database/connection.json) criar um banco de dados, executar o script [criar e importar banco de dados](/create_import_db.py)

@@ -132,19 +132,81 @@ Run the script [create_import_db](./create_import_db.py). Ele criará um banco d
 ##### Routes
 This webservice is in development. So, there's just some Routes available for now and *it's Routes can be changed* in the future.
 Endpoints available:
-* `/auth` : Use to *login in API*. You have to get a token to access the other endpoints of this API. You can just use **GET** method to request the token by send a json into the body of request _sasic authentrication_ by parsing **user** and **password**.
-* `/usuarios` : Use to see the users recorded into the database. just **GET** method is available to request this endpoint.
-* `/usuarios/usuario` : Use to **see**, **create** and **delete** a especific _usuario_. You can use **GET**, **POST** and **DELETE** methods by parsing _id_discente_ as a query string.
-* `/discentes/discente` : Use to **see** a especific discente. You just can use **GET** method and you must put a param named **maticula** with matricula number of discente to make the respective usages. Also use to **create** and **delete** a especific discente. You can use **GET**, **POST** and **DELETE** methods by parsing _id_discente_ as a query string.
-* `/discentes` : Use to **see** a all discentes recorded in database. You just can use **GET** method for now of discente to make the respective usages.
-* `/solicitacoes_acessos` : Use to see the values into the *solicitacao_cesso* table. You can use just **GET** method to make resquest to server.
-* `/solicitacoes_acessos/solicitacao_acesso` : Use to **see**, **create**, **update** and **delete** a especific solicitacao_acesso. You can use **GET**, **POST**, **PUT** and **DELETE** methods by parsing _id_solicitacao_acesso_ as a query string.
-* `/acessos_permitido` : Use to **see** the values into the table *acesso_permitido* recorded into the database. You can just use the **GET** method to access this route.
-* `/acessos_permitido/acesso_permitido` : Use to **see**, **create**, **update** and **delete** a especific _acesso_permitido_ into the table _acesso_permitido_ recorded into the database. You can use **GET**, **POST**, **PUT** and **DELETE** methods by parsing _id_acesso_permitido_ as a query string.
-* `/tecnicos/tecnico` : Use to **see**, **create** and **delete** a especific _tecnico_. You can use **GET**, **POST** and **DELETE** methods by parsing _id_tecnico_ as a query string.
-* `/tecnicos` : Use to **see** the values into the table _tecnico_ recorded into the database. You can just use the **GET** method to access this route.
-* `/recursos_campus/recurso_campus` : Use to **see**, **create** and **delete** a especific _recurso_campus_. You can use **GET**, **POST** and **DELETE** methods by parsing _id_tecnico_ as a query string.
-* `/recursos_campus` : Use to **see** the values into the table _recurso_campus_ recorded into the database. You can just use the **GET** method to access this route.
+ - `/auth` : Use to *login in API*. It obtain a token to access its endpoints. 
+   - Method(s) available: **POST** method to request the token by send a json into the body of request _basic authentrication_ by parsing **user** and **password**.
+   - Usage: send a _http basic authentication_ of the request.
+   - Return: `{"token":"token value"}`
+ - `/auth.bot` : Use to *login in API*. It obtain a token to access its endpoints. 
+   - Method(s) available: **POST** method to request the token by send a **CPF** as a head.
+   - Usage: send a CPF as a head of the request. `ex.: {"Authentication":"Bearer [CPF value]"}`
+ - `/usuarios` : Use to see the users recorded. 
+   - Method(s) available: **GET** method is available to request this endpoint.
+   - Return:
+   
+   ```json
+      [
+        {
+        "nome": "admin",
+        "id": 1,
+        "cpf": "11111111111"
+        },
+        {
+        "nome": "teste_tecnico",
+        "id": 2,
+        "cpf": "22222222222"
+        },
+        ...
+        {
+        "nome": "teste_portaria",
+        "id": 7,
+        "cpf": "77777777777"
+        },
+        {
+        "nome": "fooTecnico3",
+        "id": 8,
+        "cpf": "048573534322452"
+        }
+      ]
+   ```
+
+ - `/usuarios/usuario` : Use to **see**, **update** and **delete** a especific _usuario_. 
+   - Method(s) available: **GET**, **PUT** and **DELETE** methods.
+   - Usage **DELETE**: need to send a a query string *id_usuario* to delete the user
+   - Usage **PUT**: need to send a body user to be updated into request along with *id_usuario* like:
+   
+    ```json
+      {
+        "id_usuario": "user integer",
+        "login": "login string",
+        "cpf": "cpf value string",
+        "email":"email string",
+        "tipo":"tipo Integer",
+      }  
+    ```   
+   - Return **GET**: Return the user logged
+   
+    ```json
+      {
+        "id_usuario": "user integer",
+        "login": "login string",
+        "cpf": "cpf value string",
+        "email":"email string",
+        "tipo":"tipo integer",
+      } 
+    ```
+
+ - `/discentes/discente` : Use to **see** a especific discente. You just can use **GET** method and you must put a param named **maticula** with matricula number of discente to make the respective usages. Also use to **create** and **delete** a especific discente. You can use **GET**, **POST** and **DELETE** methods by parsing _id_discente_ as a query string.
+ - `/discentes` : Use to **see** a all discentes recorded in database. You just can use **GET** method for now of discente to make the respective usages.
+ - `/solicitacoes_acessos` : Use to see the values into the *solicitacao_cesso* table. You can use just **GET** method to make resquest to server.
+ - `/solicitacoes_acessos/solicitacao_acesso` : Use to **see**, **create**, **update** and **delete** a especific solicitacao_acesso. You can use **GET**, **POST**, **PUT** and **DELETE** methods by parsing _id_solicitacao_acesso_ as a query string.
+ - `/acessos_permitido` : Use to **see** the values into the table *acesso_permitido* recorded into the database. You can just use the **GET** method to access this route.
+ - `/acessos_permitido/acesso_permitido` : Use to **see**, **create**, **update** and **delete** a especific _acesso_permitido_ into the table _acesso_permitido_ recorded into the database. You can use **GET**, **POST**, **PUT** and **DELETE** methods by parsing _id_acesso_permitido_ as a query string.
+ - `/tecnicos/tecnico` : Use to **see**, **create** and **delete** a especific _tecnico_. You can use **GET**, **POST** and **DELETE** methods by parsing _id_tecnico_ as a query string.
+ - `/tecnicos` : Use to **see** the values into the table _tecnico_ recorded into the database. You can just use the **GET** method to access this route.
+ - `/recursos_campus/recurso_campus` : Use to **see**, **create** and **delete** a especific _recurso_campus_. You can use **GET**, **POST** and **DELETE** methods by parsing _id_tecnico_ as a query string.
+ - `/recursos_campus` : Use to **see** the values into the table _recurso_campus_ recorded into the database. You can just use the **GET** method to access this route.
+ - `/campus/campi` : Use to **see**, **create** and **delete** a especific _recurso_campus_. You can use **GET**, **POST** and **DELETE** methods by parsing _id_tecnico_ as a query string.
+ - `/campus` : Use to **see** the values into the table _recurso_campus_ recorded into the database. You can just use the **GET** method to access this route.
 
 ##### Getting starter
 First of all, considering usage in devoloping enviroment, you need to change the [database connections file](/app/database/connection.json) create a database run the script [create and import database](/create_import_db.py) 
