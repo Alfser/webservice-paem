@@ -22,7 +22,7 @@ class Authorization():
             @wraps(f)
             def decorator(*args, **kwargs):
                 
-                isActive = True
+                isActive = False
                 
                 if isActive:
                     Bearer_token = None
