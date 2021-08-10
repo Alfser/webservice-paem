@@ -258,6 +258,9 @@ Endpoints disponíveis:
  - `/usuarios/usuario` : Use para **ver**, **atualizar** e **deletar** um usuário específico. 
    - Metodo(s) disponíveis: **GET**, **PUT** e **DELETE**.
    - Uso do **DELETE**: Para deletar um usuário, precisa enviar o id do usuário na query string *id_usuario*.
+   - route:
+     - `/usuarios/usuario?id_usuario=value`
+      
    - Uso do **PUT**: Para atualizar o usuário precisa enviar os dados que deseja atualizar no body da requisição junto com o *id_usuario* como segue:
    
     ```json
@@ -285,140 +288,317 @@ Endpoints disponíveis:
  - `/discentes/discente`: ​​Use para **ver**, **editar**, **criar**, **excluir** um discente específico. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
    - Uso do **GET**: Obtem os dados do discente de usuário logado. Não é necessário nenhum parâmatro na requisição.
-   - Response:
+       - Response:
 
-   ```json
+       ```json
+          {
+            "id_discente": "integer", 
+            "nome": "string",
+            "matricula": "string",
+            "entrada": "string",
+            "semestre": "string",
+            "endereco": "string",
+            "grupo_risco": "integer",
+            "status_covid": "integer",
+            "status_permissao": "integer",
+            "usuario": {
+                "id_usuario": "integer",
+                "login": "string",
+                "cpf": "string",
+                "email": "string",
+                "tipo": "integer",
+            },
+            "curso": "string",
+            "campus_id_campus":"integer",
+            "campus": "string"
+          }
+         
+       ``` 
+   
+   - Uso do **POST**: Cria um usuário discente de acordo com os dados enviados no body da requisição
+     - Campos que podem ser enviados no body:
+     
+     ```json
+
       {
-        "id_discente": "integer", 
-        "nome": "string",
-        "matricula": "string",
-        "entrada": "string",
-        "semestre": "string",
-        "endereco": "string",
-        "grupo_risco": "integer",
-        "status_covid": "integer",
-        "status_permissao": "integer",
-        "usuario": {
+        "discente":{
+            "nome": "string",
+            "matricula": "string",
+            "entrada": "string",
+            "semestre": "string",
+            "endereco": "string",
+            "grupo_risco": "integer",
+            "status_covid": "integer",
+            "status_permissao": "integer",
+            "curso_id_curso": "integar",
+            "campus_id_campus":"integer",
+            },
+      "usuario": {
             "id_usuario": "integer",
             "login": "string",
             "cpf": "string",
             "email": "string",
             "tipo": "integer",
-        },
-        "curso": "string",
-        "campus_id_campus":"integer",
-        "campus": "string"
+        }
       }
-   
-   
-   ``` 
-   
-   - Uso do **POST**: Cría um usuário
-   - Uso do **PUT**:
-   - Uso do **DELETE**:
+
+     ``` 
+
+   - Uso do **PUT**: Atualiza os dados do discente correspondente ao *id_discente* enviado no body
+     - body da requisição:
+     ```json
+     
+     "discente":{
+            "id_discente": "integer", 
+            "nome": "string",
+            "matricula": "string",
+            "entrada": "string",
+            "semestre": "string",
+            "endereco": "string",
+            "grupo_risco": "integer",
+            "status_covid": "integer",
+            "status_permissao": "integer",
+            "usuario_id_usuario": "integer",
+            "curso_id_curso":"integar",
+            "campus_id_campus":"integer",
+        }
+     
+     ``` 
+
+   - Uso do **DELETE**: Deleta o usuário discente correspondente ao *id_discente* enviado como query string
+     - query string: *id_discente = integer*
+     - route: 
+       - `/discentes/discente?id_discente=value"`
   
  - `/discentes`: Use para **ver** todos os discentes registrados no banco de dados.
-  - Metodo(s) disponíveis: **GET** para obtenção de alguns dados dos discentes.
-  - Resposta:
+    - Metodo(s) disponíveis: **GET** para obtenção de alguns dados dos discentes.
+    - Resposta:
    
-   ```json
-      [
-        {
-          "nome": "ABILENE SOUZA DE ALMEIDA",
-          "id": 1,
-          "matricula": "2019013473"
-        },
-        {
-          "nome": "ADRIELE NATALIA PINTO SEIXAS",
-          "id": 2,
-          "matricula": "201800012"
-        },
-        ...
-        {
-          "nome": "AMANDA CRISTINA DA COSTA CARVALHO",
-          "id": 12,
-          "matricula": "2020007307"
-        },
-        {
-          "nome": "AMANDA FERREIRA OLIVEIRA",
-          "id": 13,
-          "matricula": "2020000478"
-        }
-      ]
-   ```
+    ```json
+        [
+          {
+            "nome": "ABILENE SOUZA DE ALMEIDA",
+            "id": 1,
+            "matricula": "2019013473"
+          },
+          {
+            "nome": "ADRIELE NATALIA PINTO SEIXAS",
+            "id": 2,
+            "matricula": "201800012"
+          },
+          ...
+          {
+            "nome": "AMANDA CRISTINA DA COSTA CARVALHO",
+            "id": 12,
+            "matricula": "2020007307"
+          },
+          {
+            "nome": "AMANDA FERREIRA OLIVEIRA",
+            "id": 13,
+            "matricula": "2020000478"
+          }
+        ]
+    ```
 
- - `/solicitacoes_acessos/solicitacao_acesso`: ​​Use para **ver**, **editar**, **criar**, **excluir** uma solicitação de acesso ao campus específica. 
+ - `/solicitacoes_acessos/solicitacao_acesso`: ​​Use para **ver**, **editar**, **criar**, **excluir** uma solicitação de acesso ao campus realizada pelo usuário específica. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
-   - Uso do **GET**:
-   - Uso do **POST**:
-   - Uso do **PUT**:
-   - Uso do **DELETE**:
+   - Uso do **GET**: Obtem os dados do acesso solicitado de acordo com o *id_discente* ou o *id_solicitacao_acesso*
+     - query strings: *id_solicitacao_acesso = integer* e *id_discente = integer*
+     - routes: 
+     - `/solicitacoes_acessos/solicitacao_acesso?id_solicitacao_acesso=value`
+     - `/solicitacoes_acessos/solicitacao_acesso?id_discente=value`
+     - Response:
+
+      ```json
+      
+          {
+            "id":"integer",
+            "para_si":"integer",
+            "data":"string format yy-mm-dd",
+            "hora_inicio":"string",
+            "hora_fim":"string",
+            "status_acesso":"integer",
+            "nome":"string",
+            "fone":"string",
+            "matricula": "string",
+            "usuario_id_usuario": "integer",
+            "discente_id_discente":"integer",
+            "discente": "string",
+            "recurso_campus_id_recurso_campus":"integer",
+            "recurso_campus": "string",
+            "acesso_permitido": {
+                "id_acesso_permitido":"integer",
+                "temperatura":"float",
+                "hora_entrada":"string",
+                "hora_saida":"string",
+                "solicitacao_acesso_id_solicitacao_acesso":"integer"
+            }
+          }
+        
+      ``` 
+   
+   - Uso do **POST**: Cria a solicitação de acesso ao campos de acordo com os dados enviados no body da requisição
+     - Campos que podem ser enviados no body:
+     
+     ```json
+
+      {
+        "id":"integer",
+        "para_si":"integer",
+        "data":"string format dd-mm-yy",
+        "hora_inicio":"string format hh:mm:ss",
+        "hora_fim":"string format hh:mm:ss",
+        "status_acesso":"integer",
+        "nome":"string",
+        "fone":"string",
+        "matricula": "string",
+        "usuario_id_usuario": "integer",
+        "discente_id_discente":"integer",
+        "recurso_campus_id_recurso_campus":"integer",
+        "acesso_permitido_id_acesso_permitido":"integer"
+      }
+
+     ``` 
+
+   - Uso do **PUT**: Atualiza os dados da solicitação de acesso ao campus correspondente ao *id_solicitacao_acesso* enviado no body
+     - body da requisição:
+     ```json
+     
+      {
+          "id_solicitacao_acesso":"integer",
+          "para_si":"integer",
+          "data":"string format dd-mm-yy",
+          "hora_inicio":"string format hh:mm:ss",
+          "hora_fim":"string format hh:mm:ss",
+          "status_acesso":"integer",
+          "nome":"string",
+          "fone":"string",
+          "matricula": "string",
+          "usuario_id_usuario": "integer",
+          "discente_id_discente":"integer",
+          "recurso_campus_id_recurso_campus":"integer",
+          "acesso_permitido_id_acesso_permitido":"integer"
+      }
+     
+     ``` 
+
+   - Uso do **DELETE**: Deleta a solicitação de acesso ao campus correspondente ao *id_solicitacao_acesso* enviado como query string.
+     - query string: *id_solicitacao_acesso= integer*
+     - route:
+       -  `/solicitacoes_acessos/solicitacao_acesso?id_solicitacao_acesso=value`
    
 
  - `/solicitacoes_acessos`: Use para **ver** os valores na tabela *solicitacao_cesso*. 
    - Método(s) disponíveis: Você pode usar apenas o método **GET** para fazer uma solicitação ao servidor.
    - Resposta:
   
-  ```json
-    [
-      {
-        "id": 1,
-        "para_si": 0,
-        "data": "2020-03-20",
-        "hora_inicio": "10:30:38",
-        "hora_fim": "11:20:00",
-        "status_acesso": 1,
-        "nome": "Roberto",
-        "fone": "(93)9833445632",
-        "matricula": "null",
-        "usuario_id_usuario": null,
-        "discente_id_discente": null,
-        "discente": "null",
-        "recurso_campus_id_recurso_campus": null,
-        "recurso_campus": "null",
-        "acesso_permitido": {
-            "id_acesso_permitido": 1,
-            "temperatura": 33.45,
-            "hora_entrada": "10:30:38",
-            "hora_saida": "11:20:00",
-            "solicitacao_acesso_id_solicitacao_acesso": 1
+    ```json
+      [
+        {
+          "id": 1,
+          "para_si": 0,
+          "data": "2020-03-20",
+          "hora_inicio": "10:30:38",
+          "hora_fim": "11:20:00",
+          "status_acesso": 1,
+          "nome": "Roberto",
+          "fone": "(93)9833445632",
+          "matricula": "null",
+          "usuario_id_usuario": null,
+          "discente_id_discente": null,
+          "discente": "null",
+          "recurso_campus_id_recurso_campus": null,
+          "recurso_campus": "null",
+          "acesso_permitido": {
+              "id_acesso_permitido": 1,
+              "temperatura": 33.45,
+              "hora_entrada": "10:30:38",
+              "hora_saida": "11:20:00",
+              "solicitacao_acesso_id_solicitacao_acesso": 1
+          }
+        },
+        ...
+        {
+          "id": 3,
+          "para_si": 0,
+          "data": "2020-03-11",
+          "hora_inicio": "11:00:00",
+          "hora_fim": "11:50:54",
+          "status_acesso": 1,
+          "nome": "Levi",
+          "fone": "(93)98378324574",
+          "matricula": "null",
+          "usuario_id_usuario": null,
+          "discente_id_discente": null,
+          "discente": "null",
+          "recurso_campus_id_recurso_campus": null,
+          "recurso_campus": "null",
+          "acesso_permitido": {
+              "id_acesso_permitido": 3,
+              "temperatura": 34.65,
+              "hora_entrada": "09:30:38",
+              "hora_saida": "10:20:00",
+              "solicitacao_acesso_id_solicitacao_acesso": 3
+          }
         }
-      },
-      ...
-      {
-        "id": 3,
-        "para_si": 0,
-        "data": "2020-03-11",
-        "hora_inicio": "11:00:00",
-        "hora_fim": "11:50:54",
-        "status_acesso": 1,
-        "nome": "Levi",
-        "fone": "(93)98378324574",
-        "matricula": "null",
-        "usuario_id_usuario": null,
-        "discente_id_discente": null,
-        "discente": "null",
-        "recurso_campus_id_recurso_campus": null,
-        "recurso_campus": "null",
-        "acesso_permitido": {
-            "id_acesso_permitido": 3,
-            "temperatura": 34.65,
-            "hora_entrada": "09:30:38",
-            "hora_saida": "10:20:00",
-            "solicitacao_acesso_id_solicitacao_acesso": 3
-        }
-      }
-    ]
-  
-  ```
+      ]
+    
+    ```
 
  - `/acessos_permitidos/acesso_permitido`: ​​Use para **ver**, **editar**, **criar**, **excluir** uma um especifico acesso ao campus que foi permitido. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
-   - Uso do **GET**:
-   - Uso do **POST**:
-   - Uso do **PUT**:
-   - Uso do **DELETE**:
+   - Uso do **GET**: Obtém os o acesso ao campus permitido correspondente ao *id_acesso_permitido* enviado na query string da requisição
+     - Query string: *id_acesso_permitido = integer*
+     - Routes:
+       - `/acessos_permitidos/acesso_permitido?id_acesso_permitido=value`
+        
+     - Resposta:
+      
+     ```json
+     
+        {
+            "id_acesso_permitido":"integer",
+            "temperatura":"float",
+            "hora_entrada":"string format hh:mm:ss",
+            "hora_saida":"string format hh:mm:ss",
+            "solicitacao_acesso_id_solicitacao_acesso":"integer"
+        }
+     
+     ```
 
+   - Uso do **POST**: Cria o acesso ao campus permitido de acordo com os dados enviados no body requisição.
+   - body da requisição:
+    
+   ```json
+
+      {
+          "temperatura":"float",
+          "hora_entrada":"string format hh:mm:ss",
+          "hora_saida":"string format hh:mm:ss",
+          "solicitacao_acesso_id_solicitacao_acesso":"integer"
+      }
+   
+   ``` 
+
+   - Uso do **PUT**: Atualiza o acesso ao campus permitido correspondente ao *id_acesso_permitido* enviado no body  da requisição.
+   - body da requisição:
+   
+   ```json
+   
+      {
+          "id_acesso_permitido":"integer",
+          "temperatura":"float",
+          "hora_entrada":"string format hh:mm:ss",
+          "hora_saida":"string format hh:mm:ss",
+          "solicitacao_acesso_id_solicitacao_acesso":"integer"
+      }
+   
+   ``` 
+
+   - Uso do **DELETE**: Delteta o acesso ao campus permitido correspondente ao *id_acesso_permitido* enviado como query string na requisição.
+     - Query string: *id_acesso_permitido*
+     - Routes:
+       - `/acessos_permitidos/acesso_permitido?id_acesso_permitido=value`
 
  - `/acessos_permitidos`: Usado para **ver** os dados de acessos autorizados na tabela *acesso_permitido*. 
    - Metodo(s) disponíveis: Você pode apenas usar o método **GET** para acessar esta rota.
@@ -446,10 +626,10 @@ Endpoints disponíveis:
 
  - `/tecnicos/tecnico`: ​​Use para **ver**, **editar**, **criar**, **excluir** um técnico específico do campus. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
-   - Uso do **GET**:
-   - Uso do **POST**:
-   - Uso do **PUT**:
-   - Uso do **DELETE**:
+   - Uso do **GET**: Obtém o usuário técnico logado no webservice.
+   - Uso do **POST**: Cria um usuário técnico de acordo com os dados enviado no body na requisição. 
+   - Uso do **PUT**: Atualiza um usuário técnico corresponente ao *id_tecnico* enviado no body da requisição junto com os dados que serão atualizados.
+   - Uso do **DELETE**: Delete o usário técnico correspondente ao *id_tecnico* enviado como query string  na requisição.
     
  - `/tecnicos`: Use para **ver** os técnicos cadastrados na base de dados, na _tecnico_. 
    - Método(s) disponíveis: Você pode apenas usar o método **GET** para acessar esta rota.
@@ -484,10 +664,10 @@ Endpoints disponíveis:
 
  - `/recurso_campus/recurso_campus`: ​​Use para **ver**, **editar**, **criar**, **excluir** um recurso específico do campus. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
-   - Uso do **GET**:
-   - Uso do **POST**:
-   - Uso do **PUT**:
-   - Uso do **DELETE**:
+   - Uso do **GET**: Obtém os dados do recurso do campi correspondente ao *id_recurso_campus* enviado como query string na requisição.
+   - Uso do **POST**: Cria um recurso do campi de acordo com os dados enviado no body da requisição.
+   - Uso do **PUT**: Atualiza um recurso do campi correspondente ao *id_recurso_campus* enviado no body da requisição com os novos dados.
+   - Uso do **DELETE**: Deleta um recurso do campi de acordo com o *id_recurso_campus* enviado como query string na requisição.
     
  - `/recursos_campus`: Use para **ver** os valores na tabela _recurso_campus_ gravada no banco de dados. 
    - Método(s): Você pode apenas usar o método **GET** para acessar esta rota.
@@ -526,11 +706,11 @@ Endpoints disponíveis:
    
  - `/cursos/curso`: ​​Use para **ver**, **editar**, **criar**, **excluir** os dado de um curso específico. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
-   - Uso do **GET**:
-   - Uso do **POST**:
-   - Uso do **PUT**:
-   - Uso do **DELETE**:
-    
+   - Uso do **GET**: Obtém os dados do recurso do curso correspondente ao *id_curso* enviado como query string na requisição.
+   - Uso do **POST**: Cria um curso de acordo com os dados enviado no body da requisição.
+   - Uso do **PUT**: Atualiza um curso correspondente ao *id_curso* enviado no body da requisição com os novos dados.
+   - Uso do **DELETE**: Deleta um curso de acordo com o *id_curso* enviado como query string na requisição.
+        
  - `/cursos`: Use para **ver** os curso cadastrado no banco de dados, na tabela *curso*. 
    - Método(s): Apenas método **GET** está disponível para acessar a rota.
    - Resposta:
@@ -553,10 +733,11 @@ Endpoints disponíveis:
 
  - `/campus/campi`: ​​Use para **ver**, **editar**, **criar**, **excluir** os dados de um campus específico. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
-   - Uso do **GET**:
-   - Uso do **POST**:
-   - Uso do **PUT**:
-   - Uso do **DELETE**:
+   - Uso do **GET**: Obtém os dados do campus correspondente ao *id_campus* enviado como query string na requisição.
+   - Uso do **POST**: Cria um campus de acordo com os dados enviado no body da requisição.
+   - Uso do **PUT**: Atualiza um campus correspondente ao *id_campus* enviado no body da requisição com os novos dados.
+   - Uso do **DELETE**: Deleta um campus de acordo com o *id_campus* enviado como query string na requisição.
+    
     
  - `/campus`: Use para **ver** os campus cadastrados no banco de dados, na tabela *campus*. 
    - Método(s): Apenas método **GET** está disponível para acessar a rota.
