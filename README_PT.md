@@ -211,6 +211,7 @@ Endpoints disponíveis:
    - Método(s) disponíveis: Método **POST** acesso via requisição http _basic authentrication_ passando o _usuário ou email_ e _senha_.
    - Uso: Requisição _http basic authentication_.
    - Resposta: `{"token":"token value"}`
+    
  - `/auth.bot` : Uso para *login in* na API. Assim, se o obtém o token apara acessar os endpoints. 
    - Método(s) disponíveis: **POST** realiza a requisição do token enviando o **CPF** no Head da requisição.
    - Uso: Enviar o CPF seguinto como um json de acordocom o exemple a seguir: 
@@ -258,8 +259,8 @@ Endpoints disponíveis:
  - `/usuarios/usuario` : Use para **ver**, **atualizar** e **deletar** um usuário específico. 
    - Metodo(s) disponíveis: **GET**, **PUT** e **DELETE**.
    - Uso do **DELETE**: Para deletar um usuário, precisa enviar o id do usuário na query string *id_usuario*.
-   - route:
-     - `/usuarios/usuario?id_usuario=value`
+     - route:
+       - `/usuarios/usuario?id_usuario=value`
       
    - Uso do **PUT**: Para atualizar o usuário precisa enviar os dados que deseja atualizar no body da requisição junto com o *id_usuario* como segue:
    
@@ -334,7 +335,6 @@ Endpoints disponíveis:
             "campus_id_campus":"integer",
             },
       "usuario": {
-            "id_usuario": "integer",
             "login": "string",
             "cpf": "string",
             "email": "string",
@@ -366,8 +366,8 @@ Endpoints disponíveis:
      ``` 
 
    - Uso do **DELETE**: Deleta o usuário discente correspondente ao *id_discente* enviado como query string
-     - query string: *id_discente = integer*
-     - route: 
+     - Query string: *id_discente = integer*
+     - Route: 
        - `/discentes/discente?id_discente=value"`
   
  - `/discentes`: Use para **ver** todos os discentes registrados no banco de dados.
@@ -567,33 +567,33 @@ Endpoints disponíveis:
      ```
 
    - Uso do **POST**: Cria o acesso ao campus permitido de acordo com os dados enviados no body requisição.
-   - body da requisição:
-    
-   ```json
+     - body da requisição:
+      
+     ```json
 
-      {
-          "temperatura":"float",
-          "hora_entrada":"string format hh:mm:ss",
-          "hora_saida":"string format hh:mm:ss",
-          "solicitacao_acesso_id_solicitacao_acesso":"integer"
-      }
-   
-   ``` 
+        {
+            "temperatura":"float",
+            "hora_entrada":"string format hh:mm:ss",
+            "hora_saida":"string format hh:mm:ss",
+            "solicitacao_acesso_id_solicitacao_acesso":"integer"
+        }
+     
+     ``` 
 
    - Uso do **PUT**: Atualiza o acesso ao campus permitido correspondente ao *id_acesso_permitido* enviado no body  da requisição.
-   - body da requisição:
-   
-   ```json
-   
-      {
-          "id_acesso_permitido":"integer",
-          "temperatura":"float",
-          "hora_entrada":"string format hh:mm:ss",
-          "hora_saida":"string format hh:mm:ss",
-          "solicitacao_acesso_id_solicitacao_acesso":"integer"
-      }
-   
-   ``` 
+     - body da requisição:
+     
+     ```json
+     
+        {
+            "id_acesso_permitido":"integer",
+            "temperatura":"float",
+            "hora_entrada":"string format hh:mm:ss",
+            "hora_saida":"string format hh:mm:ss",
+            "solicitacao_acesso_id_solicitacao_acesso":"integer"
+        }
+     
+     ``` 
 
    - Uso do **DELETE**: Delteta o acesso ao campus permitido correspondente ao *id_acesso_permitido* enviado como query string na requisição.
      - Query string: *id_acesso_permitido*
@@ -602,35 +602,212 @@ Endpoints disponíveis:
 
  - `/acessos_permitidos`: Usado para **ver** os dados de acessos autorizados na tabela *acesso_permitido*. 
    - Metodo(s) disponíveis: Você pode apenas usar o método **GET** para acessar esta rota.
-   - Resposta:
-   
-   ```json
-      [
+     - Resposta:
+     
+     ```json
+        [
+          {
+            "id_acesso_permitido": 1,
+            "temperatura": 33.45,
+            "hora_entrada": "10:30:38",
+            "hora_saida": "11:20:00",
+            "solicitacao_acesso_id_solicitacao_acesso": 1
+          },
+          ...
+          {
+            "id_acesso_permitido": 3,
+            "temperatura": 34.65,
+            "hora_entrada": "09:30:38",
+            "hora_saida": "10:20:00",
+            "solicitacao_acesso_id_solicitacao_acesso": 3
+          }
+        ]
+     ``` 
+
+
+ - `/docentes/docente`: ​​Use para **ver**, **editar**, **criar**, **excluir** os dados de um docente específico do banco. 
+   - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
+   - Uso do **GET**: Obtém o usuário docente logado no webservice.
+     - Resposta:
+      
+     ```json
         {
-          "id_acesso_permitido": 1,
-          "temperatura": 33.45,
-          "hora_entrada": "10:30:38",
-          "hora_saida": "11:20:00",
-          "solicitacao_acesso_id_solicitacao_acesso": 1
-        },
-        ...
-        {
-          "id_acesso_permitido": 3,
-          "temperatura": 34.65,
-          "hora_entrada": "09:30:38",
-          "hora_saida": "10:20:00",
-          "solicitacao_acesso_id_solicitacao_acesso": 3
+          "id_docente": "integer",
+          "siape": "string",
+          "nome": "string",
+          "data_nascimento": "string format yy-mm-dd",
+          "status_covid": "integer",
+          "status_afastamento": "integer",
+          "situacao": "string",
+          "usuario_id_usuario": "integer",
+          "usuario": {
+              "id_usuario": "integer",
+              "login": "string",
+              "cpf": "string",
+              "email": "string",
+              "tipo": "integer",
+          },
+          "curso_id_curso": "integer",
+          "curso": "string",
+          "campus_id_campus": "integer",
+          "campus": "string"
         }
-      ]
-   ``` 
+     
+     ``` 
+
+   - Uso do **POST**: Cria um usuário docente de acordo com os dados enviado no body na requisição.
+     - Requisição: Campos que podem ser enviados no body.
+     
+     ```json
+        {
+          "docente":{
+          "siape": "string",
+          "nome": "string",
+          "data_nascimento": "string format dd-mm-yy",
+          "status_covid": "integer",
+          "status_afastamento": "integer",
+          "situacao": "string",
+          "usuario_id_usuario": "integer",
+          "curso_id_curso": "integer",
+          "campus_id_campus": "integer"
+          },
+          "usuario": {
+              "login": "string",
+              "cpf": "string",
+              "email": "string",
+              "tipo": "integer",
+          }
+        }
+
+     ```  
+
+   - Uso do **PUT**: Atualiza um usuário docente corresponente ao *id_docente* enviado no body da requisição junto com os dados que serão atualizados.
+     - Body da requisição:
+     
+     ```json
+
+        {
+          "id_docente": "integer",
+          "siape": "string",
+          "nome": "string",
+          "data_nascimento": "string format dd-mm-yy",
+          "status_covid": "integer",
+          "status_afastamento": "integer",
+          "situacao": "string",
+          "usuario_id_usuario": "integer",
+          "curso_id_curso": "integer",
+          "campus_id_campus": "integer"
+        }
+
+     ``` 
+
+   - Uso do **DELETE**: Delete o usário técnico correspondente ao *id_tecnico* enviado como query string  na requisição.
+     - Query string: *id_tecnico = integer*
+     - Route: 
+       - `/docentes/docente?id_docente=value`
+
+ - `/docentes`: Use para **ver** os técnicos cadastrados na base de dados, na tabela _docente_. 
+   - Método(s) disponíveis: Você pode apenas usar o método **GET** para acessar esta rota.
+     - Resposta:
+     
+     ```json
+        [
+          {
+          "nome": "DAVIA MARCIANA TALGATTI",
+          "id": 1,
+          "matricula": "2391001"
+          },
+          {
+          "nome": "ELDRA CARVALHO DA SILVA",
+          "id": 2,
+          "matricula": "1995687"
+          },
+          ...
+          {
+          "nome": "JOSIVAN RODRIGUES DOS REIS",
+          "id": 6,
+          "matricula": "3004452"
+          }
+        ]
+     ```
 
  - `/tecnicos/tecnico`: ​​Use para **ver**, **editar**, **criar**, **excluir** um técnico específico do campus. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
    - Uso do **GET**: Obtém o usuário técnico logado no webservice.
-   - Uso do **POST**: Cria um usuário técnico de acordo com os dados enviado no body na requisição. 
+     - Resposta:
+     ```json
+     {
+      "id_tecnico":"integer",
+      "siape":"string", 
+      "nome":"string", 
+      "data_nascimento":"string format yy-mm-dd", 
+      "cargo":"string",
+      "status_covid":"integer", 
+      "status_afastamento":"integer", 
+      "usuario_id_usuario":"integer",
+      "usuario":{
+          "id_usuario": "integer",
+          "login": "string",
+          "cpf": "string",
+          "email": "string",
+          "tipo": "integer",
+      },
+      "campus_id_campus":"integer",
+      "campus": "string"
+      }
+     
+     ``` 
+
+   - Uso do **POST**: Cria um usuário técnico de acordo com os dados enviado no body na requisição.
+     - Requisição: Campos que podem ser enviados no body.
+     
+     ```json
+      {
+        "tecnico":{
+        "siape":"string", 
+        "nome":"string", 
+        "data_nascimento":"string format dd-mm-yy", 
+        "cargo":"string",
+        "status_covid":"integer", 
+        "status_afastamento":"integer", 
+        "usuario_id_usuario":"integer",
+        "campus_id_campus":"integer"
+        },
+        "usuario":{
+            "login": "string",
+            "cpf": "string",
+            "email": "string",
+            "tipo": "integer",
+        }
+      }
+
+     ```  
+
    - Uso do **PUT**: Atualiza um usuário técnico corresponente ao *id_tecnico* enviado no body da requisição junto com os dados que serão atualizados.
+     - Body da requisição:
+     
+     ```json
+      {
+        "id_tecnico":"integer",
+        "siape":"string", 
+        "nome":"string", 
+        "data_nascimento":"string format dd-mm-yy", 
+        "cargo":"string",
+        "status_covid":"integer", 
+        "status_afastamento":"integer", 
+        "usuario_id_usuario":"integer",
+        "campus_id_campus":"integer",
+      }
+
+     ``` 
+
    - Uso do **DELETE**: Delete o usário técnico correspondente ao *id_tecnico* enviado como query string  na requisição.
-    
+     - Query string: *id_tecnico = integer*
+     - Route: 
+       - `/tecnicos/tecnico?id_tecnico=value`
+
+
+
  - `/tecnicos`: Use para **ver** os técnicos cadastrados na base de dados, na _tecnico_. 
    - Método(s) disponíveis: Você pode apenas usar o método **GET** para acessar esta rota.
    - Resposta:
@@ -665,9 +842,68 @@ Endpoints disponíveis:
  - `/recurso_campus/recurso_campus`: ​​Use para **ver**, **editar**, **criar**, **excluir** um recurso específico do campus. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
    - Uso do **GET**: Obtém os dados do recurso do campi correspondente ao *id_recurso_campus* enviado como query string na requisição.
+     - Query string: *id_recurso_campus = integer*
+     - Route:
+       - `/recurso_campus/recurso_campus?id_recurso_campus=value`
+     - Resposta:
+      
+     ```json
+
+        {
+          "id_recuso_campus": "integer", 
+          "nome": "string",
+          "capacidade": "integer",
+          "descricao": "string",
+          "inicio_horario_funcionamento": "string format hh:mm:ss",
+          "fim_horario_funcionamento": "string format hh:mm:ss",
+          "quantidade_horas": "integer",
+          "campus_id_campus": "integer",
+          "campus": "string"
+        }
+     
+     ``` 
+
    - Uso do **POST**: Cria um recurso do campi de acordo com os dados enviado no body da requisição.
+     - Requisição: Campos que podem ser enviados no body.
+    
+      ```json
+
+          {
+            "nome": "string",
+            "capacidade": "integer",
+            "descricao": "string",
+            "inicio_horario_funcionamento": "string format hh:mm:ss",
+            "fim_horario_funcionamento": "string format hh:mm:ss",
+            "quantidade_horas": "integer",
+            "campus_id_campus": "integer",
+            "campus": "string"
+          }
+      
+      ``` 
+
    - Uso do **PUT**: Atualiza um recurso do campi correspondente ao *id_recurso_campus* enviado no body da requisição com os novos dados.
+     - Body da requisição:
+     
+        ```json
+
+          {
+            "id_recuso_campus": "integer", 
+            "nome": "string",
+            "capacidade": "integer",
+            "descricao": "string",
+            "inicio_horario_funcionamento": "string format hh:mm:ss",
+            "fim_horario_funcionamento": "string format hh:mm:ss",
+            "quantidade_horas": "integer",
+            "campus_id_campus": "integer",
+            "campus": "string"
+          }
+      
+        ``` 
+
    - Uso do **DELETE**: Deleta um recurso do campi de acordo com o *id_recurso_campus* enviado como query string na requisição.
+     - Query string: *id_recurso_campus = integer*.
+     - Route: 
+       - `/recurso_campus/recurso_campus?id_recurso_campus=value` 
     
  - `/recursos_campus`: Use para **ver** os valores na tabela _recurso_campus_ gravada no banco de dados. 
    - Método(s): Você pode apenas usar o método **GET** para acessar esta rota.
@@ -706,11 +942,56 @@ Endpoints disponíveis:
    
  - `/cursos/curso`: ​​Use para **ver**, **editar**, **criar**, **excluir** os dado de um curso específico. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
-   - Uso do **GET**: Obtém os dados do recurso do curso correspondente ao *id_curso* enviado como query string na requisição.
-   - Uso do **POST**: Cria um curso de acordo com os dados enviado no body da requisição.
-   - Uso do **PUT**: Atualiza um curso correspondente ao *id_curso* enviado no body da requisição com os novos dados.
-   - Uso do **DELETE**: Deleta um curso de acordo com o *id_curso* enviado como query string na requisição.
+   - Uso do **GET**: Obtém os dados do curso correspondente ao *id_curso* enviado como query string na requisição.
+     - Query string: *id_curso = integer*
+     - Route:
+       - `/cursos/curso?id_curso=value`
         
+     - Resposta:
+      
+     ```json
+
+        {
+          "id_curso": "integer",
+          "nome": "string",
+          "data_fundacao": "string format yy-mm-dd",
+          "campus": "string"
+        }
+     
+     ``` 
+
+   - Uso do **POST**: Cria um curso de acordo com os dados enviado no body da requisição.
+     - Requisição: Campos que podem ser enviados no body.
+    
+      ```json
+
+        {
+          "nome": "string",
+          "data_fundacao": "string format dd-mm-yy",
+          "campus_id_campus": "integer"
+        }
+      
+      ``` 
+
+   - Uso do **PUT**: Atualiza um curso correspondente ao *id_curso* enviado no body da requisição com os novos dados.
+     - Body da requisição:
+     
+        ```json
+
+          {
+            "id_curso": "integer",
+            "nome": "string",
+            "data_fundacao": "string format dd-mm-yy",
+            "campus_id_campus": "integer"
+          }
+      
+        ``` 
+
+   - Uso do **DELETE**: Deleta um curso de acordo com o *id_curso* enviado como query string na requisição.
+     - Query string: *id_curso = integer*.
+     - Route: 
+       - `/cursos/curso?id_curso=value`  
+       
  - `/cursos`: Use para **ver** os curso cadastrado no banco de dados, na tabela *curso*. 
    - Método(s): Apenas método **GET** está disponível para acessar a rota.
    - Resposta:
@@ -734,10 +1015,55 @@ Endpoints disponíveis:
  - `/campus/campi`: ​​Use para **ver**, **editar**, **criar**, **excluir** os dados de um campus específico. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
    - Uso do **GET**: Obtém os dados do campus correspondente ao *id_campus* enviado como query string na requisição.
+     - Query string: *id_campus = integer*
+     - Route:
+       - `/campus/campi?id_campus=value`
+        
+     - Resposta:
+      
+     ```json
+
+        {
+          "id_campus":"integer",
+          "nome":"string",
+          "ano_fundacao":"string format yy-mm-dd",
+          "direcao_id_direcao": "integer",
+          "direcao": "string" 
+        }
+     
+     ``` 
+
    - Uso do **POST**: Cria um campus de acordo com os dados enviado no body da requisição.
-   - Uso do **PUT**: Atualiza um campus correspondente ao *id_campus* enviado no body da requisição com os novos dados.
-   - Uso do **DELETE**: Deleta um campus de acordo com o *id_campus* enviado como query string na requisição.
+     - Requisição: Campos que podem ser enviados no body.
     
+      ```json
+
+        {
+          "nome":"string",
+          "ano_fundacao":"string format dd-mm-yy",
+          "direcao_id_direcao": "integer",
+        }
+      
+      ``` 
+
+   - Uso do **PUT**: Atualiza um campus correspondente ao *id_campus* enviado no body da requisição com os novos dados.
+     - Body da requisição:
+     
+        ```json
+
+          {
+            "id_campus":"integer",
+            "nome":"string",
+            "ano_fundacao":"string format dd-mm-yy",
+            "direcao_id_direcao": "integer",
+          }
+      
+        ``` 
+
+   - Uso do **DELETE**: Deleta um campus de acordo com o *id_campus* enviado como query string na requisição.
+     - Query string: *id_campus = integer*.
+     - Route: 
+       - `/campus/campi?id_campus=value`   
     
  - `/campus`: Use para **ver** os campus cadastrados no banco de dados, na tabela *campus*. 
    - Método(s): Apenas método **GET** está disponível para acessar a rota.

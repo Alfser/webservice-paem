@@ -36,9 +36,9 @@ class CampusModel(BaseHasNameModel, db.Model):
             docente_dict = None
         finally:
             return {
+                "id_campus":self.id_campus,
                 "nome":self.nome,
                 "ano_fundacao":self.ano_fundacao,
-                "id_campus":self.id_campus,
                 'direcao_id_direcao': self.direcao_id_direcao,
                 "direcao": docente_dict if docente_dict else 'null' 
             }
