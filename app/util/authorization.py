@@ -22,7 +22,8 @@ class Authorization():
             @wraps(f)
             def decorator(*args, **kwargs):
                 
-                isActive = False
+                #active token required in routes
+                isActive = True
                 
                 if isActive:
                     Bearer_token = None
