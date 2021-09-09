@@ -25,7 +25,6 @@ class DocenteResource(Resource):
         
         return {"message": "there is no user logged."}
     
-    @Authorization.token_required()
     def post(self):
         body = request.json
         docente_body = body.get("docente")
