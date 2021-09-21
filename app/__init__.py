@@ -11,6 +11,7 @@ from .resources import CampusResource, ListaCampusResource
 from .resources import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource
 from .resources import AcessoPermitidoResource, ListaAcessoPermitidoResource
 from .resources import RecursoCampusResource, ListaRecursoCampusResource
+from .resources import ProtocoloResource, ListaProtocolosResource
 from .resources import HomeResource
 
 from .resources import app

@@ -2,16 +2,23 @@ from ..model import ProtocoloModel
 from .base_controller import BaseController
 
 class ProtocoloController(BaseController):
-
-    def get(self):
-        pass
-
-    def post(self):
-        pass
-
-    def put(self):
-        pass
-
-    def delete(self):
-        pass
     
+    @classmethod
+    def get(cls, id):
+        return super().get(id, ProtocoloModel)
+
+    @classmethod
+    def post(cls, body):
+        return super().post(body, ProtocoloModel)
+
+    @classmethod
+    def put(cls, body):
+        return super().put(body, ProtocoloModel)
+
+    @classmethod
+    def delete(cls, id):
+        return super().delete(id, ProtocoloModel)
+    
+    @classmethod
+    def get_list(cls):
+        return super().get_list(ProtocoloModel)

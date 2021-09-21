@@ -36,7 +36,6 @@ class RecursoCampusResource(Resource):
 
       args = parser.parse_args()
       id_recurso_campus = args.get('id_recurso_campus')
-
       return RecursoCampusController.delete(id_recurso_campus)
 
 
