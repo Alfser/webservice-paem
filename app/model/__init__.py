@@ -13,6 +13,8 @@ from .acesso_permitido import AcessoPermitidoModel
 from .recurso_campus import RecursoCampusModel
 from .reserva_recurso_servidores import ReservaRecursoServidoresModel
 from .direcao import DirecaoModel
+from .protocolo import ProtocoloModel
+
 
 
 

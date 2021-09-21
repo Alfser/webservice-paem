@@ -12,3 +12,4 @@ from .reserva_recurso_servidores_controller import ReservaRecursoServidoresContr
 from .solicitacao_acesso_controller import SolicitacaoAcessoController
 from .acesso_permitido_controller import AcessoPermitidoController
 from .recurso_campus_controller import RecursoCampusController
+from .protocolo_controller import ProtocoloController
