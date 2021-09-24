@@ -3,6 +3,7 @@ from .curso import CursoModel
 from .usuario import UsuarioModel
 from .campus import CampusModel
 from .base_model import BaseHasUsuarioModel 
+from datetime import date
 from ..database import db
 from app.model import usuario
 
@@ -13,7 +14,7 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
     matricula = db.Column(db.String(45), unique=True, nullable=False)
     nome = db.Column(db.String(45), nullable=False)
     entrada = db.Column(db.String(6), nullable=True)
-    data_nascimento = db.Column(db.String(45), nullable=True)
+    __data_nascimento = db.Column('data_nascimento', db.String(45), nullable=True)
     sexo = db.Column(db.String(2), nullable=True)
     quantidade_pessoas = db.Column(db.Integer, nullable=True)
     quantidade_vacinas = db.Column(db.Integer, nullable=True)
@@ -34,6 +35,27 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
     curso_id_curso = db.Column(db.Integer, db.ForeignKey('curso.id_curso'), nullable=True)
 
     solicitacoes_acesso = db.relationship('SolicitacaoAcessoModel', uselist=False, lazy='select')
+
+    @classmethod
+    def find_by_matricula(cls, matricula):
+       return cls.query.filter_by(matricula=matricula).first()
+    
+    @classmethod
+    def update_by_matricula(cls, matricula, dict):
+       cls.query.filter_by(matricula=matricula).update(dict)
+       cls.save()
+    
+    @property
+    def data_nascimento(self):
+        return str(self.__data_nascimento)
+
+    @data_nascimento.setter
+    def ano_fundacao(self, data):
+        if isinstance(data, str):
+            day, month, year = data.split('-')
+            data = date(day=int(day), month=int(month), year=int(year))
+
+        self.__data_nascimento = data
 
     def serialize(self):
 
@@ -75,14 +97,7 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
                 "campus": campus.nome if campus else "null"
             }
     
-    @classmethod
-    def find_by_matricula(cls, matricula):
-       return cls.query.filter_by(matricula=matricula).first()
     
-    @classmethod
-    def update_by_matricula(cls, matricula, dict):
-       cls.query.filter_by(matricula=matricula).update(dict)
-       cls.save()
 
     @classmethod
     def query_all_names(cls):
