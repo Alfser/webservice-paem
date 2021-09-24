@@ -63,6 +63,6 @@ class ListaDiscenteResource(Resource):
       ENDPOINT = 'discentes'
       ROUTE = '/discentes'
 
-    #   @Authorization.token_required()
+      @Authorization.token_required()
       def get(self):
           return DiscenteController.get_all_names()
