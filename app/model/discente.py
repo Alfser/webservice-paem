@@ -50,7 +50,7 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
         return str(self.__data_nascimento)
 
     @data_nascimento.setter
-    def ano_fundacao(self, data):
+    def data_nascimento(self, data):
         if isinstance(data, str):
             day, month, year = data.split('-')
             data = date(day=int(day), month=int(month), year=int(year))
