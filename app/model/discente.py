@@ -15,7 +15,7 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
     nome = db.Column(db.String(45), nullable=False)
     entrada = db.Column(db.String(6), nullable=True)
     __data_nascimento = db.Column('data_nascimento', db.String(45), nullable=True)
-    __ano_de_ingresso = db.Column('ano_de_ingresso', db.Integer, nullable=True)
+    ano_de_ingresso = db.Column(db.Integer, nullable=True)
     sexo = db.Column(db.String(2), nullable=True)
     quantidade_pessoas = db.Column(db.Integer, nullable=True)
     quantidade_vacinas = db.Column(db.Integer, nullable=True)
@@ -57,18 +57,6 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
             data = date(day=int(day), month=int(month), year=int(year))
 
         self.__data_nascimento = data
-
-    @property
-    def ano_de_ingresso(self):
-        return str(self.__ano_de_ingresso)
-
-    @ano_de_ingresso.setter
-    def ano_de_ingresso(self, data):
-        if isinstance(data, str):
-            day, month, year = data.split('-')
-            data = date(day=int(day), month=int(month), year=int(year))
-
-        self.__ano_de_ingresso = data
 
     def serialize(self):
 
