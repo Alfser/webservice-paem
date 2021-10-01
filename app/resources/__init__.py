@@ -14,4 +14,5 @@ from .acesso_permitido_resource import AcessoPermitidoResource, ListaAcessoPermi
 from .recurso_campus_resource import RecursoCampusResource, ListaRecursoCampusResource
 from .reserva_recurso_servidor_resource import ReservaRecursoServidorResource, ListaReservaRecursoServidorResource
 from .protocolo_resource import ProtocoloResource, ListaProtocolosResource
+from .discente_vacinacao_resource import DiscenteVacinacaoResource
 from .home import HomeResource

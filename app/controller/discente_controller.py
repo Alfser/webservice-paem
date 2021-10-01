@@ -23,8 +23,8 @@ class DiscenteController(BaseHasUsuarioController, BaseHasOtherIdController):
         return super().get_by_usuario(usuario_id_usuario, DiscenteModel)
 
     @classmethod
-    def get_discente_vacinacao(cls, matricula_dsicente):
-        json_discente_vacinacao = DiscenteModel.get_discente_vacinacao(matricula=matricula_dsicente)
+    def get_discente_vacinacao(cls, matricula_discente):
+        json_discente_vacinacao = DiscenteModel.get_discente_vacinacao(matricula_discente)
         if json_discente_vacinacao:
             return json_discente_vacinacao, OK
         return {"message":"Not found status vacinacao of this discente."}, NOT_FOUND_REQUEST

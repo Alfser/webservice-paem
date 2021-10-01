@@ -15,7 +15,7 @@ class DiscenteVacinacaoResource(Resource):
         parser.add_argument('matricula', type=str, required=False, help="You need to send query string maticula.")
         args = parser.parse_args()
 
-        matricula = args.get("matricula_discente")
+        matricula = args.get("matricula")
 
         if matricula:
             return DiscenteController.get_discente_vacinacao(matricula)
