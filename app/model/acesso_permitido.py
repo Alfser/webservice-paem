@@ -9,6 +9,7 @@ class AcessoPermitidoModel(BaseModel, db.Model):
 
       id_acesso_permitido = db.Column(db.Integer, primary_key=True)
       temperatura = db.Column(db.Float, nullable=True)
+      matricula_discente = db.Column(db.String(45), nullable=True)
       __hora_entrada = db.Column('hora_entrada', db.Time, nullable=True)
       __hora_saida = db.Column('hora_saida', db.Time, nullable=True)
     
@@ -16,7 +17,7 @@ class AcessoPermitidoModel(BaseModel, db.Model):
 
       @property
       def hora_entrada(self):
-            return str(self.__hora_entrada)
+        return str(self.__hora_entrada)
 
       @hora_entrada.setter
       def hora_entrada(self, hora_entrada):
@@ -41,10 +42,11 @@ class AcessoPermitidoModel(BaseModel, db.Model):
       
       def serialize(self):
           return {
-              'id_acesso_permitido':self.id_acesso_permitido,
-              'temperatura':self.temperatura,
-              'hora_entrada':self.hora_entrada,
-              'hora_saida':self.hora_saida,
+              "id_acesso_permitido":self.id_acesso_permitido,
+              "temperatura":self.temperatura,
+              "hora_entrada":self.hora_entrada,
+              "hora_saida":self.hora_saida,
+              "matricula_discente":self.matricula_discente,
               'solicitacao_acesso_id_solicitacao_acesso':self.solicitacao_acesso_id_solicitacao_acesso
           }
 
