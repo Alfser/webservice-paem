@@ -1,4 +1,5 @@
 
+from _typeshed import Self
 from .curso import CursoModel
 from .usuario import UsuarioModel
 from .campus import CampusModel
@@ -41,6 +42,9 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
     def find_by_matricula(cls, matricula):
        return cls.query.filter_by(matricula=matricula).first()
     
+    def __find_by_matricula(cls, matricula_discente):
+       return cls.query.filter_by(matricula=matricula_discente).first()
+
     @classmethod
     def update_by_matricula(cls, matricula, dict):
        cls.query.filter_by(matricula=matricula).update(dict)
@@ -57,6 +61,20 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
             data = date(day=int(day), month=int(month), year=int(year))
 
         self.__data_nascimento = data
+
+    def get_discente_vacinacao(cls, matricula_discente):
+        discente = cls.__find_by_matricula(matricula_discente)
+
+        if discente:
+            return {
+                "id_discente":discente.id_discente,
+                "nome":discente.nome,
+                "fabricante":discente.fabricante,
+                "status_covid":discente.status_covid,
+                "quantidade_vacinas":discente.quantidade_vacinas
+            }
+        
+        return None
 
     def serialize(self):
 

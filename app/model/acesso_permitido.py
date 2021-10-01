@@ -10,10 +10,13 @@ class AcessoPermitidoModel(BaseModel, db.Model):
       id_acesso_permitido = db.Column(db.Integer, primary_key=True)
       temperatura = db.Column(db.Float, nullable=True)
       matricula_discente = db.Column(db.String(45), nullable=True)
-      __hora_entrada = db.Column('hora_entrada', db.Time, nullable=True)
-      __hora_saida = db.Column('hora_saida', db.Time, nullable=True)
+      recurso_campus_id_recurso_campus = db.Column(db.Integer, db.ForeignKey("recurso_campus.id_recurso_campus"), nullable=True)
+      __hora_entrada = db.Column("hora_entrada", db.Time, nullable=True)
+      __hora_saida = db.Column("hora_saida", db.Time, nullable=True)
     
-      solicitacao_acesso_id_solicitacao_acesso = db.Column(db.Integer, db.ForeignKey('solicitacao_acesso.id_solicitacao_acesso'), nullable=True)
+      solicitacao_acesso_id_solicitacao_acesso = db.Column(db.Integer, db.ForeignKey("solicitacao_acesso.id_solicitacao_acesso"), nullable=True)
+      
+      recurso_campus = db.relationship('RecursoCampusModel', uselist=False, lazy='select')
 
       @property
       def hora_entrada(self):
@@ -47,6 +50,8 @@ class AcessoPermitidoModel(BaseModel, db.Model):
               "hora_entrada":self.hora_entrada,
               "hora_saida":self.hora_saida,
               "matricula_discente":self.matricula_discente,
+              "recurso_campus_id_recurso_campus":self.recurso_campus_id_recurso_campus,
+              "recurso_campus":self.recurso_campus.nome if self.recurso_campus else "null",
               'solicitacao_acesso_id_solicitacao_acesso':self.solicitacao_acesso_id_solicitacao_acesso
           }
 

@@ -57,7 +57,7 @@ class BaseController:
         model = Model.find_by_id(id)
         
         if not model:
-            return {"message":"Can't delete, not found this discente."}, BAD_REQUEST
+            return {"message":"Can't delete, not found this resource."}, BAD_REQUEST
         
         model.delete_from_db()
 
