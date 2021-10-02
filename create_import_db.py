@@ -14,6 +14,7 @@ from app.model import PortariaModel
 from app.model import TecnicoModel
 from app.model import ReservaRecursoServidoresModel
 from app.model import ProtocoloModel
+from app.model import PontoVerificacaoModel
 
 from app.database import create_db, db
 # libs
