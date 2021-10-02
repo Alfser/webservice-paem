@@ -63,7 +63,7 @@ class DocenteModel(BaseHasUsuarioModel, db.Model):
             ).filter_by(id_curso=self.curso_id_curso).first()
             
             campus = db.session.query(
-                CampusModel.nome
+                CampusInstitutoModel.nome
             ).filter_by(id_campus=self.campus_instituto_id_campus_instituto).first()
             
             return {
