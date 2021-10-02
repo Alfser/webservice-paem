@@ -2,7 +2,7 @@ from ..database import db
 from .curso import CursoModel
 from .disciplina import DisciplinaModel
 from .usuario import UsuarioModel
-from .campus import CampusModel
+from .campus_instituto import CampusInstitutoModel
 from .base_model import BaseHasUsuarioModel
 from datetime import date
 
@@ -30,8 +30,8 @@ class DocenteModel(BaseHasUsuarioModel, db.Model):
     usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
     usuario = db.relationship('UsuarioModel', uselist=False, lazy='select')
 
-    campus_id_campus = db.Column(db.Integer, db.ForeignKey('campus.id_campus'), nullable=True)
-    campus = db.relationship('CampusModel', uselist=False, lazy='select')
+    campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
+    campus = db.relationship('CampusInstitutoModel', uselist=False, lazy='select')
 
     curso_id_curso = db.Column(db.Integer, db.ForeignKey('curso.id_curso'), nullable=True)
     
@@ -64,7 +64,7 @@ class DocenteModel(BaseHasUsuarioModel, db.Model):
             
             campus = db.session.query(
                 CampusModel.nome
-            ).filter_by(id_campus=self.campus_id_campus).first()
+            ).filter_by(id_campus=self.campus_instituto_id_campus_instituto).first()
             
             return {
                 "id_docente":self.id_docente,
@@ -78,7 +78,7 @@ class DocenteModel(BaseHasUsuarioModel, db.Model):
                 "usuario": usuario_dict if usuario_dict else 'nenhum registro',
                 "curso_id_curso":self.curso_id_curso,
                 "curso": curso.nome if curso else "nenhum curso",
-                "campus_id_campus":self.campus_id_campus,
+                "campus_id_campus":self.campus_instituto_id_campus_instituto,
                 "campus": campus.nome if campus else "nenhum campus"
             }
     

@@ -7,7 +7,7 @@ from .resources import DirecaoResource, ListaDirecaoResource
 from .resources import CoordenacaoResource, ListaCoordenacaoResource
 from .resources import CursoResource, ListaCursoResource
 from .resources import DisciplinaResource, ListaDisciplinaResource
-from .resources import CampusResource, ListaCampusResource
+from .resources import CampusInstitutoResource, ListaCampusInstitutoResource
 from .resources import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource
 from .resources import AcessoPermitidoResource, ListaAcessoPermitidoResource
 from .resources import RecursoCampusResource, ListaRecursoCampusResource

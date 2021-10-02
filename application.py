@@ -8,7 +8,7 @@ from app import DirecaoResource, ListaDirecaoResource
 from app import CoordenacaoResource, ListaCoordenacaoResource
 from app import CursoResource, ListaCursoResource
 from app import DisciplinaResource, ListaDisciplinaResource
-from app import CampusResource, ListaCampusResource
+from app import CampusInstitutoResource, ListaCampusInstitutoResource
 from app import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource
 from app import AcessoPermitidoResource, ListaAcessoPermitidoResource
 from app import RecursoCampusResource, ListaRecursoCampusResource
@@ -44,8 +44,8 @@ adicionar_recurso(ListaDiscenteResource)
 adicionar_recurso(RecursoCampusResource)
 adicionar_recurso(ListaRecursoCampusResource)
 
-adicionar_recurso(CampusResource)
-adicionar_recurso(ListaCampusResource)
+adicionar_recurso(CampusInstitutoResource)
+adicionar_recurso(ListaCampusInstitutoResource)
 
 adicionar_recurso(DocenteResource)
 adicionar_recurso(ListaDocenteResource)

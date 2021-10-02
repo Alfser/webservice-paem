@@ -4,14 +4,14 @@ from .base_model import BaseHasNameModel
 
 from datetime import date
 
+class CampusInstitutoModel(BaseHasNameModel, db.Model):
+    __tablename__ = "campus_instituto"
 
-class CampusModel(BaseHasNameModel, db.Model):
-    __tablename__ = "campus"
-
-    id_campus = db.Column(db.Integer, primary_key=True)
+    id_campus_instituto = db.Column(db.Integer, primary_key=True)
     __ano_fundacao = db.Column('ano_fundacao', db.Date, nullable=False)
     nome = db.Column(db.String(45), nullable=False)
-    
+    abertura_total = db.Column(db.SmallInteger, nullable=True)
+
     direcao_id_direcao = db.Column(db.Integer, db.ForeignKey('direcao.id_direcao'), nullable=True)
     direcao = db.relationship('DirecaoModel', uselist=False, lazy='select')
 
@@ -36,8 +36,9 @@ class CampusModel(BaseHasNameModel, db.Model):
             docente_dict = None
         finally:
             return {
-                "id_campus":self.id_campus,
+                "id_campus_instituto":self.id_campus_instituto,
                 "nome":self.nome,
+                "abertura_total":self.abertura_total,
                 "ano_fundacao":self.ano_fundacao,
                 'direcao_id_direcao': self.direcao_id_direcao,
                 "direcao": docente_dict if docente_dict else 'null' 
@@ -45,7 +46,7 @@ class CampusModel(BaseHasNameModel, db.Model):
 
     @classmethod
     def query_all_names(cls):
-        return super().query_all_names(cls.nome.label("nome"), cls.id_campus.label("id"))
+        return super().query_all_names(cls.nome.label("nome"), cls.id_campus_instituto.label("id"))
 
     def __repr__(self):
         return '<campus %r>' % self.nome

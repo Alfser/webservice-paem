@@ -7,7 +7,7 @@ from .portaria import PortariaModel
 from .coordenacao import CoordenacaoModel
 from .curso import CursoModel
 from ..database import app
-from .campus import CampusModel
+from .campus_instituto import CampusInstitutoModel
 from .solicitacao_acesso import SolicitacaoAcessoModel
 from .acesso_permitido import AcessoPermitidoModel
 from .recurso_campus import RecursoCampusModel

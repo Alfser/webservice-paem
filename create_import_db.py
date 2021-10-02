@@ -2,7 +2,7 @@
 # import models to create tables
 from app.model import UsuarioModel
 from app.model import CursoModel
-from app.model import CampusModel
+from app.model import CampusInstitutoModel
 from app.model import DocenteModel
 from app.model import DirecaoModel
 from app.model import CoordenacaoModel
@@ -31,7 +31,7 @@ def dicts2db(dicts, Model):
 
 def import_csv_db():
 
-    campus_dicts = read_csv('app/database/inputs/campus.csv', parse_dates=["ano_fundacao"], na_filter=False, sep=';', encoding='ISO-8859-1').to_dict(orient='records')
+    campus_dicts = read_csv('app/database/inputs/campus_instituto.csv', parse_dates=["ano_fundacao"], na_filter=False, sep=';', encoding='ISO-8859-1').to_dict(orient='records')
     curso_dicts = read_csv('app/database/inputs/curso.csv', parse_dates=["data_fundacao"], na_filter=False, sep=';', encoding='ISO-8859-1').to_dict(orient='records')
     discente_dicts = read_csv('app/database/inputs/discentes.csv', na_filter=False, sep=';', encoding='ISO-8859-1').to_dict(orient='records')
     docente_dicts = read_csv('app/database/inputs/docentes.csv', parse_dates=["data_nascimento"], na_filter=False, sep=';', encoding='ISO-8859-1').to_dict(orient='records')
@@ -66,7 +66,7 @@ def import_csv_db():
     dicts2db(acesso_permitido_dicts, AcessoPermitidoModel)
     
     # import campus
-    dicts2db(campus_dicts, CampusModel)
+    dicts2db(campus_dicts, CampusInstitutoModel)
 
     dicts2db(protocolo_dicts, ProtocoloModel)
     

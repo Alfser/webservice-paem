@@ -1,11 +1,8 @@
 from ..database import db
 from .usuario import UsuarioModel
-from .campus import CampusModel
+from .campus_instituto import CampusInstitutoModel
 from .base_model import BaseHasUsuarioModel
 from datetime import date
-
-from app.model import campus
-
 
 class TecnicoModel(BaseHasUsuarioModel, db.Model):
     __tablename__ = "tecnico"
@@ -21,8 +18,8 @@ class TecnicoModel(BaseHasUsuarioModel, db.Model):
     usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
     usuario = db.relationship('UsuarioModel', lazy='select', uselist=False)
 
-    campus_id_campus = db.Column(db.Integer, db.ForeignKey('campus.id_campus'), nullable=True)
-    campus = db.relationship('CampusModel', uselist=False, lazy='noload')
+    campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
+    campus = db.relationship('CampusInstitutoModel', uselist=False, lazy='noload')
 
     @property
     def data_nascimento(self):
@@ -46,8 +43,8 @@ class TecnicoModel(BaseHasUsuarioModel, db.Model):
         
         finally:
             campus = db.session.query(
-                CampusModel.nome
-            ).filter_by(id_campus=self.campus_id_campus).first() # query name and get name from tuple
+                CampusInstitutoModel.nome
+            ).filter_by(id_campus=self.campus_instituto_id_campus_instituto).first() # query name and get name from tuple
             
             return {
                 'id_tecnico':self.id_tecnico,
@@ -59,7 +56,7 @@ class TecnicoModel(BaseHasUsuarioModel, db.Model):
                 'status_afastamento':self.status_afastamento, 
                 'usuario_id_usuario':self.usuario_id_usuario,
                 'usuario': usuario_dict if usuario_dict else "null",
-                'campus_id_campus':self.campus_id_campus,
+                'campus_id_campus':self.campus_instituto_id_campus_instituto,
                 'campus': campus.nome if campus else "null"
             }
 

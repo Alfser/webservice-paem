@@ -1,5 +1,5 @@
 from ..database import db
-from .campus import BaseHasNameModel, CampusModel
+from .campus_instituto import BaseHasNameModel, CampusInstitutoModel
 from datetime import time
 
 
@@ -14,14 +14,14 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
     __fim_horario_funcionamento = db.Column('fim_nicio_horario_funcionamento', db.Time, nullable=True)
     quantidade_horas = db.Column(db.Integer, nullable=True)
     
-    campus_id_campus = db.Column(db.Integer, db.ForeignKey('campus.id_campus'), nullable=True)
-    campus = db.relationship('CampusModel', backref=db.backref('recursos_campus', lazy='select'))
+    campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
+    campus = db.relationship('CampusInstitutoModel', backref=db.backref('recursos_campus', lazy='select'))
             
     def serialize(self):
 
         campus = db.session.query(
-            CampusModel.nome
-        ).filter_by(id_campus=self.campus_id_campus).first() # query name of campus
+            CampusInstitutoModel.nome
+        ).filter_by(id_campus=self.campus_instituto_id_campus_instituto).first() # query name of campus
         
         return {
             'id_recuso_campus': self.id_recurso_campus, 
@@ -31,7 +31,7 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
             'inicio_horario_funcionamento':self.inicio_horario_funcionamento,
             'fim_horario_funcionamento':self.fim_horario_funcionamento,
             'quantidade_horas': self.quantidade_horas,
-            'campus_id_campus':self.campus_id_campus,
+            'campus_id_campus':self.campus_instituto_id_campus_instituto,
             'campus': campus.nome if campus else "null"
         }
     

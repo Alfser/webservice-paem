@@ -7,7 +7,7 @@ from .portaria_controller import PortariaController
 from .direcao_controller import DirecaoController
 from .coordenacao_controller import CoordenacaoController
 from .curso_controller import CursoController
-from .campus_controller import CampusController
+from .campus_instituto_controller import CampusInstitutoController
 from .reserva_recurso_servidores_controller import ReservaRecursoServidoresController
 from .solicitacao_acesso_controller import SolicitacaoAcessoController
 from .acesso_permitido_controller import AcessoPermitidoController

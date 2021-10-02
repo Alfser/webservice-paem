@@ -1,7 +1,7 @@
 from ..database import db
 from .disciplina import DisciplinaModel
 from .base_model import BaseHasNameModel
-from .campus import CampusModel
+from .campus_instituto import CampusInstitutoModel
 
 from datetime import date
 
@@ -12,8 +12,8 @@ class CursoModel(BaseHasNameModel, db.Model):
     nome = db.Column(db.String(45), nullable=False)
     __data_fundacao = db.Column("data_fundacao", db.Date, nullable=True)
     
-    campus_id_campus = db.Column(db.Integer, db.ForeignKey('campus.id_campus'), nullable=True)
-    campus = db.relationship('CampusModel', lazy='subquery', uselist=False)
+    campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
+    campus = db.relationship('CampusInstitutoModel', lazy='subquery', uselist=False)
 
     docentes = db.relationship('DocenteModel', uselist=True, backref=db.backref('curso', uselist=False, lazy='select'))
     
@@ -35,8 +35,8 @@ class CursoModel(BaseHasNameModel, db.Model):
         
     def serialize(self):
         campus = db.session.query(
-            CampusModel.nome
-        ).filter_by(id_campus=self.campus_id_campus).first()
+            CampusInstitutoModel.nome
+        ).filter_by(id_campus=self.campus_instituto_id_campus_instituto).first()
 
         return {
             'id_curso':self.id_curso,
