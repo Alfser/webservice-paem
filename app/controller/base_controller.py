@@ -104,7 +104,10 @@ class BaseHasHorarioController(BaseHasNameController):
 
 #Class to handle users
 class BaseHasUsuarioController(BaseHasNameController):
-
+    """
+    Recurso que possue um usuário (login)
+    
+    """
     @classmethod
     def post(cls, body, Model, usuario):
 

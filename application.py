@@ -14,6 +14,7 @@ from app import AcessoPermitidoResource, ListaAcessoPermitidoResource
 from app import RecursoCampusResource, ListaRecursoCampusResource
 from app import ProtocoloResource, ListaProtocolosResource
 from app import DiscenteVacinacaoResource
+from app import PontoVerificacaoResource, ListaPontoVerificacaoResource
 from app import HomeResource
 
 # Just to aws know the variable of flask app.
@@ -57,6 +58,9 @@ adicionar_recurso(ProtocoloResource)
 adicionar_recurso(ListaProtocolosResource)
 
 adicionar_recurso(DiscenteVacinacaoResource)
+
+adicionar_recurso(PontoVerificacaoResource)
+adicionar_recurso(ListaPontoVerificacaoResource)
 
 # Objeto flask que será obtido para realizar o deploy na AWS
 # Ele está localizado abaixo dos recursos para ser

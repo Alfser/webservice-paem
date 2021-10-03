@@ -1,8 +1,8 @@
 from ..database import db
 from .campus_instituto import CampusInstitutoModel
+from .base_model import BaseHasUsuarioModel
 
-
-class PontoVerificacaoModel(db.Model):
+class PontoVerificacaoModel(BaseHasUsuarioModel, db.Model):
     __tablename__ = "ponto_verificacao"
 
     id_ponto_verificacao = db.Column(db.Integer, primary_key=True)
@@ -25,7 +25,7 @@ class PontoVerificacaoModel(db.Model):
         
         campus_instituto = db.session.query(
                 CampusInstitutoModel.nome
-            ).filter_by(id_campus=self.campus_instituto_id_campus_instituto).first()
+            ).filter_by(id_campus_instituto=self.campus_instituto_id_campus_instituto).first()
 
         return{
             "id_ponto_verificacao":self.id_ponto_verificacao,

@@ -13,6 +13,7 @@ from .resources import AcessoPermitidoResource, ListaAcessoPermitidoResource
 from .resources import RecursoCampusResource, ListaRecursoCampusResource
 from .resources import ProtocoloResource, ListaProtocolosResource
 from .resources import DiscenteVacinacaoResource
+from .resources import PontoVerificacaoResource, ListaPontoVerificacaoResource
 from .resources import HomeResource
 
 from .resources import app

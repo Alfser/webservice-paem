@@ -15,4 +15,5 @@ from .recurso_campus_resource import RecursoCampusResource, ListaRecursoCampusRe
 from .reserva_recurso_servidor_resource import ReservaRecursoServidorResource, ListaReservaRecursoServidorResource
 from .protocolo_resource import ProtocoloResource, ListaProtocolosResource
 from .discente_vacinacao_resource import DiscenteVacinacaoResource
+from .ponto_verificacao_resource import PontoVerificacaoResource, ListaPontoVerificacaoResource
 from .home import HomeResource
