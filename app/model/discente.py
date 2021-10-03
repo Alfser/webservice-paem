@@ -87,7 +87,7 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
                 CursoModel.nome
             ).filter_by(id_curso=self.curso_id_curso).first()
             
-            campus = db.session.query(
+            campus_instituto = db.session.query(
                 CampusInstitutoModel.nome
             ).filter_by(id_campus=self.campus_instituto_id_campus_instituto).first()
 
@@ -110,8 +110,8 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
                 "status_permissao": self.status_permissao,
                 "usuario": usuario_dict if usuario_dict else "null",
                 "curso": curso.nome if curso else "null",
-                "campus_id_campus": self.campus_instituto_id_campus_instituto,
-                "campus": campus.nome if campus else "null"
+                "campus_instituto_id_campus_instituto": self.campus_instituto_id_campus_instituto,
+                "campus_instituto": campus_instituto.nome if campus_instituto else "null"
             }
     
     

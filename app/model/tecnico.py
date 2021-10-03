@@ -19,7 +19,7 @@ class TecnicoModel(BaseHasUsuarioModel, db.Model):
     usuario = db.relationship('UsuarioModel', lazy='select', uselist=False)
 
     campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
-    campus = db.relationship('CampusInstitutoModel', uselist=False, lazy='noload')
+    campus_instituto = db.relationship('CampusInstitutoModel', uselist=False, lazy='noload')
 
     @property
     def data_nascimento(self):
@@ -42,7 +42,7 @@ class TecnicoModel(BaseHasUsuarioModel, db.Model):
             usuario_dict = None
         
         finally:
-            campus = db.session.query(
+            campus_instituto = db.session.query(
                 CampusInstitutoModel.nome
             ).filter_by(id_campus=self.campus_instituto_id_campus_instituto).first() # query name and get name from tuple
             
@@ -57,7 +57,7 @@ class TecnicoModel(BaseHasUsuarioModel, db.Model):
                 'usuario_id_usuario':self.usuario_id_usuario,
                 'usuario': usuario_dict if usuario_dict else "null",
                 'campus_id_campus':self.campus_instituto_id_campus_instituto,
-                'campus': campus.nome if campus else "null"
+                'campus': campus_instituto.nome if campus_instituto else "null"
             }
 
     @classmethod

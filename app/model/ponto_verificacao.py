@@ -31,8 +31,8 @@ class PontoVerificacaoModel(BaseHasUsuarioModel, db.Model):
             "id_ponto_verificacao":self.id_ponto_verificacao,
             "nome":self.nome,
             "descricao":self.descricao,
-            "campus_id_campus":self.campus_instituto_id_campus_instituto,
-            "campus": campus_instituto.nome if campus_instituto else "nenhum campus",
+            "campus_instituto_id_campus_instituto":self.campus_instituto_id_campus_instituto,
+            "campus_instituto": campus_instituto.nome if campus_instituto else "nenhum campus",
             "usuario_id_usuario":self.usuario_id_usuario,
             "usuario": usuario_dict if usuario_dict else 'nenhum registro'
         }

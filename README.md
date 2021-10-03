@@ -169,6 +169,7 @@ imprimir ("texto:", res.text)
 
 ```
 Resposta:
+
 ```json
 status_code: 200
 
@@ -312,8 +313,8 @@ Endpoints disponíveis:
                 "tipo": "integer",
             },
             "curso": "string",
-            "campus_id_campus":"integer",
-            "campus": "string"
+            "campus_instituto_id_campus_instituto":"integer",
+            "campus_instituto": "string"
           }
          
        ``` 
@@ -563,6 +564,7 @@ Endpoints disponíveis:
             "temperatura":"float",
             "hora_entrada":"string format hh:mm:ss",
             "hora_saida":"string format hh:mm:ss",
+            "matricula_discente":"string(45)",
             "solicitacao_acesso_id_solicitacao_acesso":"integer"
         }
      
@@ -577,6 +579,7 @@ Endpoints disponíveis:
             "temperatura":"float",
             "hora_entrada":"string format hh:mm:ss",
             "hora_saida":"string format hh:mm:ss",
+            "matricula_discente":"string(45)",
             "solicitacao_acesso_id_solicitacao_acesso":"integer"
         }
      
@@ -592,6 +595,7 @@ Endpoints disponíveis:
             "temperatura":"float",
             "hora_entrada":"string format hh:mm:ss",
             "hora_saida":"string format hh:mm:ss",
+            "matricula_discente":"string(45)",
             "solicitacao_acesso_id_solicitacao_acesso":"integer"
         }
      
@@ -613,6 +617,7 @@ Endpoints disponíveis:
             "temperatura": 33.45,
             "hora_entrada": "10:30:38",
             "hora_saida": "11:20:00",
+            "matricula_discente":"423543252254",
             "solicitacao_acesso_id_solicitacao_acesso": 1
           },
           ...
@@ -621,6 +626,7 @@ Endpoints disponíveis:
             "temperatura": 34.65,
             "hora_entrada": "09:30:38",
             "hora_saida": "10:20:00",
+            "matricula_discente":"5454542545",
             "solicitacao_acesso_id_solicitacao_acesso": 3
           }
         ]
@@ -651,8 +657,8 @@ Endpoints disponíveis:
           },
           "curso_id_curso": "integer",
           "curso": "string",
-          "campus_id_campus": "integer",
-          "campus": "string"
+          "campus_instituto_id_campus_instituto": "integer",
+          "campus_instituto": "string"
         }
      
      ``` 
@@ -754,8 +760,8 @@ Endpoints disponíveis:
           "email": "string",
           "tipo": "integer",
       },
-      "campus_id_campus":"integer",
-      "campus": "string"
+      "campus_instituto_id_campus_instituto":"integer",
+      "campus_instituto": "string"
       }
      
      ``` 
@@ -773,7 +779,7 @@ Endpoints disponíveis:
         "status_covid":"integer", 
         "status_afastamento":"integer", 
         "usuario_id_usuario":"integer",
-        "campus_id_campus":"integer"
+        "campus_instituto_id_campus_instituto":"integer"
         },
         "usuario":{
             "login": "string",
@@ -798,7 +804,7 @@ Endpoints disponíveis:
         "status_covid":"integer", 
         "status_afastamento":"integer", 
         "usuario_id_usuario":"integer",
-        "campus_id_campus":"integer",
+        "campus_instituto_id_campus_instituto":"integer",
       }
 
      ``` 
@@ -841,6 +847,104 @@ Endpoints disponíveis:
   
    ```
 
+
+ - `/pontos_verificacao/ponto_verificacao`: ​​Use para **ver**, **editar**, **criar**, **excluir** um técnico específico do campus. 
+   - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
+   - Uso do **GET**: Obtém o usuário ponto_verificacao logado no webservice.
+     - Resposta:
+     
+     ```json
+     {
+   
+      "id_ponto_verificacao":"integer",
+      "nome":"string(45)",
+      "descricao":"Text",
+      "campus_instituto_id_campus_instituto":"integer",
+      "campus_instituto":"string(45)",
+      "usuario_id_usuario":"integer",
+      "usuario":{
+          "id_usuario": "integer",
+          "login": "string",
+          "cpf": "string",
+          "email": "string",
+          "tipo": "integer",
+      }
+     
+     ``` 
+
+   - Uso do **POST**: Cria um usuário ponto_verificacao de acordo com os dados enviado no body na requisição.
+     - Requisição: Campos que podem ser enviados no body.
+     
+     ```json
+      {
+        "ponto_verificacao":{
+            "nome":"string(45)",
+            "descricao":"Text",
+            "campus_instituto_id_campus_instituto":"integer",
+            "usuario_id_usuario":"integer",
+        "usuario":{
+            "id_usuario": "integer",
+            "login": "string",
+            "cpf": "string",
+            "email": "string",
+            "tipo": "integer",
+        }
+      }
+
+     ```  
+
+   - Uso do **PUT**: Atualiza um usuário ponto_verificacao corresponente ao *id_ponto_verificacao* enviado no body da requisição junto com os dados que serão atualizados.
+     - Body da requisição:
+     
+     ```json
+      {
+        "id_ponto_verificacao":"integer",
+        "nome":"string(45)",
+        "descricao":"Text",
+        "campus_instituto_id_campus_instituto":"integer",
+        "usuario_id_usuario":"integer",
+      }
+
+     ``` 
+
+   - Uso do **DELETE**: Delete o usário ponto_varificacao correspondente ao *id_ponto_verificacao* enviado como query string  na requisição.
+     - Query string: *id_ponto_verificacao = integer*
+     - Route: 
+       - `/pontos_verificacao/ponto_verificacao?id_ponto_verificacao=value`
+
+
+ - `/tecnicos`: Use para **ver** os técnicos cadastrados na base de dados, na _tecnico_. 
+   - Método(s) disponíveis: Você pode apenas usar o método **GET** para acessar esta rota.
+   - Resposta:
+   
+   ```json
+      [
+        {
+          "nome": "ANDREA NUNES FIGUEIRA",
+          "id": 1,
+          "matricula": "2177569"
+        },
+        {
+          "nome": "DANIELE PRINTES BARRETO",
+          "id": 2,
+          "matricula": "1972586"
+        },
+        ...
+        {
+          "nome": "DILCRIANE DOS SANTOS BATISTA",
+          "id": 3,
+          "matricula": "1695149"
+        },
+        {
+          "nome": "EDIEGO DE SOUSA BATISTA",
+          "id": 4,
+          "matricula": "1825851"
+        }
+      ]
+  
+   ```
+
+
  - `/recurso_campus/recurso_campus`: ​​Use para **ver**, **editar**, **criar**, **excluir** um recurso específico do campus. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
    - Uso do **GET**: Obtém os dados do recurso do campi correspondente ao *id_recurso_campus* enviado como query string na requisição.
@@ -859,8 +963,8 @@ Endpoints disponíveis:
           "inicio_horario_funcionamento": "string format hh:mm:ss",
           "fim_horario_funcionamento": "string format hh:mm:ss",
           "quantidade_horas": "integer",
-          "campus_id_campus": "integer",
-          "campus": "string"
+          "campus_instituto_id_campus_instituto": "integer",
+          "campus_instituto": "string"
         }
      
      ``` 
@@ -877,8 +981,8 @@ Endpoints disponíveis:
             "inicio_horario_funcionamento": "string format hh:mm:ss",
             "fim_horario_funcionamento": "string format hh:mm:ss",
             "quantidade_horas": "integer",
-            "campus_id_campus": "integer",
-            "campus": "string"
+            "campus_instituto_id_campus_instituto": "integer",
+            "campus_instituto": "string"
           }
       
       ``` 
@@ -896,8 +1000,8 @@ Endpoints disponíveis:
             "inicio_horario_funcionamento": "string format hh:mm:ss",
             "fim_horario_funcionamento": "string format hh:mm:ss",
             "quantidade_horas": "integer",
-            "campus_id_campus": "integer",
-            "campus": "string"
+            "campus_instituto_id_campus_instituto": "integer",
+            "campus_instituto": "string"
           }
       
         ``` 
@@ -957,7 +1061,7 @@ Endpoints disponíveis:
           "id_curso": "integer",
           "nome": "string",
           "data_fundacao": "string format yy-mm-dd",
-          "campus": "string"
+          "campus_instituto": "string"
         }
      
      ``` 
@@ -970,7 +1074,7 @@ Endpoints disponíveis:
         {
           "nome": "string",
           "data_fundacao": "string format dd-mm-yy",
-          "campus_id_campus": "integer"
+          "campus_instituto_id_campus_instituto": "integer"
         }
       
       ``` 
@@ -984,7 +1088,7 @@ Endpoints disponíveis:
             "id_curso": "integer",
             "nome": "string",
             "data_fundacao": "string format dd-mm-yy",
-            "campus_id_campus": "integer"
+            "campus_instituto_id_campus_instituto": "integer"
           }
       
         ``` 
@@ -1014,7 +1118,7 @@ Endpoints disponíveis:
    
    ``` 
 
- - `/campus/campi`: ​​Use para **ver**, **editar**, **criar**, **excluir** os dados de um campus específico. 
+ - `/campus_institutos/campus_instituto`: ​​Use para **ver**, **editar**, **criar**, **excluir** os dados de um campus específico. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
    - Uso do **GET**: Obtém os dados do campus correspondente ao *id_campus* enviado como query string na requisição.
      - Query string: *id_campus = integer*
@@ -1067,7 +1171,7 @@ Endpoints disponíveis:
      - Route: 
        - `/campus/campi?id_campus=value`   
     
- - `/campus`: Use para **ver** os campus cadastrados no banco de dados, na tabela *campus*. 
+ - `/campus_institutos`: Use para **ver** os campus cadastrados no banco de dados, na tabela *campus*. 
    - Método(s): Apenas método **GET** está disponível para acessar a rota.
    - Resposta:
 

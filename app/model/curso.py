@@ -13,7 +13,7 @@ class CursoModel(BaseHasNameModel, db.Model):
     __data_fundacao = db.Column("data_fundacao", db.Date, nullable=True)
     
     campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
-    campus = db.relationship('CampusInstitutoModel', lazy='subquery', uselist=False)
+    campus_instituto = db.relationship('CampusInstitutoModel', lazy='subquery', uselist=False)
 
     docentes = db.relationship('DocenteModel', uselist=True, backref=db.backref('curso', uselist=False, lazy='select'))
     
@@ -34,7 +34,7 @@ class CursoModel(BaseHasNameModel, db.Model):
         self.__data_fundacao = data
         
     def serialize(self):
-        campus = db.session.query(
+        campus_instituto = db.session.query(
             CampusInstitutoModel.nome
         ).filter_by(id_campus=self.campus_instituto_id_campus_instituto).first()
 
@@ -42,7 +42,7 @@ class CursoModel(BaseHasNameModel, db.Model):
             'id_curso':self.id_curso,
             'nome':self.nome,
             'data_fundacao':self.data_fundacao,
-            "campus": campus.nome if campus else "null"
+            "campus_instituto": campus_instituto.nome if campus_instituto else "null"
         }
 
     @classmethod
