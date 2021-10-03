@@ -15,6 +15,13 @@ class PontoVerificacaoModel(BaseHasUsuarioModel, db.Model):
     campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'))
     campus_instituto = db.relationship('CampusInstitutoModel', uselist=True, lazy='select')
 
+    @classmethod
+    def query_all_names(cls):
+        return super().query_all_names(
+            cls.nome.label("nome"), 
+            cls.id_ponto_verificacao.label("id")
+        )
+
     def serialize(self):
         try:    
             usuario_dict = self.usuario.serialize()
@@ -26,7 +33,7 @@ class PontoVerificacaoModel(BaseHasUsuarioModel, db.Model):
         campus_instituto = db.session.query(
                 CampusInstitutoModel.nome
             ).filter_by(id_campus_instituto=self.campus_instituto_id_campus_instituto).first()
-
+        
         return{
             "id_ponto_verificacao":self.id_ponto_verificacao,
             "nome":self.nome,

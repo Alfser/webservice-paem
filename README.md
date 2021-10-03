@@ -913,7 +913,7 @@ Endpoints disponíveis:
        - `/pontos_verificacao/ponto_verificacao?id_ponto_verificacao=value`
 
 
- - `/tecnicos`: Use para **ver** os técnicos cadastrados na base de dados, na _tecnico_. 
+ - `/pontos_verificacao`: Use para **ver** os técnicos cadastrados na base de dados, na *pontos_verificacao*. 
    - Método(s) disponíveis: Você pode apenas usar o método **GET** para acessar esta rota.
    - Resposta:
    
@@ -922,23 +922,14 @@ Endpoints disponíveis:
         {
           "nome": "ANDREA NUNES FIGUEIRA",
           "id": 1,
-          "matricula": "2177569"
+          
         },
-        {
-          "nome": "DANIELE PRINTES BARRETO",
-          "id": 2,
-          "matricula": "1972586"
-        },
+        ,
         ...
         {
           "nome": "DILCRIANE DOS SANTOS BATISTA",
           "id": 3,
           "matricula": "1695149"
-        },
-        {
-          "nome": "EDIEGO DE SOUSA BATISTA",
-          "id": 4,
-          "matricula": "1825851"
         }
       ]
   
@@ -1184,6 +1175,35 @@ Endpoints disponíveis:
     ]
    
    ``` 
+
+
+- `/discente_vacinacao`: ​​Use para **ver**, #*editar** os dados de um discente específico. 
+   - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
+   - Uso do **GET**: Obtém os dados de vacinação do discente correspondente a query string *discente_matricula* enviado como query string na requisição.
+     - Query string: *discente_matricula = string*
+     - Route:
+       - `/discente_vacinacao?discente_matricula=value`
+        
+     - Resposta:
+      
+     ```json
+
+        {
+          
+        }
+     
+     ``` 
+
+   - Uso do **PUT**: Edita o discente de acordo com os dados enviado no body da requisição.
+     - Requisição: Campos que podem ser enviados no body.
+    
+      ```json
+
+        {
+          
+        }
+      
+      ``` 
 
 ## Documentações
 

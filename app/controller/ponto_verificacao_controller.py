@@ -1,8 +1,8 @@
 from ..model import PontoVerificacaoModel
-from .base_controller import BaseHasUsuarioController
+from .base_controller import BaseHasUsuarioController, BaseHasNameController
 
 
-class PontoVerificacaoController(BaseHasUsuarioController):
+class PontoVerificacaoController(BaseHasUsuarioController, BaseHasNameController):
 
     @classmethod
     def get(cls, id_usuario):
@@ -22,5 +22,5 @@ class PontoVerificacaoController(BaseHasUsuarioController):
     
     @classmethod
     def get_list(cls):
-        return super().get_list(PontoVerificacaoModel)
+        return super().get_all_names(PontoVerificacaoModel)
     
