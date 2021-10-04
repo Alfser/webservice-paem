@@ -41,7 +41,7 @@ class CampusInstitutoModel(BaseHasNameModel, db.Model):
                 "abertura_total":self.abertura_total,
                 "ano_fundacao":self.ano_fundacao,
                 'direcao_id_direcao': self.direcao_id_direcao,
-                "direcao": docente_dict if docente_dict else 'null' 
+                "direcao": docente_dict if docente_dict else None 
             }
 
     @classmethod

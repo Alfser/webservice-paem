@@ -1143,6 +1143,7 @@ Endpoints disponíveis:
         {
           "id_campus":"integer",
           "nome":"string",
+          "abertura_total":"boolean(1 ou 0)",
           "ano_fundacao":"string format yy-mm-dd",
           "direcao_id_direcao": "integer",
           "direcao": "string" 
@@ -1156,8 +1157,9 @@ Endpoints disponíveis:
       ```json
 
         {
-          "nome":"string",
+          "nome":"string(45)",
           "ano_fundacao":"string format dd-mm-yy",
+          "abertura_total":"boolean(1 ou 0)",
           "direcao_id_direcao": "integer",
         }
       
@@ -1171,8 +1173,9 @@ Endpoints disponíveis:
           {
             "id_campus":"integer",
             "nome":"string",
+            "abertura_total":"boolean(1 ou 0)",
             "ano_fundacao":"string format dd-mm-yy",
-            "direcao_id_direcao": "integer",
+            "direcao_id_direcao": "integer"
           }
       
         ``` 
