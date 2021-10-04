@@ -297,24 +297,32 @@ Endpoints disponíveis:
        ```json
           {
             "id_discente": "integer", 
-            "nome": "string",
-            "matricula": "string",
-            "entrada": "string",
-            "semestre": "string",
-            "endereco": "string",
-            "grupo_risco": "integer",
-            "status_covid": "integer",
-            "status_permissao": "integer",
+            "nome": "string(45)",
+            "matricula": "string(45)",
+            "entrada": "string(6)",
+            "data_nascimento":"string format yyyy-mm-dd",
+            "ano_de_ingresso":"integer",
+            "sexo":"string(2)",
+            "quantidade_pessoas":"integer",
+            "quantidade_vacinas":"integer",
+            "fabricantes":"string(45)",
+            "justificativa":"text",
+            "semestre":"integer",
+            "endereco":"string(45)",
+            "grupo_risco":"boolean(1 ou 0)",
+            "status_covid":"boolean(1 ou 0)",
+            "status_permissao":"boolean(1 ou 0)",
             "usuario": {
-                "id_usuario": "integer",
-                "login": "string",
-                "cpf": "string",
-                "email": "string",
-                "tipo": "integer",
+                "id_usuario":"integer",
+                "login":"string(45)",
+                "cpf":"string(15)",
+                "email":"string(45)",
+                "tipo":"integer",
             },
-            "curso": "string",
+            "curso_id_curso":"integer",
+            "curso": "string(45)",
             "campus_instituto_id_campus_instituto":"integer",
-            "campus_instituto": "string"
+            "campus_instituto": "string(45)"
           }
          
        ``` 
@@ -326,45 +334,57 @@ Endpoints disponíveis:
 
       {
         "discente":{
-            "nome": "string",
-            "matricula": "string",
-            "entrada": "string",
-            "semestre": "string",
-            "endereco": "string",
-            "grupo_risco": "integer",
-            "status_covid": "integer",
-            "status_permissao": "integer",
-            "curso_id_curso": "integar",
-            "campus_id_campus":"integer",
-            },
-      "usuario": {
-            "login": "string",
-            "cpf": "string",
-            "email": "string",
-            "tipo": "integer",
-        }
+            "nome": "string(45)",
+            "matricula": "string(45)",
+            "entrada": "string(6)",
+            "data_nascimento":"string format dd-mm-yyyy",
+            "ano_de_ingresso":"integer",
+            "sexo":"string(2)",
+            "quantidade_pessoas":"integer",
+            "quantidade_vacinas":"integer",
+            "fabricantes":"string(45)",
+            "justificativa":"text",
+            "semestre":"integer",
+            "endereco":"string(45)",
+            "grupo_risco":"boolean(1 ou 0)",
+            "status_covid":"boolean(1 ou 0)",
+            "status_permissao":"boolean(1 ou 0)"
+        },
+        "usuario": {
+            "id_usuario":"integer",
+            "login":"string(45)",
+            "cpf":"string(15)",
+            "email":"string(45)",
+            "tipo":"integer",
+        },
+        "curso_id_curso":"integer",
+        "campus_instituto_id_campus_instituto":"integer"
       }
-
      ``` 
 
    - Uso do **PUT**: Atualiza os dados do discente correspondente ao *id_discente* enviado no body
      - body da requisição:
      ```json
      
-     "discente":{
-            "id_discente": "integer", 
-            "nome": "string",
-            "matricula": "string",
-            "entrada": "string",
-            "semestre": "string",
-            "endereco": "string",
-            "grupo_risco": "integer",
-            "status_covid": "integer",
-            "status_permissao": "integer",
-            "usuario_id_usuario": "integer",
-            "curso_id_curso":"integar",
-            "campus_id_campus":"integer",
-        }
+      {
+        "nome": "string(45)",
+        "matricula": "string(45)",
+        "entrada": "string(6)",
+        "data_nascimento":"string format dd-mm-yyyy",
+        "ano_de_ingresso":"integer",
+        "sexo":"string(2)",
+        "quantidade_pessoas":"integer",
+        "quantidade_vacinas":"integer",
+        "fabricantes":"string(45)",
+        "justificativa":"text",
+        "semestre":"integer",
+        "endereco":"string(45)",
+        "grupo_risco":"boolean(1 ou 0)",
+        "status_covid":"boolean(1 ou 0)",
+        "status_permissao":"boolean(1 ou 0)",
+        "curso_id_curso":"integer",
+        "campus_instituto_id_campus_instituto":"integer"
+      }
      
      ``` 
 
@@ -1189,18 +1209,26 @@ Endpoints disponíveis:
      ```json
 
         {
-          
+          "id_discente":"integer",
+          "nome":"string(45)",
+          "fabricante":"string(45)",
+          "status_covid":"boolean(1 ou 0)",
+          "quantidade_vacinas":"integer"
         }
      
      ``` 
 
-   - Uso do **PUT**: Edita o discente de acordo com os dados enviado no body da requisição.
+   - Uso do **PUT**: Edita os dados de vacinação do discente de acordo com os dados enviado no body da requisição (O *id_discente* do discente deve ser especificado no body).
      - Requisição: Campos que podem ser enviados no body.
     
       ```json
 
         {
-          
+          "id_discente":"integer",
+          "nome":"string(45)",
+          "fabricante":"string(45)",
+          "status_covid":"boolean(1 ou 0)",
+          "quantidade_vacinas":"integer"
         }
       
       ``` 

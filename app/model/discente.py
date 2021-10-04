@@ -14,7 +14,7 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
     matricula = db.Column(db.String(45), unique=True, nullable=False)
     nome = db.Column(db.String(45), nullable=False)
     entrada = db.Column(db.String(6), nullable=True)
-    __data_nascimento = db.Column('data_nascimento', db.String(45), nullable=True)
+    __data_nascimento = db.Column('data_nascimento', db.Date, nullable=True)
     ano_de_ingresso = db.Column(db.Integer, nullable=True)
     sexo = db.Column(db.String(2), nullable=True)
     quantidade_pessoas = db.Column(db.Integer, nullable=True)
@@ -108,10 +108,11 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
                 "grupo_risco": self.grupo_risco,
                 "status_covid": self.status_covid,
                 "status_permissao": self.status_permissao,
-                "usuario": usuario_dict if usuario_dict else "null",
-                "curso": curso.nome if curso else "null",
+                "usuario": usuario_dict if usuario_dict else None,
+                "curso_id_curso": self.curso_id_curso,
+                "curso": curso.nome if curso else None,
                 "campus_instituto_id_campus_instituto": self.campus_instituto_id_campus_instituto,
-                "campus_instituto": campus_instituto.nome if campus_instituto else "null"
+                "campus_instituto": campus_instituto.nome if campus_instituto else None
             }
     
     
