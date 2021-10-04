@@ -44,7 +44,7 @@ class DirecaoModel(db.Model):
             "data_entrada": self.data_entrada,
             "data_saida": self.data_saida,
             "status": self.status_ativo,
-            "docente": docente.nome if docente else "nenhum docente"
+            "docente": docente.nome if docente else None
         }
 
     def __repr__(self):

@@ -32,7 +32,7 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
             'fim_horario_funcionamento':self.fim_horario_funcionamento,
             'quantidade_horas': self.quantidade_horas,
             'campus_instituto_id_campus_instituto':self.campus_instituto_id_campus_instituto,
-            'campus_instituto': campus_instituto.nome if campus_instituto else "null"
+            'campus_instituto': campus_instituto.nome if campus_instituto else None
         }
     
     @property                    

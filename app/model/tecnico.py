@@ -55,9 +55,9 @@ class TecnicoModel(BaseHasUsuarioModel, db.Model):
                 'status_covid':self.status_covid, 
                 'status_afastamento':self.status_afastamento, 
                 'usuario_id_usuario':self.usuario_id_usuario,
-                'usuario': usuario_dict if usuario_dict else "null",
+                'usuario': usuario_dict if usuario_dict else None,
                 'campus_id_campus':self.campus_instituto_id_campus_instituto,
-                'campus': campus_instituto.nome if campus_instituto else "null"
+                'campus': campus_instituto.nome if campus_instituto else None
             }
 
     @classmethod

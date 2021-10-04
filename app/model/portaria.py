@@ -38,9 +38,9 @@ class PortariaModel(BaseHasNameModel, db.Model):
                 "funcao": self.funcao,
                 "turno_trabalho": self.turno_trabalho,
                 "usuario_id_usuario": self.usuario_id_usuario,
-                "usuario": usuario_dict if usuario_dict else 'nenhum registro',
+                "usuario": usuario_dict if usuario_dict else None,
                 "curso_id_curso": self.curso_id_curso,
-                "curso": curso.nome if curso else "nenhum curso",
+                "curso": curso.nome if curso else None,
                 "id_portaria": self.id_portaria
             }
     

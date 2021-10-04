@@ -75,11 +75,11 @@ class DocenteModel(BaseHasUsuarioModel, db.Model):
                 "status_afastamento":self.status_afastamento,
                 "situacao":self.situacao,
                 "usuario_id_usuario":self.usuario_id_usuario,
-                "usuario": usuario_dict if usuario_dict else 'nenhum registro',
+                "usuario": usuario_dict if usuario_dict else None,
                 "curso_id_curso":self.curso_id_curso,
-                "curso": curso.nome if curso else "nenhum curso",
+                "curso": curso.nome if curso else None,
                 "campus_instituto_id_campus_instituto":self.campus_instituto_id_campus_instituto,
-                "campus_instituto":campus_instituto.nome if campus_instituto else "nenhum campus ou instituto"
+                "campus_instituto":campus_instituto.nome if campus_instituto else None
             }
     
     @classmethod

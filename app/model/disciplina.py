@@ -34,7 +34,7 @@ class DisciplinaModel(db.Model):
                 "nome":self.nome,
                 "codigo_sigaa":self.codigo_sigaa,
                 "semestre":self.semestre,
-                'discentes': discentes_dict if discentes_dict else 'nenhum registro' 
+                'discentes': discentes_dict if discentes_dict else None 
             }
 
     @classmethod

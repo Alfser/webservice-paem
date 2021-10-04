@@ -51,7 +51,7 @@ class AcessoPermitidoModel(BaseModel, db.Model):
               "hora_saida":self.hora_saida,
               "matricula_discente":self.matricula_discente,
               "recurso_campus_id_recurso_campus":self.recurso_campus_id_recurso_campus,
-              "recurso_campus":self.recurso_campus.nome if self.recurso_campus else "null",
+              "recurso_campus":self.recurso_campus.nome if self.recurso_campus else None,
               'solicitacao_acesso_id_solicitacao_acesso':self.solicitacao_acesso_id_solicitacao_acesso
           }
 

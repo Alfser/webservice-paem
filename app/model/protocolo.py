@@ -23,5 +23,5 @@ class ProtocoloModel(BaseModel, db.Model):
             "id_protocolo": self.id_protocolo,
             "mensagens": self.mensagens,
             "usuario_id_usuario": self.usuario_id_usuario,
-            "usuario": usuario_dict if usuario_dict else 'nenhum registro'
+            "usuario": usuario_dict if usuario_dict else None
         }

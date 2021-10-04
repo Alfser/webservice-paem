@@ -36,13 +36,13 @@ class CursoModel(BaseHasNameModel, db.Model):
     def serialize(self):
         campus_instituto = db.session.query(
             CampusInstitutoModel.nome
-        ).filter_by(id_campus=self.campus_instituto_id_campus_instituto).first()
+        ).filter_by(id_campus_instituto=self.campus_instituto_id_campus_instituto).first()
 
         return {
             'id_curso':self.id_curso,
             'nome':self.nome,
             'data_fundacao':self.data_fundacao,
-            "campus_instituto": campus_instituto.nome if campus_instituto else "null"
+            "campus_instituto": campus_instituto.nome if campus_instituto else None
         }
 
     @classmethod
