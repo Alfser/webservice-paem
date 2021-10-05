@@ -44,7 +44,7 @@ class TecnicoModel(BaseHasUsuarioModel, db.Model):
         finally:
             campus_instituto = db.session.query(
                 CampusInstitutoModel.nome
-            ).filter_by(id_campus=self.campus_instituto_id_campus_instituto).first() # query name and get name from tuple
+            ).filter_by(id_campus_instituto=self.campus_instituto_id_campus_instituto).first() # query name and get name from tuple
             
             return {
                 'id_tecnico':self.id_tecnico,
