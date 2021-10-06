@@ -14,6 +14,7 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
     matricula = db.Column(db.String(45), unique=True, nullable=False)
     nome = db.Column(db.String(45), nullable=False)
     entrada = db.Column(db.String(6), nullable=True)
+    carteirinha_vacinacao = db.Column(db.Text, nullable=True)
     __data_nascimento = db.Column('data_nascimento', db.Date, nullable=True)
     ano_de_ingresso = db.Column(db.Integer, nullable=True)
     sexo = db.Column(db.String(2), nullable=True)

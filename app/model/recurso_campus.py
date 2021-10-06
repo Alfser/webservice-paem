@@ -21,7 +21,9 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
 
         campus_instituto = db.session.query(
             CampusInstitutoModel.nome
-        ).filter_by(id_campus=self.campus_instituto_id_campus_instituto).first() # query name of campus
+        ).filter_by(
+            id_campus_instituto=self.campus_instituto_id_campus_instituto
+            ).first() # query name of campus
         
         return {
             'id_recuso_campus': self.id_recurso_campus, 
@@ -75,7 +77,7 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
             cls.nome.label("nome"), 
             cls.id_recurso_campus.label("id"),
             cls.__inicio_horario_funcionamento.label("inicio_horario"),
-            cls.__fim_horario_funcionamento.label("fim_horario")
+            cls.__fim_horario_funcionamento.label("fim_horario"), id_campus_instituto=1
         )
 
     def __repr__(self):

@@ -11,6 +11,13 @@ class CursoModel(BaseHasNameModel, db.Model):
     id_curso = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(45), nullable=False)
     __data_fundacao = db.Column("data_fundacao", db.Date, nullable=True)
+    unidade = db.Column(db.String(45), nullable=True)
+    cidade = db.Column(db.String(45), nullable=True)
+    grau_academico = db.Column(db.String(45), nullable=True)
+    situacao = db.Column(db.String(45), nullable=True)
+    modalidade = db.Column(db.String(45), nullable=True)
+    convenio = db.Column(db.String(45), nullable=True)
+    ativo = db.Column(db.SmallInteger, nullable=True)
     
     campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
     campus_instituto = db.relationship('CampusInstitutoModel', lazy='subquery', uselist=False)

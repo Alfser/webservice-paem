@@ -53,8 +53,8 @@ class BaseHasNameModel(BaseModel):
     #    cls.save()
 
     @classmethod
-    def query_all_names(*entiries):
-        return list(db.session.query(*entiries).all())
+    def query_all_names(*entiries, id_campus_instituto):
+        return list(db.session.query(*entiries).filter_by(id_campus_instituto = id_campus_instituto).all())
 
 # List id_usuario of all that is user
 class BaseHasUsuarioModel(BaseHasNameModel):

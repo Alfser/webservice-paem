@@ -22,6 +22,7 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
       fone = db.Column(db.String(45), nullable=True)
       cpf = db.Column(db.String(45), nullable=True)
       visitante = db.Column(db.SmallInteger, nullable=True)
+      observacao = db.Column(db.Text, nullable=True)
 
       usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
       usuario = db.relationship('UsuarioModel', uselist=False, lazy='noload')
