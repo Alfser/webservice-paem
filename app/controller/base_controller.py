@@ -72,10 +72,10 @@ class BaseController:
 class BaseHasNameController(BaseController):
     
     @classmethod
-    def get_all_names(cls, Model):
+    def get_all_names(cls, Model, campus_instituto_id_campus_instituto=None):
         
         # models_names receve a tuple of (nome , id)
-        model_names = Model.query_all_names()
+        model_names = Model.query_all_names(campus_instituto_id_campus_instituto)
 
         #create a dict with nome as key and id as a value
         names_dict = [{"nome":row.nome, "id":row.id} for row in model_names]
@@ -86,9 +86,9 @@ class BaseHasNameController(BaseController):
 class BaseHasHorarioController(BaseHasNameController):
 
         @classmethod
-        def get_all_names(cls, Model):
-            # models_names receve a tuple of (nome , id)
-            model_names = Model.query_all_names()
+        def get_all_names(cls, Model, campus_instituto_id_campus_instituto=None):
+            # models_names receve a list of resources
+            model_names = Model.query_all_names(campus_instituto_id_campus_instituto)
 
             #create a dict with nome as key and id as a value
             names_dict = [

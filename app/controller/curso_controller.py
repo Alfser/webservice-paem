@@ -20,5 +20,5 @@ class CursoController(BaseHasNameController):
         return super().delete(id, CursoModel)
 
     @classmethod
-    def get_all_names(cls):
-        return super().get_all_names(CursoModel)
+    def get_all_names(cls, campus_instituto_id_campus_instituto=None):
+        return super().get_all_names(CursoModel, campus_instituto_id_campus_instituto)

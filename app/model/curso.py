@@ -20,7 +20,7 @@ class CursoModel(BaseHasNameModel, db.Model):
     ativo = db.Column(db.SmallInteger, nullable=True)
     
     campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
-    campus_instituto = db.relationship('CampusInstitutoModel', lazy='subquery', uselist=False)
+    campus_instituto = db.relationship('CampusInstitutoModel', lazy='select', uselist=False)
 
     docentes = db.relationship('DocenteModel', uselist=True, backref=db.backref('curso', uselist=False, lazy='select'))
     
@@ -53,8 +53,12 @@ class CursoModel(BaseHasNameModel, db.Model):
         }
 
     @classmethod
-    def query_all_names(cls):
-        return super().query_all_names(cls.nome.label("nome"), cls.id_curso.label("id"))
+    def query_all_names(cls, campus_instituto_id_campus_instituto):
+        return super().query_all_names(
+            cls.nome.label("nome"), 
+            cls.id_curso.label("id"), 
+            campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto
+        )
         
     def __repr__(self):
         return '<curso %r>' % self.nome

@@ -14,6 +14,13 @@ class UsuarioModel(BaseHasNameModel, db.Model):
     email = db.Column(db.String(45), unique=True, nullable=False)
     tipo = db.Column(db.Integer, nullable=False)
 
+    campus_instituto_id_campus_instituto = db.Column(
+        db.Integer, 
+        db.ForeignKey('campus_instituto.id_campus_instituto'),
+        nullable=True
+    )
+    campus_instituto = db.relationship('CampusInstitutoModel', uselist=False, lazy='noload')
+
     @property
     def senha(self):
         return self._senha
@@ -27,11 +34,13 @@ class UsuarioModel(BaseHasNameModel, db.Model):
         return pwd_context.verify(password, self.senha)
 
     def serialize(self):
-        return {'id_usuario': self.id_usuario, 
-                'login': self.login,
-                'cpf': self.cpf,
-                'email':self.email,
-                'tipo':self.tipo,
+        return {"id_usuario": self.id_usuario, 
+                "login": self.login,
+                "cpf": self.cpf,
+                "email":self.email,
+                "tipo":self.tipo,
+                "campus_instituto_id_campus_instituto":self.campus_instituto_id_campus_instituto
+                
         }
 
     @classmethod

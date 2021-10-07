@@ -42,7 +42,7 @@ class ListaCursoResource(Resource):
     ENDPOINT = "cursos"
     ROUTE = "/cursos"
 
-    @Authorization.token_required()
-    def get(self):
-        return CursoController.get_all_names()
+    @Authorization.token_required(with_usuario=True)
+    def get(self, usuario):
+        return CursoController.get_all_names(usuario.campus_instituto_id_campus_instituto)
 

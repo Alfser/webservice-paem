@@ -23,7 +23,7 @@ class Authorization():
             def decorator(*args, **kwargs):
                 
                 #active token required in routes
-                isActive = False
+                isActive = True
                 
                 if isActive:
                     Bearer_token = None

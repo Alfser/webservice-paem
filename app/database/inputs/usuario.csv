@@ -1,8 +1,8 @@
-login;senha;cpf;email;tipo
-admin;admin;11111111111;admin@teste.com;0
-teste_tecnico;teste;22222222222;tecnico@teste.com;1
-teste_docente;teste;33333333333;docente@teste.com;2
-teste_discente_1;teste;44444444444;discente1@teste.com;3
-teste_discente_2;teste;55555555555;discente2@teste.com;3
-teste_discente_3;teste;66666666666;discente3@teste.com;3
-teste_portaria;teste;77777777777;portaria@teste.com;4
+login;senha;cpf;email;tipo;campus_instituto_id_campus_instituto
+admin;admin;11111111111;admin@teste.com;0;1
+teste_tecnico;teste;22222222222;tecnico@teste.com;1;1
+teste_docente;teste;33333333333;docente@teste.com;2;1
+teste_discente_1;teste;44444444444;discente1@teste.com;3;1
+teste_discente_2;teste;55555555555;discente2@teste.com;3;1
+teste_discente_3;teste;66666666666;discente3@teste.com;3;1
+teste_portaria;teste;77777777777;portaria@teste.com;4;1

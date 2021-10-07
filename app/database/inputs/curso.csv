@@ -1,3 +1,3 @@
-nome;data_fundacao
-SISTEMAS DE INFORMAÇÃO;01-01-2018
-CIÊNCIAS BIOLÓGICAS;01-01-2014
+nome;data_fundacao;campus_instituto_id_campus_instituto
+SISTEMAS DE INFORMAÇÃO;01-01-2018;1
+CIÊNCIAS BIOLÓGICAS;01-01-2014;1

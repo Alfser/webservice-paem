@@ -21,5 +21,5 @@ class RecursoCampusController(BaseHasHorarioController):
         return super().delete(id_recurso_campus, RecursoCampusModel)
 
     @classmethod
-    def get_all_names(cls):
-        return super().get_all_names(RecursoCampusModel)
+    def get_all_names(cls, campus_instituto_id_campus_instituto=None):
+        return super().get_all_names(RecursoCampusModel, campus_instituto_id_campus_instituto)
