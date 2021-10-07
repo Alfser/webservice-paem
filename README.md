@@ -968,7 +968,7 @@ Endpoints disponíveis:
    ```
 
 
- - `/recurso_campus/recurso_campus`: ​​Use para **ver**, **editar**, **criar**, **excluir** um recurso específico do campus. 
+ - `/recursos_campus/recurso_campus`: ​​Use para **ver**, **editar**, **criar**, **excluir** um recurso específico do campus. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
    - Uso do **GET**: Obtém os dados do recurso do campi correspondente ao *id_recurso_campus* enviado como query string na requisição.
      - Query string: *id_recurso_campus = integer*
