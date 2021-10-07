@@ -267,27 +267,30 @@ Endpoints disponíveis:
       
    - Uso do **PUT**: Para atualizar o usuário precisa enviar os dados que deseja atualizar no body da requisição junto com o *id_usuario* como segue:
    
-    ```json
-      {
-        "id_usuario": "user integer - OBRIGATÓRIO",
-        "login": "login string",
-        "cpf": "cpf value string",
-        "email":"email string",
-        "tipo":"tipo Integer",
-      }  
-    ```
+      ```json
+        {
+          "id_usuario": "*integer",
+          "login": "string(45)",
+          "cpf": "string(15)",
+          "email":"string(45) format name@mail.com",
+          "tipo":"integer",
+          "senha":"text",
+          "campus_instituto_id_campus_instituto":"integer"
+        }  
+      ```
 
-   - Resposta **GET**: Retorna os dado do usuário logado.
+   - Resposta **GET**: Retorna os dados do usuário logado.
    
-    ```json
-      {
-        "id_usuario": "user logged - integer",
-        "login": "login - string",
-        "cpf": "cpf value - string",
-        "email":"email - string",
-        "tipo":"tipo - integer",
-      } 
-    ```
+      ```json
+        {
+          "id_usuario": "integer",
+          "login": "string(45)",
+          "cpf": "string(15)",
+          "email":"string(45) format name@mail.com",
+          "tipo":"Integer",
+          "campus_instituto_id_campus_instituto":"integer"
+        } 
+      ```
 
  - `/discentes/discente`: ​​Use para **ver**, **editar**, **criar**, **excluir** um discente específico. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
@@ -318,6 +321,7 @@ Endpoints disponíveis:
                 "cpf":"string(15)",
                 "email":"string(45)",
                 "tipo":"integer",
+                "campus_instituto_id_campus_instituto":"integer"
             },
             "curso_id_curso":"integer",
             "curso": "string(45)",
@@ -352,12 +356,13 @@ Endpoints disponíveis:
         },
         "usuario": {
             "id_usuario":"integer",
-            "login":"string(45)",
+            "login":"*string(45)",
             "cpf":"string(15)",
-            "email":"string(45)",
-            "tipo":"integer",
+            "email":"*string(45)",
+            "tipo":"*integer",
+            "campus_instituto_id_campus_instituto":"*integer"
         },
-        "curso_id_curso":"integer",
+        "curso_id_curso":"*integer",
         "campus_instituto_id_campus_instituto":"integer"
       }
      ``` 
@@ -367,6 +372,7 @@ Endpoints disponíveis:
      ```json
      
       {
+        "id_discente":"*integer",
         "nome": "string(45)",
         "matricula": "string(45)",
         "entrada": "string(6)",
@@ -488,7 +494,7 @@ Endpoints disponíveis:
      ```json
      
       {
-          "id_solicitacao_acesso":"integer",
+          "id_solicitacao_acesso":"*integer",
           "para_si":"integer",
           "data":"string format dd-mm-yy",
           "hora_inicio":"string format hh:mm:ss",
@@ -611,7 +617,7 @@ Endpoints disponíveis:
      ```json
      
         {
-            "id_acesso_permitido":"integer",
+            "id_acesso_permitido":"*integer",
             "temperatura":"float",
             "hora_entrada":"string format hh:mm:ss",
             "hora_saida":"string format hh:mm:ss",
@@ -669,11 +675,12 @@ Endpoints disponíveis:
           "situacao": "string",
           "usuario_id_usuario": "integer",
           "usuario": {
-              "id_usuario": "integer",
-              "login": "string",
-              "cpf": "string",
-              "email": "string",
-              "tipo": "integer",
+            "id_usuario":"integer",
+            "login":"*string(45)",
+            "cpf":"string(15)",
+            "email":"*string(45)",
+            "tipo":"*integer",
+            "campus_instituto_id_campus_instituto":"*integer"
           },
           "curso_id_curso": "integer",
           "curso": "string",
@@ -700,10 +707,11 @@ Endpoints disponíveis:
           "campus_id_campus": "integer"
           },
           "usuario": {
-              "login": "string",
-              "cpf": "string",
-              "email": "string",
-              "tipo": "integer",
+            "login":"*string(45)",
+            "cpf":"string(15)",
+            "email":"*string(45)",
+            "tipo":"*integer",
+            "campus_instituto_id_campus_instituto":"*integer"
           }
         }
 
@@ -715,7 +723,7 @@ Endpoints disponíveis:
      ```json
 
         {
-          "id_docente": "integer",
+          "id_docente": "*integer",
           "siape": "string",
           "nome": "string",
           "data_nascimento": "string format dd-mm-yy",
@@ -773,12 +781,13 @@ Endpoints disponíveis:
       "status_covid":"integer", 
       "status_afastamento":"integer", 
       "usuario_id_usuario":"integer",
-      "usuario":{
-          "id_usuario": "integer",
-          "login": "string",
-          "cpf": "string",
-          "email": "string",
-          "tipo": "integer",
+      "usuario": {
+          "id_usuario":"integer",
+          "login":"*string(45)",
+          "cpf":"string(15)",
+          "email":"*string(45)",
+          "tipo":"*integer",
+          "campus_instituto_id_campus_instituto":"*integer"
       },
       "campus_instituto_id_campus_instituto":"integer",
       "campus_instituto": "string"
@@ -801,11 +810,12 @@ Endpoints disponíveis:
         "usuario_id_usuario":"integer",
         "campus_instituto_id_campus_instituto":"integer"
         },
-        "usuario":{
-            "login": "string",
-            "cpf": "string",
-            "email": "string",
-            "tipo": "integer",
+        "usuario": {
+            "login":"*string(45)",
+            "cpf":"string(15)",
+            "email":"*string(45)",
+            "tipo":"*integer",
+            "campus_instituto_id_campus_instituto":"*integer"
         }
       }
 
@@ -816,7 +826,7 @@ Endpoints disponíveis:
      
      ```json
       {
-        "id_tecnico":"integer",
+        "id_tecnico":"*integer",
         "siape":"string", 
         "nome":"string", 
         "data_nascimento":"string format dd-mm-yy", 
@@ -876,19 +886,21 @@ Endpoints disponíveis:
      ```json
      {
    
-      "id_ponto_verificacao":"integer",
-      "nome":"string(45)",
-      "descricao":"Text",
-      "campus_instituto_id_campus_instituto":"integer",
-      "campus_instituto":"string(45)",
-      "usuario_id_usuario":"integer",
-      "usuario":{
-          "id_usuario": "integer",
-          "login": "string",
-          "cpf": "string",
-          "email": "string",
-          "tipo": "integer",
-      }
+        "id_ponto_verificacao":"integer",
+        "nome":"string(45)",
+        "descricao":"Text",
+        "campus_instituto_id_campus_instituto":"integer",
+        "campus_instituto":"string(45)",
+        "usuario_id_usuario":"integer",
+        "usuario": {
+            "id_usuario":"integer",
+            "login":"*string(45)",
+            "cpf":"string(15)",
+            "email":"*string(45)",
+            "tipo":"*integer",
+            "campus_instituto_id_campus_instituto":"*integer"
+        }
+     }
      
      ``` 
 
@@ -902,13 +914,13 @@ Endpoints disponíveis:
             "descricao":"Text",
             "campus_instituto_id_campus_instituto":"integer",
             "usuario_id_usuario":"integer",
-        "usuario":{
-            "id_usuario": "integer",
-            "login": "string",
-            "cpf": "string",
-            "email": "string",
-            "tipo": "integer",
-        }
+        "usuario": {
+            "login":"*string(45)",
+            "cpf":"string(15)",
+            "email":"*string(45)",
+            "tipo":"*integer",
+            "campus_instituto_id_campus_instituto":"*integer"
+          }
       }
 
      ```  
@@ -918,7 +930,7 @@ Endpoints disponíveis:
      
      ```json
       {
-        "id_ponto_verificacao":"integer",
+        "id_ponto_verificacao":"*integer",
         "nome":"string(45)",
         "descricao":"Text",
         "campus_instituto_id_campus_instituto":"integer",
@@ -1004,7 +1016,7 @@ Endpoints disponíveis:
         ```json
 
           {
-            "id_recuso_campus": "integer", 
+            "id_recuso_campus": "*integer", 
             "nome": "string",
             "capacidade": "integer",
             "descricao": "string",
@@ -1070,9 +1082,16 @@ Endpoints disponíveis:
 
         {
           "id_curso": "integer",
-          "nome": "string",
+          "nome": "string(45)",
           "data_fundacao": "string format yy-mm-dd",
-          "campus_instituto": "string"
+          "campus_instituto": "string",
+          "unidade":"string(45)",
+          "cidade":"string(45)",
+          "grau_academico":"string(45)",
+          "situacao":"string(45)",
+          "modalidade":"string(45)",
+          "convenio":"string(45)",
+          "ativo":"Boolean(0-não ou 1-sim)"
         }
      
      ``` 
@@ -1083,9 +1102,16 @@ Endpoints disponíveis:
       ```json
 
         {
-          "nome": "string",
+          "nome": "string(45)",
           "data_fundacao": "string format dd-mm-yy",
-          "campus_instituto_id_campus_instituto": "integer"
+          "campus_instituto_id_campus_instituto": "integer",
+          "unidade":"string(45)",
+          "cidade":"string(45)",
+          "grau_academico":"string(45)",
+          "situacao":"string(45)",
+          "modalidade":"string(45)",
+          "convenio":"string(45)",
+          "ativo":"Boolean(0-não ou 1-sim)"
         }
       
       ``` 
@@ -1096,10 +1122,17 @@ Endpoints disponíveis:
         ```json
 
           {
-            "id_curso": "integer",
-            "nome": "string",
+            "id_curso": "*integer",
+            "nome": "string(45)",
             "data_fundacao": "string format dd-mm-yy",
-            "campus_instituto_id_campus_instituto": "integer"
+            "campus_instituto_id_campus_instituto": "integer",
+            "unidade":"string(45)",
+            "cidade":"string(45)",
+            "grau_academico":"string(45)",
+            "situacao":"string(45)",
+            "modalidade":"string(45)",
+            "convenio":"string(45)",
+            "ativo":"Boolean(0-não ou 1-sim)"
           }
       
         ``` 
@@ -1142,11 +1175,11 @@ Endpoints disponíveis:
 
         {
           "id_campus":"integer",
-          "nome":"string",
-          "abertura_total":"boolean(1 ou 0)",
+          "nome":"string(45)",
+          "abertura_total":"boolean(1-sim ou 0-não)",
           "ano_fundacao":"string format yy-mm-dd",
           "direcao_id_direcao": "integer",
-          "direcao": "string" 
+          "direcao": "string(45)" 
         }
      
      ``` 
@@ -1159,7 +1192,7 @@ Endpoints disponíveis:
         {
           "nome":"string(45)",
           "ano_fundacao":"string format dd-mm-yy",
-          "abertura_total":"boolean(1 ou 0)",
+          "abertura_total":"boolean(1-sim ou 0-não)",
           "direcao_id_direcao": "integer",
         }
       
@@ -1171,7 +1204,7 @@ Endpoints disponíveis:
         ```json
 
           {
-            "id_campus":"integer",
+            "id_campus":"*integer",
             "nome":"string",
             "abertura_total":"boolean(1 ou 0)",
             "ano_fundacao":"string format dd-mm-yy",
@@ -1227,7 +1260,7 @@ Endpoints disponíveis:
       ```json
 
         {
-          "id_discente":"integer",
+          "id_discente":"*integer",
           "nome":"string(45)",
           "fabricante":"string(45)",
           "status_covid":"boolean(1 ou 0)",

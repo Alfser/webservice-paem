@@ -46,10 +46,18 @@ class CursoModel(BaseHasNameModel, db.Model):
         ).filter_by(id_campus_instituto=self.campus_instituto_id_campus_instituto).first()
 
         return {
-            'id_curso':self.id_curso,
-            'nome':self.nome,
-            'data_fundacao':self.data_fundacao,
-            "campus_instituto": campus_instituto.nome if campus_instituto else None
+            "id_curso":self.id_curso,
+            "nome":self.nome,
+            "data_fundacao":self.data_fundacao,
+            "campus_instituto_id_campus_instituto":self.campus_instituto_id_campus_instituto,
+            "campus_instituto": campus_instituto.nome if campus_instituto else None,
+            "unidade":self.unidade,
+            "cidade":self.cidade,
+            "grau_academico":self.grau_academico,
+            "situacao":self.situacao,
+            "modalidade":self.modalidade,
+            "convenio":self.convenio,
+            "ativo":self.ativo
         }
 
     @classmethod
