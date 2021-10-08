@@ -14,9 +14,19 @@ class AcessoPermitidoModel(BaseModel, db.Model):
       __hora_entrada = db.Column("hora_entrada", db.Time, nullable=True)
       __hora_saida = db.Column("hora_saida", db.Time, nullable=True)
     
-      solicitacao_acesso_id_solicitacao_acesso = db.Column(db.Integer, db.ForeignKey("solicitacao_acesso.id_solicitacao_acesso"), nullable=True)
-      
+      solicitacao_acesso_id_solicitacao_acesso = db.Column(
+          db.Integer, 
+          db.ForeignKey("solicitacao_acesso.id_solicitacao_acesso"), 
+          nullable=True
+        )
       recurso_campus = db.relationship('RecursoCampusModel', uselist=False, lazy='select')
+
+      campus_instituto_id_campus_instituto = db.Column(
+          db.Integer,
+          db.ForeignKey("campus_instituto.id_campus_instituto"),
+          nullable=True
+        )
+      campus_instituto = db.relationship('CampusInstitutoModel', uselist=True, lazy='select')
 
       @property
       def hora_entrada(self):

@@ -27,11 +27,27 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
       usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
       usuario = db.relationship('UsuarioModel', uselist=False, lazy='noload')
 
-      discente_id_discente = db.Column(db.Integer, db.ForeignKey('discente.id_discente'), nullable=True)
+      discente_id_discente = db.Column(
+            db.Integer, 
+            db.ForeignKey('discente.id_discente'), 
+            nullable=True
+        )
 
-      recurso_campus_id_recurso_campus = db.Column(db.Integer, db.ForeignKey('recurso_campus.id_recurso_campus'), nullable=True)
+      recurso_campus_id_recurso_campus = db.Column(
+          db.Integer, 
+          db.ForeignKey('recurso_campus.id_recurso_campus'), 
+          nullable=True
+      )
+
       recurso_campus = db.relationship('RecursoCampusModel', uselist=False, lazy='noload')
       
+      campus_instituto_id_campus_instituto = db.Column(
+          db.Integer, 
+          db.ForeignKey('campus_instituto.id_campus_instituto'),
+          nullable=True
+        )
+      campus_instituto = db.relationship('CampusInstituto', uselist=False, lazy='noload')
+
       acesso_permitido = db.relationship('AcessoPermitidoModel', uselist=False, lazy='select')
 
       @property
