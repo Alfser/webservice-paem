@@ -46,7 +46,7 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
           db.ForeignKey('campus_instituto.id_campus_instituto'),
           nullable=True
         )
-      campus_instituto = db.relationship('CampusInstituto', uselist=False, lazy='noload')
+      campus_instituto = db.relationship('CampusInstitutoModel', uselist=False, lazy='noload')
 
       acesso_permitido = db.relationship('AcessoPermitidoModel', uselist=False, lazy='select')
 
