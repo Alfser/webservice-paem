@@ -115,13 +115,13 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
                 "nome":self.nome,
                 "fone":self.fone,
                 "matricula": discente.matricula if discente else None,
+                "campus_instituto_id_campus_instituto":self.campus_instituto_id_campus_instituto,
                 "usuario_id_usuario": self.usuario_id_usuario,
                 "discente_id_discente":self.discente_id_discente,
                 "discente": discente.nome if discente else None,
                 "recurso_campus_id_recurso_campus":self.recurso_campus_id_recurso_campus,
                 "recurso_campus": recurso_campus.nome if recurso_campus else None,
-                "acesso_permitido": acesso_permitido_dict if acesso_permitido_dict else None,
-                "campus_instituto_id_campus_instituto":self.campus_instituto_id_campus_instituto
+                "acesso_permitido": acesso_permitido_dict if acesso_permitido_dict else None
 
             }
 

@@ -450,6 +450,7 @@ Endpoints disponíveis:
             "nome":"string",
             "fone":"string",
             "matricula": "string",
+            "campus_instituto_id_campus_instituto":"integer",
             "usuario_id_usuario": "integer",
             "discente_id_discente":"integer",
             "discente": "string",
@@ -484,7 +485,8 @@ Endpoints disponíveis:
         "usuario_id_usuario": "integer",
         "discente_id_discente":"integer",
         "recurso_campus_id_recurso_campus":"integer",
-        "acesso_permitido_id_acesso_permitido":"integer"
+        "acesso_permitido_id_acesso_permitido":"integer",
+        "campus_instituto_id_campus_instituto":"integer"
       }
 
      ``` 
@@ -506,7 +508,8 @@ Endpoints disponíveis:
           "usuario_id_usuario": "integer",
           "discente_id_discente":"integer",
           "recurso_campus_id_recurso_campus":"integer",
-          "acesso_permitido_id_acesso_permitido":"integer"
+          "acesso_permitido_id_acesso_permitido":"integer",
+          "campus_instituto_id_campus_instituto":"integer"
       }
      
      ``` 
@@ -591,7 +594,8 @@ Endpoints disponíveis:
             "hora_entrada":"string format hh:mm:ss",
             "hora_saida":"string format hh:mm:ss",
             "matricula_discente":"string(45)",
-            "solicitacao_acesso_id_solicitacao_acesso":"integer"
+            "solicitacao_acesso_id_solicitacao_acesso":"integer",
+            "campus_instituto_id_campus_instituto":"integer"
         }
      
      ```
@@ -606,7 +610,8 @@ Endpoints disponíveis:
             "hora_entrada":"string format hh:mm:ss",
             "hora_saida":"string format hh:mm:ss",
             "matricula_discente":"string(45)",
-            "solicitacao_acesso_id_solicitacao_acesso":"integer"
+            "solicitacao_acesso_id_solicitacao_acesso":"integer",
+            "campus_instituto_id_campus_instituto":"integer"
         }
      
      ``` 
@@ -622,7 +627,8 @@ Endpoints disponíveis:
             "hora_entrada":"string format hh:mm:ss",
             "hora_saida":"string format hh:mm:ss",
             "matricula_discente":"string(45)",
-            "solicitacao_acesso_id_solicitacao_acesso":"integer"
+            "solicitacao_acesso_id_solicitacao_acesso":"integer",
+            "campus_instituto_id_campus_instituto":"integer"
         }
      
      ``` 
