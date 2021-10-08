@@ -55,7 +55,7 @@ class ListaSolicitacaoAcessoResource(Resource):
     ENDPOINT = 'solicitacoes_acessos'
     ROUTE = '/solicitacoes_acessos'
     
-    @Authorization.token_required()
-    def get(self):
-        return SolicitacaoAcessoController.get_list()
+    @Authorization.token_required(with_usuario=True)
+    def get(self, usuario):
+        return SolicitacaoAcessoController.get_list(usuario.campus_instituto_id_campus_instituto)
 

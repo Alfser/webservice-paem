@@ -10,8 +10,8 @@ class BaseModel():
        return cls.query.get(id)
     
     @classmethod
-    def query_all(cls):
-       return cls.query.all()
+    def query_all(cls, campus_instituto_id_campus_instituto=None):
+       return cls.query.filter_by(campus_instituto_id_campus_instituto = campus_instituto_id_campus_instituto).all()
     
     @classmethod
     def update_by_id(cls, id, dict):

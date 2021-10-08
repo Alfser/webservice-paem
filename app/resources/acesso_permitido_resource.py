@@ -49,6 +49,6 @@ class ListaAcessoPermitidoResource(Resource):
     ENDPOINT = 'acessos_permitidos'
     ROUTE = '/acessos_permitidos'
     
-    @Authorization.token_required()
-    def get(self):
-        return AcessoPermitidoController.get_list()
+    @Authorization.token_required(with_usuario=True)
+    def get(self, usuario):
+        return AcessoPermitidoController.get_list(usuario.campus_instituto_id_campus_instituto)

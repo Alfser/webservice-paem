@@ -64,8 +64,8 @@ class BaseController:
         return {"message":" Deleted"}, OK
 
     @classmethod
-    def get_list(cls, Model):
-        models = Model.query_all()
+    def get_list(cls, Model, campus_instituto_id_campus_instituto=None):
+        models = Model.query_all(campus_instituto_id_campus_instituto)
         serialized = [model.serialize() for model in models]
         return serialized
     
