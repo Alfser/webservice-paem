@@ -56,7 +56,7 @@ class Authorization():
                                 return f(*args, **kwargs, usuario=current_user)
 
                             else:
-                                {'message':'token invalido'}
+                                return {'message':'token invalido'}, FORBIDDEN_REQUEST
                         
                     except:
                         return {'message':'token invalido'}, FORBIDDEN_REQUEST       

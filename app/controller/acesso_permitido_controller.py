@@ -20,5 +20,5 @@ class AcessoPermitidoController(BaseController):
         return super().delete(id,AcessoPermitidoModel)
     
     @classmethod
-    def get_list(cls):
-        return super().get_list(AcessoPermitidoModel)
+    def get_list(cls, campus_instituto_id_campus_instituto=None):
+        return super().get_list(AcessoPermitidoModel, campus_instituto_id_campus_instituto)
