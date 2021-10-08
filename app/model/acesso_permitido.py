@@ -62,7 +62,8 @@ class AcessoPermitidoModel(BaseModel, db.Model):
               "matricula_discente":self.matricula_discente,
               "recurso_campus_id_recurso_campus":self.recurso_campus_id_recurso_campus,
               "recurso_campus":self.recurso_campus.nome if self.recurso_campus else None,
-              'solicitacao_acesso_id_solicitacao_acesso':self.solicitacao_acesso_id_solicitacao_acesso
+              "solicitacao_acesso_id_solicitacao_acesso":self.solicitacao_acesso_id_solicitacao_acesso,
+              "campus_instituto_id_campus_instituto":self.campus_instituto_id_campus_instituto
           }
 
       def __repr__(self):

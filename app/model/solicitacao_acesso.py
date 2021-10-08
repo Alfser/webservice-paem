@@ -106,21 +106,23 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
             ).filter_by(id_recurso_campus=self.recurso_campus_id_recurso_campus).first()
             
             return {
-                'id':self.id_solicitacao_acesso,
-                'para_si':self.para_si,
-                'data':self.data,
-                'hora_inicio':self.hora_inicio,
-                'hora_fim':self.hora_fim,
-                'status_acesso':self.status_acesso,
-                'nome':self.nome,
-                'fone':self.fone,
-                'matricula': discente.matricula if discente else None,
-                'usuario_id_usuario': self.usuario_id_usuario,
-                'discente_id_discente':self.discente_id_discente,
-                'discente': discente.nome if discente else None,
-                'recurso_campus_id_recurso_campus':self.recurso_campus_id_recurso_campus,
-                'recurso_campus': recurso_campus.nome if recurso_campus else None,
-                'acesso_permitido': acesso_permitido_dict if acesso_permitido_dict else None
+                "id":self.id_solicitacao_acesso,
+                "para_si":self.para_si,
+                "data":self.data,
+                "hora_inicio":self.hora_inicio,
+                "hora_fim":self.hora_fim,
+                "status_acesso":self.status_acesso,
+                "nome":self.nome,
+                "fone":self.fone,
+                "matricula": discente.matricula if discente else None,
+                "usuario_id_usuario": self.usuario_id_usuario,
+                "discente_id_discente":self.discente_id_discente,
+                "discente": discente.nome if discente else None,
+                "recurso_campus_id_recurso_campus":self.recurso_campus_id_recurso_campus,
+                "recurso_campus": recurso_campus.nome if recurso_campus else None,
+                "acesso_permitido": acesso_permitido_dict if acesso_permitido_dict else None,
+                "campus_instituto_id_campus_instituto":self.campus_instituto_id_campus_instituto
+
             }
 
       @classmethod
