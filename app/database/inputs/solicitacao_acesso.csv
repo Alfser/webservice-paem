@@ -1,4 +1,4 @@
-para_si;data;hora_inicio;hora_fim;status_acesso;nome;fone
-0;20-03-2020;10:30:38;11:20:00;1;Roberto;(93)9833445632
-0;28-10-2020;9:30:38;10:20:00;1;Manuel;(93)9835545672
-0;03-11-2020;11:00:00;11:50:54;1;Levi;(93)98378324574
+para_si;data;hora_inicio;hora_fim;status_acesso;nome;fone;campus_instituto_id_campus_instituto
+0;20-03-2020;10:30:38;11:20:00;1;Roberto;(93)9833445632;1
+0;28-10-2020;9:30:38;10:20:00;1;Manuel;(93)9835545672;1
+0;03-11-2020;11:00:00;11:50:54;1;Levi;(93)98378324574;1
