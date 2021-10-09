@@ -29,14 +29,16 @@ class SolicitacaoAcessoResource(Resource):
 
         return {"message":"Required query string id_solicitacao_acesso or id_discente."}, BAD_REQUEST
 
-    @Authorization.token_required()
-    def post(self):
+    @Authorization.token_required(with_usuario=True)
+    def post(self, usuario):
         body = request.json
+        body["campus_instituto_id_campus_instituto"] = usuario.campus_instituto_id_campus_instituto
         return SolicitacaoAcessoController.post(body)
 
-    @Authorization.token_required()
-    def put(self):
+    @Authorization.token_required(with_usuario=True)
+    def put(self, usuario):
         body = request.json
+        body["campus_instituto_id_campus_instituto"] = usuario.campus_instituto_id_campus_instituto
         return SolicitacaoAcessoController.put(body)
 
     @Authorization.token_required()

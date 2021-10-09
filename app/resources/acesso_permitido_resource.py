@@ -22,14 +22,16 @@ class AcessoPermitidoResource(Resource):
         
         return AcessoPermitidoController.get(id_acesso_permitido)
     
-    @Authorization.token_required()
-    def post(self):
+    @Authorization.token_required(with_usuario=True)
+    def post(self, usuario):
         body = request.json
+        body["campus_instituto_id_campus_instituto"] = usuario.campus_instituto_id_campus_instituto
         return AcessoPermitidoController.post(body)
     
-    @Authorization.token_required()
-    def put(self):
+    @Authorization.token_required(with_usuario=True)
+    def put(self, usuario):
         body = request.json
+        body["campus_instituto_id_campus_instituto"] = usuario.campus_instituto_id_campus_instituto
         return AcessoPermitidoController.put(body)
     
 

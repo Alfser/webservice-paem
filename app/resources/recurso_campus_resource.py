@@ -19,14 +19,16 @@ class RecursoCampusResource(Resource):
       id_recurso_campus = args.get('id_recurso_campus')
       return RecursoCampusController.get(id_recurso_campus)
 
-    @Authorization.token_required()
-    def post(self):
+    @Authorization.token_required(with_usuario=True)
+    def post(self, usuario):
         body = request.json
+        body["campus_instituto_id_campus_instituto"] = usuario.campus_instituto_id_campus_instituto
         return RecursoCampusController.post(body)
     
-    @Authorization.token_required()
-    def put(self):
+    @Authorization.token_required(with_usuario=True)
+    def put(self, usuario):
       body = request.json
+      body["campus_instituto_id_campus_instituto"] = usuario.campus_instituto_id_campus_instituto
       return RecursoCampusController.put(body)
 
     @Authorization.token_required()
