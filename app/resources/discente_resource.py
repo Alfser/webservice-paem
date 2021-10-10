@@ -57,7 +57,6 @@ class DiscenteResource(Resource):
 
         return DiscenteController.delete(id_discente)
 
-
 class ListaDiscenteResource(Resource):
       
       ENDPOINT = 'discentes'

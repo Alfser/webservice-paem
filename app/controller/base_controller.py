@@ -120,6 +120,7 @@ class BaseHasUsuarioController(BaseHasNameController):
 
         return new_model.serialize(), CREATED
 
+
     @classmethod
     def get_by_usuario(cls, usuario_id_usuario, Model):
 
