@@ -58,6 +58,8 @@ class BaseHasNameModel(BaseModel):
 
     @classmethod
     def query_all_names(*entiries, campus_instituto_id_campus_instituto=None):
+        if campus_instituto_id_campus_instituto:
+            return db.session.query(*entiries).all()
         return list(db.session.query(*entiries).filter_by(campus_instituto_id_campus_instituto = campus_instituto_id_campus_instituto).all())
 
 # List id_usuario of all that is user
