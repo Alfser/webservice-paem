@@ -12,10 +12,10 @@ class BaseModel():
     @classmethod
     def query_all(cls, campus_instituto_id_campus_instituto=None):
        if campus_instituto_id_campus_instituto: 
-          return cls.query.all() 
-       return cls.query.filter_by(
+          return cls.query.filter_by(
             campus_instituto_id_campus_instituto = campus_instituto_id_campus_instituto
         ).all()
+       return cls.query.all() 
 
     @classmethod
     def update_by_id(cls, id, dict):
@@ -55,12 +55,11 @@ class BaseHasNameModel(BaseModel):
     # def update_by_name(cls, nome, dict):
     #    cls.query.filter_by(nome=nome).update(dict)
     #    cls.save()
-
     @classmethod
     def query_all_names(*entiries, campus_instituto_id_campus_instituto=None):
         if campus_instituto_id_campus_instituto:
-            return db.session.query(*entiries).all()
-        return list(db.session.query(*entiries).filter_by(campus_instituto_id_campus_instituto = campus_instituto_id_campus_instituto).all())
+            return list(db.session.query(*entiries).filter_by(campus_instituto_id_campus_instituto = campus_instituto_id_campus_instituto).all())
+        return db.session.query(*entiries).all()
 
 # List id_usuario of all that is user
 class BaseHasUsuarioModel(BaseHasNameModel):
