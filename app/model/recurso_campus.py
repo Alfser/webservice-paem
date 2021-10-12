@@ -9,6 +9,7 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
     id_recurso_campus = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.Text, nullable=False)
     capacidade = db.Column(db.Integer, nullable=False)
+    tipo_recurso = db.Column(db.SmallInteger, nullable=False)
     descricao = db.Column(db.Text, nullable=False)
     __inicio_horario_funcionamento = db.Column('inicio_horario_funcionamento', db.Time, nullable=True)
     __fim_horario_funcionamento = db.Column('fim_nicio_horario_funcionamento', db.Time, nullable=True)

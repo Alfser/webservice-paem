@@ -102,7 +102,8 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
             ).filter_by(id_discente=self.discente_id_discente).first()
             
             recurso_campus = db.session.query(
-                RecursoCampusModel.nome
+                RecursoCampusModel.nome,
+                RecursoCampusModel.tipo_recurso
             ).filter_by(id_recurso_campus=self.recurso_campus_id_recurso_campus).first()
             
             return {
@@ -121,6 +122,7 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
                 "discente": discente.nome if discente else None,
                 "recurso_campus_id_recurso_campus":self.recurso_campus_id_recurso_campus,
                 "recurso_campus": recurso_campus.nome if recurso_campus else None,
+                "tipo_recurso": recurso_campus.tipo_recurso if recurso_campus else None,
                 "acesso_permitido": acesso_permitido_dict if acesso_permitido_dict else None
 
             }
