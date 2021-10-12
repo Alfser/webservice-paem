@@ -9,7 +9,7 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
     id_recurso_campus = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.Text, nullable=False)
     capacidade = db.Column(db.Integer, nullable=False)
-    tipo_recurso = db.Column(db.SmallInteger, nullable=False)
+    tipo_restricao = db.Column(db.SmallInteger, nullable=False)#(0=livre, 1=restricão parcial; 2=restricão total)
     descricao = db.Column(db.Text, nullable=False)
     __inicio_horario_funcionamento = db.Column('inicio_horario_funcionamento', db.Time, nullable=True)
     __fim_horario_funcionamento = db.Column('fim_nicio_horario_funcionamento', db.Time, nullable=True)
@@ -27,9 +27,10 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
             ).first() # query name of campus
         
         return {
-            'id_recuso_campus': self.id_recurso_campus, 
-            'nome': self.nome,
-            'capacidade': self.capacidade,
+            "id_recuso_campus": self.id_recurso_campus, 
+            "nome": self.nome,
+            "capacidade": self.capacidade,
+            "tipo_restricao":self.tipo_restricao,
             'descricao':self.descricao,
             'inicio_horario_funcionamento':self.inicio_horario_funcionamento,
             'fim_horario_funcionamento':self.fim_horario_funcionamento,
