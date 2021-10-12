@@ -15,6 +15,7 @@ from .reserva_recurso_servidores import ReservaRecursoServidoresModel
 from .direcao import DirecaoModel
 from .protocolo import ProtocoloModel
 from .ponto_verificacao import PontoVerificacaoModel
+from .disciplina import DisciplinaModel
 
 
 
