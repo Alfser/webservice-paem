@@ -59,6 +59,9 @@ adicionar_recurso(ListaProtocolosResource)
 
 adicionar_recurso(DiscenteVacinacaoResource)
 
+adicionar_recurso(DisciplinaResource)
+adicionar_recurso(ListaDisciplinaResource)
+
 adicionar_recurso(PontoVerificacaoResource)
 adicionar_recurso(ListaPontoVerificacaoResource)
 

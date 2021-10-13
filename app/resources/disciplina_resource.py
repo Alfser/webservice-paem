@@ -13,7 +13,7 @@ class DisciplinaResource(Resource):
     def get(self):
 
         parser = reqparse.RequestParser()
-        parser.add_argument('id_disciplina', type=int, required=False, help="Query string id_disciplina must be integer.")
+        parser.add_argument('id_disciplina', type=int, required=False, help="Query string id_disciplina deve ser um inteiro.")
         args = parser.parse_args()
         id_disciplina = args.get("id_disciplina")
         
@@ -32,7 +32,7 @@ class DisciplinaResource(Resource):
     @Authorization.token_required()
     def delete(self):
         parser = reqparse.RequestParser()
-        parser.add_argument("id_disciplina", type=int, required=True, help="query string id_discente não encontrada")
+        parser.add_argument("id_disciplina", type=int, required=True, help="query string id_disciplina deve ser um inteiro.")
         args = parser.parse_args(strict=True)
         id_disciplina = args.get("id_disciplina")
 
