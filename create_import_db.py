@@ -21,6 +21,8 @@ from app.database import create_db, db
 from datetime import time, date
 from pandas import DataFrame, read_csv
 
+from app.model.disciplina import DisciplinaModel
+
 def dicts2db(dicts, Model):
 
     models = list()
@@ -42,6 +44,7 @@ def import_csv_db():
     solicitacao_acesso_dicts = read_csv('app/database/inputs/solicitacao_acesso.csv', parse_dates=["data", "hora_inicio", "hora_fim"], na_filter=False, sep=';', encoding='UTF-8').to_dict(orient='records')
     acesso_permitido_dicts = read_csv('app/database/inputs/acesso_permitido.csv', parse_dates=["hora_entrada", "hora_saida"], na_filter=False, sep=';', encoding='UTF-8').to_dict(orient='records')
     protocolo_dicts = read_csv('app/database/inputs/protocolo.csv', na_filter=False, sep=';', encoding='UTF-8').to_dict(orient='records')
+    disciplinas_dicts = read_csv('app/database/inputs/disciplinas.csv', na_filter=False, sep=';', encoding='UTF-8').to_dict(orient='records')
 
     # import usuario
     dicts2db(usuario_dicts, UsuarioModel)
@@ -70,6 +73,8 @@ def import_csv_db():
     dicts2db(campus_dicts, CampusInstitutoModel)
 
     dicts2db(protocolo_dicts, ProtocoloModel)
+
+    dicts2db(disciplinas_dicts, DisciplinaModel)
     
     # if all data fake was added commit all insertions
     db.session.commit()

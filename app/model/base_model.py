@@ -61,6 +61,14 @@ class BaseHasNameModel(BaseModel):
             return list(db.session.query(*entiries).filter_by(campus_instituto_id_campus_instituto = campus_instituto_id_campus_instituto).all())
         return db.session.query(*entiries).all()
 
+class BaseHasCurso(BaseModel):
+
+    @classmethod
+    def query_all_names(*entiries, curso_id_curso=None):
+        if curso_id_curso:
+            return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso).all())
+        return db.session.query(*entiries).all()
+
 # List id_usuario of all that is user
 class BaseHasUsuarioModel(BaseHasNameModel):
     '''

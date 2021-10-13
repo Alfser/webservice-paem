@@ -1,9 +1,9 @@
-from .base_controller import BaseHasNameController
+from .base_controller import BaseHasCursoController
 from ..model import DisciplinaModel
 from ..util.http_status_code import OK, CREATED, BAD_REQUEST, NOT_FOUND_REQUEST
 
 
-class DisciplinaController(BaseHasNameController):
+class DisciplinaController(BaseHasCursoController):
     
     @classmethod
     def get(cls, id_disciplina):
@@ -22,5 +22,5 @@ class DisciplinaController(BaseHasNameController):
         return super().delete(id_disciplina, DisciplinaModel)
 
     @classmethod
-    def get_all_names(cls, campus_instituto_id_campus_instituto=None):
-        return super().get_all_names(DisciplinaModel, campus_instituto_id_campus_instituto)
+    def get_all_names(cls, curso_id_curso=None):
+        return super().get_all_names(DisciplinaModel, curso_id_curso=curso_id_curso)

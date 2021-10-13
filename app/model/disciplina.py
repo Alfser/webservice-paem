@@ -1,5 +1,5 @@
 from ..database import db
-from .base_model import BaseHasNameModel
+from .base_model import BaseHasCurso
 
 db.Table(
         'disciplina_has_discente',
@@ -8,7 +8,7 @@ db.Table(
         db.Column('data', db.Date, nullable=False)
 )
 
-class DisciplinaModel(BaseHasNameModel, db.Model):
+class DisciplinaModel(BaseHasCurso, db.Model):
     __tablename__='disciplina'
 
     id_disciplina = db.Column(db.Integer, primary_key=True)
@@ -34,14 +34,15 @@ class DisciplinaModel(BaseHasNameModel, db.Model):
                 "nome":self.nome,
                 "codigo_sigaa":self.codigo_sigaa,
                 "semestre":self.semestre,
-                'discentes': discentes_dict if discentes_dict else None 
+                "curso_id_curso":self.curso_id_curso
             }
 
     @classmethod
-    def query_all_names(cls):
+    def query_all_names(cls, curso_id_curso=None):
         return super().query_all_names(
-            cls.nome, 
-            cls.id_disciplina, 
+            cls.nome.label("nome"), 
+            cls.id_disciplina.label("id"),
+            curso_id_curso 
         )
 
     def __repr__(self):

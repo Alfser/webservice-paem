@@ -9,7 +9,7 @@ class DisciplinaResource(Resource):
     ENDPOINT = 'disciplina'
     ROUTE = '/disciplinas/disciplina'
     
-    @Authorization.token_required(with_usuario=True)
+    @Authorization.token_required()
     def get(self):
 
         parser = reqparse.RequestParser()
@@ -43,6 +43,6 @@ class ListaDisciplinaResource(Resource):
       ENDPOINT = 'disciplinas'
       ROUTE = '/disciplinas'
 
-      @Authorization.token_required(with_usuario=True)
-      def get(self, usuario):
-          return DisciplinaController.get_all_names(usuario.campus_instituto_id_campus_instituto)
+      @Authorization.token_required()
+      def get(self):
+          return DisciplinaController.get_all_names()
