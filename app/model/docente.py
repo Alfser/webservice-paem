@@ -23,6 +23,12 @@ class DocenteModel(BaseHasUsuarioModel, db.Model):
     status_afastamento = db.Column(db.SmallInteger, nullable=True)
     escolaridade = db.Column(db.String(45), nullable=True)
     situacao = db.Column(db.String(45), nullable=True)
+    sexo = db.Column(db.String(2), nullable=True)
+    quantidade_pessoas = db.Column(db.Integer, nullable=True)
+    quantidade_vacinas = db.Column(db.Integer, nullable=True)
+    fabricante = db.Column(db.String(45), nullable=True)
+    justificativa = db.Column(db.Text, nullable=True)
+    carteirinha_vacinacao = db.Column(db.Text, nullable=True)
 
     disciplinas = db.relationship('DisciplinaModel', secondary='docente_has_disciplina', lazy='select',
                                                         backref=db.backref('docentes', lazy=True))
@@ -74,6 +80,12 @@ class DocenteModel(BaseHasUsuarioModel, db.Model):
                 "status_covid":self.status_covid,
                 "status_afastamento":self.status_afastamento,
                 "situacao":self.situacao,
+                "sexo": self.sexo,
+                "carteirinha_vacinacao":self.carteirinha_vacinacao,
+                "quantidade_pessoas": self.quantidade_pessoas,
+                "quantidade_vacinas": self.quantidade_vacinas,
+                "fabricantes": self.fabricante,
+                "justificativa": self.justificativa,
                 "usuario_id_usuario":self.usuario_id_usuario,
                 "usuario": usuario_dict if usuario_dict else None,
                 "curso_id_curso":self.curso_id_curso,
@@ -82,6 +94,22 @@ class DocenteModel(BaseHasUsuarioModel, db.Model):
                 "campus_instituto":campus_instituto.nome if campus_instituto else None
             }
     
+    @classmethod
+    def get_docente_vacinacao(cls, siape_docente):
+        docente = cls.find_by_siape(siape_docente)
+
+        if docente:
+            return {
+                "id_docente":docente.id_docente,
+                "nome":docente.nome,
+                "carteirinha_vacinacao":docente.carteirinha_vacinacao,
+                "fabricante":docente.fabricante,
+                "status_covid":docente.status_covid,
+                "quantidade_vacinas":docente.quantidade_vacinas,
+                "justificativa": docente.justificativa
+            }
+        return None
+        
     @classmethod
     def query_all_names(cls):
         return super().query_all_names(

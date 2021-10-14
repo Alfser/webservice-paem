@@ -67,9 +67,11 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
             return {
                 "id_discente":discente.id_discente,
                 "nome":discente.nome,
+                "carteirinha_vacinacao":discente.carteirinha_vacinacao,
                 "fabricante":discente.fabricante,
                 "status_covid":discente.status_covid,
-                "quantidade_vacinas":discente.quantidade_vacinas
+                "quantidade_vacinas":discente.quantidade_vacinas,
+                "justificativa": discente.justificativa
             }
         
         return None
@@ -100,6 +102,7 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
                 "data_nascimento": self.data_nascimento,
                 "ano_de_ingresso": self.ano_de_ingresso,
                 "sexo": self.sexo,
+                "carteirinha_vacinacao":self.carteirinha_vacinacao,
                 "quantidade_pessoas": self.quantidade_pessoas,
                 "quantidade_vacinas": self.quantidade_vacinas,
                 "fabricantes": self.fabricante,

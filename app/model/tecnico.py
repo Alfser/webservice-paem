@@ -14,7 +14,13 @@ class TecnicoModel(BaseHasUsuarioModel, db.Model):
     cargo = db.Column(db.String(45), nullable=True)
     status_covid = db.Column(db.SmallInteger, nullable=True)
     status_afastamento = db.Column(db.SmallInteger, nullable=True)
-
+    sexo = db.Column(db.String(2), nullable=True)
+    quantidade_pessoas = db.Column(db.Integer, nullable=True)
+    quantidade_vacinas = db.Column(db.Integer, nullable=True)
+    fabricante = db.Column(db.String(45), nullable=True)
+    justificativa = db.Column(db.Text, nullable=True)
+    carteirinha_vacinacao = db.Column(db.Text, nullable=True)
+    
     usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
     usuario = db.relationship('UsuarioModel', lazy='select', uselist=False)
 
@@ -47,18 +53,42 @@ class TecnicoModel(BaseHasUsuarioModel, db.Model):
             ).filter_by(id_campus_instituto=self.campus_instituto_id_campus_instituto).first() # query name and get name from tuple
             
             return {
-                'id_tecnico':self.id_tecnico,
-                'siape':self.siape, 
-                'nome':self.nome, 
-                'data_nascimento':self.data_nascimento, 
+                "id_tecnico":self.id_tecnico,
+                "siape":self.siape, 
+                "nome":self.nome, 
+                "data_nascimento":self.data_nascimento, 
                 "cargo":self.cargo,
-                'status_covid':self.status_covid, 
-                'status_afastamento':self.status_afastamento, 
-                'usuario_id_usuario':self.usuario_id_usuario,
-                'usuario': usuario_dict if usuario_dict else None,
-                'campus_id_campus':self.campus_instituto_id_campus_instituto,
-                'campus': campus_instituto.nome if campus_instituto else None
+                "status_covid":self.status_covid, 
+                "status_afastamento":self.status_afastamento,
+                "sexo": self.sexo,
+                "carteirinha_vacinacao":self.carteirinha_vacinacao,
+                "quantidade_pessoas": self.quantidade_pessoas,
+                "quantidade_vacinas": self.quantidade_vacinas,
+                "fabricantes": self.fabricante,
+                "justificativa": self.justificativa,
+                "usuario_id_usuario":self.usuario_id_usuario,
+                "usuario": usuario_dict if usuario_dict else None,
+                "campus_id_campus":self.campus_instituto_id_campus_instituto,
+                "campus": campus_instituto.nome if campus_instituto else None
             }
+
+    @classmethod
+    def get_tecnico_vacinacao(cls, siape_tecnico):
+        tecnico = cls.find_by_siape(siape_tecnico)
+
+        if tecnico:
+            return {
+                "id_tecnico":tecnico.id_tecnico,
+                "nome":tecnico.nome,
+                "fabricante":tecnico.fabricante,
+                "status_covid":tecnico.status_covid,
+                "quantidade_vacinas":tecnico.quantidade_vacinas,
+                "justificativa": tecnico.justificativa,
+                "carteirinha_vacinacao":tecnico.carteirinha_vacinacao
+            }
+        
+        return None
+
 
     @classmethod
     def query_all_names(cls):
