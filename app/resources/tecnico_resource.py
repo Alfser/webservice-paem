@@ -51,6 +51,27 @@ class TecnicoResource(Resource):
 
         return TecnicoController.delete(id_tecnico)
 
+class TecnicoVacinacaoResource(Resource):
+    
+    ENDPOINT = 'tecnico_vacinacao'
+    ROUTE = '/tecnico_vacinacao'
+    
+    @Authorization.token_required()
+    def get(self):
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('siape', type=str, required=False, help="You need to send query string siape.")
+        args = parser.parse_args()
+
+        siape = args.get("siape")
+
+        if siape:
+            return TecnicoController.get_vacinacao(siape)
+
+    @Authorization.token_required()
+    def put(self):
+        new_discente_vacinacao = request.json
+        return TecnicoController.put(new_discente_vacinacao)
 
 class ListaTecnicoResource(Resource):
     

@@ -47,6 +47,28 @@ class DocenteResource(Resource):
 
         return DocenteController.delete(id_docente)
 
+class DocenteVacinacaoResource(Resource):
+    
+    ENDPOINT = 'docente_vacinacao'
+    ROUTE = '/docente_vacinacao'
+    
+    @Authorization.token_required()
+    def get(self):
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('siape', type=str, required=False, help="You need to send query string siape.")
+        args = parser.parse_args()
+
+        siape = args.get("siape")
+
+        if siape:
+            return DocenteController.get_vacinacao(siape)
+
+    @Authorization.token_required()
+    def put(self):
+        new_docente_vacinacao = request.json
+        return DocenteController.put(new_docente_vacinacao)
+
 class ListaDocenteResource(Resource):
     
     ENDPOINT = 'docentes'

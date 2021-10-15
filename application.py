@@ -1,9 +1,9 @@
 from app import api
 from app import AuthorizationResource, AuthorizationBotResource
 from app import UsuarioResource, ListaUsuarioResource
-from app import DocenteResource, ListaDocenteResource
-from app import DiscenteResource, ListaDiscenteResource
-from app import TecnicoResource, ListaTecnicoResource
+from app import DocenteResource, ListaDocenteResource, DocenteVacinacaoResource
+from app import DiscenteResource, ListaDiscenteResource, DiscenteVacinacaoResource
+from app import TecnicoResource, ListaTecnicoResource, TecnicoVacinacaoResource
 from app import DirecaoResource, ListaDirecaoResource
 from app import CoordenacaoResource, ListaCoordenacaoResource
 from app import CursoResource, ListaCursoResource
@@ -13,7 +13,6 @@ from app import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource
 from app import AcessoPermitidoResource, ListaAcessoPermitidoResource
 from app import RecursoCampusResource, ListaRecursoCampusResource
 from app import ProtocoloResource, ListaProtocolosResource
-from app import DiscenteVacinacaoResource
 from app import PontoVerificacaoResource, ListaPontoVerificacaoResource
 from app import HomeResource
 
@@ -32,6 +31,7 @@ adicionar_recurso(ListaUsuarioResource)
 
 adicionar_recurso(TecnicoResource)
 adicionar_recurso(ListaTecnicoResource)
+adicionar_recurso(TecnicoVacinacaoResource)
 
 adicionar_recurso(SolicitacaoAcessoResource)
 adicionar_recurso(ListaSolicitacaoAcessoResource)
@@ -41,6 +41,7 @@ adicionar_recurso(ListaAcessoPermitidoResource)
 
 adicionar_recurso(DiscenteResource)
 adicionar_recurso(ListaDiscenteResource)
+adicionar_recurso(DiscenteVacinacaoResource)
 
 adicionar_recurso(RecursoCampusResource)
 adicionar_recurso(ListaRecursoCampusResource)
@@ -50,14 +51,13 @@ adicionar_recurso(ListaCampusInstitutoResource)
 
 adicionar_recurso(DocenteResource)
 adicionar_recurso(ListaDocenteResource)
+adicionar_recurso(DocenteVacinacaoResource)
 
 adicionar_recurso(CursoResource)
 adicionar_recurso(ListaCursoResource)
 
 adicionar_recurso(ProtocoloResource)
 adicionar_recurso(ListaProtocolosResource)
-
-adicionar_recurso(DiscenteVacinacaoResource)
 
 adicionar_recurso(DisciplinaResource)
 adicionar_recurso(ListaDisciplinaResource)

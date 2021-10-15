@@ -69,6 +69,12 @@ class BaseHasCurso(BaseModel):
             return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso).all())
         return db.session.query(*entiries).all()
 
+class BaseHasSiape(BaseModel):
+
+    @classmethod
+    def find_by_siape(cls, *entiries, siape):
+        return db.session.query(*entiries).filter_by(siape=siape).first()
+
 # List id_usuario of all that is user
 class BaseHasUsuarioModel(BaseHasNameModel):
     '''

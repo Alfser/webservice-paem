@@ -1,8 +1,8 @@
 from .resources import AuthorizationResource, AuthorizationBotResource
 from .resources import UsuarioResource, ListaUsuarioResource
-from .resources import DocenteResource, ListaDocenteResource
-from .resources import DiscenteResource, ListaDiscenteResource
-from .resources import TecnicoResource, ListaTecnicoResource
+from .resources import DocenteResource, ListaDocenteResource, DocenteVacinacaoResource
+from .resources import DiscenteResource, ListaDiscenteResource, DiscenteVacinacaoResource
+from .resources import TecnicoResource, ListaTecnicoResource, TecnicoVacinacaoResource
 from .resources import DirecaoResource, ListaDirecaoResource
 from .resources import CoordenacaoResource, ListaCoordenacaoResource
 from .resources import CursoResource, ListaCursoResource

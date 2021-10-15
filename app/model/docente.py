@@ -3,7 +3,7 @@ from .curso import CursoModel
 from .disciplina import DisciplinaModel
 from .usuario import UsuarioModel
 from .campus_instituto import CampusInstitutoModel
-from .base_model import BaseHasUsuarioModel
+from .base_model import BaseHasSiape, BaseHasUsuarioModel
 from datetime import date
 
 # table to relationship many to many
@@ -12,7 +12,7 @@ db.Table('docente_has_disciplina', db.Column('docente_siape', db.String(45), db.
                                     db.Column('data', db.Date, nullable=False)
                                 )
 
-class DocenteModel(BaseHasUsuarioModel, db.Model):
+class DocenteModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
     __tablename__ = "docente"
 
     id_docente = db.Column(db.Integer, primary_key=True)
@@ -28,7 +28,7 @@ class DocenteModel(BaseHasUsuarioModel, db.Model):
     quantidade_vacinas = db.Column(db.Integer, nullable=True)
     fabricante = db.Column(db.String(45), nullable=True)
     justificativa = db.Column(db.Text, nullable=True)
-    carteirinha_vacinacao = db.Column(db.Text, nullable=True)
+    carteirinha_vacinacao = db.Column(db.LargeBinary, nullable=True)
 
     disciplinas = db.relationship('DisciplinaModel', secondary='docente_has_disciplina', lazy='select',
                                                         backref=db.backref('docentes', lazy=True))
@@ -95,8 +95,17 @@ class DocenteModel(BaseHasUsuarioModel, db.Model):
             }
     
     @classmethod
-    def get_docente_vacinacao(cls, siape_docente):
-        docente = cls.find_by_siape(siape_docente)
+    def get_vacinacao(cls, siape_docente):
+        docente = cls.find_by_siape(
+            cls.id_docente,
+            cls.nome,
+            cls.fabricante,
+            cls.status_covid,
+            cls.quantidade_vacinas,
+            cls.justificativa,
+            cls.carteirinha_vacinacao,
+            siape=siape_docente
+        )
 
         if docente:
             return {

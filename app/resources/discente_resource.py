@@ -57,6 +57,28 @@ class DiscenteResource(Resource):
 
         return DiscenteController.delete(id_discente)
 
+class DiscenteVacinacaoResource(Resource):
+    
+    ENDPOINT = 'discente_vacinacao'
+    ROUTE = '/discente_vacinacao'
+    
+    @Authorization.token_required()
+    def get(self):
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('matricula', type=str, required=False, help="You need to send query string maticula.")
+        args = parser.parse_args()
+
+        matricula = args.get("matricula")
+
+        if matricula:
+            return DiscenteController.get_vacinacao(matricula)
+
+    @Authorization.token_required()
+    def put(self):
+        new_discente_vacinacao = request.json
+        return DiscenteController.put(new_discente_vacinacao)
+
 class ListaDiscenteResource(Resource):
       
       ENDPOINT = 'discentes'
