@@ -28,7 +28,6 @@ def export_db_to_csv(tables):
         print("abs path:", abs_csv_path)
         df_result.to_csv(abs_csv_path, encoding="UTF-8", index=False, sep=";")
         
-
     mydb.close()
     mycursor.close()
 

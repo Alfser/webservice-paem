@@ -143,17 +143,6 @@ class BaseHasUsuarioController(BaseHasNameController):
             
         return {"message":"usuario not found"}, NOT_FOUND_REQUEST
 
-    @classmethod
-    def get_all_names(cls, Model):
-        
-        # models_names receve a tuple of (nome , id)
-        model_names = Model.query_all_names()
-
-        #create a dict with nome as key and id as a value
-        names_dict = [{"nome":row.nome, "id":row.id, "siape":row.other_id} for row in model_names]
-        
-        return names_dict
-
 #class to randle user that has matricula or siape
 class BaseHasMatriculaController(BaseHasNameController):
 
@@ -174,6 +163,17 @@ class BaseHasMatriculaController(BaseHasNameController):
             return {"message":"Not found."}, NOT_FOUND_REQUEST
       
         return query, OK
+    
+    @classmethod
+    def get_all_names(cls, Model):
+        
+        # models_names receve a tuple of (nome , id)
+        model_names = Model.query_all_names()
+
+        #create a dict with nome as key and id as a value
+        names_dict = [{"nome":row.nome, "id":row.id, "matricula":row.other_id} for row in model_names]
+        
+        return names_dict
 
 
 class BaseHasSiapeController(BaseHasNameController):
