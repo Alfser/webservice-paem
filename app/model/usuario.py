@@ -10,7 +10,7 @@ class UsuarioModel(BaseHasNameModel, db.Model):
     id_usuario = db.Column(db.Integer, primary_key=True)
     login = db.Column(db.String(45), unique=True, nullable=False)
     cpf = db.Column(db.String(15), unique=True, nullable=True)
-    _senha = db.Column('senha', db.Text, nullable=False)
+    _senha = db.Column('_senha', db.Text, nullable=False)
     email = db.Column(db.String(45), unique=True, nullable=False)
     tipo = db.Column(db.Integer, nullable=False)
 
