@@ -35,7 +35,7 @@ class AcessoPermitidoModel(BaseModel, db.Model):
       @hora_entrada.setter
       def hora_entrada(self, hora_entrada):
 
-          if isinstance(hora_entrada, str):  
+          if isinstance(hora_entrada, str) and hora_entrada.find(":")!=-1:  
               hour_ent, minute_ent, second_ent = hora_entrada.split(':')
               hora_entrada = time(hour=int(hour_ent), minute=int(minute_ent), second=int(second_ent))
           
@@ -47,7 +47,7 @@ class AcessoPermitidoModel(BaseModel, db.Model):
 
       @hora_saida.setter
       def hora_saida(self, hora_saida):
-          if isinstance(hora_saida, str):
+          if isinstance(hora_saida, str) and hora_saida.find(":")!=-1:
               hour_sai, minute_sai, second_sai = hora_saida.split(':')
               hora_saida = time(hour=int(hour_sai), minute=int(minute_sai), second=int(second_sai))
          

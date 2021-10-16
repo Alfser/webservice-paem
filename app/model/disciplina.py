@@ -20,22 +20,14 @@ class DisciplinaModel(BaseHasCurso, db.Model):
 
     discentes = db.relationship('DiscenteModel', secondary='disciplina_has_discente', lazy='select', backref=db.backref('disciplinas', lazy='select'))
 
-    def serialize(self):
-
-        try:
-            discentes_dict = self.discentes.seriaize()
-        except AttributeError as msg:
-            print("Nenhum discente registrado nessa disciplina.")
-            discentes_dict = None
-        
-        finally:
-            return {
-                "id_disciplina":self.id_disciplina,
-                "nome":self.nome,
-                "codigo_sigaa":self.codigo_sigaa,
-                "semestre":self.semestre,
-                "curso_id_curso":self.curso_id_curso
-            }
+    def serialize(self):    
+        return {
+            "id_disciplina":self.id_disciplina,
+            "nome":self.nome,
+            "codigo_sigaa":self.codigo_sigaa,
+            "semestre":self.semestre,
+            "curso_id_curso":self.curso_id_curso
+        }
 
     @classmethod
     def query_all_names(cls, curso_id_curso=None):

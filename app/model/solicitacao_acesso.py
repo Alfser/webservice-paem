@@ -56,7 +56,7 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
 
       @data.setter
       def data(self, data):
-          if isinstance(data, str):
+          if isinstance(data, str) and data.find("-")!=-1:
               day, month, year = data.split('-')
               data = date(day=int(day), month=int(month), year=int(year))
 
@@ -68,7 +68,7 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
 
       @hora_inicio.setter
       def hora_inicio(self, hora_inicio):
-          if isinstance(hora_inicio, str):
+          if isinstance(hora_inicio, str) and hora_inicio.find(":")!=-1:
               hour_inic, minute_inic, second_inic = hora_inicio.split(':')
               hora_inicio = time(hour=int(hour_inic), minute=int(minute_inic), second=int(second_inic))
         
@@ -80,7 +80,7 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
  
       @hora_fim.setter
       def hora_fim(self, hora_fim):
-          if isinstance(hora_fim, str):
+          if isinstance(hora_fim, str) and hora_fim.find(":")!=-1:
               hour_inic, minute_inic, second_inic = hora_fim.split(':')
               hora_fim = time(hour=int(hour_inic), minute=int(minute_inic), second=int(second_inic))
             

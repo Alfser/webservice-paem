@@ -45,8 +45,7 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
     
     @inicio_horario_funcionamento.setter
     def inicio_horario_funcionamento(self, inicio_horario_funcionamento):
-        
-        if isinstance(inicio_horario_funcionamento, str):
+        if isinstance(inicio_horario_funcionamento, str) and inicio_horario_funcionamento.find(":")!=-1:
             hour_inicio, minute_inicio, second_inicio = inicio_horario_funcionamento.split(':')
             self.__inicio_horario_funcionamento = time(
                 hour=int(hour_inicio), 
@@ -61,9 +60,8 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
         return str(self.__fim_horario_funcionamento)
 
     @fim_horario_funcionamento.setter
-    def fim_horario_funcionamento(self, fim_horario_funcionamento):
-        
-        if isinstance(fim_horario_funcionamento, str):
+    def fim_horario_funcionamento(self, fim_horario_funcionamento):        
+        if isinstance(fim_horario_funcionamento, str) and fim_horario_funcionamento.find(":")!=-1:
             hour_fim, minute_fim, sec_fim = fim_horario_funcionamento.split(':')
             self.__fim_horario_funcionamento = time(
                 hour=int(hour_fim),

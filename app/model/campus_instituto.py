@@ -21,7 +21,7 @@ class CampusInstitutoModel(BaseHasNameModel, db.Model):
 
     @ano_fundacao.setter
     def ano_fundacao(self, data):
-        if isinstance(data, str):
+        if isinstance(data, str) and data.find("-")!=-1:
             day, month, year = data.split('-')
             data = date(day=int(day), month=int(month), year=int(year))
 
