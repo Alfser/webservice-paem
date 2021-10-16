@@ -2,6 +2,7 @@ from mysql import connector
 from app.database.config import Config
 import sys
 import csv
+import pandas as pd
 
 
 
@@ -22,31 +23,22 @@ def export_db_to_csv(tables):
         columns_name=[desc[0] for desc in mycursor.description]
         print(f"### data from table {table} ###")
         print(columns_name)
-        with open(f'app/database/inputs/{table}.csv', 'w') as f:
-            c = csv.writer(f)
-            c.writerow(columns_name)
-            for x in result:
-                c.writerow(x)
+        
+        df_result = pd.DataFrame(data=result, columns=columns_name)
+        df_result.to_csv(f'app/database/inputs/{table}.csv', encoding="UTF-8", index=False, sep=";")
+            
 
     mydb.close()
     mycursor.close()
 
 if __name__=="__main__":
-    columns_dict = {
-        "usuario":[], "discente":[], 
-        "docente":[], "tecnico":[], 
-        "recurso_campus":[], "campus_instituto":[],
-        "acesso_permitido":[], "solicitacao_acesso":[],
-        "curso":[], "disciplina":[],
-        "protocolo":[]
-        }
-
+    
     tables = [
         "usuario", "discente", 
-        "docente", "tecnico", 
-        "recurso_campus", "campus_instituto",
-        "acesso_permitido", "solicitacao_acesso",
-        "curso", "disciplina",
-        "protocolo"
+        # "docente", "tecnico", 
+        # "recurso_campus", "campus_instituto",
+        # "acesso_permitido", "solicitacao_acesso",
+        # "curso", "disciplina",
+        # "protocolo"
     ]
     export_db_to_csv(tables)
