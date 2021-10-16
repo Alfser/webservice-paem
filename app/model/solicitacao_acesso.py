@@ -6,7 +6,7 @@ from .acesso_permitido import AcessoPermitidoModel
 from .discente import DiscenteModel
 from .recurso_campus import RecursoCampusModel
 
-from datetime import time, date
+from datetime import time, datetime
 
 class SolicitacaoAcessoModel(BaseModel, db.Model):
       __tablename__= "solicitacao_acesso"
@@ -57,8 +57,7 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
       @data.setter
       def data(self, data):
           if isinstance(data, str) and data.find("-")!=-1:
-              day, month, year = data.split('-')
-              data = date(day=int(day), month=int(month), year=int(year))
+              data = datetime.strptime(data, "%Y-%m-%d")
 
           self.__data = data
 

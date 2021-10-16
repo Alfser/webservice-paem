@@ -1,6 +1,6 @@
 from ..database.db import db
 from .docente import DocenteModel
-from datetime import date
+from datetime import datetime
 
 class DirecaoModel(db.Model):
     __tablename__ = "direcao"
@@ -20,9 +20,8 @@ class DirecaoModel(db.Model):
     @data_entrada.setter
     def data_entrada(self, data):
         if isinstance(data, str):
-            day, month, year = data.split('-')
-            data = date(day=int(day), month=int(month), year=int(year))
-            self.__data_entrada = data
+            data = datetime.strptime(data, "%Y-%m-%d")
+        self.__data_entrada = data
 
     @property
     def data_saida(self):
@@ -31,9 +30,8 @@ class DirecaoModel(db.Model):
     @data_saida.setter
     def data_saida(self, data):
         if isinstance(data, str):
-            day, month, year = data.split('-')
-            data = date(day=int(day), month=int(month), year=int(year))
-            self.__data_saida = data
+            data = datetime.strptime(data, "%Y-%m-%d")
+        self.__data_saida = data
 
     def serialize(self):
         docente = db.session.query(

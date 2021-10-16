@@ -4,7 +4,7 @@ from .disciplina import DisciplinaModel
 from .usuario import UsuarioModel
 from .campus_instituto import CampusInstitutoModel
 from .base_model import BaseHasSiape, BaseHasUsuarioModel
-from datetime import date
+from datetime import datetime
 
 # table to relationship many to many
 db.Table('docente_has_disciplina', db.Column('docente_siape', db.String(45), db.ForeignKey('docente.siape'), primary_key=True),
@@ -48,9 +48,7 @@ class DocenteModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
     @data_nascimento.setter
     def data_nascimento(self, data):
         if isinstance(data, str) and data.find("-")!=-1:
-            day, month, year = data.split('-')
-            data = date(day=int(day), month=int(month), year=int(year))
-        
+            data = datetime.strptime(data, "%Y-%m-%d")
         self.__data_nascimento = data
 
 

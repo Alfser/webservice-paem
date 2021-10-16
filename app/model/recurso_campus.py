@@ -12,7 +12,7 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
     tipo_restricao = db.Column(db.SmallInteger, nullable=False)#(0=livre, 1=restricão parcial; 2=restricão total)
     descricao = db.Column(db.Text, nullable=False)
     __inicio_horario_funcionamento = db.Column('inicio_horario_funcionamento', db.Time, nullable=True)
-    __fim_horario_funcionamento = db.Column('fim_nicio_horario_funcionamento', db.Time, nullable=True)
+    __fim_horario_funcionamento = db.Column('fim_horario_funcionamento', db.Time, nullable=True)
     quantidade_horas = db.Column(db.Integer, nullable=True)
     
     campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)

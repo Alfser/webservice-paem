@@ -2,7 +2,7 @@
 from ..database import db
 from .base_model import BaseHasNameModel
 
-from datetime import date
+from datetime import datetime
 
 class CampusInstitutoModel(BaseHasNameModel, db.Model):
     __tablename__ = "campus_instituto"
@@ -22,8 +22,7 @@ class CampusInstitutoModel(BaseHasNameModel, db.Model):
     @ano_fundacao.setter
     def ano_fundacao(self, data):
         if isinstance(data, str) and data.find("-")!=-1:
-            day, month, year = data.split('-')
-            data = date(day=int(day), month=int(month), year=int(year))
+            data = datetime.strptime(data, "%Y-%m-%d")
 
         self.__ano_fundacao = data
 

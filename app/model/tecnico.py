@@ -2,7 +2,7 @@ from ..database import db
 from .usuario import UsuarioModel
 from .campus_instituto import CampusInstitutoModel
 from .base_model import BaseHasUsuarioModel, BaseHasSiape
-from datetime import date
+from datetime import datetime
 
 class TecnicoModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
     __tablename__ = "tecnico"
@@ -34,9 +34,7 @@ class TecnicoModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
     @data_nascimento.setter
     def data_nascimento(self, data):
           if isinstance(data, str) and data.find("-")!=-1:
-              day, month, year = data.split('-')
-              data = date(day=int(day), month=int(month), year=int(year))
-
+              data = datetime.strptime(data, "%Y-%m-%d")
           self.__data_nascimento = data
 
     def serialize(self):
