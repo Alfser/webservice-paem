@@ -8,7 +8,7 @@ class PortariaModel(BaseHasNameModel, db.Model):
     __tablename__ = "portaria"
 
     id_portaria = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(45), nullable=False)
+    nome = db.Column(db.String(255), nullable=False)
     data_nascimento = db.Column(db.Date, nullable=True)
     funcao = db.Column(db.String(45), nullable=True)
     turno_trabalho = db.Column(db.SmallInteger, nullable=False)

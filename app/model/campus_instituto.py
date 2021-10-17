@@ -9,7 +9,7 @@ class CampusInstitutoModel(BaseHasNameModel, db.Model):
 
     id_campus_instituto = db.Column(db.Integer, primary_key=True)
     __ano_fundacao = db.Column('ano_fundacao', db.Date, nullable=False)
-    nome = db.Column(db.String(45), nullable=False)
+    nome = db.Column(db.String(255), nullable=False)
     abertura_total = db.Column(db.SmallInteger, nullable=True)
 
     direcao_id_direcao = db.Column(db.Integer, db.ForeignKey('direcao.id_direcao'), nullable=True)

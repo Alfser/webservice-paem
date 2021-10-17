@@ -6,7 +6,7 @@ class PontoVerificacaoModel(BaseHasUsuarioModel, db.Model):
     __tablename__ = "ponto_verificacao"
 
     id_ponto_verificacao = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(45), nullable=True)
+    nome = db.Column(db.String(255), nullable=True)
     descricao = db.Column(db.Text, nullable=True)
 
     usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)

@@ -9,7 +9,7 @@ class TecnicoModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
 
     id_tecnico = db.Column(db.Integer, primary_key=True)
     siape = db.Column(db.String(45), unique=True, nullable=False)
-    nome = db.Column(db.String(45), nullable=False)
+    nome = db.Column(db.String(255), nullable=False)
     __data_nascimento = db.Column('data_nascimento', db.Date, nullable=True)
     cargo = db.Column(db.String(45), nullable=True)
     status_covid = db.Column(db.SmallInteger, nullable=True)
