@@ -11,7 +11,7 @@ class UsuarioModel(BaseHasNameModel, db.Model):
     login = db.Column(db.String(255), unique=True, nullable=False)
     cpf = db.Column(db.String(15), unique=True, nullable=True)
     _senha = db.Column('_senha', db.Text, nullable=False)
-    email = db.Column(db.String(45), unique=True, nullable=False)
+    email = db.Column(db.String(255), unique=True, nullable=False)
     tipo = db.Column(db.Integer, nullable=False)
 
     campus_instituto_id_campus_instituto = db.Column(
