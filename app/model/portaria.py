@@ -14,7 +14,7 @@ class PortariaModel(BaseHasNameModel, db.Model):
     turno_trabalho = db.Column(db.SmallInteger, nullable=False)
 
     usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
-    usuario = db.relationship('UsuarioModel', lazy='select')
+    usuario = db.relationship('UsuarioModel',cascade="all, delete", lazy='select')
 
     curso_id_curso = db.Column(db.Integer, db.ForeignKey('curso.id_curso'), nullable=True)
     curso = db.relationship('CursoModel', lazy="select")

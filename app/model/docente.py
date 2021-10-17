@@ -34,7 +34,7 @@ class DocenteModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
                                                         backref=db.backref('docentes', lazy=True))
     
     usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
-    usuario = db.relationship('UsuarioModel', uselist=False, lazy='select')
+    usuario = db.relationship('UsuarioModel', cascade="all, delete", uselist=False, lazy='select')
 
     campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
     campus_instituto = db.relationship('CampusInstitutoModel', uselist=False, lazy='select')

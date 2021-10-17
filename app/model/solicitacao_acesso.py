@@ -48,7 +48,7 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
         )
       campus_instituto = db.relationship('CampusInstitutoModel', uselist=False, lazy='noload')
 
-      acesso_permitido = db.relationship('AcessoPermitidoModel', uselist=False, lazy='select')
+      acesso_permitido = db.relationship('AcessoPermitidoModel', cascade="all, delete", uselist=False, lazy='select')
 
       @property
       def data(self):

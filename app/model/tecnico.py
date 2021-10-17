@@ -22,7 +22,7 @@ class TecnicoModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
     carteirinha_vacinacao = db.Column(db.LargeBinary, nullable=True)
     
     usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
-    usuario = db.relationship('UsuarioModel', lazy='select', uselist=False)
+    usuario = db.relationship('UsuarioModel',cascade="all, delete", lazy='select', uselist=False)
 
     campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
     campus_instituto = db.relationship('CampusInstitutoModel', uselist=False, lazy='noload')
