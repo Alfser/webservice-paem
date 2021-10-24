@@ -47,22 +47,25 @@ def import_csv_db():
     protocolo_dicts = read_csv('app/database/inputs/protocolo.csv', na_filter=True, sep=';', encoding='UTF-8').replace([np.nan], [None]).to_dict(orient='records')
     disciplinas_dicts = read_csv('app/database/inputs/disciplina.csv', na_filter=True, sep=';', encoding='UTF-8').replace([np.nan], [None]).to_dict(orient='records')
 
-    # print(campus_dicts)
     
+    # import campus
+    dicts2db(campus_dicts, CampusInstitutoModel)
+
     # import usuario
     dicts2db(usuario_dicts, UsuarioModel)
+
     # import curso
     dicts2db(curso_dicts, CursoModel)
 
     # import recurso_campus
     dicts2db(recurso_campus_dicts, RecursoCampusModel)
 
-    # import discente
-    dicts2db(discente_dicts, DiscenteModel)
-
     # import docente
     dicts2db(docente_dicts, DocenteModel)
 
+    # import discente
+    dicts2db(discente_dicts, DiscenteModel)
+    
     # import tecnico
     dicts2db(tecnico_dicts, TecnicoModel)
     
@@ -72,11 +75,10 @@ def import_csv_db():
     # import acesso_permitido
     dicts2db(acesso_permitido_dicts, AcessoPermitidoModel)
     
-    # import campus
-    dicts2db(campus_dicts, CampusInstitutoModel)
-
+    # import PROTOCOLO
     dicts2db(protocolo_dicts, ProtocoloModel)
 
+    # import DISCIPLINA
     dicts2db(disciplinas_dicts, DisciplinaModel)
     
     # if all data fake was added commit all insertions
@@ -86,5 +88,5 @@ def import_csv_db():
 if __name__=='__main__':
     db.app.config['SQLALCHEMY_ECHO'] = True
 
-    create_db()
+    # create_db()
     import_csv_db()
