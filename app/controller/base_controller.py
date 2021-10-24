@@ -21,9 +21,12 @@ class BaseController:
         if not body:
             return {"message":"Não encontrado dados no corpo da requisição."}, BAD_REQUEST
         
-        print(body)
-        new_model = Model(**body)
-        new_model.save_to_db()
+        # print(body)
+        try:
+            new_model = Model(**body)
+            new_model.save_to_db()
+        except:
+            return {"message":"Há dado(s) inválido(s) no body da requisição."}, BAD_REQUEST
 
         return new_model.serialize(), CREATED
 
