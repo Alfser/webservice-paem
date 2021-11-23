@@ -679,6 +679,12 @@ Endpoints disponíveis:
           "status_covid": "integer",
           "status_afastamento": "integer",
           "situacao": "string",
+          "sexo":"string(2)",
+          "quantidade_pessoas":"integer",
+          "quantidade_vacinas":"integer",
+          "fabricantes":"string(45)",
+          "justificativa":"text",
+          "carteirinha_vacinacao":"bytes",
           "usuario_id_usuario": "integer",
           "usuario": {
             "id_usuario":"integer",
@@ -708,6 +714,12 @@ Endpoints disponíveis:
           "status_covid": "integer",
           "status_afastamento": "integer",
           "situacao": "string",
+          "sexo":"string(2)",
+          "quantidade_pessoas":"integer",
+          "quantidade_vacinas":"integer",
+          "fabricantes":"string(45)",
+          "justificativa":"text",
+          "carteirinha_vacinacao":"bytes",
           "usuario_id_usuario": "integer",
           "curso_id_curso": "integer",
           "campus_id_campus": "integer"
@@ -736,6 +748,12 @@ Endpoints disponíveis:
           "status_covid": "integer",
           "status_afastamento": "integer",
           "situacao": "string",
+          "sexo":"string(2)",
+          "quantidade_pessoas":"integer",
+          "quantidade_vacinas":"integer",
+          "fabricantes":"string(45)",
+          "justificativa":"text",
+          "carteirinha_vacinacao":"bytes",
           "usuario_id_usuario": "integer",
           "curso_id_curso": "integer",
           "campus_id_campus": "integer"
@@ -743,8 +761,8 @@ Endpoints disponíveis:
 
      ``` 
 
-   - Uso do **DELETE**: Delete o usário técnico correspondente ao *id_tecnico* enviado como query string  na requisição.
-     - Query string: *id_tecnico = integer*
+   - Uso do **DELETE**: Delete o usário técnico correspondente ao *id_docente* enviado como query string  na requisição.
+     - Query string: *id_docente = integer*
      - Route: 
        - `/docentes/docente?id_docente=value`
 
@@ -757,18 +775,18 @@ Endpoints disponíveis:
           {
           "nome": "DAVIA MARCIANA TALGATTI",
           "id": 1,
-          "matricula": "2391001"
+          "siape": "2391001"
           },
           {
           "nome": "ELDRA CARVALHO DA SILVA",
           "id": 2,
-          "matricula": "1995687"
+          "siape": "1995687"
           },
           ...
           {
           "nome": "JOSIVAN RODRIGUES DOS REIS",
           "id": 6,
-          "matricula": "3004452"
+          "siape": "3004452"
           }
         ]
      ```
@@ -785,7 +803,13 @@ Endpoints disponíveis:
       "data_nascimento":"string format yy-mm-dd", 
       "cargo":"string",
       "status_covid":"integer", 
-      "status_afastamento":"integer", 
+      "status_afastamento":"integer",
+      "sexo":"string(2)",
+      "quantidade_pessoas":"integer",
+      "quantidade_vacinas":"integer",
+      "fabricantes":"string(45)",
+      "justificativa":"text",
+      "carteirinha_vacinacao":"bytes", 
       "usuario_id_usuario":"integer",
       "usuario": {
           "id_usuario":"integer",
@@ -812,7 +836,13 @@ Endpoints disponíveis:
         "data_nascimento":"string format dd-mm-yy", 
         "cargo":"string",
         "status_covid":"integer", 
-        "status_afastamento":"integer", 
+        "status_afastamento":"integer",
+        "sexo":"string(2)",
+        "quantidade_pessoas":"integer",
+        "quantidade_vacinas":"integer",
+        "fabricantes":"string(45)",
+        "justificativa":"text",
+        "carteirinha_vacinacao":"bytes", 
         "usuario_id_usuario":"integer",
         "campus_instituto_id_campus_instituto":"integer"
         },
@@ -838,7 +868,13 @@ Endpoints disponíveis:
         "data_nascimento":"string format dd-mm-yy", 
         "cargo":"string",
         "status_covid":"integer", 
-        "status_afastamento":"integer", 
+        "status_afastamento":"integer",
+        "sexo":"string(2)",
+        "quantidade_pessoas":"integer",
+        "quantidade_vacinas":"integer",
+        "fabricantes":"string(45)",
+        "justificativa":"text",
+        "carteirinha_vacinacao":"bytes", 
         "usuario_id_usuario":"integer",
         "campus_instituto_id_campus_instituto":"integer",
       }
@@ -861,23 +897,23 @@ Endpoints disponíveis:
         {
           "nome": "ANDREA NUNES FIGUEIRA",
           "id": 1,
-          "matricula": "2177569"
+          "siape": "2177569"
         },
         {
           "nome": "DANIELE PRINTES BARRETO",
           "id": 2,
-          "matricula": "1972586"
+          "siape": "1972586"
         },
         ...
         {
           "nome": "DILCRIANE DOS SANTOS BATISTA",
           "id": 3,
-          "matricula": "1695149"
+          "siape": "1695149"
         },
         {
           "nome": "EDIEGO DE SOUSA BATISTA",
           "id": 4,
-          "matricula": "1825851"
+          "siape": "1825851"
         }
       ]
   
@@ -1274,6 +1310,81 @@ Endpoints disponíveis:
         }
       
       ``` 
+
+- `/disciplinas/disciplina`: ​​Use para **ver**, **editar**, **criar**, **excluir** os dado de um curso específico. 
+   - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
+   - Uso do **GET**: Obtém os dados da disciplina correspondente ao *id_disciplina* enviado como query string na requisição.
+     - Query string: *id_disciplina = integer*
+     - Route:
+       - `/disciplinas/disciplina?id_disciplina=value`
+        
+     - Resposta:
+      
+     ```json
+
+        {
+            "id_disciplina":"*integer",
+            "nome":"*string",
+            "codigo_sigaa":"*string",
+            "semestre":"integer",
+            "curso_id_curso":"integer"
+        }
+     
+     ``` 
+
+   - Uso do **POST**: Cria uma disciplina de acordo com os dados enviado no body da requisição.
+     - Requisição: Campos que podem ser enviados no body.
+    
+      ```json
+
+        {
+            "nome":"*string",
+            "codigo_sigaa":"*string",
+            "semestre":"integer",
+            "curso_id_curso":"integer"
+        }
+      
+      ``` 
+
+   - Uso do **PUT**: Atualiza uma disciplina correspondente ao *id_disciplina* enviado no body da requisição com os novos dados.
+     - Body da requisição:
+     
+        ```json
+
+          {
+            "id_disciplina":"*integer",
+            "nome":"string",
+            "codigo_sigaa":"string",
+            "semestre":"integer",
+            "curso_id_curso":"integer"
+        }
+      
+        ``` 
+
+   - Uso do **DELETE**: Deleta uma disciplina de acordo com o *id_disciplina* enviado como query string na requisição.
+     - Query string: *id_disciplina = integer*.
+     - Route: 
+       - `/disciplinas/disciplina?id_disciplina=value`  
+       
+ - `/disciplinas`: Use para **ver** as disciplinas cadastradas no banco de dados, na tabela *disciplina*. 
+   - Método(s): Apenas método **GET** está disponível para acessar a rota.
+   - Resposta:
+   
+   ```json
+   
+    [
+      {
+        "nome": "string",
+        "id": "integer"
+      },
+      ...
+      {
+        "nome": "string",
+        "id": 2
+      }
+    ]
+   
+   ``` 
 
 ## Documentações
 
