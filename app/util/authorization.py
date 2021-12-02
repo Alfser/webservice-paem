@@ -33,7 +33,7 @@ class Authorization():
                         Bearer_token = request.headers[auth_key]
 
                     if not Bearer_token:
-                        return {'message':'acesso não autorizado.'}, UNAUTHORIZED_REQUEST
+                        return {'message':'acesso não autorizado. token não encontrado.'}, UNAUTHORIZED_REQUEST
 
                     if not ("Bearer" in Bearer_token):
                         return {'message':'Token invalido'}, FORBIDDEN_REQUEST
@@ -73,10 +73,10 @@ class Authorization():
             "login":login,
             "exp": datetime.utcnow()+timedelta(minutes=60)
         }
-
+        
         token = encode(payload, current_app.secret_key, algorithm='HS256')
 
-        return {'token':token}
+        return {"token":token}
 
     @classmethod
     def verify_user(cls, login_email, senha):

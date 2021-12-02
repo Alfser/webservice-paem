@@ -24,7 +24,7 @@ class AuthorizationResource(Resource):
     @http_auth.login_required
     def post(self):
         login = http_auth.username()
-        print("usuario: ", login)
+        #print("usuario: ", login)
         return Authorization.get_token(login)
 
 # rota do chatbot para obter o token

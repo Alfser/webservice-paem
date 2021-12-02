@@ -19,7 +19,7 @@ class TecnicoModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
     quantidade_vacinas = db.Column(db.Integer, nullable=True)
     fabricante = db.Column(db.String(45), nullable=True)
     justificativa = db.Column(db.Text, nullable=True)
-    carteirinha_vacinacao = db.Column(db.LargeBinary, nullable=True)
+    carteirinha_vacinacao = db.Column(db.Text, nullable=True)
     
     usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
     usuario = db.relationship('UsuarioModel',cascade="all, delete", lazy='select', uselist=False)

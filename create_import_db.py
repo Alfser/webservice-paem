@@ -88,5 +88,5 @@ def import_csv_db():
 if __name__=='__main__':
     db.app.config['SQLALCHEMY_ECHO'] = True
 
-    # create_db()
+    create_db()
     import_csv_db()

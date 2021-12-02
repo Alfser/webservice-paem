@@ -18,14 +18,4 @@ Pipfile.lock
 app/database/connection.json
 
 #csvs databases
-app/database/inputs/acesso_permitido.csv
-app/database/inputs/docente.csv
-app/database/inputs/campus_instituto.csv
-app/database/inputs/curso.csv
-app/database/inputs/discente.csv
-app/database/inputs/disciplina.csv
-app/database/inputs/protocolo.csv
-app/database/inputs/recurso_campus.csv
-app/database/inputs/solicitacao_acesso.csv
-app/database/inputs/tecnico.csv
-app/database/inputs/usuario.csv
+app/database/inputs/*
