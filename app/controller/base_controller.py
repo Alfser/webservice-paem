@@ -168,13 +168,13 @@ class BaseHasMatriculaController(BaseHasNameController):
         return query, OK
     
     @classmethod
-    def get_all_names(cls, Model, campus_instituto_id_campus_instituto):
+    def get_all_names(cls, Model):
         
         # models_names receve a tuple of (nome , id)
-        model_names = Model.query_all_names(campus_instituto_id_campus_instituto)
+        model_names = Model.query_all_names()
 
         #create a dict with nome as key and id as a value
-        names_dict = [{"nome":row.nome, "id":row.id, "matricula":row.matricula, "curso_id_curso":row.curso_id_curso} for row in model_names]
+        names_dict = [{"nome":row.nome, "id":row.id, "matricula":row.matricula, "curso_id_curso":row.curso_id_curso, "campus_instituto_id_campus_instituto":row.campus_instituto_id_campus_instituto} for row in model_names]
         
         return names_dict
 
