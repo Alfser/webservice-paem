@@ -120,11 +120,13 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
     
 
     @classmethod
-    def query_all_names(cls):
+    def query_all_names(cls, campus_instituto_id_campus_instituto):
         return super().query_all_names(
             cls.nome.label("nome"), 
             cls.id_discente.label("id"),
-            cls.matricula.label("other_id")
+            cls.matricula.label("matricula"),
+            cls.curso_id_curso.label("curso_id_curso"),
+            campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto
         )
     
     def __repr__(self):

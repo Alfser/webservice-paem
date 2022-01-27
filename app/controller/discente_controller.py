@@ -30,5 +30,5 @@ class DiscenteController(BaseHasUsuarioController, BaseHasMatriculaController):
         return super().delete(id_discente, DiscenteModel)
 
     @classmethod
-    def get_all_names(cls):
-        return super().get_all_names(DiscenteModel)
+    def get_all_names(cls, campus_instituto_id_campus_instituto):
+        return super().get_all_names(DiscenteModel, campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto)
