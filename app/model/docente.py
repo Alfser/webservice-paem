@@ -7,10 +7,10 @@ from .base_model import BaseHasSiape, BaseHasUsuarioModel
 from datetime import datetime
 
 # table to relationship many to many
-db.Table('docente_has_disciplina', db.Column('docente_siape', db.String(45), db.ForeignKey('docente.siape'), primary_key=True),
-                                    db.Column('disciplina_id_disciplina', db.Integer, db.ForeignKey('disciplina.id_disciplina'), primary_key=True),
-                                    db.Column('data', db.Date, nullable=False)
-                                )
+# db.Table('docente_has_disciplina', db.Column('docente_siape', db.String(45), db.ForeignKey('docente.siape'), primary_key=True),
+#                                     db.Column('disciplina_id_disciplina', db.Integer, db.ForeignKey('disciplina.id_disciplina'), primary_key=True),
+#                                     db.Column('data', db.Date, nullable=False)
+#                                 )
 
 class DocenteModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
     __tablename__ = "docente"
@@ -30,8 +30,8 @@ class DocenteModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
     justificativa = db.Column(db.Text, nullable=True)
     carteirinha_vacinacao = db.Column(db.String, nullable=True)
 
-    disciplinas = db.relationship('DisciplinaModel', secondary='docente_has_disciplina', lazy='select',
-                                                        backref=db.backref('docentes', lazy=True))
+    # disciplinas = db.relationship('DisciplinaModel', secondary='docente_has_disciplina', lazy='select',
+    #                                                     backref=db.backref('docentes', lazy=True))
     
     usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
     usuario = db.relationship('UsuarioModel', cascade="all, delete", uselist=False, lazy='select')

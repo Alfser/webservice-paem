@@ -21,12 +21,15 @@ class DisciplinaResource(Resource):
 
     @Authorization.token_required()
     def post(self):
-        disciplina_body  = request.json
-        return DisciplinaController.post(disciplina_body)
+        disciplina_body  = request.json.get('disciplina')
+        discentes_matricula  = request.json.get('discentes')
+    
+        return DisciplinaController.post(disciplina_body, discentes_matricula)
       
     @Authorization.token_required()
     def put(self):
         disciplina_body = request.json
+    
         return DisciplinaController.put(disciplina_body)
 
     @Authorization.token_required()
@@ -43,6 +46,6 @@ class ListaDisciplinaResource(Resource):
       ENDPOINT = 'disciplinas'
       ROUTE = '/disciplinas'
 
-      @Authorization.token_required()
-      def get(self):
-          return DisciplinaController.get_all_names()
+      @Authorization.token_required(with_usuario=True)
+      def get(self, usuario):
+          return DisciplinaController.get_all_names(usuario.campus_instituto_id_campus_instituto)

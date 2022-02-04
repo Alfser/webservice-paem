@@ -136,6 +136,25 @@ class BaseHasUsuarioController(BaseHasNameController):
 
         return new_model.serialize(), CREATED
 
+class BaseHasDiscentesListController(BaseHasNameController):
+    """
+    Recurso que possue um usuário (login)
+    
+    """
+    @classmethod
+    def post(cls, body, Model, discentes):
+
+        if not body:
+            return {"message":"não há dados no body da requsição."}, BAD_REQUEST
+        
+        # print(body)
+        model = Model(**body)
+
+        for discente in discentes:
+            model.discentes.append(discente)
+        model.save_to_db()
+
+        return model.serialize(), CREATED
 
     @classmethod
     def get_by_usuario(cls, usuario_id_usuario, Model):

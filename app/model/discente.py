@@ -116,7 +116,19 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
                 "campus_instituto_id_campus_instituto": self.campus_instituto_id_campus_instituto,
                 "campus_instituto": campus_instituto.nome if campus_instituto else None
             }
-    
+
+    def serialize_to_list(self):
+        discente_list = db.session.query(
+            DiscenteModel.id_discente,
+            DiscenteModel.nome,
+            DiscenteModel.matricula
+        ).filter_by().first()
+        return {
+            "id_discente":discente_list.id_discente,
+            "nome":discente_list.nome,
+            "matricula":discente_list.matricula
+        }
+
     @classmethod
     def query_all_names(cls):
         return super().query_all_names(
