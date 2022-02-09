@@ -136,6 +136,15 @@ class BaseHasUsuarioController(BaseHasNameController):
 
         return new_model.serialize(), CREATED
 
+    @classmethod
+    def get_by_usuario(cls, usuario_id_usuario, Model):
+
+        model_queried = Model.find_by_id_usuario(usuario_id_usuario)
+        if model_queried:
+            return model_queried.serialize(), OK
+        
+        return {"message":"usuario not found"}, NOT_FOUND_REQUEST
+
 class BaseHasDiscentesListController(BaseHasNameController):
     """
     Recurso que possue um usuário (login)
@@ -155,15 +164,6 @@ class BaseHasDiscentesListController(BaseHasNameController):
         model.save_to_db()
 
         return model.serialize(), CREATED
-
-    @classmethod
-    def get_by_usuario(cls, usuario_id_usuario, Model):
-
-        model_queried = Model.find_by_id_usuario(usuario_id_usuario)
-        if model_queried:
-            return model_queried.serialize(), OK
-            
-        return {"message":"usuario not found"}, NOT_FOUND_REQUEST
 
 #class to randle user that has matricula or siape
 class BaseHasMatriculaController(BaseHasNameController):
@@ -196,7 +196,6 @@ class BaseHasMatriculaController(BaseHasNameController):
         names_dict = [{"nome":row.nome, "id":row.id, "matricula":row.matricula, "curso_id_curso":row.curso_id_curso, "campus_instituto_id_campus_instituto":row.campus_instituto_id_campus_instituto} for row in model_names]
         
         return names_dict
-
 
 class BaseHasSiapeController(BaseHasNameController):
 
