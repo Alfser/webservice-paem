@@ -64,10 +64,33 @@ class BaseHasNameModel(BaseModel):
 class BaseHasCurso(BaseModel):
 
     @classmethod
-    def query_all_names(cls,*entiries, curso_id_curso=None):
+    def query_all_names(cls,*entiries, 
+                curso_id_curso=None
+            ):
         if curso_id_curso:
-            return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso).all())
+            return list(db.session.query(*entiries).filter_by(
+                    curso_id_curso=curso_id_curso
+                ).all())
         return db.session.query(*entiries).all()
+
+class BaseListaDisciplina(BaseModel):
+
+    @classmethod
+    def query_all_names(cls,*entiries, 
+                campus_instituto_id_campus_instituto=None, 
+                docente_id_docente=None
+            ):
+        if campus_instituto_id_campus_instituto:
+            return list(db.session.query(*entiries).filter_by(
+                    campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto
+                ).all())
+        
+        if docente_id_docente:
+            return list(db.session.query(*entiries).filter_by(
+                    docente_id_docente=docente_id_docente
+                ).all())
+
+        return list(db.session.query(*entiries).all())
 
 class BaseHasSiape(BaseModel):
 

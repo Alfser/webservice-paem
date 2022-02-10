@@ -27,5 +27,11 @@ class DisciplinaController(BaseHasDiscentesListController):
         return super().delete(id_disciplina, DisciplinaModel)
 
     @classmethod
-    def get_all_names(cls, campus_instituto_id_campus_instituto=None):
-        return super().get_all_names(DisciplinaModel, campus_instituto_id_campus_instituto==campus_instituto_id_campus_instituto)
+    def get_all_names(cls, 
+                campus_instituto_id_campus_instituto=None,
+                docente_id_docente=None,
+            ):
+        return super().get_all_names(DisciplinaModel, 
+                                campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto,
+                                docente_id_docente=docente_id_docente
+                            )

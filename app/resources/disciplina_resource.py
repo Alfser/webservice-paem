@@ -43,9 +43,19 @@ class DisciplinaResource(Resource):
 
 class ListaDisciplinaResource(Resource):
       
-      ENDPOINT = 'disciplinas'
-      ROUTE = '/disciplinas'
+    ENDPOINT = 'disciplinas'
+    ROUTE = '/disciplinas'
 
-      @Authorization.token_required(with_usuario=True)
-      def get(self, usuario):
-          return DisciplinaController.get_all_names(usuario.campus_instituto_id_campus_instituto)
+    @Authorization.token_required(with_usuario=True)
+    def get(self, usuario):
+        parser = reqparse.RequestParser()
+        parser.add_argument("id_docente", type=int, required=False, help="query string id_docente deve ser um inteiro.")
+        #parser.add_argument("id_discente", type=int, required=False, help="query string id_discente deve ser um inteiro.")
+        args = parser.parse_args()
+        id_docente = args.get("id_docente")
+        #id_discente = args.get("id_discente")
+          
+        if id_docente:
+            return DisciplinaController.get_all_names(docente_id_docente=id_docente)  
+        else:
+            return DisciplinaController.get_all_names(campus_instituto_id_campus_instituto=usuario.campus_instituto_id_campus_instituto)
