@@ -1,5 +1,6 @@
 
 # import models to create tables
+import app
 from app.model import UsuarioModel
 from app.model import CursoModel
 from app.model import CampusInstitutoModel
@@ -15,6 +16,7 @@ from app.model import PortariaModel
 from app.model import ReservaRecursoServidoresModel
 from app.model import ProtocoloModel
 from app.model import PontoVerificacaoModel
+from app.model  import NotificacaoCovidModel
 
 from app.database import create_db, db
 # libs
@@ -46,41 +48,43 @@ def import_csv_db():
     acesso_permitido_dicts = read_csv('app/database/inputs/acesso_permitido.csv', parse_dates=["hora_entrada", "hora_saida"], na_filter=True, sep=';', encoding='UTF-8').replace([np.nan], [None]).to_dict(orient='records')
     protocolo_dicts = read_csv('app/database/inputs/protocolo.csv', na_filter=True, sep=';', encoding='UTF-8').replace([np.nan], [None]).to_dict(orient='records')
     disciplinas_dicts = read_csv('app/database/inputs/disciplina.csv', na_filter=True, sep=';', encoding='UTF-8').replace([np.nan], [None]).to_dict(orient='records')
-
+    notificacao_covid_dicts = read_csv('app/database/inputs/notificacao_covid.csv', parse_dates=["data"], na_filter=True, sep=',', encoding='UTF-8').replace([np.nan], [None]).to_dict(orient='records')
     
     # import campus
-    dicts2db(campus_dicts, CampusInstitutoModel)
+    # dicts2db(campus_dicts, CampusInstitutoModel)
 
     # import usuario
-    dicts2db(usuario_dicts, UsuarioModel)
+    # dicts2db(usuario_dicts, UsuarioModel)
 
     # import curso
-    dicts2db(curso_dicts, CursoModel)
+    # dicts2db(curso_dicts, CursoModel)
 
     # import recurso_campus
-    dicts2db(recurso_campus_dicts, RecursoCampusModel)
+    # dicts2db(recurso_campus_dicts, RecursoCampusModel)
 
     # import docente
-    dicts2db(docente_dicts, DocenteModel)
+    # dicts2db(docente_dicts, DocenteModel)
 
     # import discente
-    dicts2db(discente_dicts, DiscenteModel)
+    # dicts2db(discente_dicts, DiscenteModel)
     
     # import tecnico
-    dicts2db(tecnico_dicts, TecnicoModel)
+    # dicts2db(tecnico_dicts, TecnicoModel)
     
     # import solicitacao_acesso
-    dicts2db(solicitacao_acesso_dicts, SolicitacaoAcessoModel)
+    # dicts2db(solicitacao_acesso_dicts, SolicitacaoAcessoModel)
     
     # import acesso_permitido
-    dicts2db(acesso_permitido_dicts, AcessoPermitidoModel)
+    # dicts2db(acesso_permitido_dicts, AcessoPermitidoModel)
     
     # import PROTOCOLO
-    dicts2db(protocolo_dicts, ProtocoloModel)
+    # dicts2db(protocolo_dicts, ProtocoloModel)
 
     # import DISCIPLINA
-    dicts2db(disciplinas_dicts, DisciplinaModel)
-    
+    # dicts2db(disciplinas_dicts, DisciplinaModel)
+
+    # import Notificacao Covid
+    dicts2db(notificacao_covid_dicts, NotificacaoCovidModel) 
     # if all data fake was added commit all insertions
     db.session.commit()
     
@@ -88,5 +92,5 @@ def import_csv_db():
 if __name__=='__main__':
     db.app.config['SQLALCHEMY_ECHO'] = True
 
-    create_db()
+    # create_db()
     import_csv_db()

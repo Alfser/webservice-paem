@@ -1,10 +1,11 @@
-
+from csv import Dialect
 from .curso import CursoModel
 from .usuario import UsuarioModel
 from .campus_instituto import CampusInstitutoModel
 from .base_model import BaseHasUsuarioModel 
 from datetime import datetime
 from ..database import db
+
 from app.model import usuario
 
 class DiscenteModel(BaseHasUsuarioModel, db.Model):
@@ -14,7 +15,7 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
     matricula = db.Column(db.String(45), unique=True, nullable=False)
     nome = db.Column(db.String(255), nullable=False)
     entrada = db.Column(db.String(6), nullable=True)
-    carteirinha_vacinacao = db.Column(db.String, nullable=True)
+    carteirinha_vacinacao = db.Column(db.Text(150000), nullable=True)
     __data_nascimento = db.Column('data_nascimento', db.Date, nullable=True)
     ano_de_ingresso = db.Column(db.Integer, nullable=True)
     sexo = db.Column(db.String(2), nullable=True)
@@ -138,6 +139,6 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
             cls.curso_id_curso.label("curso_id_curso"),
             cls.campus_instituto_id_campus_instituto.label("campus_instituto_id_campus_instituto")
         )
-    
+
     def __repr__(self):
         return '<discente %r>' % self.login

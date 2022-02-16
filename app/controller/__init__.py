@@ -15,3 +15,4 @@ from .recurso_campus_controller import RecursoCampusController
 from .protocolo_controller import ProtocoloController
 from .ponto_verificacao_controller import PontoVerificacaoController
 from .disciplina_controller import DisciplinaController
+from .notificacao_covid_controller import NotificacaoCovidController

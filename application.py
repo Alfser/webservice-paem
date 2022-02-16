@@ -9,11 +9,12 @@ from app import CoordenacaoResource, ListaCoordenacaoResource
 from app import CursoResource, ListaCursoResource
 from app import DisciplinaResource, ListaDisciplinaResource
 from app import CampusInstitutoResource, ListaCampusInstitutoResource
-from app import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource
+from app import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource, SolicitacaoAcessoStatisticsResource
 from app import AcessoPermitidoResource, ListaAcessoPermitidoResource
 from app import RecursoCampusResource, ListaRecursoCampusResource
 from app import ProtocoloResource, ListaProtocolosResource
 from app import PontoVerificacaoResource, ListaPontoVerificacaoResource
+from app import NotificacaoCovidResource, ListaNotificacaoCovidResource
 from app import HomeResource
 
 # Just to aws know the variable of flask app.
@@ -35,6 +36,7 @@ adicionar_recurso(TecnicoVacinacaoResource)
 
 adicionar_recurso(SolicitacaoAcessoResource)
 adicionar_recurso(ListaSolicitacaoAcessoResource)
+adicionar_recurso(SolicitacaoAcessoStatisticsResource)
 
 adicionar_recurso(AcessoPermitidoResource)
 adicionar_recurso(ListaAcessoPermitidoResource)
@@ -65,11 +67,13 @@ adicionar_recurso(ListaDisciplinaResource)
 adicionar_recurso(PontoVerificacaoResource)
 adicionar_recurso(ListaPontoVerificacaoResource)
 
+adicionar_recurso(NotificacaoCovidResource)
+adicionar_recurso(ListaNotificacaoCovidResource)
+
 # Objeto flask que será obtido para realizar o deploy na AWS
 # Ele está localizado abaixo dos recursos para ser
 # obtido depois que os recursos são adicionados
 application = api.app
-
 
 if __name__=='__main__':
 

@@ -16,6 +16,7 @@ from .direcao import DirecaoModel
 from .protocolo import ProtocoloModel
 from .ponto_verificacao import PontoVerificacaoModel
 from .disciplina import DisciplinaModel
+from .notificacao_covid import NotificacaoCovidModel
 
 
 

@@ -28,7 +28,7 @@ class DocenteModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
     quantidade_vacinas = db.Column(db.Integer, nullable=True)
     fabricante = db.Column(db.String(45), nullable=True)
     justificativa = db.Column(db.Text, nullable=True)
-    carteirinha_vacinacao = db.Column(db.String, nullable=True)
+    carteirinha_vacinacao = db.Column(db.Text(150000), nullable=True)
 
     # disciplinas = db.relationship('DisciplinaModel', secondary='docente_has_disciplina', lazy='select',
     #                                                     backref=db.backref('docentes', lazy=True))

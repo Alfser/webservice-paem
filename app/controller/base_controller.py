@@ -68,7 +68,10 @@ class BaseController:
 
     @classmethod
     def get_list(cls, Model, campus_instituto_id_campus_instituto=None):
-        models = Model.query_all(campus_instituto_id_campus_instituto)
+        if campus_instituto_id_campus_instituto:
+            models = Model.query_all(campus_instituto_id_campus_instituto)
+        else:
+            models = Model.query_all()    
         serialized = [model.serialize() for model in models]
         return serialized
     

@@ -34,3 +34,8 @@ class SolicitacaoAcessoController(BaseController):
     @classmethod
     def get_list(cls, campus_instituto_id_campus_instituto=None):
         return super().get_list(SolicitacaoAcessoModel, campus_instituto_id_campus_instituto)
+
+    @classmethod
+    def get_sum(cls):
+        return SolicitacaoAcessoModel.query_sum()
+        

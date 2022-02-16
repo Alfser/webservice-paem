@@ -61,3 +61,12 @@ class ListaSolicitacaoAcessoResource(Resource):
     def get(self, usuario):
         return SolicitacaoAcessoController.get_list(usuario.campus_instituto_id_campus_instituto)
 
+class SolicitacaoAcessoStatisticsResource(Resource):
+    
+    ENDPOINT = 'solicitacoes_acessos_statistics'
+    ROUTE = '/solicitacoes_acessos/statistics'
+    
+    @Authorization.token_required()
+    def get(self):
+        return SolicitacaoAcessoController.get_sum()
+
