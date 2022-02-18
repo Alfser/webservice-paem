@@ -8,14 +8,14 @@ from .resources import CoordenacaoResource, ListaCoordenacaoResource
 from .resources import CursoResource, ListaCursoResource
 from .resources import DisciplinaResource, ListaDisciplinaResource
 from .resources import CampusInstitutoResource, ListaCampusInstitutoResource
-from .resources import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource, SolicitacaoAcessoStatisticsResource
+from .resources import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource, SolicitacaoAcessoQuantidadePorCampusResource, SolicitacaoAcessoQuantidadePorRecursoCampusResource, SolicitacaoAcessoPorCursoResource
 from .resources import AcessoPermitidoResource, ListaAcessoPermitidoResource
 from .resources import RecursoCampusResource, ListaRecursoCampusResource
 from .resources import ProtocoloResource, ListaProtocolosResource
-from .resources import DiscenteVacinacaoResource
+from .resources import DiscenteVacinacaoResource, DiscenteVacinadosPorCursoResource
 from .resources import PontoVerificacaoResource, ListaPontoVerificacaoResource
 from .resources import DisciplinaResource, ListaDisciplinaResource
-from .resources import NotificacaoCovidResource, ListaNotificacaoCovidResource
+from .resources import NotificacaoCovidResource, ListaNotificacaoCovidResource, NotificacaoCovidQuantidadePorCampusResource, NotificacaoCovidQuantidadePorCursoResource
 from .resources import HomeResource
 
 from .resources import app

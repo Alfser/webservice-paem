@@ -32,3 +32,7 @@ class DiscenteController(BaseHasUsuarioController, BaseHasMatriculaController):
     @classmethod
     def get_all_names(cls):
         return super().get_all_names(DiscenteModel)
+    
+    @classmethod
+    def contar_vacinados_por_curso(cls, id_campus_instituto):
+        return DiscenteModel.contar_vacinados_por_curso(id_campus_instituto)

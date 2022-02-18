@@ -45,3 +45,33 @@ class ListaNotificacaoCovidResource(Resource):
     @Authorization.token_required(with_usuario=True)
     def get(self, usuario):
         return NotificacaoCovidController.get_list(usuario.campus_instituto_id_campus_instituto)
+
+class NotificacaoCovidQuantidadePorCampusResource(Resource):
+      
+      ENDPOINT = 'notificacoes_covid_quantidade_por_campus'
+      ROUTE = '/notificacoes_covid/quantidade_por_campus'
+
+      @Authorization.token_required()
+      def get(self):
+            parser = reqparse.RequestParser()
+            parser.add_argument("id_campus_instituto", type=int, required=True, help="Precisa do argumento 'id_campus_instituto' na solicitação para acessar este recurso.")
+            parser.add_argument("ano", type=int, required=True, help="Precisa do argumento 'ano' na solicitação para acessar este recurso.")
+            args = parser.parse_args()
+            id_campus_instituto = args.get('id_campus_instituto')
+            ano = args.get('ano')
+            return NotificacaoCovidController.contar_notificacao_por_campus(ano, id_campus_instituto)
+
+class NotificacaoCovidQuantidadePorCursoResource(Resource):
+      
+      ENDPOINT = 'notificacoes_covid_quantidade_por_curso'
+      ROUTE = '/notificacoes_covid/quantidade_por_curso'
+
+      @Authorization.token_required()
+      def get(self):
+            parser = reqparse.RequestParser()
+            parser.add_argument("id_campus_instituto", type=int, required=True, help="Precisa do argumento 'id_campus_instituto' na solicitação para acessar este recurso.")
+            parser.add_argument("ano", type=int, required=True, help="Precisa do argumento 'ano' na solicitação para acessar este recurso.")
+            args = parser.parse_args()
+            id_campus_instituto = args.get('id_campus_instituto')
+            ano = args.get('ano')
+            return NotificacaoCovidController.contar_notificacao_por_curso(ano, id_campus_instituto)

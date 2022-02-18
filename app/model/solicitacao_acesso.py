@@ -5,6 +5,7 @@ from .usuario import UsuarioModel
 from .acesso_permitido import AcessoPermitidoModel
 from .discente import DiscenteModel
 from .recurso_campus import RecursoCampusModel
+from .campus_instituto import CampusInstitutoModel
 
 from datetime import time, datetime
 
@@ -132,17 +133,48 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
         return solicitacao_acesso.serialize()
 
     @classmethod
-    def query_sum(cls):
-        query = db.session.query(cls.recurso_campus_id_recurso_campus, db.func.count(cls.id_solicitacao_acesso).label("sum_by_recurso_campus")).group_by(cls.recurso_campus_id_recurso_campus).all()
-
-        dict_sum = dict()
+    def contar_agendamento_por_campus(cls):
+        query = db.engine.execute("SELECT campus_instituto.nome, count(id_solicitacao_acesso) as count_by_curso"
+                                    " FROM solicitacao_acesso, campus_instituto"
+                                    " WHERE campus_instituto_id_campus_instituto=id_campus_instituto"
+                                    " AND data BETWEEN DATE_SUB(CURDATE(), INTERVAL 6 MONTH) AND CURDATE()"
+                                    " GROUP BY id_campus_instituto;"
+                                    )
+        dict_query = dict()
         for row in query:
-            recurso_campus = db.session.query(
-            RecursoCampusModel.nome
-        ).filter_by(id_recurso_campus=row[0]).first()
+            dict_query[row[0]]=row[1]
+        return dict_query
 
-            dict_sum[recurso_campus.nome]= row[1] 
-        return dict_sum
+    @classmethod
+    def contar_agendamento_por_recurso_campus(cls, ano, mes, id_campus_instituto):
+        query = db.engine.execute("SELECT recurso_campus.nome, count(id_solicitacao_acesso) count_by_curso"
+                                    " FROM solicitacao_acesso, recurso_campus"
+                                    " WHERE recurso_campus_id_recurso_campus=id_recurso_campus"
+                                    " AND solicitacao_acesso.campus_instituto_id_campus_instituto = %s"
+                                    " AND YEAR(data) = %s AND MONTH(data) = %s"
+                                    " GROUP BY id_recurso_campus;",
+                                    id_campus_instituto, ano, mes
+                                )
+        dict_query = dict()
+        for row in query:
+            dict_query[row[0]]=row[1]
+        return dict_query
+
+    @classmethod
+    def contar_agendamento_por_curso(cls, ano, mes, id_campus_instituto):
+        query = db.engine.execute("SELECT curso.nome, count(id_solicitacao_acesso) as count_by_curso"
+                                    " FROM solicitacao_acesso, discente, curso"
+                                    " WHERE discente_id_discente=id_discente"
+                                    " AND curso_id_curso=id_curso"
+                                    " AND solicitacao_acesso.campus_instituto_id_campus_instituto = %s"
+                                    " AND YEAR(data) = %s AND MONTH(data) = %s"
+                                    " GROUP BY id_curso;",
+                                    id_campus_instituto, ano, mes
+                                )
+        dict_query = dict()
+        for row in query:
+            dict_query[row[0]]=row[1]
+        return dict_query
 
     def __repr__(self):
         return '<solicita_acesso %r>' % self.id_solicitacao_acesso

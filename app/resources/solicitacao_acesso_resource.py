@@ -61,12 +61,48 @@ class ListaSolicitacaoAcessoResource(Resource):
     def get(self, usuario):
         return SolicitacaoAcessoController.get_list(usuario.campus_instituto_id_campus_instituto)
 
-class SolicitacaoAcessoStatisticsResource(Resource):
+class SolicitacaoAcessoQuantidadePorCampusResource(Resource):
     
-    ENDPOINT = 'solicitacoes_acessos_statistics'
-    ROUTE = '/solicitacoes_acessos/statistics'
+    ENDPOINT = 'solicitacoes_acessos_quantidade_por_campus'
+    ROUTE = '/solicitacoes_acessos/quantidade_por_campus'
     
     @Authorization.token_required()
     def get(self):
-        return SolicitacaoAcessoController.get_sum()
+        return SolicitacaoAcessoController.contar_agendamento_por_campus()
 
+class SolicitacaoAcessoQuantidadePorRecursoCampusResource(Resource):
+    
+    ENDPOINT = 'solicitacoes_acessos_quantidade_por_recurso_campus'
+    ROUTE = '/solicitacoes_acessos/quantidade_por_recurso_campus'
+    
+    @Authorization.token_required()
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument("id_campus_instituto", type=int, required=True, help="Precisa do argumento 'id_campus_instituto' na solicitação para acessar a solicitação deste recurso.")
+        parser.add_argument("ano", type=int, required=True, help="Precisa do argumento 'ano' para solicitação deste recurso.")
+        parser.add_argument("mes", type=int, required=True, help="Precisa do argumento 'mes' para solicitação deste recurso.")
+        args = parser.parse_args()
+        id_campus_instituto = args.get('id_campus_instituto')
+        ano = args.get('ano')
+        mes = args.get('mes')
+
+        return SolicitacaoAcessoController.contar_agendamento_por_recurso_campus(ano, mes, id_campus_instituto)
+
+class SolicitacaoAcessoPorCursoResource(Resource):
+    
+    ENDPOINT = 'solicitacoes_acessos_quantidade_por_curso'
+    ROUTE = '/solicitacoes_acessos/quantidade_por_curso'
+    
+    @Authorization.token_required()
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument("id_campus_instituto", type=int, required=True, help="Precisa do argumento 'id_campus_instituto' na solicitação para a solicitação deste recurso.")
+        parser.add_argument("ano", type=int, required=True, help="Precisa do argumento 'ano' para solicitação deste recurso.")
+        parser.add_argument("mes", type=int, required=True, help="Precisa do argumento 'mes' para solicitação deste recurso.")
+        args = parser.parse_args()
+        id_campus_instituto = args.get('id_campus_instituto')
+        ano = args.get('ano')
+        mes = args.get('mes')
+
+        return SolicitacaoAcessoController.contar_agendamento_por_curso(ano, mes, id_campus_instituto)
+    

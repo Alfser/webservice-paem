@@ -140,5 +140,36 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
             cls.campus_instituto_id_campus_instituto.label("campus_instituto_id_campus_instituto")
         )
 
+    @classmethod
+    def contar_vacinados_por_curso(cls, id_campus_instituto):
+        query_vacinados = db.engine.execute(
+            "SELECT curso.nome, COUNT(quantidade_vacinas) quantidade_vacinados"
+            " FROM discente, curso"
+            " WHERE curso_id_curso=id_curso"
+            " AND discente.campus_instituto_id_campus_instituto=%s"
+            " AND quantidade_vacinas>0"
+            " GROUP BY id_curso;",
+            id_campus_instituto
+        )
+        dict_query_vacinados = dict()
+        for row in query_vacinados:
+            dict_query_vacinados[row[0]]=row[1]
+        
+
+        query_alunos = db.engine.execute(
+            "SELECT curso.nome, COUNT(id_discente) quantidade_discente"
+            " FROM discente, curso"
+            " WHERE curso_id_curso=id_curso"
+            " AND discente.campus_instituto_id_campus_instituto=%s"
+            " GROUP BY id_curso;",
+            id_campus_instituto
+        )
+
+        dict_query_alunos = dict()
+        for row in query_alunos:
+            dict_query_alunos[row[0]]=row[1]
+
+        return{"total_vacinados":dict_query_vacinados, "total_alunos":dict_query_alunos}
+        
     def __repr__(self):
         return '<discente %r>' % self.login

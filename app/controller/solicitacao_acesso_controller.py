@@ -36,6 +36,14 @@ class SolicitacaoAcessoController(BaseController):
         return super().get_list(SolicitacaoAcessoModel, campus_instituto_id_campus_instituto)
 
     @classmethod
-    def get_sum(cls):
-        return SolicitacaoAcessoModel.query_sum()
+    def contar_agendamento_por_campus(cls):
+        return SolicitacaoAcessoModel.contar_agendamento_por_campus()
+    
+    @classmethod
+    def contar_agendamento_por_recurso_campus(cls, ano, mes, id_campus_instituto):
+        return SolicitacaoAcessoModel.contar_agendamento_por_recurso_campus(ano, mes, id_campus_instituto)
+
+    @classmethod
+    def contar_agendamento_por_curso(cls, ano, mes, id_campus_instituto):
+        return SolicitacaoAcessoModel.contar_agendamento_por_curso(ano, mes, id_campus_instituto)
         

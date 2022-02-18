@@ -9,13 +9,15 @@ from app import CoordenacaoResource, ListaCoordenacaoResource
 from app import CursoResource, ListaCursoResource
 from app import DisciplinaResource, ListaDisciplinaResource
 from app import CampusInstitutoResource, ListaCampusInstitutoResource
-from app import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource, SolicitacaoAcessoStatisticsResource
+from app import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource, SolicitacaoAcessoQuantidadePorCampusResource, SolicitacaoAcessoQuantidadePorRecursoCampusResource, SolicitacaoAcessoPorCursoResource
 from app import AcessoPermitidoResource, ListaAcessoPermitidoResource
 from app import RecursoCampusResource, ListaRecursoCampusResource
 from app import ProtocoloResource, ListaProtocolosResource
 from app import PontoVerificacaoResource, ListaPontoVerificacaoResource
 from app import NotificacaoCovidResource, ListaNotificacaoCovidResource
 from app import HomeResource
+from app.resources.discente_resource import DiscenteVacinadosPorCursoResource
+from app.resources.notificacao_covid_resource import NotificacaoCovidQuantidadePorCampusResource, NotificacaoCovidQuantidadePorCursoResource
 
 # Just to aws know the variable of flask app.
 
@@ -36,7 +38,9 @@ adicionar_recurso(TecnicoVacinacaoResource)
 
 adicionar_recurso(SolicitacaoAcessoResource)
 adicionar_recurso(ListaSolicitacaoAcessoResource)
-adicionar_recurso(SolicitacaoAcessoStatisticsResource)
+adicionar_recurso(SolicitacaoAcessoQuantidadePorCampusResource)
+adicionar_recurso(SolicitacaoAcessoQuantidadePorRecursoCampusResource)
+adicionar_recurso(SolicitacaoAcessoPorCursoResource)
 
 adicionar_recurso(AcessoPermitidoResource)
 adicionar_recurso(ListaAcessoPermitidoResource)
@@ -44,6 +48,7 @@ adicionar_recurso(ListaAcessoPermitidoResource)
 adicionar_recurso(DiscenteResource)
 adicionar_recurso(ListaDiscenteResource)
 adicionar_recurso(DiscenteVacinacaoResource)
+adicionar_recurso(DiscenteVacinadosPorCursoResource)
 
 adicionar_recurso(RecursoCampusResource)
 adicionar_recurso(ListaRecursoCampusResource)
@@ -69,6 +74,9 @@ adicionar_recurso(ListaPontoVerificacaoResource)
 
 adicionar_recurso(NotificacaoCovidResource)
 adicionar_recurso(ListaNotificacaoCovidResource)
+adicionar_recurso(NotificacaoCovidQuantidadePorCampusResource)
+adicionar_recurso(NotificacaoCovidQuantidadePorCursoResource)
+
 
 # Objeto flask que será obtido para realizar o deploy na AWS
 # Ele está localizado abaixo dos recursos para ser

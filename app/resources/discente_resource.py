@@ -87,3 +87,16 @@ class ListaDiscenteResource(Resource):
       @Authorization.token_required()
       def get(self):
           return DiscenteController.get_all_names()
+
+class DiscenteVacinadosPorCursoResource(Resource):
+      
+      ENDPOINT = 'discentes_vacinados_por_curso'
+      ROUTE = '/discentes/quantidade_vacinados_por_curso'
+
+      @Authorization.token_required()
+      def get(self):
+            parser = reqparse.RequestParser()
+            parser.add_argument("id_campus_instituto", type=int, required=True, help="Precisa do argumento 'id_campus_instituto' na solicitação para acessar este recurso.")
+            args = parser.parse_args()
+            id_campus_instituto = args.get('id_campus_instituto')
+            return DiscenteController.contar_vacinados_por_curso(id_campus_instituto)
