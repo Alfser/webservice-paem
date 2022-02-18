@@ -19,6 +19,7 @@ português | [inglês](./README_ENG.md)
         - [Começando](#começando)
         - [Exemplos](#exemplos)
   - [Endpoints](#endpoints)
+    - [Para tela de Estatísticas](#para-tela-de-estatísticas)
   - [Documentações](#documentações)
   - [Licença](#licença)
 
@@ -1323,11 +1324,12 @@ Endpoints disponíveis:
      ```json
 
         {
-            "id_disciplina":"*integer",
+            "id_disciplina":<*integer>,
             "nome":"*string",
             "codigo_sigaa":"*string",
-            "semestre":"integer",
-            "curso_id_curso":"integer"
+            "docente_id_docente":"*string",
+            "semestre":<integer>,
+            "curso_id_curso":<*integer>
         }
      
      ``` 
@@ -1340,8 +1342,9 @@ Endpoints disponíveis:
         {
             "nome":"*string",
             "codigo_sigaa":"*string",
-            "semestre":"integer",
-            "curso_id_curso":"integer"
+            "semestre":<integer>,
+            "docente_id_docente":"*string",
+            "curso_id_curso":<*integer>
         }
       
       ``` 
@@ -1352,11 +1355,12 @@ Endpoints disponíveis:
         ```json
 
           {
-            "id_disciplina":"*integer",
+            "id_disciplina":<*integer>,
             "nome":"string",
             "codigo_sigaa":"string",
-            "semestre":"integer",
-            "curso_id_curso":"integer"
+            "docente_id_docente":"*string",
+            "semestre":<integer>,
+            "curso_id_curso":<integer>
         }
       
         ``` 
@@ -1364,7 +1368,7 @@ Endpoints disponíveis:
    - Uso do **DELETE**: Deleta uma disciplina de acordo com o *id_disciplina* enviado como query string na requisição.
      - Query string: *id_disciplina = integer*.
      - Route: 
-       - `/disciplinas/disciplina?id_disciplina=value`  
+       - `/disciplinas/disciplina?id_disciplina=3`  
        
  - `/disciplinas`: Use para **ver** as disciplinas cadastradas no banco de dados, na tabela *disciplina*. 
    - Método(s): Apenas método **GET** está disponível para acessar a rota.
@@ -1375,17 +1379,219 @@ Endpoints disponíveis:
     [
       {
         "nome": "string",
-        "id": "integer"
+        "id": <integer>,
+        "semestre": <integer>,
+        "codigo_sigaa":"string"
       },
       ...
       {
         "nome": "string",
-        "id": 2
+        "id": <integer>,
+        "semestre": <integer>,
+        "codigo_sigaa":"string"
       }
     ]
    
    ``` 
+- `/notificacoes_covid/notificacao_covid`: ​​Use para **ver**, **editar**, **criar**, **excluir** os dado de uma notificacao específico. 
+   - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
+   - Uso do **GET**: Obtém os dados da notificacão correspondente ao *id_notificacao_covid* enviado como query string na requisição.
+     - Query string: *id_notificacao_covid = integer*
+     - Route:
+       - `/notificacoes_covid/notificacao_covid?id_notificacao_covid=<INTEIRO>`
+        
+     - Resposta:
+      
+     ```json
 
+      {
+        "id_notificacao_covid": <integer>,
+        "data": "yyyy-mm-dd",
+        "teste": "string",
+        "nivel_sintomas": "string",
+        "matricula_discente": "*string",
+        "campus_instituto_id_campus_instituto": <*integer>
+      }   
+     
+     ``` 
+
+   - Uso do **POST**: Cria uma notificação de acordo com os dados enviado no body da requisição.
+     - Requisição: Campos que podem ser enviados no body.
+    
+      ```json
+
+      {
+        "data": "yyyy-mm-dd",
+        "teste": "string",
+        "nivel_sintomas": "string",
+        "matricula_discente": "*string",
+        "campus_instituto_id_campus_instituto": <*integer>
+      }
+      
+      ``` 
+
+   - Uso do **PUT**: Atualiza uma notificacao correspondente ao *id_notificacao_covid* enviado no body da requisição com os novos dados.
+     - Body da requisição:
+     
+        ```json
+
+        {
+          "id_notificacao_covid": <*integer>,
+          "data": "yyyy-mm-dd",
+          "teste": "string",
+          "nivel_sintomas": "string",
+          "matricula_discente": "*string",
+          "campus_instituto_id_campus_instituto": <*integer>
+        }
+      
+        ``` 
+
+   - Uso do **DELETE**: Deleta uma notificação de acordo com o *id_notificacao_covid* enviado como query string na requisição.
+     - Query string: *id_notificacao_covid = <INTEIRO>*.
+     - Route: 
+       - `/notificacoes_covid/notificacao_covid?id_notificacao_covid=133`  
+       
+- `/notificacoes_covid`: Use para **ver** as notificações de covid cadastradas no banco de dados, na tabela *notificacao_covid*.  
+  - Método(s): Apenas método **GET** está disponível para acessar a rota.
+  - Resposta:
+   
+   ```json
+   
+  [
+    
+    {
+        "id_notificacao_covid": <integer>,
+        "data": "string",
+        "teste": "string",
+        "nivel_sintomas": "string",
+        "matricula_discente": "string",
+        "campus_instituto_id_campus_instituto": <integer>
+    },
+    {
+        "id_notificacao_covid": <integer>,
+        "data": "string",
+        "teste": "string",
+        "nivel_sintomas": "string",
+        "matricula_discente": "string",
+        "campus_instituto_id_campus_instituto": <integer>
+    },
+    ...,
+    {
+        "id_notificacao_covid": <integer>,
+        "data": "string",
+        "teste": "string",
+        "nivel_sintomas": "string",
+        "matricula_discente": "string",
+        "campus_instituto_id_campus_instituto": <integer>
+    },
+   
+   ```
+### Para tela de Estatísticas
+
+- `/discentes/quantidade_vacinados_por_curso` : Para **Ver**, a quantidade de alunos vacinados por curso e a quantidade total de alunos por curso. 
+   - Metodo disponíveis: **GET**.
+   - rota completa:
+     - `/discentes/quantidade_vacinados_por_curso?id_campus_intituto=<INTEIRO>`
+   - Resposta:
+  ```json
+  
+  {
+    "total_vacinados": {
+        "SISTEMAS DE INFORMAÇÃO": 33,
+        "CIÊNCIAS BIOLÓGICAS": 82,
+        "INTERDISCIPLINAR EM CIÊNCIAS BIOLÓGICAS E CONSERVAÇÃO": 1
+    },
+    "total_alunos": {
+        "SISTEMAS DE INFORMAÇÃO": 34,
+        "CIÊNCIAS BIOLÓGICAS": 84,
+        "INTERDISCIPLINAR EM CIÊNCIAS BIOLÓGICAS E CONSERVAÇÃO": 1
+    }
+  }
+  ```
+
+- `/solicitacoes_acessos/quantidade_por_campus` : Para **Ver**, a quantidade de agendamentos solicidados à universidade por campus e intitutos pelos últimos 6 meses. 
+   - Metodo disponíveis: **GET**.
+   - rota completa:
+     - `/solicitacoes_acessos/quantidade_por_campus`
+   - Resposta:
+  ```json
+  
+  {
+    "CAMPUS UNIVERSITÁRIO DE ORIXIMINÁ-PROF.DR. DOMINGOS DINIZ": 214
+  }  
+
+  ```
+
+- `/solicitacoes_acessos/quantidade_por_curso` : Para **Ver**, a quantidade de agendamentos solicitados por curso da universidade de acordo com o mês requisitado na query string(1, para Janeiro; 2, para Fevereiro;...;12, para Dezembro) e o ano(2020, 2021,...). 
+   - Metodo disponíveis: **GET**.
+   - rota completa:
+     - `/solicitacoes_acessos/quantidade_por_curso?id_campus_instituto=5&ano=2021&mes=11`
+   - Resposta:
+  ```json
+  
+  {
+    "CIÊNCIAS BIOLÓGICAS": 48,
+    "SISTEMAS DE INFORMAÇÃO": 15
+  }  
+
+  ```
+
+- `/solicitacoes_acessos/quantidade_por_recurso_campus` : Para **Ver**, a quantidade de agendamentos solicitados por recurso do campus da universidade de acordo com o mês requisitado na query string(1, para Janeiro; 2, para Fevereiro;...;12, para Dezembro) e o ano(2020, 2021,...). 
+   - Metodo disponíveis: **GET**.
+   - rota completa:
+     - `/solicitacoes_acessos/quantidade_por_recurso_campus?id_campus_instituto=5&ano=2021&mes=11`
+   - Resposta:
+  ```json
+  
+  {
+    "Laboratório de Informática": 10,
+    "Sala de Aula Inteligente I": 2,
+    "Sala de Aula Inteligente II": 13,
+    "Area Comum de Convivência": 5,
+    "Auditorio": 30,
+    "Sala de Aula Inteligente III": 1,
+    "Laboratório Mult. de Biologia III": 2
+  }
+
+  ```
+
+- `/notificacoes_covid/quantidade_por_campus` : Para **Ver**, a quantidade de notificações de covid efetuadas pelos alunos de acordo com o campus(id_campus_intituto) e o ano(2021, 2021,...). 
+   - Metodo disponíveis: **GET**.
+   - rota completa:
+     - `/notificacoes_covid/quantidade_por_campus?id_campus_instituto=5&ano=2021`
+   - Resposta:
+  ```json
+  
+  {
+    "JAN": 3,
+    "FEV": 4,
+    "MAR": 2,
+    "ABR": 2,
+    "MAI": 1,
+    "JUN": 1,
+    "JUL": 1,
+    "AGO": 0,
+    "SET": 0,
+    "OUT": 0,
+    "NOV": 1,
+    "DEZ": 9
+  }  
+
+  ```
+
+- `/notificacoes_covid/quantidade_por_curso` : Para **Ver**, a quantidade de notificações de covid efetuadas pelos alunos por curso e de acordo com campus_insituto(id_campus_instituto) e o ano(2021, 2021,...). 
+   - Metodo disponíveis: **GET**.
+   - rota completa:
+     - `/quantidade_por_curso?id_campus_instituto=5&ano=2021`
+   - Resposta:
+  ```json
+  
+  {
+    "SISTEMAS DE INFORMAÇÃO": 10,
+    "CIÊNCIAS BIOLÓGICAS": 14
+  }  
+
+  ```
 ## Documentações
 
 A documentação do Webservice PAEM estará aqui no futuro.
