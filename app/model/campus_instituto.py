@@ -44,8 +44,12 @@ class CampusInstitutoModel(BaseHasNameModel, db.Model):
             }
 
     @classmethod
-    def query_all_names(cls):
-        return super().query_all_names(cls.nome.label("nome"), cls.id_campus_instituto.label("id"))
+    def query_all_names(cls, campus_instituto=None):
+        return super().query_all_names(
+            cls.nome.label("nome"), 
+            cls.id_campus_instituto.label("id"), 
+            campus_instituto_id_campus_instituto=campus_instituto
+        )
 
     def __repr__(self):
         return '<campus %r>' % self.nome
