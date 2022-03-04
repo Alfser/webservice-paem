@@ -32,6 +32,10 @@ class SolicitacaoAcessoController(BaseController):
         return super().delete(id, SolicitacaoAcessoModel)
 
     @classmethod
+    def solicitar_para_disciplina_criada(cls, discentes):
+        pass
+
+    @classmethod
     def get_list(cls, campus_instituto_id_campus_instituto=None):
         return super().get_list(SolicitacaoAcessoModel, campus_instituto_id_campus_instituto)
 

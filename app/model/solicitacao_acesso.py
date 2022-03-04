@@ -14,7 +14,7 @@ class SolicitacaoAcessoModel(BaseModel, db.Model):
           
 
     id_solicitacao_acesso = db.Column(db.Integer, primary_key=True)
-    para_si = db.Column(db.SmallInteger, nullable=False)
+    para_si = db.Column(db.SmallInteger, nullable=False) #0-não e 1-sim
     __data = db.Column('data', db.Date, nullable=False)
     __hora_inicio = db.Column('hora_inicio', db.Time, nullable=False)
     __hora_fim = db.Column('hora_fim', db.Time, nullable=False)

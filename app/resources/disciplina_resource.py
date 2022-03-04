@@ -23,14 +23,17 @@ class DisciplinaResource(Resource):
     def post(self):
         disciplina_body  = request.json.get('disciplina')
         discentes_matricula  = request.json.get('discentes')
-    
-        return DisciplinaController.post(disciplina_body, discentes_matricula)
-      
+        response = DisciplinaController.post(disciplina_body, discentes_matricula)
+        if response[1]==201:
+            pass
+
+        return response
+
     @Authorization.token_required()
     def put(self):
         disciplina_body = request.json
-    
-        return DisciplinaController.put(disciplina_body)
+        response = DisciplinaController.put(disciplina_body)
+        return response
 
     @Authorization.token_required()
     def delete(self):
@@ -46,16 +49,14 @@ class ListaDisciplinaResource(Resource):
     ENDPOINT = 'disciplinas'
     ROUTE = '/disciplinas'
 
-    @Authorization.token_required(with_usuario=True)
-    def get(self, usuario):
+    @Authorization.token_required()
+    def get(self):
         parser = reqparse.RequestParser()
-        parser.add_argument("id_docente", type=int, required=False, help="query string id_docente deve ser um inteiro.")
+        parser.add_argument("id_docente", type=int, required=True, help="query string id_docente deve ser um inteiro.")
         #parser.add_argument("id_discente", type=int, required=False, help="query string id_discente deve ser um inteiro.")
         args = parser.parse_args()
         id_docente = args.get("id_docente")
         #id_discente = args.get("id_discente")
           
-        if id_docente:
-            return DisciplinaController.get_all_names(docente_id_docente=id_docente)  
-        else:
-            return DisciplinaController.get_all_names(campus_instituto_id_campus_instituto=usuario.campus_instituto_id_campus_instituto)
+        return DisciplinaController.get_all_names(docente_id_docente=id_docente)  
+            

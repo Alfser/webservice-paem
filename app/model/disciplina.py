@@ -33,7 +33,6 @@ class DisciplinaModel(BaseListaDisciplina, db.Model):
 
     @classmethod
     def query_all_names(cls, 
-            campus_instituto_id_campus_instituto=None, 
             docente_id_docente=None
             ): 
         return super().query_all_names(
@@ -41,7 +40,6 @@ class DisciplinaModel(BaseListaDisciplina, db.Model):
             cls.id_disciplina.label("id"),
             cls.semestre.label("semestre"),
             cls.codigo_sigaa.label("codigo_sigaa"),
-            campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto,
             docente_id_docente=docente_id_docente
         )
 

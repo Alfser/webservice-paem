@@ -150,7 +150,7 @@ class BaseHasUsuarioController(BaseHasNameController):
 
 class BaseHasDiscentesListController(BaseHasNameController):
     """
-    Recurso que possue um usuário (login)
+    Classe que lida com a criação de disciplina
     
     """
     @classmethod
@@ -170,13 +170,11 @@ class BaseHasDiscentesListController(BaseHasNameController):
     
     @classmethod
     def get_all_names(cls, Model, 
-                campus_instituto_id_campus_instituto=None,
                 docente_id_docente=None
             ):
         
         # models_names receve a tuple of (nome , id)
         model_names = Model.query_all_names(
-                                    campus_instituto_id_campus_instituto,
                                     docente_id_docente
                                 )
 
