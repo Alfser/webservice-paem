@@ -12,7 +12,6 @@ from datetime import time, datetime
 class SolicitacaoAcessoModel(BaseModel, db.Model):
     __tablename__= "solicitacao_acesso"
           
-
     id_solicitacao_acesso = db.Column(db.Integer, primary_key=True)
     para_si = db.Column(db.SmallInteger, nullable=False) #0-não e 1-sim
     __data = db.Column('data', db.Date, nullable=False)

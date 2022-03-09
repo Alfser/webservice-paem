@@ -61,6 +61,16 @@ class ListaSolicitacaoAcessoResource(Resource):
     def get(self, usuario):
         return SolicitacaoAcessoController.get_list(usuario.campus_instituto_id_campus_instituto)
 
+class SolicitacaoDisciplina(Resource):
+    ENDPOINT = 'solicitacao_disciplina'
+    ROUTE = '/solicitacoes_acesso/disciplina'
+
+    @Authorization.token_required(with_usuario=True)
+    def post(self, usuario):
+        body = request.json
+        body["campus_instituto_id_campus_instituto"] = usuario.campus_instituto_id_campus_instituto
+        return SolicitacaoAcessoController.solicitar_para_disciplina_criada(body)
+
 class SolicitacaoAcessoQuantidadePorCampusResource(Resource):
     
     ENDPOINT = 'solicitacoes_acessos_quantidade_por_campus'

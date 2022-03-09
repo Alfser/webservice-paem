@@ -1,4 +1,4 @@
-from ..model import SolicitacaoAcessoModel
+from ..model import SolicitacaoAcessoModel, DisciplinaModel
 from ..util.http_status_code import BAD_REQUEST
 
 from .base_controller import BaseController
@@ -32,8 +32,32 @@ class SolicitacaoAcessoController(BaseController):
         return super().delete(id, SolicitacaoAcessoModel)
 
     @classmethod
-    def solicitar_para_disciplina_criada(cls, discentes):
-        pass
+    def solicitar_para_disciplina_criada(cls, body):
+        '''
+            Solicitar acesso ao recurso para os discentes, de acordo com a disciplina. 
+        
+        '''
+        id_disciplina = body['id_disciplina']
+        body.pop('id_disciplina', None) # remove id_disciplina from dict
+        disciplinaModel = DisciplinaModel.find_by_id(id_disciplina)
+        
+        lista_solicitacao_acesso = list() 
+
+        try:
+            for discente in disciplinaModel.discentes:
+                body['nome'] = discente.nome
+                body['usuario_id_usuario'] = discente.usuario_id_usuario
+                body['discente_id_discente'] = discente.id_discente
+
+            
+                solicitacaoAcessoModel = SolicitacaoAcessoModel(**body)
+                lista_solicitacao_acesso.append(solicitacaoAcessoModel)
+        except:
+            return {"message":"Há dado(s) inválido(s) no body da requisição."}, BAD_REQUEST    
+
+        SolicitacaoAcessoModel.save_all(lista_solicitacao_acesso) 
+        
+        return {"message":f"solicitações criada para os discentes da disciplina {disciplinaModel.nome}"}, 201
 
     @classmethod
     def get_list(cls, campus_instituto_id_campus_instituto=None):

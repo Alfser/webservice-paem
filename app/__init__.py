@@ -8,7 +8,9 @@ from .resources import CoordenacaoResource, ListaCoordenacaoResource
 from .resources import CursoResource, ListaCursoResource
 from .resources import DisciplinaResource, ListaDisciplinaResource
 from .resources import CampusInstitutoResource, ListaCampusInstitutoResource
-from .resources import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource, SolicitacaoAcessoQuantidadePorCampusResource, SolicitacaoAcessoQuantidadePorRecursoCampusResource, SolicitacaoAcessoPorCursoResource
+from .resources import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource, SolicitacaoAcessoQuantidadePorCampusResource
+from .resources import SolicitacaoAcessoQuantidadePorRecursoCampusResource, SolicitacaoAcessoPorCursoResource
+from .resources import SolicitacaoDisciplina
 from .resources import AcessoPermitidoResource, ListaAcessoPermitidoResource
 from .resources import RecursoCampusResource, ListaRecursoCampusResource
 from .resources import ProtocoloResource, ListaProtocolosResource

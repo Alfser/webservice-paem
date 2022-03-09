@@ -24,9 +24,7 @@ class DisciplinaResource(Resource):
         disciplina_body  = request.json.get('disciplina')
         discentes_matricula  = request.json.get('discentes')
         response = DisciplinaController.post(disciplina_body, discentes_matricula)
-        if response[1]==201:
-            pass
-
+        
         return response
 
     @Authorization.token_required()

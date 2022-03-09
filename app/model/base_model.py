@@ -30,8 +30,8 @@ class BaseModel():
         db.session.commit()
     
     @classmethod
-    def save_all(values):
-        db.session.add_all()
+    def save_all(cls, values):
+        db.session.add_all(values)
         db.session.commit()
 
     def delete_from_db(self):

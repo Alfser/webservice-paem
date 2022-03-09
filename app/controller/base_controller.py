@@ -134,8 +134,12 @@ class BaseHasUsuarioController(BaseHasNameController):
             return {"message":"não há dados no body da requsição."}, BAD_REQUEST
         
         print(body)
-        new_model = Model(**body, usuario=usuario)
-        new_model.save_to_db()
+
+        try:
+            new_model = Model(**body, usuario=usuario)
+            new_model.save_to_db()
+        except:
+            return {"message":"Há dado(s) inválido(s) no body da requisição."}, BAD_REQUEST
 
         return new_model.serialize(), CREATED
 
@@ -160,11 +164,14 @@ class BaseHasDiscentesListController(BaseHasNameController):
             return {"message":"não há dados no body da requsição."}, BAD_REQUEST
         
         # print(body)
-        model = Model(**body)
+        try:
+            model = Model(**body)
 
-        for discente in discentes:
-            model.discentes.append(discente)
-        model.save_to_db()
+            for discente in discentes:
+                model.discentes.append(discente)
+            model.save_to_db()
+        except:
+            return {"message":"Há dado(s) inválido(s) no body da requisição."}, BAD_REQUEST
 
         return model.serialize(), CREATED
     

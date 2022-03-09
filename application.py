@@ -9,7 +9,8 @@ from app import CoordenacaoResource, ListaCoordenacaoResource
 from app import CursoResource, ListaCursoResource
 from app import DisciplinaResource, ListaDisciplinaResource
 from app import CampusInstitutoResource, ListaCampusInstitutoResource
-from app import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource, SolicitacaoAcessoQuantidadePorCampusResource, SolicitacaoAcessoQuantidadePorRecursoCampusResource, SolicitacaoAcessoPorCursoResource
+from app import SolicitacaoAcessoResource, ListaSolicitacaoAcessoResource, SolicitacaoAcessoQuantidadePorCampusResource
+from app import SolicitacaoAcessoQuantidadePorRecursoCampusResource, SolicitacaoAcessoPorCursoResource, SolicitacaoDisciplina
 from app import AcessoPermitidoResource, ListaAcessoPermitidoResource
 from app import RecursoCampusResource, ListaRecursoCampusResource
 from app import ProtocoloResource, ListaProtocolosResource
@@ -41,6 +42,7 @@ adicionar_recurso(ListaSolicitacaoAcessoResource)
 adicionar_recurso(SolicitacaoAcessoQuantidadePorCampusResource)
 adicionar_recurso(SolicitacaoAcessoQuantidadePorRecursoCampusResource)
 adicionar_recurso(SolicitacaoAcessoPorCursoResource)
+adicionar_recurso(SolicitacaoDisciplina)
 
 adicionar_recurso(AcessoPermitidoResource)
 adicionar_recurso(ListaAcessoPermitidoResource)
