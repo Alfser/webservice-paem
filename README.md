@@ -1041,14 +1041,16 @@ Endpoints disponíveis:
      ```json
 
         {
-          "id_recuso_campus": "integer", 
+          "id_recuso_campus": <*integer>, 
           "nome": "string",
-          "capacidade": "integer",
+          "capacidade": <integer>,
           "descricao": "string",
+          "tipo_restricao": <smallInteger>, (0=livre, 1=restricão parcial; 2=restricão total)
+          "usuario_id_usuario":<integer>,
           "inicio_horario_funcionamento": "string format hh:mm:ss",
           "fim_horario_funcionamento": "string format hh:mm:ss",
-          "quantidade_horas": "integer",
-          "campus_instituto_id_campus_instituto": "integer",
+          "quantidade_horas": <integer>,
+          "campus_instituto_id_campus_instituto": <integer>,
           "campus_instituto": "string"
         }
      
@@ -1061,12 +1063,14 @@ Endpoints disponíveis:
 
           {
             "nome": "string",
-            "capacidade": "integer",
+            "capacidade": <integer>,
             "descricao": "string",
+            "tipo_restricao": <smallInteger> (0=livre, 1=restricão parcial; 2=restricão total)
+            "usuario_id_usuario": <integer>
             "inicio_horario_funcionamento": "string format hh:mm:ss",
             "fim_horario_funcionamento": "string format hh:mm:ss",
-            "quantidade_horas": "integer",
-            "campus_instituto_id_campus_instituto": "integer",
+            "quantidade_horas": <integer>,
+            "campus_instituto_id_campus_instituto": <integer>,
             "campus_instituto": "string"
           }
       
@@ -1078,14 +1082,16 @@ Endpoints disponíveis:
         ```json
 
           {
-            "id_recuso_campus": "*integer", 
+            "id_recuso_campus": <*integer>, 
             "nome": "string",
-            "capacidade": "integer",
+            "capacidade": <integer>,
             "descricao": "string",
+            "tipo_restricao": <smallInteger> (0=livre, 1=restricão parcial; 2=restricão total)
+            "usuario_id_usuario": <integer>
             "inicio_horario_funcionamento": "string format hh:mm:ss",
             "fim_horario_funcionamento": "string format hh:mm:ss",
-            "quantidade_horas": "integer",
-            "campus_instituto_id_campus_instituto": "integer",
+            "quantidade_horas": <integer>,
+            "campus_instituto_id_campus_instituto": <integer>,
             "campus_instituto": "string"
           }
       

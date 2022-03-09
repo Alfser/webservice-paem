@@ -1,5 +1,6 @@
 from ..database import db
 from .campus_instituto import BaseHasNameModel, CampusInstitutoModel
+from .usuario import UsuarioModel
 from datetime import time
 
 
@@ -10,13 +11,17 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
     nome = db.Column(db.Text, nullable=False)
     capacidade = db.Column(db.Integer, nullable=False)
     tipo_restricao = db.Column(db.SmallInteger, nullable=False)#(0=livre, 1=restricão parcial; 2=restricão total)
-    descricao = db.Column(db.Text, nullable=False)
-    __inicio_horario_funcionamento = db.Column('inicio_horario_funcionamento', db.Time, nullable=True)
-    __fim_horario_funcionamento = db.Column('fim_horario_funcionamento', db.Time, nullable=True)
-    quantidade_horas = db.Column(db.Integer, nullable=True)
-    
+    descricao = db.Column(db.Text, nullable=True)
+    __inicio_horario_funcionamento = db.Column('inicio_horario_funcionamento', db.Time, nullable=False)
+    __fim_horario_funcionamento = db.Column('fim_horario_funcionamento', db.Time, nullable=False)
+    quantidade_horas = db.Column(db.Integer, nullable=False)
+    usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
     campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
+    
+    usuario = db.relationship('UsuarioModel', lazy='select', uselist=False)
     campus_instituto = db.relationship('CampusInstitutoModel', backref=db.backref('recursos_campus', lazy='select'))
+
+
             
     def serialize(self):
 
@@ -31,6 +36,7 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
             "nome": self.nome,
             "capacidade": self.capacidade,
             "tipo_restricao":self.tipo_restricao,
+            "usuario_id_usuario":self.usuario_id_usuario,
             'descricao':self.descricao,
             'inicio_horario_funcionamento':self.inicio_horario_funcionamento,
             'fim_horario_funcionamento':self.fim_horario_funcionamento,

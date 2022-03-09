@@ -13,7 +13,7 @@ class RecursoCampusResource(Resource):
     @Authorization.token_required()
     def get(self):
       parser = reqparse.RequestParser()
-      parser.add_argument('id_recurso_campus', type=int, required=True, help='Required query string id_recurso.')
+      parser.add_argument('id_recurso_campus', type=int, required=True, help='Required query string id_recurso_campus.')
       
       args = parser.parse_args()
       id_recurso_campus = args.get('id_recurso_campus')
