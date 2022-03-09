@@ -577,6 +577,25 @@ Endpoints disponíveis:
       ]
     
     ```
+ 
+ - `/solicitacoes_acessos/disciplina`: ​​Use para **criar** as solicitações de acesso ao campus para cada aluno de uma disciplina específica cujo o id será envido no body da requisição. 
+    - Uso do **POST**: Cria as solicitações de acesso à uma disciplina para cada discente desta de acordo com os dados enviados no body da requisição.
+     - Campos que podem ser enviados no body:
+     
+     ```json
+
+      {
+          "para_si":<integer>,
+          "data":"*yyyy-mm-dd",
+          "hora_inicio":"*hh:mm:ss",
+          "hora_fim":"*hh:mm:ss",
+          "recurso_campus_id_recurso_campus":<*integer>,
+          "status_acesso":<*integer>,
+          "id_disciplina":<*integer>
+      } 
+
+     ``` 
+
 
  - `/acessos_permitidos/acesso_permitido`: ​​Use para **ver**, **editar**, **criar**, **excluir** uma um especifico acesso ao campus que foi permitido. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
