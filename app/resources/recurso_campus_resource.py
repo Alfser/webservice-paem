@@ -1,7 +1,7 @@
 
 from ..controller import RecursoCampusController
 from ..util.authorization import Authorization
-
+from ..util.http_status_code import BAD_REQUEST
 from flask_restful import Resource, reqparse, request
 
 
@@ -48,5 +48,19 @@ class ListaRecursoCampusResource(Resource):
 
     @Authorization.token_required(with_usuario=True)
     def get(self, usuario):
+        parser = reqparse.RequestParser()
+        parser.add_argument('usuario_id_usuario', type=int, required=False, help='Required query string usuario_id_usuario.')
         
-        return RecursoCampusController.get_all_names(usuario.campus_instituto_id_campus_instituto)
+        try:
+          args = parser.parse_args()
+        except:
+          return {"message":"Invalid value to this Query String"}, BAD_REQUEST
+
+        usuario_id_usuario = args.get('usuario_id_usuario')
+        if usuario_id_usuario:
+          return RecursoCampusController.get_all_names(
+          campus_instituto_id_campus_instituto=usuario.campus_instituto_id_campus_instituto, 
+          usuario_id_usuario=usuario_id_usuario
+        )
+
+        return RecursoCampusController.get_all_names(None, None)

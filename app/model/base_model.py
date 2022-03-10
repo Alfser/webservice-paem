@@ -56,9 +56,9 @@ class BaseHasNameModel(BaseModel):
     #    cls.query.filter_by(nome=nome).update(dict)
     #    cls.save()
     @classmethod
-    def query_all_names(cls, *entiries, campus_instituto_id_campus_instituto=None):
-        if campus_instituto_id_campus_instituto:
-            return list(db.session.query(*entiries).filter_by(campus_instituto_id_campus_instituto = campus_instituto_id_campus_instituto).all())
+    def query_all_names(cls, *entiries, campus_instituto_id_campus_instituto=None, usuario_id_usuario=None):
+        if campus_instituto_id_campus_instituto and usuario_id_usuario:
+            return list(db.session.query(*entiries).filter_by(campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto, usuario_id_usuario=usuario_id_usuario).all())
         return db.session.query(*entiries).all()
         
 class BaseHasCurso(BaseModel):

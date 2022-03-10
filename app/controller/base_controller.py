@@ -105,15 +105,16 @@ class BaseHasCursoController(BaseController):
 class BaseHasHorarioController(BaseHasNameController):
 
         @classmethod
-        def get_all_names(cls, Model, campus_instituto_id_campus_instituto=None):
+        def get_all_names(cls, Model, campus_instituto_id_campus_instituto, usuario_id_usuario):
             # models_names receve a list of resources
-            model_names = Model.query_all_names(campus_instituto_id_campus_instituto)
+            model_names = Model.query_all_names(campus_instituto_id_campus_instituto, usuario_id_usuario)
 
             #create a dict with nome as key and id as a value
             names_dict = [
                 {
                     "nome":row.nome, 
-                    "id":row.id, 
+                    "id":row.id,
+                    "usuario_id_usuario":row.usuario_id_usuario, 
                     "inicio_horario":str(row.inicio_horario),
                     "fim_hoario":str(row.inicio_horario)
                 } for row in model_names

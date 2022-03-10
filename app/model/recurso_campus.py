@@ -78,13 +78,15 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
         self.__fim_horario_funcionamento = fim_horario_funcionamento
     
     @classmethod
-    def query_all_names(cls, campus_instituto_id_campus_instituto):
+    def query_all_names(cls, campus_instituto_id_campus_instituto, usuario_id_usuario):
         return super().query_all_names(
             cls.nome.label("nome"), 
             cls.id_recurso_campus.label("id"),
+            cls.usuario_id_usuario.label("usuario_id_usuario"),
             cls.__inicio_horario_funcionamento.label("inicio_horario"),
             cls.__fim_horario_funcionamento.label("fim_horario"), 
-            campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto
+            campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto,
+            usuario_id_usuario=usuario_id_usuario
         )
 
     def __repr__(self):
