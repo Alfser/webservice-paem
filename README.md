@@ -430,13 +430,13 @@ Endpoints disponíveis:
         ]
     ```
 
- - `/solicitacoes_acessos/solicitacao_acesso`: ​​Use para **ver**, **editar**, **criar**, **excluir** uma solicitação de acesso ao campus realizada pelo usuário específica. 
+ - `/solicitacoes_acesso/solicitacao_acesso`: ​​Use para **ver**, **editar**, **criar**, **excluir** uma solicitação de acesso ao campus realizada pelo usuário específica. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
    - Uso do **GET**: Obtem os dados do acesso solicitado de acordo com o *id_discente* ou o *id_solicitacao_acesso*
      - query strings: *id_solicitacao_acesso = integer* e *id_discente = integer*
      - routes: 
-     - `/solicitacoes_acessos/solicitacao_acesso?id_solicitacao_acesso=value`
-     - `/solicitacoes_acessos/solicitacao_acesso?id_discente=value`
+     - `/solicitacoes_acesso/solicitacao_acesso?id_solicitacao_acesso=value`
+     - `/solicitacoes_acesso/solicitacao_acesso?id_discente=value`
      - Response:
 
       ```json
@@ -521,7 +521,7 @@ Endpoints disponíveis:
        -  `/solicitacoes_acessos/solicitacao_acesso?id_solicitacao_acesso=value`
    
 
- - `/solicitacoes_acessos`: Use para **ver** os valores na tabela *solicitacao_cesso*. 
+ - `/solicitacoes_acesso`: Use para **ver** os valores na tabela *solicitacao_cesso*. 
    - Método(s) disponíveis: Você pode usar apenas o método **GET** para fazer uma solicitação ao servidor.
    - Resposta:
   
@@ -578,7 +578,7 @@ Endpoints disponíveis:
     
     ```
  
- - `/solicitacoes_acessos/disciplina`: ​​Use para **criar** as solicitações de acesso ao campus para cada aluno de uma disciplina específica cujo o id será envido no body da requisição. 
+ - `/solicitacoes_acesso/disciplina`: ​​Use para **criar** as solicitações de acesso ao campus para cada aluno de uma disciplina específica cujo o id será envido no body da requisição. 
     - Uso do **POST**: Cria as solicitações de acesso à uma disciplina para cada discente desta de acordo com os dados enviados no body da requisição.
      - Campos que podem ser enviados no body:
      
