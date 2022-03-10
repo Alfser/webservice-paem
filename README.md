@@ -1104,6 +1104,7 @@ Endpoints disponíveis:
     
  - `/recursos_campus`: Use para **ver** os valores na tabela _recurso_campus_ gravada no banco de dados. 
    - Método(s): Você pode apenas usar o método **GET** para acessar esta rota.
+   - Usar a rota `/recursos_campus`, para buscar todos, ou `/recursos_campus?usuario_usuario=integer`, para buscar os de um usuario especifico
    - Resposta:
 
    ```json
@@ -1111,12 +1112,14 @@ Endpoints disponíveis:
         {
           "nome": "Laboratório de ensino em Biologia",
           "id": 1,
+          "usuario_id_usuario":null,
           "inicio_horario": "08:00:00",
           "fim_hoario": "08:00:00"
         },
         {
           "nome": "Laboratório multidisciplinar de biologia II",
           "id": 2,
+          "usuario_id_usuario":null,
           "inicio_horario": "08:00:00",
           "fim_hoario": "08:00:00"
         },
@@ -1124,12 +1127,14 @@ Endpoints disponíveis:
         {
           "nome": "Laboratório de Informática",
           "id": 3,
+          "usuario_id_usuario":null,
           "inicio_horario": "08:00:00",
           "fim_hoario": "08:00:00"
         },
         {
           "nome": "Sala de Aula Inteligente I",
           "id": 4,
+          "usuario_id_usuario":null,
           "inicio_horario": "08:00:00",
           "fim_hoario": "08:00:00"
         }
