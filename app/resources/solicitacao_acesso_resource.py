@@ -88,6 +88,7 @@ class SolicitacaoDisciplina(Resource):
     def post(self, usuario):
         body = request.json
         body["campus_instituto_id_campus_instituto"] = usuario.campus_instituto_id_campus_instituto
+        body["usuario_id_usuario"] = usuario.id_usuario
         return SolicitacaoAcessoController.solicitar_para_disciplina_criada(body)
 
 class SolicitacaoAcessoQuantidadePorCampusResource(Resource):

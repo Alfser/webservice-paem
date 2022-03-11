@@ -46,10 +46,8 @@ class SolicitacaoAcessoController(BaseHasUsuarioAndDiscenteController):
         try:
             for discente in disciplinaModel.discentes:
                 body['nome'] = discente.nome
-                body['usuario_id_usuario'] = discente.usuario_id_usuario
                 body['discente_id_discente'] = discente.id_discente
 
-            
                 solicitacaoAcessoModel = SolicitacaoAcessoModel(**body)
                 lista_solicitacao_acesso.append(solicitacaoAcessoModel)
         except:
