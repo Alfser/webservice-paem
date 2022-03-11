@@ -1,10 +1,10 @@
 from ..model import SolicitacaoAcessoModel, DisciplinaModel
 from ..util.http_status_code import BAD_REQUEST
 
-from .base_controller import BaseController
+from .base_controller import BaseHasUsuarioAndDiscenteController
 
 
-class SolicitacaoAcessoController(BaseController):
+class SolicitacaoAcessoController(BaseHasUsuarioAndDiscenteController):
    
     @classmethod
     def get(cls, id):
@@ -60,8 +60,13 @@ class SolicitacaoAcessoController(BaseController):
         return {"message":f"solicitações criada para os discentes da disciplina {disciplinaModel.nome}"}, 201
 
     @classmethod
-    def get_list(cls, campus_instituto_id_campus_instituto=None):
-        return super().get_list(SolicitacaoAcessoModel, campus_instituto_id_campus_instituto)
+    def get_list(cls, campus_instituto_id_campus_instituto=None, usuario_id_usuario=None, discente_id_discente=None):
+        return super().get_list(
+            SolicitacaoAcessoModel, 
+            campus_instituto_id_campus_instituto, 
+            usuario_id_usuario,
+            discente_id_discente
+        )
 
     @classmethod
     def contar_agendamento_por_campus(cls):

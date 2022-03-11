@@ -1,6 +1,6 @@
 # Table structure for table `solicita_acesso`
 from ..database import db
-from .base_model import BaseModel
+from .base_model import BaseHasUsuarioAndDiscenteModel
 from .usuario import UsuarioModel
 from .acesso_permitido import AcessoPermitidoModel
 from .discente import DiscenteModel
@@ -9,7 +9,7 @@ from .campus_instituto import CampusInstitutoModel
 
 from datetime import time, datetime
 
-class SolicitacaoAcessoModel(BaseModel, db.Model):
+class SolicitacaoAcessoModel(BaseHasUsuarioAndDiscenteModel, db.Model):
     __tablename__= "solicitacao_acesso"
           
     id_solicitacao_acesso = db.Column(db.Integer, primary_key=True)

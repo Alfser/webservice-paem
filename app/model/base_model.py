@@ -42,6 +42,25 @@ class BaseModel():
     def save(cls):
         db.session.commit()
 
+class BaseHasUsuarioAndDiscenteModel(BaseModel):
+    
+    @classmethod
+    def query_all(cls, campus_instituto_id_campus_instituto=None, usuario_id_usuario=None, discente_id_discente=None):
+        if campus_instituto_id_campus_instituto: 
+          return cls.query.filter_by(
+            campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto
+        ).all()
+        elif usuario_id_usuario: 
+          return cls.query.filter_by(
+            usuario_id_usuario=usuario_id_usuario
+        ).all()
+        elif discente_id_discente: 
+          return cls.query.filter_by(
+            discente_id_discente=discente_id_discente
+        ).all()
+
+        return cls.query.all()
+
 # class to working on person atributes 
 class BaseHasNameModel(BaseModel):
     '''

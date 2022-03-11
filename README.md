@@ -407,30 +407,30 @@ Endpoints disponíveis:
     ```json
         [
           {
-            "nome": "ABILENE SOUZA DE ALMEIDA",
-            "id": 1,
-            "matricula": "2019013473"
+            "nome": "*string",
+            "id": <*integer>,
+            "matricula": "*string"
           },
           {
-            "nome": "ADRIELE NATALIA PINTO SEIXAS",
-            "id": 2,
-            "matricula": "201800012"
+            "nome": "*string",
+            "id": <*integer>,
+            "matricula": "*string"
           },
           ...
           {
-            "nome": "AMANDA CRISTINA DA COSTA CARVALHO",
-            "id": 12,
-            "matricula": "2020007307"
+            "nome": "*string",
+            "id": <*integer>,
+            "matricula": "*string"
           },
           {
-            "nome": "AMANDA FERREIRA OLIVEIRA",
-            "id": 13,
-            "matricula": "2020000478"
+            "nome": "*string",
+            "id": <*integer>,
+            "matricula": "*string"
           }
         ]
     ```
 
- - `/solicitacoes_acesso/solicitacao_acesso`: ​​Use para **ver**, **editar**, **criar**, **excluir** uma solicitação de acesso ao campus realizada pelo usuário específica. 
+ - `/solicitacoes_acessos/solicitacao_acesso`: ​​Use para **ver**, **editar**, **criar**, **excluir** uma solicitação de acesso ao campus realizada pelo usuário específica. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
    - Uso do **GET**: Obtem os dados do acesso solicitado de acordo com o *id_discente* ou o *id_solicitacao_acesso*
      - query strings: *id_solicitacao_acesso = integer* e *id_discente = integer*
@@ -521,64 +521,67 @@ Endpoints disponíveis:
        -  `/solicitacoes_acessos/solicitacao_acesso?id_solicitacao_acesso=value`
    
 
- - `/solicitacoes_acesso`: Use para **ver** os valores na tabela *solicitacao_cesso*. 
+ - `/solicitacoes_acessos`: Use para **ver** os valores na tabela *solicitacao_cesso*. 
    - Método(s) disponíveis: Você pode usar apenas o método **GET** para fazer uma solicitação ao servidor.
+   - Use a rota `/solicitacoes_acessos` para buscar as solicitações do campus_instituto do usuario do usuario que requisitou.
+   - Use a rota `/solicitacoes_acessos?usuario_id_usuario=integer` para buscar as solicitações filtrando pelo usuario.
+   - Use a rota `/solicitacoes_acessos?discente_id_discente` para buscar as solicitações filtrando pelo discente.
    - Resposta:
   
     ```json
       [
         {
-          "id": 1,
-          "para_si": 0,
-          "data": "2020-03-20",
-          "hora_inicio": "10:30:38",
-          "hora_fim": "11:20:00",
-          "status_acesso": 1,
-          "nome": "Roberto",
-          "fone": "(93)9833445632",
-          "matricula": "null",
-          "usuario_id_usuario": null,
-          "discente_id_discente": null,
-          "discente": "null",
-          "recurso_campus_id_recurso_campus": null,
-          "recurso_campus": "null",
+          "id": <*integer>,
+          "para_si": <*smallInteger>,
+          "data": "yyyy-mm-dd",
+          "hora_inicio": "hh:mm:ss",
+          "hora_fim": "hh:mm:ss",
+          "status_acesso": <*integer>,
+          "nome": "string",
+          "fone": "string",
+          "matricula": "string",
+          "usuario_id_usuario": <*integer>,
+          "discente_id_discente": <*integer>,
+          "discente": "stirng",
+          "recurso_campus_id_recurso_campus": <*integer>,
+          "recurso_campus": "string",
           "acesso_permitido": {
-              "id_acesso_permitido": 1,
-              "temperatura": 33.45,
-              "hora_entrada": "10:30:38",
-              "hora_saida": "11:20:00",
-              "solicitacao_acesso_id_solicitacao_acesso": 1
+              "id_acesso_permitido": <*integer>,
+              "temperatura": <float>,
+              "hora_entrada": "hh:mm:dd",
+              "hora_saida": "hh:mm:dd",
+              "solicitacao_acesso_id_solicitacao_acesso": <*integer>
           }
         },
         ...
         {
-          "id": 3,
-          "para_si": 0,
-          "data": "2020-03-11",
-          "hora_inicio": "11:00:00",
-          "hora_fim": "11:50:54",
-          "status_acesso": 1,
-          "nome": "Levi",
-          "fone": "(93)98378324574",
-          "matricula": "null",
-          "usuario_id_usuario": null,
-          "discente_id_discente": null,
-          "discente": "null",
-          "recurso_campus_id_recurso_campus": null,
-          "recurso_campus": "null",
+          "id": <*integer>,
+          "para_si": <*smallInteger>,
+          "data": "yyyy-mm-dd",
+          "hora_inicio": "hh:mm:ss",
+          "hora_fim": "hh:mm:ss",
+          "status_acesso": <*integer>,
+          "nome": "string",
+          "fone": "string",
+          "matricula": "string",
+          "usuario_id_usuario": <*integer>,
+          "discente_id_discente": <*integer>,
+          "discente": "stirng",
+          "recurso_campus_id_recurso_campus": <*integer>,
+          "recurso_campus": "string",
           "acesso_permitido": {
-              "id_acesso_permitido": 3,
-              "temperatura": 34.65,
-              "hora_entrada": "09:30:38",
-              "hora_saida": "10:20:00",
-              "solicitacao_acesso_id_solicitacao_acesso": 3
+              "id_acesso_permitido": <*integer>,
+              "temperatura": <float>,
+              "hora_entrada": "hh:mm:dd",
+              "hora_saida": "hh:mm:dd",
+              "solicitacao_acesso_id_solicitacao_acesso": <*integer>
           }
         }
       ]
     
     ```
  
- - `/solicitacoes_acesso/disciplina`: ​​Use para **criar** as solicitações de acesso ao campus para cada aluno de uma disciplina específica cujo o id será envido no body da requisição. 
+ - `/solicitacoes_acessos/disciplina`: ​​Use para **criar** as solicitações de acesso ao campus para cada aluno de uma disciplina específica cujo o id será envido no body da requisição. 
     - Uso do **POST**: Cria as solicitações de acesso à uma disciplina para cada discente desta de acordo com os dados enviados no body da requisição.
      - Campos que podem ser enviados no body:
      

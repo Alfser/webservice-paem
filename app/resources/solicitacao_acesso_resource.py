@@ -59,11 +59,30 @@ class ListaSolicitacaoAcessoResource(Resource):
     
     @Authorization.token_required(with_usuario=True)
     def get(self, usuario):
+        parser = reqparse.RequestParser()
+        parser.add_argument('usuario_id_usuario', type=int, required=False, help='Required query string usuario_id_usuario.')
+        parser.add_argument('discente_id_discente', type=int, required=False, help='Required query string discente_id_discente.')
+        try:
+          args = parser.parse_args()
+        except:
+          return {"message":"Invalid value to this Query String"}, BAD_REQUEST
+
+        usuario_id_usuario = args.get('usuario_id_usuario')
+        discente_id_discente = args.get('discente_id_discente')
+        if usuario_id_usuario:
+          return SolicitacaoAcessoController.get_list(
+          usuario_id_usuario=usuario_id_usuario
+        )
+        
+        if discente_id_discente:
+          return SolicitacaoAcessoController.get_list(
+          discente_id_discente=discente_id_discente
+        )
         return SolicitacaoAcessoController.get_list(usuario.campus_instituto_id_campus_instituto)
 
 class SolicitacaoDisciplina(Resource):
     ENDPOINT = 'solicitacao_disciplina'
-    ROUTE = '/solicitacoes_acesso/disciplina'
+    ROUTE = '/solicitacoes_acessos/disciplina'
 
     @Authorization.token_required(with_usuario=True)
     def post(self, usuario):
