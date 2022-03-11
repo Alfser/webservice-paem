@@ -202,7 +202,13 @@ class BaseHasDiscentesListController(BaseHasNameController):
                                 )
 
         #create a dict with nome as key and id as a value
-        names_dict = [{"nome":row.nome, "id":row.id, "semestre":row.nome, "codigo_sigaa":row.id} for row in model_names]
+        names_dict = [
+            {
+                "nome":row.nome, 
+                "id":row.id, 
+                "semestre":row.semestre, 
+                "codigo_sigaa":row.codigo_sigaa
+            } for row in model_names]
         
         return names_dict
 

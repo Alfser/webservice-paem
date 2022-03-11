@@ -30,6 +30,7 @@ class DisciplinaController(BaseHasDiscentesListController):
     def get_all_names(cls, 
                 docente_id_docente=None,
             ):
-        return super().get_all_names(DisciplinaModel, 
-                                docente_id_docente=docente_id_docente
-                            )
+        return super().get_all_names(
+            DisciplinaModel, 
+            docente_id_docente=docente_id_docente
+        )
