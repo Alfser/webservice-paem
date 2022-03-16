@@ -62,6 +62,7 @@ class ListaSolicitacaoAcessoResource(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('usuario_id_usuario', type=int, required=False, help='Required query string usuario_id_usuario.')
         parser.add_argument('discente_id_discente', type=int, required=False, help='Required query string discente_id_discente.')
+        parser.add_argument('disciplina_id_disciplina', type=int, required=False, help='Required query string discente_id_discente.')
         try:
           args = parser.parse_args()
         except:
@@ -69,6 +70,7 @@ class ListaSolicitacaoAcessoResource(Resource):
 
         usuario_id_usuario = args.get('usuario_id_usuario')
         discente_id_discente = args.get('discente_id_discente')
+        disciplina_id_disciplina = args.get('disciplina_id_disciplina')
         if usuario_id_usuario:
           return SolicitacaoAcessoController.get_list(
           usuario_id_usuario=usuario_id_usuario
@@ -77,6 +79,11 @@ class ListaSolicitacaoAcessoResource(Resource):
         if discente_id_discente:
           return SolicitacaoAcessoController.get_list(
           discente_id_discente=discente_id_discente
+        )
+
+        if disciplina_id_disciplina:
+          return SolicitacaoAcessoController.get_list(
+          disciplina_id_disciplina=disciplina_id_disciplina
         )
         return SolicitacaoAcessoController.get_list(usuario.campus_instituto_id_campus_instituto)
 

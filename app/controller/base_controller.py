@@ -78,13 +78,18 @@ class BaseController:
 class BaseHasUsuarioAndDiscenteController(BaseController):
     
     @classmethod
-    def get_list(cls, Model, campus_instituto_id_campus_instituto=None, usuario_id_usuario=None, discente_id_discente=None):
+    def get_list(cls, Model, campus_instituto_id_campus_instituto=None, 
+                                usuario_id_usuario=None, 
+                                discente_id_discente=None,
+                                disciplina_id_disciplina=None):
         if campus_instituto_id_campus_instituto:
             models = Model.query_all(campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto)
         elif usuario_id_usuario:
             models = Model.query_all(usuario_id_usuario=usuario_id_usuario)
         elif discente_id_discente:
             models = Model.query_all(discente_id_discente=discente_id_discente)
+        elif disciplina_id_disciplina:
+            models = Model.query_all(disciplina_id_disciplina=disciplina_id_disciplina)
         else:
             models = Model.query_all()    
         serialized = [model.serialize() for model in models]
