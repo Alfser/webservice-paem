@@ -48,7 +48,8 @@ class BaseHasUsuarioAndDiscenteModel(BaseModel):
     def query_all(cls, campus_instituto_id_campus_instituto=None, 
                         usuario_id_usuario=None, 
                         discente_id_discente=None,
-                        disciplina_id_disciplina=None):
+                        disciplina_id_disciplina=None,
+                        docente_id_docente=None):
         if campus_instituto_id_campus_instituto: 
           return cls.query.filter_by(
             campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto
@@ -64,6 +65,10 @@ class BaseHasUsuarioAndDiscenteModel(BaseModel):
         elif disciplina_id_disciplina: 
           return cls.query.filter_by(
             disciplina_id_disciplina=disciplina_id_disciplina
+        ).all()
+        elif docente_id_docente: 
+          return cls.query.filter_by(
+            docente_id_docente=docente_id_docente
         ).all()
 
         return cls.query.all()

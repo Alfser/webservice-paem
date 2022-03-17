@@ -1,5 +1,5 @@
 from ..database import db
-from .base_model import BaseListaDisciplina
+from .base_model import BaseHasUsuarioAndDiscenteModel
 
 db.Table(
         'disciplina_has_discente',
@@ -8,7 +8,7 @@ db.Table(
         db.Column('data', db.Date, nullable=False)
 )
 
-class DisciplinaModel(BaseListaDisciplina, db.Model):
+class DisciplinaModel(BaseHasUsuarioAndDiscenteModel, db.Model):
     __tablename__='disciplina'
 
     id_disciplina = db.Column(db.Integer, primary_key=True)
@@ -31,18 +31,6 @@ class DisciplinaModel(BaseListaDisciplina, db.Model):
             "docente_id_docente":self.docente_id_docente,
             "solicitacoes_acessos":[solicitacao_acesso.serialize() for solicitacao_acesso in self.solicitacoes_acessos]
         }
-
-    @classmethod
-    def query_all_names(cls, 
-            docente_id_docente=None
-            ): 
-        return super().query_all_names(
-            cls.nome.label("nome"), 
-            cls.id_disciplina.label("id"),
-            cls.semestre.label("semestre"),
-            cls.codigo_sigaa.label("codigo_sigaa"),
-            docente_id_docente=docente_id_docente
-        )
 
     def __repr__(self):
         return '<disciplina %r>' % self.nome

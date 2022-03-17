@@ -202,20 +202,13 @@ class BaseHasDiscentesListController(BaseHasNameController):
             ):
         
         # models_names receve a tuple of (nome , id)
-        model_names = Model.query_all_names(
-                                    docente_id_docente
+        models = Model.query_all(
+                                    docente_id_docente=docente_id_docente
                                 )
 
         #create a dict with nome as key and id as a value
-        names_dict = [
-            {
-                "nome":row.nome, 
-                "id":row.id, 
-                "semestre":row.semestre, 
-                "codigo_sigaa":row.codigo_sigaa
-            } for row in model_names]
-        
-        return names_dict
+        body_dict = [model.serialize() for model in models]
+        return body_dict
 
 #class to randle user that has matricula or siape
 class BaseHasMatriculaController(BaseHasNameController):
