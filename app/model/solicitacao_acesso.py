@@ -41,7 +41,7 @@ class SolicitacaoAcessoModel(BaseHasUsuarioAndDiscenteModel, db.Model):
     )
 
     disciplina_id_disciplina = db.Column(db.Integer, db.ForeignKey('disciplina.id_disciplina'), nullable=True)
-    disciplina = db.relationship('DisciplinaModel', uselist=False, lazy='select')
+    disciplina = db.relationship('DisciplinaModel', uselist=False, lazy='select', backref=db.backref('solicitacoes_acessos', lazy='select'))
 
     recurso_campus = db.relationship('RecursoCampusModel', uselist=False, lazy='select')
     

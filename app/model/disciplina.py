@@ -20,7 +20,8 @@ class DisciplinaModel(BaseListaDisciplina, db.Model):
     discentes = db.relationship('DiscenteModel', secondary='disciplina_has_discente', lazy='noload', backref=db.backref('disciplinas', lazy='select'))
     docente = db.relationship('DocenteModel', uselist=False, lazy='select', backref=db.backref('disciplinas', lazy='select'))
     
-    def serialize(self):    
+    def serialize(self):  
+        
         return {
             "id_disciplina":self.id_disciplina,
             "nome":self.nome,
@@ -28,6 +29,7 @@ class DisciplinaModel(BaseListaDisciplina, db.Model):
             "semestre":self.semestre,
             "curso_id_curso":self.curso_id_curso,
             "docente_id_docente":self.docente_id_docente,
+            "solicitacoes_acessos":self.solicitacoes_acessos
         }
 
     @classmethod
