@@ -96,11 +96,6 @@ class SolicitacaoAcessoModel(BaseHasUsuarioAndDiscenteModel, db.Model):
             acesso_permitido_dict = self.acesso_permitido.serialize()
         except AttributeError as msg:
             acesso_permitido_dict = None        
-        
-        try:
-            disciplina_dict = self.disciplina.serialize()
-        except AttributeError as msg:
-            disciplina_dict = None
 
         finally:
         # Query just some rows
@@ -131,8 +126,7 @@ class SolicitacaoAcessoModel(BaseHasUsuarioAndDiscenteModel, db.Model):
             "recurso_campus_id_recurso_campus":self.recurso_campus_id_recurso_campus,
             "recurso_campus": recurso_campus.nome if recurso_campus else None,
             "tipo_restricao": recurso_campus.tipo_restricao if recurso_campus else None,
-            "acesso_permitido": acesso_permitido_dict if acesso_permitido_dict else None,
-            "disciplina": disciplina_dict if disciplina_dict else None
+            "acesso_permitido": acesso_permitido_dict if acesso_permitido_dict else None
         }
 
     @classmethod
