@@ -39,6 +39,7 @@ class SolicitacaoAcessoController(BaseHasUsuarioAndDiscenteController):
         '''
         id_disciplina = body['id_disciplina']
         body.pop('id_disciplina', None) # remove id_disciplina from dict
+        body['disciplina_id_disciplina']=id_disciplina # Adding disciplina to be Foreign Key of solicitacao_acesso
         disciplinaModel = DisciplinaModel.find_by_id(id_disciplina)
         
         lista_solicitacao_acesso = list() 
