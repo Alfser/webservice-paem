@@ -1,8 +1,49 @@
+'''
+    Módulo com a classe modelo da tabela `notificacao_covid`.
+    
+    autor : alfser
+    email : j.janilson12@gmail.com
+'''
 from ..database import db
 from .base_model import BaseModel
 from datetime import datetime
 
 class NotificacaoCovidModel(BaseModel, db.Model):
+    '''
+        Classe-modelo que mapeia a tabela `notificacao_covid`, que é esponsável por receber as notificações dos alunos que tiveram Covid-19.
+
+        ...
+
+        Atributos
+        ---------
+        `id_notificacao_covid : int`
+                Identificador da tupla de notificação de covid.
+        `data : Date(yyyy-mm-dd) | None`
+                Data em que teve covid.
+        `teste : boolean | None `
+                Se fez o teste para ver se estava com covid.
+        `nivel_sintomas : str | None`
+                Quais foram os sintomas que teve.
+        `matricula_discente : int | None`
+                Número de matrícula do discente.
+        `discente : DiscenteModel`
+                Dados do discente que faz a notificação de covid.
+        `campus_instituto_id_campus_instituto : int | None`
+                Identificador do campus da notificação de covid
+        `campus_instituto : CampusInstitutoModel`
+                Dados do campus ou instituto que foi realizado a notificação de covid.
+
+        Métodos
+        -------
+        `serialize(): dict`
+                Retorna um dicionário com os dados da tabela para API expor como JSON.
+        `@classmethod`
+        `contar_notificacao_por_campus(ano, id_campus_instituto):`
+                Contar o número de notificações de Covid por campus de um ano e campus selecionado.    
+        `@classmethod`
+        `contar_notificacao_por_curso(cls, ano, id_campus_instituto):`
+                Contar o número de notificações de Covid por cursos.
+    '''
     __tablename__ = "notificacao_covid"
 
     id_notificacao_covid = db.Column(db.Integer, primary_key=True)
@@ -36,6 +77,15 @@ class NotificacaoCovidModel(BaseModel, db.Model):
         self.__data = data
 
     def serialize(self):
+        '''
+            Retorna um dicionário com os dados da tabela para API expor como JSON.
+
+            ...
+
+            Retorno
+            -------
+            Dicionário `dict` com os dados da tabela `notificacao_covid`.
+        '''
         return {
             "id_notificacao_covid":self.id_notificacao_covid,
             "data":self.data,
@@ -47,6 +97,23 @@ class NotificacaoCovidModel(BaseModel, db.Model):
 
     @classmethod
     def contar_notificacao_por_campus(cls, ano, id_campus_instituto):
+        '''
+            Contar o número de notificações de Covid por campus.
+
+            ...
+
+            Parâmetros
+            ----------
+            `ano : int`
+                    Ano das notificação que serão consultadas ao banco de dados.
+            `id_campus_instituto : int`
+                    Identificador do campus ou instituto das notificação de Covid consultadas.
+
+            Retorno
+            -------
+            Um dicionário com os casos de covid notificados no sistema de cada mês do ano selecionado.
+
+        '''
         query = db.engine.execute(
             "SELECT data, COUNT(id_notificacao_covid) FROM notificacao_covid, campus_instituto"
             " WHERE  notificacao_covid.campus_instituto_id_campus_instituto=id_campus_instituto"
@@ -68,6 +135,23 @@ class NotificacaoCovidModel(BaseModel, db.Model):
 
     @classmethod
     def contar_notificacao_por_curso(cls, ano, id_campus_instituto):
+        '''
+            Contar o número de notificações de Covid por cursos.
+
+            ...
+
+            Parâmetros
+            ----------
+            `ano : int`
+                    Ano das notificação que serão consultadas ao banco de dados.
+            `id_campus_instituto : int`
+                    Identificador do campus ou instituto das notificação de Covid consultadas.
+
+            Retorno
+            -------
+            Um dicionário com os casos de covid notificados no sistema de cada curso do ano e campus ou intituto selecionado.
+
+        '''
         query = db.engine.execute(
             "SELECT curso.nome, count(id_notificacao_covid) count_by_curso"
             " FROM notificacao_covid, discente, curso"

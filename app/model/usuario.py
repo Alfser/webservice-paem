@@ -1,3 +1,9 @@
+'''
+    Módulo com a classe modelo da tabela `usuario`.
+    
+    autor : alfser
+    email : j.janilson12@gmail.com
+'''
 from ..database import db
 from .base_model import BaseHasNameModel
 
@@ -34,6 +40,16 @@ class UsuarioModel(BaseHasNameModel, db.Model):
         return pwd_context.verify(password, self.senha)
 
     def serialize(self):
+        '''
+            Retorna um dicionário com os dados da tabela para API expor como JSON.
+
+            ...
+
+            Retorno
+            -------
+            Dicionário `dict` com os dados da tabela `usuario`.
+        '''
+        
         return {"id_usuario": self.id_usuario, 
                 "login": self.login,
                 "cpf": self.cpf,

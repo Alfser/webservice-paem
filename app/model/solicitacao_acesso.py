@@ -1,4 +1,9 @@
-# Table structure for table `solicita_acesso`
+'''
+    Módulo com a classe modelo da tabela `solicitacao_acesso`.
+    
+    autor : alfser
+    email : j.janilson12@gmail.com
+'''
 from ..database import db
 from .base_model import BaseHasUsuarioAndDiscenteModel
 from .usuario import UsuarioModel
@@ -91,7 +96,16 @@ class SolicitacaoAcessoModel(BaseHasUsuarioAndDiscenteModel, db.Model):
         self.__hora_fim = hora_fim
 
     def serialize(self):
+        '''
+            Retorna um dicionário com os dados da tabela para API expor como JSON.
 
+            ...
+
+            Retorno
+            -------
+            Dicionário `dict` com os dados da tabela `solicitacao_acesso`.
+        '''
+        
         try:
             acesso_permitido_dict = self.acesso_permitido.serialize()
         except AttributeError as msg:

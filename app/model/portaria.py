@@ -1,3 +1,9 @@
+'''
+    Módulo com a classe modelo da tabela `portaria`.
+    
+    autor : alfser
+    email : j.janilson12@gmail.com
+'''
 from ..database import db
 from .usuario import UsuarioModel
 from .curso import CursoModel
@@ -20,7 +26,16 @@ class PortariaModel(BaseHasNameModel, db.Model):
     curso = db.relationship('CursoModel', lazy="select")
 
     def serialize(self):
+        '''
+            Retorna um dicionário com os dados da tabela para API expor como JSON.
 
+            ...
+
+            Retorno
+            -------
+            Dicionário `dict` com os dados da tabela `portaria`
+        '''
+        
         try:
             usuario_dict = self.usuario.serialize()
         except AttributeError as msg:

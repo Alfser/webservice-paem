@@ -1,14 +1,89 @@
-from csv import Dialect
+
+'''
+    Módulo com a classe modelo da tabela `discente`.
+    
+    autor : alfser
+    email : j.janilson12@gmail.com
+'''
 from .curso import CursoModel
 from .usuario import UsuarioModel
 from .campus_instituto import CampusInstitutoModel
-from .base_model import BaseHasUsuarioModel 
+from .base_model import BaseHasVacinacaoModel
 from datetime import datetime
 from ..database import db
 
-from app.model import usuario
+class DiscenteModel(BaseHasVacinacaoModel, db.Model):
+    '''
+        Classe modelo que mapeia a tabela `discente` do banco de dados, responsável por pelos dados do discente.
 
-class DiscenteModel(BaseHasUsuarioModel, db.Model):
+        ...
+
+        Atributos
+        ---------
+        `id_discente : int`
+                Identificador do discente.
+        `matricula : str`
+                Número de matrícula do discente.
+        `nome : str`
+                Nome do discente.
+        `entrada : str | None`
+                Tipo de entrada do discente.
+        `carteirinha_vacinacao : MediumText | None`
+                Carteirinha de vacinacao do discente.
+        `data_nascimento : Date(yyyy-mm-dd) | None`
+                Data de nacimento do discente.
+        `ano_de_ingresso : int | None`
+                Ano de ingresso do discente.
+        `sexo : str | None`
+                Sexo do discente. Pode ser 'M', 'F'..
+        `quantidade_pessoas : int | None`
+                Quantidade de psessoas que moram com o discente.
+        `quantidade_vacinas : int | None`
+                Número de doses de vacina que o discente recebeu. Pode ser 0, para nenhuma, 1, para uma dose, 2, para duas doses, 3, para três doses e 4 para mais.
+        `fabricante : str | None`
+                As fabricantes de cada uma das doses que o discente recebeu.
+        `justificativa : str | None`
+                Alguma justificativa que o discente queira informar.
+        `semestre : int | None`
+                O semestre em que o discente está atualmente.
+        `endereco : str | None`
+                O enderesso atual do discente.
+        `grupo_risco : int | None`
+                Se o discente faz parte do grupo de risco ou não. Pose ser `0 para não` e `1 para sim`.
+        `status_covid : int | None`
+                Se o discente está com covid ou não. Pode ser `0 para não` e `1 para sim`.
+        `status_permissao : int | None`
+                Se o discente tem permissção ou não para entrar no campus.
+        `usuario_id_usuario : int | None`
+                Identificador do usuário do discente.
+        `usuario : UsuarioModel`
+                Dados do usuário do discente.
+        `campus_instituto_id_campus_instituto : int | None`
+                Campus ou instituto do discente.
+        `campus_instituto : CampusInstitutoModel`
+                Dados do campus ou instituto do discente.
+        `curso_id_curso : int | None`
+                Identificador do curso do discente.
+        `solicitacoes_acesso : list[SolicitacaoAcesso]`
+            As solicitações de acesso realizadas pelo discente.
+
+        Métodos
+        -------
+        `serialize(): dict`
+                Retorna um dicionário com os dados da tabela para API expor como JSON.
+        `@classmethod`
+        `get_vacinacao(matricula_discente): dict`
+            Obtem os dados relacionados a vacinação do discente.
+        `serialize_to_list(): dict`
+                Consultar os dados dos discentes somente das colunas `id_discente`,`nome` e `matrícula` para serem listados.
+        `@classmethod`
+        `query_all_names():`
+                Consultar todos dos dados das colunas `nome`, `id_discente`, `matrícula`, `curso_id_curso` e `campus_istituto_id_campus_instituto` da tabela discente.
+        `@classmethod`
+        `contar_vacinados_por_curso(cls, id_campus_instituto):`
+            Contar o número de vacinados por curso e número total de alunos.
+    '''
+
     __tablename__='discente'
 
     id_discente = db.Column(db.Integer, primary_key=True)
@@ -33,11 +108,11 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
     usuario = db.relationship('UsuarioModel', cascade="all, delete", uselist=False, lazy='select')
 
     campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
-    campus = db.relationship('CampusInstitutoModel', uselist=False, lazy='select')
+    campus_intituto = db.relationship('CampusInstitutoModel', uselist=False, lazy='select')
 
     curso_id_curso = db.Column(db.Integer, db.ForeignKey('curso.id_curso'), nullable=True)
 
-    solicitacoes_acesso = db.relationship('SolicitacaoAcessoModel', uselist=False, lazy='select')
+    solicitacoes_acesso = db.relationship('SolicitacaoAcessoModel', uselist=True, lazy='select')
 
     @classmethod
     def find_by_matricula(cls, matricula):
@@ -60,6 +135,20 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
 
     @classmethod
     def get_vacinacao(cls, matricula_discente):
+        '''
+            Obtem os dados relacionados a vacinação do discente.
+
+            ...
+
+            Parâmetros
+            ----------
+            `matricula_discente : str`
+                    O número de matrícula do discente que será usado na consulta dos dados de vacinação.
+            
+            Retorno
+            -------
+            Dicionário com os dados de vacinação.
+        '''
         discente = cls.find_by_matricula(matricula_discente)
 
         if discente:
@@ -76,7 +165,15 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
         return None
 
     def serialize(self):
+        '''
+            Retorna um dicionário com os dados da tabela para API expor como JSON.
 
+            ...
+
+            Retorno
+            -------
+            Dicionário `dict` com os dados da tabela `discente`.
+        '''
         try:
             usuario_dict = self.usuario.serialize()
         except AttributeError as msg:
@@ -119,6 +216,16 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
             }
 
     def serialize_to_list(self):
+        '''
+            Consultar os dados dos discentes somente das colunas `id_discente`,`nome` e `matrícula` para serem listados. 
+
+            ...
+
+            Retorno
+            -------
+            Discionário com o resultado da consulta.
+        '''
+
         discente_list = db.session.query(
             DiscenteModel.id_discente,
             DiscenteModel.nome,
@@ -129,6 +236,19 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
             "nome":discente_list.nome,
             "matricula":discente_list.matricula
         }
+
+    @classmethod
+    def query_vacinacoes(cls, curso_id_curso, ano_turma, numero_de_doses):
+        return super().query_vacinacoes(
+            cls.nome.label("nome"), 
+            cls.id_discente.label("id"),
+            cls.matricula.label("matricula"),
+            cls.ano_de_ingresso.label("turma"),
+            cls.carteirinha_vacinacao.label("carteirinha_vacinacao"),
+            curso_id_curso=curso_id_curso,
+            ano_turma=ano_turma,
+            numero_de_doses=numero_de_doses
+        )
 
     @classmethod
     def query_all_names(cls):
@@ -142,6 +262,16 @@ class DiscenteModel(BaseHasUsuarioModel, db.Model):
 
     @classmethod
     def contar_vacinados_por_curso(cls, id_campus_instituto):
+        '''
+            Contar o número de vacinados por curso e número total de alunos.
+
+            ...
+
+            Parâmetros
+            -----------
+            `id_campus_instituto : int`
+                    Identificador do campus ou instituto dos discente usado para filtragem na consulta ao banco..
+        '''
         query_vacinados = db.engine.execute(
             "SELECT curso.nome, COUNT(quantidade_vacinas) quantidade_vacinados"
             " FROM discente, curso"

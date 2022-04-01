@@ -14,6 +14,10 @@ class DiscenteController(BaseHasUsuarioController, BaseHasMatriculaController):
         return super().get_vacinacao(DiscenteModel, matricula)
 
     @classmethod
+    def get_vacinacoes(cls, curso_id_curso, ano_turma, numero_de_doses):
+        return super().get_vacinacoes(DiscenteModel, curso_id_curso, ano_turma, numero_de_doses)
+
+    @classmethod
     def get_by_usuario(cls, usuario_id_usuario):
         return super().get_by_usuario(usuario_id_usuario, DiscenteModel)
 

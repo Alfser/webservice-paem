@@ -1,8 +1,17 @@
+'''
+    Módulo com a classe modelo da tabela `ponto_verificacao`.
+    
+    autor : alfser
+    email : j.janilson12@gmail.com
+'''
 from ..database import db
 from .campus_instituto import CampusInstitutoModel
 from .base_model import BaseHasUsuarioModel
 
 class PontoVerificacaoModel(BaseHasUsuarioModel, db.Model):
+    '''
+        
+    '''
     __tablename__ = "ponto_verificacao"
 
     id_ponto_verificacao = db.Column(db.Integer, primary_key=True)
@@ -23,6 +32,15 @@ class PontoVerificacaoModel(BaseHasUsuarioModel, db.Model):
         )
 
     def serialize(self):
+        '''
+            Retorna um dicionário com os dados da tabela para API expor como JSON.
+
+            ...
+
+            Retorno
+            -------
+            Dicionário `dict` com os dados da tabela `ponto_verificacao`
+        '''
         try:    
             usuario_dict = self.usuario.serialize()
         

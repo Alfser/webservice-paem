@@ -3,6 +3,7 @@ from app import AuthorizationResource, AuthorizationBotResource
 from app import UsuarioResource, ListaUsuarioResource
 from app import DocenteResource, ListaDocenteResource, DocenteVacinacaoResource
 from app import DiscenteResource, ListaDiscenteResource, DiscenteVacinacaoResource
+from app import ListaDiscenteVacinacaoResource
 from app import TecnicoResource, ListaTecnicoResource, TecnicoVacinacaoResource
 from app import DirecaoResource, ListaDirecaoResource
 from app import CoordenacaoResource, ListaCoordenacaoResource
@@ -51,6 +52,7 @@ adicionar_recurso(DiscenteResource)
 adicionar_recurso(ListaDiscenteResource)
 adicionar_recurso(DiscenteVacinacaoResource)
 adicionar_recurso(DiscenteVacinadosPorCursoResource)
+adicionar_recurso(ListaDiscenteVacinacaoResource)
 
 adicionar_recurso(RecursoCampusResource)
 adicionar_recurso(ListaRecursoCampusResource)

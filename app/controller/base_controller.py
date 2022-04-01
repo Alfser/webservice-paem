@@ -154,7 +154,7 @@ class BaseHasUsuarioController(BaseHasNameController):
         if not body:
             return {"message":"não há dados no body da requsição."}, BAD_REQUEST
         
-        print(body)
+        #print(body)
 
         try:
             new_model = Model(**body, usuario=usuario)
@@ -231,6 +231,16 @@ class BaseHasMatriculaController(BaseHasNameController):
       
         return query, OK
     
+    @classmethod
+    def get_vacinacoes(cls, Model, curso_id_curso, ano_turma, numero_de_doses):
+
+        model_discentes = Model.query_vacinacoes(curso_id_curso, ano_turma, numero_de_doses)
+
+        #create a dict with nome as key and id as a value
+        discentes_dict = [{"nome":row.nome, "id":row.id, "matricula":row.matricula, "turma":row.turma, "carteirinha_vacinacao":row.carteirinha_vacinacao} for row in model_discentes]
+        
+        return discentes_dict
+
     @classmethod
     def get_all_names(cls, Model):
         

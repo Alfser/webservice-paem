@@ -1,3 +1,9 @@
+'''
+    Módulo com a classe modelo da tabela `disciplina`.
+    
+    autor : alfser
+    email : j.janilson12@gmail.com
+'''
 from ..database import db
 from .base_model import BaseHasUsuarioAndDiscenteModel
 
@@ -9,6 +15,27 @@ db.Table(
 )
 
 class DisciplinaModel(BaseHasUsuarioAndDiscenteModel, db.Model):
+    '''
+        Classe-modelo que mapeia a tabela `disciplina`, que é utilizada pelo usário docente para criar solicitações de acesso aos discentes que assistirão sua maéria, do bancop de dados.
+
+        ...
+
+        Atributos
+        ---------
+        `id_disciplina : int`
+        `nome : str`
+        `código_sigaa : str`
+        `semestre : str | None`
+        `curso_id_curso : int | None`
+        `docente_id_docente : int | None`
+        `discentes : list[DiscenteModel]`
+        `docente : DocenteModel`
+
+        Métodos
+        -------
+        `serialize(): dict`
+                Retorna um dicionário com os dados da tabela para API expor como JSON.
+    '''
     __tablename__='disciplina'
 
     id_disciplina = db.Column(db.Integer, primary_key=True)
@@ -21,7 +48,15 @@ class DisciplinaModel(BaseHasUsuarioAndDiscenteModel, db.Model):
     docente = db.relationship('DocenteModel', uselist=False, lazy='select', backref=db.backref('disciplinas', lazy='select'))
     
     def serialize(self):  
-        
+        '''
+            Retorna um dicionário com os dados da tabela para API expor como JSON.
+
+            ...
+
+            Retorno
+            -------
+            Dicionário `dict` com os dados da tabela `disciplina`
+        '''
         return {
             "id_disciplina":self.id_disciplina,
             "nome":self.nome,

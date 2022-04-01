@@ -79,6 +79,26 @@ class DiscenteVacinacaoResource(Resource):
         new_discente_vacinacao = request.json
         return DiscenteController.put(new_discente_vacinacao)
 
+class ListaDiscenteVacinacaoResource(Resource):
+    
+    ENDPOINT = 'discentes_vacinacoes'
+    ROUTE = '/discentes_vacinacoes'
+    
+    @Authorization.token_required()
+    def get(self):
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('curso_id_curso', type=str, required=False, help="Precisa enviar a query string curso_id_curso.")
+        parser.add_argument('ano_turma', type=str, required=False, help="Precisa enviar um intero na query string turma, que é o ano de entrada dos discentes na turma.")
+        parser.add_argument('numero_de_doses', type=str, required=False, help="Precisa enviar um intero na query string numero_de_doses.")
+        args = parser.parse_args()
+
+        curso_id_curso = args.get("curso_id_curso")
+        ano_turma = args.get("ano_turma")
+        numero_de_doses = args.get("numero_de_doses")
+        
+        return DiscenteController.get_vacinacoes(curso_id_curso, ano_turma, numero_de_doses)
+
 class ListaDiscenteResource(Resource):
       
       ENDPOINT = 'discentes'

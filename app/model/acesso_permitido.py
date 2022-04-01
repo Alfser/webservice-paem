@@ -1,3 +1,10 @@
+'''
+    Módulo com a classe modelo da tabela `acesso_permitido`.
+    
+    autor : alfser
+    email : j.janilson12@gmail.com
+'''
+
 from ..database import db
 from .base_model import BaseModel
 
@@ -5,6 +12,32 @@ from datetime import time
 
 
 class AcessoPermitidoModel(BaseModel, db.Model):
+      '''
+        Classe para representa a tabela acesso_permtido.
+
+        ...
+
+        Atributos
+        ---------
+        id_acesso_permitido : int
+                identificador do acesso permitido.
+        temperatura : decimal
+                valor da temperatura medida no discente.
+        hora_entrada : str
+                hora da entrada do discente.
+        hora_saida : str
+                hora da saída do discente.
+        recurso_campus_id_recurso_campus : int
+                identificador do recurso solicitado.
+        campus_instituto_id_campus_instituto : int
+                identificador do campus onde o acesso foi permitido
+
+        Métodos
+        -------
+        serialize():
+            Retorna um dicionário com os dados para expor pela API como JSON.        
+      '''
+      
       __tablename__ = "acesso_permitido"
 
       id_acesso_permitido = db.Column(db.Integer, primary_key=True)
@@ -54,6 +87,13 @@ class AcessoPermitidoModel(BaseModel, db.Model):
           self.__hora_saida = hora_saida 
       
       def serialize(self):
+          '''
+            Retorna um dicionário com os dados da tabela, identificada pelo objeto-modelo, para API expor como JSON.
+
+            Retorno
+            -------
+            dicionário `dict` com os dados da tabela `acesso_permitido`.
+          '''
           return {
               "id_acesso_permitido":self.id_acesso_permitido,
               "temperatura":self.temperatura,

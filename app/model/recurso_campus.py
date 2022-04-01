@@ -1,3 +1,9 @@
+'''
+    Módulo com a classe modelo da tabela `recurso_campus`.
+    
+    autor : alfser
+    email : j.janilson12@gmail.com
+'''
 from ..database import db
 from .campus_instituto import BaseHasNameModel, CampusInstitutoModel
 from .usuario import UsuarioModel
@@ -24,7 +30,15 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
 
             
     def serialize(self):
+        '''
+            Retorna um dicionário com os dados da tabela para API expor como JSON.
 
+            ...
+
+            Retorno
+            -------
+            Dicionário `dict` com os dados da tabela `recurso_campus`.
+        '''
         campus_instituto = db.session.query(
             CampusInstitutoModel.nome
         ).filter_by(

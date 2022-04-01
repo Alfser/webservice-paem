@@ -1,8 +1,40 @@
+'''
+    Módulo com a classe modelo da tabela `direcao`.
+    
+    autor : alfser
+    email : j.janilson12@gmail.com
+'''
 from ..database.db import db
 from .docente import DocenteModel
 from datetime import datetime
 
 class DirecaoModel(db.Model):
+    '''
+        Classe modelo que mapeia a tabela `direcao`, onde descreve quem esteve ou está na direção do campus.
+
+        ...
+
+        Atributos
+        ---------
+        `id_direcao : int`    
+                Identificador da direção.
+        `data_entrada : Date(yyyy-mm-dd)`
+                Data de entrada na direção do campus.
+        `data_saida : Date(yyyy-mm-dd)`
+                Data de saída da direção do campus.
+        `status_ativo` : INT | None
+                Se está ativo na direção do campus.
+        `docente_id_docente` : int| None
+                Identificador do docente que está ma direção do campus.
+        `docente : DocenteModel`
+                Dados do docente que está na direção do campus.
+
+        Métodos
+        -------
+        serialize() : dict
+                Retorna um dicionário com os dados da tabela para API expor como JSON.
+    '''
+    
     __tablename__ = "direcao"
 
     id_direcao = db.Column(db.Integer, primary_key=True)
@@ -34,6 +66,15 @@ class DirecaoModel(db.Model):
         self.__data_saida = data
 
     def serialize(self):
+        '''
+            Retorna um dicionário com os dados da tabela para API expor como JSON.
+
+            ...
+
+            Retorno
+            -------
+            Dicionário `dict` com os dados da tabela `direcao`.
+        '''
         docente = db.session.query(
             DocenteModel.nome
         ).filter_by(id_docente=self.docente_id_docente).first()
