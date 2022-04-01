@@ -526,6 +526,7 @@ Endpoints disponíveis:
    - Use a rota `/solicitacoes_acessos` para buscar as solicitações do campus_instituto do usuario do usuario que requisitou.
    - Use a rota `/solicitacoes_acessos?usuario_id_usuario=integer` para buscar as solicitações filtrando pelo usuario.
    - Use a rota `/solicitacoes_acessos?discente_id_discente` para buscar as solicitações filtrando pelo discente.
+   - Use a rota `/solicitacoes_acessos?disciplina_id_disciplina` para buscar as solicitações filtrando por disciplina.
    - Resposta:
   
     ```json
@@ -1301,15 +1302,23 @@ Endpoints disponíveis:
    ```json
     [
       {
-        "nome": "Campus Oriximiná- Prof. Dr. Domingos Diniz",
-        "id": 1
+        "nome": <*string>,
+        "id": <*inteiro>
+      },
+      {
+        "nome": <*string>,
+        "id": <*inteiro>
+      },
+      {
+        "nome": <*string>,
+        "id": <*inteiro>
       }
     ]
    
    ``` 
 
 
-- `/discente_vacinacao`: ​​Use para **ver**, #*editar** os dados de um discente específico. 
+- `/discente_vacinacao`: ​​Use para **ver**, *editar** os dados de um discente específico. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
    - Uso do **GET**: Obtém os dados de vacinação do discente correspondente a query string *discente_matricula* enviado como query string na requisição.
      - Query string: *discente_matricula = string*
@@ -1344,6 +1353,46 @@ Endpoints disponíveis:
         }
       
       ``` 
+
+- `/discentes_vacinacoes` : Use para **ver** os dados de vacinação dos discentes.
+  - Método: Apenas o método **GET** está disponpivel para acesso nesta rota.
+  - Rotas de acesso com query string
+    - `/discentes_vacinacoes?curso_id_curso=<inteiro>&numero_de_doses=<inteiro>&ano_turma=<inteiro>`
+    - `/discentes_vacinacoes?curso_id_curso=<inteiro>&ano_turma=<inteiro>`
+    - `/discentes_vacinacoes?curso_id_curso=<inteiro>&numero_de_doses=<inteiro>`
+    - `/discentes_vacinacoes?numero_de_doses=<inteiro>&ano_turma=<inteiro>`
+    - `/discentes_vacinacoes?curso_id_curso=<inteiro>`
+    - `/discentes_vacinacoes?ano_turma=<inteiro>`
+    - `/discentes_vacinacoes?numero_de_doses=<inteiro>`
+  - Resposta:
+
+    ```json
+
+      [
+          {
+              "nome": <*string>,
+              "id": <*inteiro>,
+              "matricula": <*string>,
+              "turma": <*inteiro>,
+              "carteirinha_vacinacao": <string>
+          },
+          {
+              "nome": <*string>,
+              "id": <*inteiro>,
+              "matricula": <*string>,
+              "turma": <*inteiro>,
+              "carteirinha_vacinacao": <string>
+          },
+          {
+              "nome": <*string>,
+              "id": <*inteiro>,
+              "matricula": <*string>,
+              "turma": <*inteiro>,
+              "carteirinha_vacinacao": <string>
+          }
+    ]
+
+    ```
 
 - `/disciplinas/disciplina`: ​​Use para **ver**, **editar**, **criar**, **excluir** os dado de um curso específico. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
@@ -1405,6 +1454,8 @@ Endpoints disponíveis:
        
  - `/disciplinas`: Use para **ver** as disciplinas cadastradas no banco de dados, na tabela *disciplina*. 
    - Método(s): Apenas método **GET** está disponível para acessar a rota.
+   - Use a rota `/solicitacoes_acessos?docente_id_docente` para buscar todas as solicitações
+   - Use a rota `/solicitacoes_acessos?docente_id_docente` para buscar as solicitações filtrando por docente.
    - Resposta:
    
    ```json
@@ -1483,7 +1534,7 @@ Endpoints disponíveis:
      - Query string: *id_notificacao_covid = <INTEIRO>*.
      - Route: 
        - `/notificacoes_covid/notificacao_covid?id_notificacao_covid=133`  
-       
+  
 - `/notificacoes_covid`: Use para **ver** as notificações de covid cadastradas no banco de dados, na tabela *notificacao_covid*.  
   - Método(s): Apenas método **GET** está disponível para acessar a rota.
   - Resposta:
