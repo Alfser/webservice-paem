@@ -10,6 +10,36 @@ from .usuario import UsuarioModel
 
 
 class ReservaRecursoServidoresModel(db.Model):
+    '''
+        Classe-modelo que mapeia a tabela `reserva_recurso_servidores`, que por sua vez é responsável pela reserva de recurso dos servidores do campus universitário.
+
+        ...
+
+        Atributos
+        ---------
+        `id_reserva_recurso_servidores : int`
+                Identificador da reserva.
+        `data_inicio : Date(yyyy-mm-dd)`
+                Data inicial da reserva.
+        `data_fim : Date(yyyy-mm-dd)`
+                Data final da reserva.
+        `hora_inicio : Time(hh:mm:ss)`
+                Horário inicial da reserva.
+        `hora_final : Time(hh:mm:ss)`
+                Horário final da reserva.
+        `descricao : string | None`
+                Descrição da reserva.
+        `usuario_id_usuario : int | None`
+                Dados do usuário que criou a reserva.
+        `usuario : UsuarioModel`
+                Dados do usuário que criou a reserva.
+        
+        Métodos
+        -------
+        `serialize() : dict`
+            Retorna um dicionário com os dados da tabela para API expor como JSON.
+    '''
+
     __tablename__= "reserva_recurso_servidores"
 
     id_reserva_recurso_servidores = db.Column(db.Integer, primary_key=True)
@@ -20,7 +50,7 @@ class ReservaRecursoServidoresModel(db.Model):
     descricao = db.Column(db.SmallInteger, nullable=True)
 
     usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
-    usuarios = db.relationship('UsuarioModel', uselist=False, lazy='select', backref=db.backref('reserva_recurso_servidores', lazy='select'))
+    usuario = db.relationship('UsuarioModel', uselist=False, lazy='select', backref=db.backref('reserva_recurso_servidores', lazy='select'))
 
     # TODO: Add recursos aos servidores(docentes, tecnicos..)
     
@@ -47,6 +77,3 @@ class ReservaRecursoServidoresModel(db.Model):
         }
     def __repr__(self):
         return '<reserva_recurso_campus %r>' % self.nome
-
-
-    

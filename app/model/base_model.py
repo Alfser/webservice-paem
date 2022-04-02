@@ -237,8 +237,6 @@ class BaseHasNameModel(BaseModel):
         if campus_instituto_id_campus_instituto and usuario_id_usuario:
             return list(db.session.query(*entiries).filter_by(campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto, usuario_id_usuario=usuario_id_usuario).all())
         return db.session.query(*entiries).all()
-
-
 class BaseHasVacinacaoModel(BaseHasNameModel):
     '''
         Classe base especializada para classes-modelos que tenham os dado de vacinação do aluno.
@@ -277,7 +275,7 @@ class BaseHasVacinacaoModel(BaseHasNameModel):
         if curso_id_curso and ano_turma and numero_de_doses:
                 return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso, quantidade_vacinas=numero_de_doses, ano_de_ingresso=ano_turma).all())
         elif curso_id_curso and ano_turma:
-                return list(db.session.query(*entiries).filter_by(quantidade_vacinas=numero_de_doses, ano_de_ingresso=ano_turma).all())
+                return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso, ano_de_ingresso=ano_turma).all())
         elif curso_id_curso and numero_de_doses:
                 return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso, quantidade_vacinas=numero_de_doses).all())
         elif ano_turma and numero_de_doses:

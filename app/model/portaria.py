@@ -11,6 +11,37 @@ from .base_model import BaseHasNameModel
 
 
 class PortariaModel(BaseHasNameModel, db.Model):
+    '''
+        Classe-modelo que mapeia a tabela `portaria`, que por sua vez é responsável pelo cadastreo do usuário do porteiro.
+
+        ...
+
+        Atributos
+        ---------
+        `id_portaria : int`
+                Identificador do cadatro portiro. 
+        `nome : str`
+                Nome do porteiro.
+        `data_nascimento : Date(yyyy-mm-dd)` | None
+        `funcao : str | None`
+                Função do porteiro.
+        `turno_trabalho : int`
+                Turno de trabalho do porteiro.
+        `usuario_id_usuario : int | None`
+                Identificador do usuário do porteiro. 
+        `usuario : UsuarioModel`
+            Dados do usuário do porteiro.
+        `curso_id_curso : int | None`
+                Identificador do curso o qual a portaria pertence.
+        `curso : CursoModel`
+                Dados do curso.
+
+        Métodos
+        -------
+        `serialize(): dict`
+            Retorna um dicionário com os dados da tabela para API expor como JSON.
+        
+    '''
     __tablename__ = "portaria"
 
     id_portaria = db.Column(db.Integer, primary_key=True)

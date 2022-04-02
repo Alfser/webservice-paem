@@ -10,8 +10,33 @@ from .base_model import BaseHasUsuarioModel
 
 class PontoVerificacaoModel(BaseHasUsuarioModel, db.Model):
     '''
-        
+        Classe-modelo que mapeia a tabela `ponto_verificacão`, que descreve outro ponto de verificação de entrada dentro do campus.
+
+        ...
+
+        Atributos
+        ---------
+        `id_ponto_verificacao : int`
+                Identificador do ponto de acesso.
+        `nome : str`
+                Nome do responsável pelo ponto de acesso.
+        `descricao : string | None`
+                Descrição do ponto de acesso.
+        `usuario_id_usuario : int | None`
+                Identificador do usuário responsável pelo ponto de acesso.
+        `usuario : UsuarioModel`
+                Dados do usuário do ponto de acesso.
+        `campus_instituto_id_campus_instituto: int`
+                Identificador do campus do ponto de acesso.
+        `campus_instituto : CampusInstitutoModel`
+                Dados do campus ou instituto do ponto de acesso.
+
+        Métodos
+        -------
+        `serialize(): dict`
+            Retorna um dicionário com os dados da tabela para API expor como JSON.    
     '''
+
     __tablename__ = "ponto_verificacao"
 
     id_ponto_verificacao = db.Column(db.Integer, primary_key=True)

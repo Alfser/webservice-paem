@@ -11,6 +11,42 @@ from datetime import time
 
 
 class RecursoCampusModel(BaseHasNameModel, db.Model):
+    '''
+        Classe-modelo que mapeia a tabela `recurso_campus`, que por sua vez é responsável pelos dados dos recursos que são possíveis de usar no campus universitário.
+
+        ...
+
+        `id_recurso_campus : int`
+                Identificador do recurso do campus.
+        `nome : string`
+                Nome do recurso do campus.
+        `capacidade : int`
+                quantidade de pessoas que o recurso tem capacidade de recerber.
+        `tipo_restricao : int`
+                Tipo de restrição que o recurso tem: `0(livre)`, pode entrar qualquer aluno mesmo sem solicitar o acesso; `1(parcial)`, pode entrar qualquer aluno desde que tenha tomado uma dose da vacina; `3(total)`, pode entrar somente quem solicitar um cesso e tiver as doses necessárias da vacina contra a Covid-19.
+        `descricao : string | None`
+                Descrição do recurso do campus.
+        `inicio_horario_funcionamento : Time(hh:mm:ss)`
+                Horário do início de funcionamento do local que o recurso pertence.
+        `fim_horario_funcionamento : Time(hh:mm:ss)`
+                Horário do fim de funcionamento do local que o recurso pertence.
+        `quantidade_horas : int`
+                Quantidade de horas que uma pessoal pode ficar ocupando um recurso do campus.
+        `usuario_id_usuario : int | None`
+                Identificador do usuário que criou o recurso.
+        `usuario : UsuarioModel`
+                Dados do usuário que solicitou o recurso.
+        `campus_instituto_id_campus_instituto`
+                Identificador do campus o qual o recurso pertence.
+        `campus_instituto : CampusInstitutoModel`
+                Dados do campus ou instituto o qual o recurso pertence.
+        
+        Métodos
+        -------
+        `serialize():dict`
+            Retorna um dicionário com os dados da tabela para API expor como JSON.    
+    '''
+
     __tablename__ = "recurso_campus"
 
     id_recurso_campus = db.Column(db.Integer, primary_key=True)
@@ -26,7 +62,6 @@ class RecursoCampusModel(BaseHasNameModel, db.Model):
     
     usuario = db.relationship('UsuarioModel', lazy='select', uselist=False)
     campus_instituto = db.relationship('CampusInstitutoModel', backref=db.backref('recursos_campus', lazy='select'))
-
 
             
     def serialize(self):
