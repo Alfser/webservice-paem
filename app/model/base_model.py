@@ -237,57 +237,6 @@ class BaseHasNameModel(BaseModel):
         if campus_instituto_id_campus_instituto and usuario_id_usuario:
             return list(db.session.query(*entiries).filter_by(campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto, usuario_id_usuario=usuario_id_usuario).all())
         return db.session.query(*entiries).all()
-class BaseHasVacinacaoModel(BaseHasNameModel):
-    '''
-        Classe base especializada para classes-modelos que tenham os dado de vacinação do aluno.
-
-        ...
-
-        Métodos
-        -------
-        `@classmethod`
-        `query_all_names(cls, *entiries, campus_instituto_id_campus_instituto=None, usuario_id_usuario=None):`
-                Consultar dados do banco de acordo com os parâmetros usados para selecionar os dados, em `entity`, da consulta e os parâmetros usados para filtragem desta.
-        `@classmethod`
-        `query_vacinacoes(cls, *entiries, curso_id_curso=None, ano_turma=None, numero_de_dose=None):`
-                Consultar dados de vacinações do banco de dados de acordo com os parâmetros de filtragem..
-    '''
-
-    @classmethod
-    def query_vacinacoes(cls, *entiries, curso_id_curso=None, ano_turma=None, numero_de_doses=None):
-        '''
-        Consultar dados de vacinações do banco de dados de acordo com os parâmetros de filtragem.
-
-        ...
-
-        Parâmetros
-        ----------
-        `entiries : Model`
-                    Clase-Model com as colunas buscadas na consulta.
-        `curso_id_curso : int | None`
-                        Identficador do curso usado para filtragem na consulta.
-        `ano_turma : int | None`
-                        turma do considerado o ano de ingresso do discente usado para filtragem na consulta.
-        `numero_de_dose : int | None`
-                        número de dose tomadas usado para filtragem na consulta.
-        '''
-
-        if curso_id_curso and ano_turma and numero_de_doses:
-                return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso, quantidade_vacinas=numero_de_doses, ano_de_ingresso=ano_turma).all())
-        elif curso_id_curso and ano_turma:
-                return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso, ano_de_ingresso=ano_turma).all())
-        elif curso_id_curso and numero_de_doses:
-                return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso, quantidade_vacinas=numero_de_doses).all())
-        elif ano_turma and numero_de_doses:
-                return list(db.session.query(*entiries).filter_by(ano_de_ingresso=ano_turma, quantidade_vacinas=numero_de_doses).all())
-        elif curso_id_curso:
-                return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso).all())
-        elif ano_turma:
-                return list(db.session.query(*entiries).filter_by(ano_de_ingresso=ano_turma).all())
-        elif numero_de_doses:
-                return list(db.session.query(*entiries).filter_by(quantidade_vacinas=numero_de_doses).all())
-        else:
-                return db.session.query(*entiries).all()
 
 class BaseHasCurso(BaseModel):
     '''
@@ -425,3 +374,55 @@ class BaseHasUsuarioModel(BaseHasNameModel):
         '''
         
         return cls.query.filter_by(usuario_id_usuario=usuario_id_usuario).first()
+
+class BaseHasVacinacaoModel(BaseHasUsuarioModel):
+    '''
+        Classe base especializada para classes-modelos que tenham os dado de vacinação do aluno.
+
+        ...
+
+        Métodos
+        -------
+        `@classmethod`
+        `query_all_names(cls, *entiries, campus_instituto_id_campus_instituto=None, usuario_id_usuario=None):`
+                Consultar dados do banco de acordo com os parâmetros usados para selecionar os dados, em `entity`, da consulta e os parâmetros usados para filtragem desta.
+        `@classmethod`
+        `query_vacinacoes(cls, *entiries, curso_id_curso=None, ano_turma=None, numero_de_dose=None):`
+                Consultar dados de vacinações do banco de dados de acordo com os parâmetros de filtragem..
+    '''
+
+    @classmethod
+    def query_vacinacoes(cls, *entiries, curso_id_curso=None, ano_turma=None, numero_de_doses=None):
+        '''
+        Consultar dados de vacinações do banco de dados de acordo com os parâmetros de filtragem.
+
+        ...
+
+        Parâmetros
+        ----------
+        `entiries : Model`
+                    Clase-Model com as colunas buscadas na consulta.
+        `curso_id_curso : int | None`
+                        Identficador do curso usado para filtragem na consulta.
+        `ano_turma : int | None`
+                        turma do considerado o ano de ingresso do discente usado para filtragem na consulta.
+        `numero_de_dose : int | None`
+                        número de dose tomadas usado para filtragem na consulta.
+        '''
+
+        if curso_id_curso and ano_turma and numero_de_doses:
+                return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso, quantidade_vacinas=numero_de_doses, ano_de_ingresso=ano_turma).all())
+        elif curso_id_curso and ano_turma:
+                return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso, ano_de_ingresso=ano_turma).all())
+        elif curso_id_curso and numero_de_doses:
+                return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso, quantidade_vacinas=numero_de_doses).all())
+        elif ano_turma and numero_de_doses:
+                return list(db.session.query(*entiries).filter_by(ano_de_ingresso=ano_turma, quantidade_vacinas=numero_de_doses).all())
+        elif curso_id_curso:
+                return list(db.session.query(*entiries).filter_by(curso_id_curso=curso_id_curso).all())
+        elif ano_turma:
+                return list(db.session.query(*entiries).filter_by(ano_de_ingresso=ano_turma).all())
+        elif numero_de_doses:
+                return list(db.session.query(*entiries).filter_by(quantidade_vacinas=numero_de_doses).all())
+        else:
+                return db.session.query(*entiries).all()
