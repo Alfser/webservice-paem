@@ -1491,9 +1491,11 @@ Endpoints disponíveis:
       {
         "id_notificacao_covid": <integer>,
         "data": "yyyy-mm-dd",
+        "data_diagnostico": "yyyy-mm-dd",
         "teste": "string",
         "nivel_sintomas": "string",
         "matricula_discente": "*string",
+        "observacoes": "string",
         "campus_instituto_id_campus_instituto": <*integer>
       }   
      
@@ -1506,8 +1508,10 @@ Endpoints disponíveis:
 
       {
         "data": "yyyy-mm-dd",
+        "data_diagnostico": "yyyy-mm-dd",
         "teste": "string",
         "nivel_sintomas": "string",
+        "observacoes": "string",
         "matricula_discente": "*string",
         "campus_instituto_id_campus_instituto": <*integer>
       }
@@ -1522,8 +1526,10 @@ Endpoints disponíveis:
         {
           "id_notificacao_covid": <*integer>,
           "data": "yyyy-mm-dd",
+          "data_diagnostico": "yyyy-mm-dd",
           "teste": "string",
           "nivel_sintomas": "string",
+          "observacoes": "string",
           "matricula_discente": "*string",
           "campus_instituto_id_campus_instituto": <*integer>
         }
@@ -1544,28 +1550,32 @@ Endpoints disponíveis:
   [
     
     {
-        "id_notificacao_covid": <integer>,
-        "data": "string",
+        "id_notificacao_covid": <*integer>,
+        "data": "*string",
+        "data_diagnosico": "string",
         "teste": "string",
-        "nivel_sintomas": "string",
-        "matricula_discente": "string",
+        "nivel_sintomas": "*string",
+        "observacoes":"string",
+        "matricula_discente": "*string",
         "campus_instituto_id_campus_instituto": <integer>
     },
     {
-        "id_notificacao_covid": <integer>,
-        "data": "string",
+        "id_notificacao_covid": <*integer>,
+        "data": "*string",
+        "data_diagnosico": "string",
         "teste": "string",
-        "nivel_sintomas": "string",
-        "matricula_discente": "string",
+        "nivel_sintomas": "*string",
+        "matricula_discente": "*string",
         "campus_instituto_id_campus_instituto": <integer>
     },
     ...,
     {
-        "id_notificacao_covid": <integer>,
-        "data": "string",
+        "id_notificacao_covid": <*integer>,
+        "data": "*string",
+        "data_diagnosico": "string",
         "teste": "string",
-        "nivel_sintomas": "string",
-        "matricula_discente": "string",
+        "nivel_sintomas": "*string",
+        "matricula_discente": "*string",
         "campus_instituto_id_campus_instituto": <integer>
     },
    

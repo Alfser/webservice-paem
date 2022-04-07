@@ -105,8 +105,10 @@ class NotificacaoCovidModel(BaseModel, db.Model):
         return {
             "id_notificacao_covid":self.id_notificacao_covid,
             "data":self.data,
+            "data_diagnostico":self.data_diagnostico,
             "teste":self.teste,
             "nivel_sintomas":self.nivel_sintomas,
+            "observacoes":self.observacoes,
             "matricula_discente":self.matricula_discente,
             "campus_instituto_id_campus_instituto":self.campus_instituto_id_campus_instituto
         }
