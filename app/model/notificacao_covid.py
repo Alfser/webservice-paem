@@ -17,13 +17,17 @@ class NotificacaoCovidModel(BaseModel, db.Model):
         Atributos
         ---------
         `id_notificacao_covid : int`
-                Identificador da tupla de notificação de covid.
+                Identificador da tupla de notificação de Covid.
         `data : Date(yyyy-mm-dd) | None`
-                Data em que teve covid.
+                Data em que teve os sintomas de Covid.
+        `data_diagnostico : Date(yyyy-mm-dd)`
+                Data em que recebeu o diagnóstico de Covid.
         `teste : boolean | None `
                 Se fez o teste para ver se estava com covid.
         `nivel_sintomas : str | None`
                 Quais foram os sintomas que teve.
+        `observacoes : str | None`
+                Algum adendo a despeito da notificação de covid.
         `matricula_discente : int | None`
                 Número de matrícula do discente.
         `discente : DiscenteModel`
@@ -48,9 +52,11 @@ class NotificacaoCovidModel(BaseModel, db.Model):
 
     id_notificacao_covid = db.Column(db.Integer, primary_key=True)
     __data = db.Column('data', db.Date, nullable=True)
+    __data_diagnostico = db.Column('data_diagnostico', db.Date, nullable=True)
     teste = db.Column(db.Boolean, nullable=True)
     nivel_sintomas = db.Column(db.SmallInteger, nullable=True) # 0-não desejo informar, 1-leve, 2-moderado, 3-grave
-    
+    observacoes = db.Column(db.Text, nullable=True)
+
     matricula_discente = db.Column(
         db.String(45), 
         db.ForeignKey("discente.matricula"), 
@@ -75,6 +81,16 @@ class NotificacaoCovidModel(BaseModel, db.Model):
         if isinstance(data, str) and data.find("-")!=-1:
             data = datetime.strptime(data, "%Y-%m-%d")
         self.__data = data
+
+    @property
+    def data_diagnostico(self):
+        return str(self.__data_diagnostico)
+
+    @data.setter
+    def data_diagnostico(self, data):
+        if isinstance(data, str) and data.find("-")!=-1:
+            data = datetime.strptime(data, "%Y-%m-%d")
+        self.__data_diagnostico = data
 
     def serialize(self):
         '''
