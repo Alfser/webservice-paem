@@ -86,7 +86,7 @@ class NotificacaoCovidModel(BaseModel, db.Model):
     def data_diagnostico(self):
         return str(self.__data_diagnostico)
 
-    @data.setter
+    @data_diagnostico.setter
     def data_diagnostico(self, data):
         if isinstance(data, str) and data.find("-")!=-1:
             data = datetime.strptime(data, "%Y-%m-%d")
