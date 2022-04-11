@@ -45,7 +45,7 @@ class CampusInstitutoModel(BaseHasNameModel, db.Model):
     id_campus_instituto = db.Column(db.Integer, primary_key=True)
     __ano_fundacao = db.Column('ano_fundacao', db.Date, nullable=False)
     nome = db.Column(db.String(255), nullable=False)
-    abertura_total = db.Column(db.SmallInteger, nullable=True)
+    abertura_total = db.Column(db.SmallInteger, nullable=False)
 
     direcao_id_direcao = db.Column(db.Integer, db.ForeignKey('direcao.id_direcao'), nullable=True)
     direcao = db.relationship('DirecaoModel', uselist=False, lazy='select')
@@ -57,7 +57,11 @@ class CampusInstitutoModel(BaseHasNameModel, db.Model):
     @ano_fundacao.setter
     def ano_fundacao(self, data):
         if isinstance(data, str) and data.find("-")!=-1:
-            data = datetime.strptime(data, "%Y-%m-%d")
+            try:
+                data = datetime.strptime(data, "%Y-%m-%d")
+            except ValueError:
+                raise ValueError("Erro: A data deve ser enviada no formato 'YYYY-mm-dd'")    
+
 
         self.__ano_fundacao = data
 

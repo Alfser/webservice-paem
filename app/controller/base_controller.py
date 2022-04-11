@@ -1,3 +1,4 @@
+from msilib.schema import Error
 from ..util.http_status_code import OK, CREATED, BAD_REQUEST, NOT_FOUND_REQUEST
 
 
@@ -25,9 +26,10 @@ class BaseController:
         try:
             new_model = Model(**body)
             new_model.save_to_db()
+        except ValueError as msg:
+            return {"message":msg.args[0]}, BAD_REQUEST
         except:
             return {"message":"Há dado(s) inválido(s) no body da requisição."}, BAD_REQUEST
-
         return new_model.serialize(), CREATED
 
     @classmethod

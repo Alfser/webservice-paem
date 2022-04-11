@@ -12,9 +12,9 @@ class CampusInstitutoResource(Resource):
     def get(self):
 
         parser = reqparse.RequestParser()
-        parser.add_argument('id_campus_instituto', type=str, required=True, help="You need to send query string id_campus.")
+        parser.add_argument('id_campus_instituto', type=int, required=True, help="Precisa enviar a query string id_campus_instituto.")
 
-        args = parser.parse_args(strict=True)
+        args = parser.parse_args()
         id_campus_instituto = args.get('id_campus_instituto')
         
         return CampusInstitutoController.get(id_campus_instituto)
