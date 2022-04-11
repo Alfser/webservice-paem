@@ -1,4 +1,5 @@
 
+from app.model import campus_instituto
 from ..controller import RecursoCampusController
 from ..util.authorization import Authorization
 from ..util.http_status_code import BAD_REQUEST
@@ -46,21 +47,20 @@ class ListaRecursoCampusResource(Resource):
     ENDPOINT = 'recursos_campus'
     ROUTE = '/recursos_campus'
 
-    @Authorization.token_required(with_usuario=True)
-    def get(self, usuario):
+    @Authorization.token_required()
+    def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument('usuario_id_usuario', type=int, required=False, help='Required query string usuario_id_usuario.')
+        parser.add_argument('campus_instituto_id_campus_instituto', type=int, required=False, help='Required query string campus_instituto_id_campus_instituto.')
         
-        try:
-          args = parser.parse_args()
-        except:
-          return {"message":"Invalid value to this Query String"}, BAD_REQUEST
-
+        args = parser.parse_args()
+        
         usuario_id_usuario = args.get('usuario_id_usuario')
-        if usuario_id_usuario:
+        campus_instituto_id_campus_instituto = args.get('campus_instituto_id_campus_instituto')
+        if usuario_id_usuario or campus_instituto_id_campus_instituto:
           return RecursoCampusController.get_all_names(
-          campus_instituto_id_campus_instituto=usuario.campus_instituto_id_campus_instituto, 
+          campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto, 
           usuario_id_usuario=usuario_id_usuario
         )
-
+        
         return RecursoCampusController.get_all_names(None, None)

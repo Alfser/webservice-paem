@@ -1108,7 +1108,10 @@ Endpoints disponíveis:
     
  - `/recursos_campus`: Use para **ver** os valores na tabela _recurso_campus_ gravada no banco de dados. 
    - Método(s): Você pode apenas usar o método **GET** para acessar esta rota.
-   - Usar a rota `/recursos_campus`, para buscar todos, ou `/recursos_campus?usuario_usuario=integer`, para buscar os de um usuario especifico
+   - Rotas 
+     - `/recursos_campus`, para buscar todos
+     - `/recursos_campus?usuario_id_usuario=<integer>`, para buscar os recurso criado por um usuario especifico.
+     - `/recursos_campus?campus_instituto_id_campus_instituto=<integer>`para buscar os recurso de um campus ou instituto especifico.
    - Resposta:
 
    ```json
