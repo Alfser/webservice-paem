@@ -85,7 +85,10 @@ class CursoModel(BaseHasNameModel, db.Model):
     @data_fundacao.setter
     def data_fundacao(self, data):
         if isinstance(data, str) and data.find("-")!=-1:
-            data = datetime.strptime(data, "%Y-%m-%d")
+                try:
+                        data = datetime.strptime(data, "%Y-%m-%d")
+                except ValueError:
+                        raise ValueError("Erro: A data deve ser enviada no formato 'YYYY-mm-dd'")    
         self.__data_fundacao = data
         
     def serialize(self):

@@ -52,7 +52,10 @@ class DirecaoModel(db.Model):
     @data_entrada.setter
     def data_entrada(self, data):
         if isinstance(data, str):
-            data = datetime.strptime(data, "%Y-%m-%d")
+            try:
+                data = datetime.strptime(data, "%Y-%m-%d")
+            except ValueError:
+                raise ValueError("Erro: A data deve ser enviada no formato 'YYYY-mm-dd'")    
         self.__data_entrada = data
 
     @property
@@ -62,7 +65,10 @@ class DirecaoModel(db.Model):
     @data_saida.setter
     def data_saida(self, data):
         if isinstance(data, str):
-            data = datetime.strptime(data, "%Y-%m-%d")
+            try:
+                data = datetime.strptime(data, "%Y-%m-%d")
+            except ValueError:
+                raise ValueError("Erro: A data deve ser enviada no formato 'YYYY-mm-dd'")    
         self.__data_saida = data
 
     def serialize(self):

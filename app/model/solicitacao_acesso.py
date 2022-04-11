@@ -134,8 +134,10 @@ class SolicitacaoAcessoModel(BaseHasUsuarioAndDiscenteModel, db.Model):
     @data.setter
     def data(self, data):
         if isinstance(data, str) and data.find("-")!=-1:
-            data = datetime.strptime(data, "%Y-%m-%d")
-
+            try:
+                data = datetime.strptime(data, "%Y-%m-%d")
+            except ValueError:
+                raise ValueError("Erro: A data deve ser enviada no formato 'YYYY-mm-dd'")    
         self.__data = data
 
     @property

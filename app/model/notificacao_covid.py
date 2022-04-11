@@ -79,7 +79,10 @@ class NotificacaoCovidModel(BaseModel, db.Model):
     @data.setter
     def data(self, data):
         if isinstance(data, str) and data.find("-")!=-1:
-            data = datetime.strptime(data, "%Y-%m-%d")
+            try:
+                data = datetime.strptime(data, "%Y-%m-%d")
+            except ValueError:
+                raise ValueError("Erro: A data deve ser enviada no formato 'YYYY-mm-dd'")    
         self.__data = data
 
     @property
@@ -89,7 +92,10 @@ class NotificacaoCovidModel(BaseModel, db.Model):
     @data_diagnostico.setter
     def data_diagnostico(self, data):
         if isinstance(data, str) and data.find("-")!=-1:
-            data = datetime.strptime(data, "%Y-%m-%d")
+            try:
+                data = datetime.strptime(data, "%Y-%m-%d")
+            except ValueError:
+                raise ValueError("Erro: A data deve ser enviada no formato 'YYYY-mm-dd'")    
         self.__data_diagnostico = data
 
     def serialize(self):
