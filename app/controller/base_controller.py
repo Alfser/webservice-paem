@@ -1,4 +1,3 @@
-from msilib.schema import Error
 from ..util.http_status_code import OK, CREATED, BAD_REQUEST, NOT_FOUND_REQUEST
 
 
