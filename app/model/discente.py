@@ -99,7 +99,7 @@ class DiscenteModel(BaseHasVacinacaoModel, db.Model):
     fabricante = db.Column(db.String(45), nullable=True)
     justificativa = db.Column(db.Text, nullable=True)
     semestre = db.Column(db.Integer, nullable=True)
-    endereco = db.Column(db.String(45), nullable=True)
+    endereco = db.Column(db.String(255), nullable=True)
     grupo_risco = db.Column(db.SmallInteger, nullable=True)
     status_covid = db.Column(db.SmallInteger, nullable=True)
     status_permissao = db.Column(db.SmallInteger, nullable=True)
