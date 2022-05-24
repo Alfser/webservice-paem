@@ -19,6 +19,7 @@ from .resources import DiscenteVacinacaoResource, DiscenteVacinadosPorCursoResou
 from .resources import PontoVerificacaoResource, ListaPontoVerificacaoResource
 from .resources import DisciplinaResource, ListaDisciplinaResource
 from .resources import NotificacaoCovidResource, ListaNotificacaoCovidResource, NotificacaoCovidQuantidadePorCampusResource, NotificacaoCovidQuantidadePorCursoResource
+from .resources import PortariaResource, ListaPortariaResource
 from .resources import HomeResource
 
 from .resources import app

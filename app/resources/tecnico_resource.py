@@ -31,9 +31,12 @@ class TecnicoResource(Resource):
 
         tecnico_body = request.json.get("tecnico")
         usuario_body = request.json.get("usuario")
-        usuario = UsuarioController.create_usuario(usuario_body)
+        result, has_error = UsuarioController.create_usuario(usuario_body)
 
-        return TecnicoController.post(tecnico_body, usuario)
+        if has_error:
+            return result
+
+        return TecnicoController.post(tecnico_body, result)
 
     @Authorization.token_required()
     def put(self):

@@ -6,11 +6,11 @@
 '''
 from ..database import db
 from .usuario import UsuarioModel
-from .curso import CursoModel
-from .base_model import BaseHasNameModel
+from .base_model import BaseHasUsuarioModel, BaseHasSiape
 
+from datetime import datetime
 
-class PortariaModel(BaseHasNameModel, db.Model):
+class PortariaModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
     '''
         Classe-modelo que mapeia a tabela `portaria`, que por sua vez é responsável pelo cadastreo do usuário do porteiro.
 
@@ -31,30 +31,45 @@ class PortariaModel(BaseHasNameModel, db.Model):
                 Identificador do usuário do porteiro. 
         `usuario : UsuarioModel`
             Dados do usuário do porteiro.
-        `curso_id_curso : int | None`
-                Identificador do curso o qual a portaria pertence.
-        `curso : CursoModel`
-                Dados do curso.
-
+        `campus_instituto_id_campus_instituto : int | None`
+                Campus ou instituto do porteiro.
+        `campus_instituto : CampusInstitutoModel`
+                Dados do campus ou instituto do porteiro.
         Métodos
         -------
         `serialize(): dict`
             Retorna um dicionário com os dados da tabela para API expor como JSON.
         
     '''
+
     __tablename__ = "portaria"
 
     id_portaria = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(255), nullable=False)
-    data_nascimento = db.Column(db.Date, nullable=True)
+    __data_nascimento = db.Column('data_nascimento',db.Date, nullable=True)
     funcao = db.Column(db.String(45), nullable=True)
     turno_trabalho = db.Column(db.SmallInteger, nullable=False)
 
     usuario_id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), nullable=True)
     usuario = db.relationship('UsuarioModel',cascade="all, delete", lazy='select')
 
-    curso_id_curso = db.Column(db.Integer, db.ForeignKey('curso.id_curso'), nullable=True)
-    curso = db.relationship('CursoModel', lazy="select")
+    campus_instituto_id_campus_instituto = db.Column(db.Integer, db.ForeignKey('campus_instituto.id_campus_instituto'), nullable=True)
+    campus_instituto = db.relationship('CampusInstitutoModel', lazy="select")
+
+    @property
+    def data_nascimento(self):
+        return str(self.__data_nascimento)
+
+    @data_nascimento.setter
+    def data_nascimento(self, data):
+        if isinstance(data, str) and data.find("-")!=-1:
+            
+            try:
+                data = datetime.strptime(data, "%Y-%m-%d")
+            except:
+                raise ValueError("A data deve ser enviada no formato 'YYYY-mm-dd'")    
+        
+        self.__data_nascimento = data
 
     def serialize(self):
         '''
@@ -70,14 +85,10 @@ class PortariaModel(BaseHasNameModel, db.Model):
         try:
             usuario_dict = self.usuario.serialize()
         except AttributeError as msg:
-            print("Usuário não cadastrado.")
+            # print("Usuário não cadastrado.")
             usuario_dict = None
 
         finally:
-            curso = db.session.query(
-                CursoModel.nome
-            ).filter_by(id_curso=self.curso_id_curso).first()
-            
             return {
                 "nome": self.nome,
                 "data_nascimento": self.data_nascimento,
@@ -85,16 +96,15 @@ class PortariaModel(BaseHasNameModel, db.Model):
                 "turno_trabalho": self.turno_trabalho,
                 "usuario_id_usuario": self.usuario_id_usuario,
                 "usuario": usuario_dict if usuario_dict else None,
-                "curso_id_curso": self.curso_id_curso,
-                "curso": curso.nome if curso else None,
                 "id_portaria": self.id_portaria
             }
     
     @classmethod
-    def query_all_names(cls):
+    def query_all_names(cls, campus_instituto_id_campus_instituto):
         return super().query_all_names(
             cls.nome.label("nome"), 
-            cls.id_portaria.label("id")
+            cls.id_portaria.label("id"),
+            campus_instituto_id_campus_instituto=campus_instituto_id_campus_instituto
         )
 
     def __repr__(self):

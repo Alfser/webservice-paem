@@ -6,14 +6,12 @@ class UsuarioController(BaseHasCPFController):
 
     @classmethod
     def create_usuario(cls, usuario_dict):
-        
+        has_error = True
         try:
             usuario = UsuarioModel(**usuario_dict)
-            return usuario
-
-        except TypeError as msg:
-            print("error ao tentar criar um usuário")
-            return None
+        except Exception as msg:
+            return {'message':msg.args[0]} , has_error
+        return usuario, not has_error
 
     @classmethod
     def get(cls, id):

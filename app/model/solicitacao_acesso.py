@@ -137,7 +137,7 @@ class SolicitacaoAcessoModel(BaseHasUsuarioAndDiscenteModel, db.Model):
             try:
                 data = datetime.strptime(data, "%Y-%m-%d")
             except ValueError:
-                raise ValueError("Erro: A data deve ser enviada no formato 'YYYY-mm-dd'")    
+                raise ValueError("A data deve ser enviada no formato 'YYYY-mm-dd'")    
         self.__data = data
 
     @property

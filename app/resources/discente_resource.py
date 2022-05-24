@@ -37,9 +37,12 @@ class DiscenteResource(Resource):
 
         discente_body  = request.json.get("discente")
         usuario_body = request.json.get("usuario")
-        usuario = UsuarioController.create_usuario(usuario_body)
+        result, has_error = UsuarioController.create_usuario(usuario_body)
+
+        if has_error:
+            return result
         
-        return DiscenteController.post(discente_body, usuario)
+        return DiscenteController.post(discente_body, result)
       
     @Authorization.token_required()
     def put(self):

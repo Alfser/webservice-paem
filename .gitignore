@@ -20,3 +20,4 @@ app/database/connection.json
 #csvs databases
 app/database/inputs/*
 mydbpaem.sql
+update_portaria.sql

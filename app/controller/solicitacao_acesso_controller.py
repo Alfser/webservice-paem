@@ -25,7 +25,7 @@ class SolicitacaoAcessoController(BaseHasUsuarioAndDiscenteController):
             return response
 
         except ValueError as msg:
-            return {"message":msg}, BAD_REQUEST 
+            return {"message":msg.args[0]}, BAD_REQUEST 
 
     @classmethod
     def delete(cls, id):

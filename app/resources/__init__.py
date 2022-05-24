@@ -18,4 +18,5 @@ from .protocolo_resource import ProtocoloResource, ListaProtocolosResource
 from .ponto_verificacao_resource import PontoVerificacaoResource, ListaPontoVerificacaoResource
 from .disciplina_resource import DisciplinaResource, ListaDisciplinaResource
 from .notificacao_covid_resource import NotificacaoCovidResource, ListaNotificacaoCovidResource, NotificacaoCovidQuantidadePorCampusResource, NotificacaoCovidQuantidadePorCursoResource
+from .portaria_resource import PortariaResource, ListaPortariaResource
 from .home import HomeResource

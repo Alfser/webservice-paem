@@ -29,9 +29,12 @@ class DocenteResource(Resource):
         body = request.json
         docente_body = body.get("docente")
         usuario_body = body.get("usuario")
-        usuario = UsuarioController.create_usuario(usuario_body)
+        result, has_error = UsuarioController.create_usuario(usuario_body)
 
-        return DocenteController.post(docente_body, usuario=usuario)
+        if has_error:
+            return result
+
+        return DocenteController.post(docente_body, usuario=result)
 
     @Authorization.token_required()
     def put(self):

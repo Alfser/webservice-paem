@@ -27,8 +27,8 @@ class BaseController:
             new_model.save_to_db()
         except ValueError as msg:
             return {"message":msg.args[0]}, BAD_REQUEST
-        except:
-            return {"message":"Há dado(s) inválido(s) no body da requisição."}, BAD_REQUEST
+        except Exception:
+            return {"message":msg.args[0]}, BAD_REQUEST
         return new_model.serialize(), CREATED
 
     @classmethod
@@ -65,7 +65,7 @@ class BaseController:
         
         model.delete_from_db()
 
-        return {"message":" Deleted"}, OK
+        return {"message":" Deletado"}, OK
 
     @classmethod
     def get_list(cls, Model, campus_instituto_id_campus_instituto=None):
@@ -160,8 +160,11 @@ class BaseHasUsuarioController(BaseHasNameController):
         try:
             new_model = Model(**body, usuario=usuario)
             new_model.save_to_db()
-        except:
-            return {"message":"Há dado(s) inválido(s) no body da requisição."}, BAD_REQUEST
+        
+        except ValueError as msg:
+            return {"message":msg.args[0]}, BAD_REQUEST
+        except Exception as msg:
+            return {"message":msg.args[0]}, BAD_REQUEST
 
         return new_model.serialize(), CREATED
 
