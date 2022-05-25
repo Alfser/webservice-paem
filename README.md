@@ -604,22 +604,22 @@ Endpoints disponíveis:
  - `/acessos_permitidos/acesso_permitido`: ​​Use para **ver**, **editar**, **criar**, **excluir** uma um especifico acesso ao campus que foi permitido. 
    - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
    - Uso do **GET**: Obtém os o acesso ao campus permitido correspondente ao *id_acesso_permitido* enviado na query string da requisição
-     - Query string: *id_acesso_permitido = integer*
+     - Query string: *id_acesso_permitido = <integer>
      - Routes:
-       - `/acessos_permitidos/acesso_permitido?id_acesso_permitido=value`
+       - `/acessos_permitidos/acesso_permitido?id_acesso_permitido=<integer>`
         
      - Resposta:
       
      ```json
      
         {
-            "id_acesso_permitido":"integer",
-            "temperatura":"float",
-            "hora_entrada":"string format hh:mm:ss",
-            "hora_saida":"string format hh:mm:ss",
-            "matricula_discente":"string(45)",
-            "solicitacao_acesso_id_solicitacao_acesso":"integer",
-            "campus_instituto_id_campus_instituto":"integer"
+            "id_acesso_permitido":<*integer>,
+            "temperatura":<float>,
+            "hora_entrada":"*string format hh:mm:ss",
+            "hora_saida":"*string format hh:mm:ss",
+            "matricula_discente":"*string",
+            "solicitacao_acesso_id_solicitacao_acesso":<integer>,
+            "campus_instituto_id_campus_instituto":<integer>
         }
      
      ```
@@ -630,12 +630,12 @@ Endpoints disponíveis:
      ```json
 
         {
-            "temperatura":"float",
-            "hora_entrada":"string format hh:mm:ss",
-            "hora_saida":"string format hh:mm:ss",
-            "matricula_discente":"string(45)",
-            "solicitacao_acesso_id_solicitacao_acesso":"integer",
-            "campus_instituto_id_campus_instituto":"integer"
+            "temperatura":<float>,
+            "hora_entrada":"*string format hh:mm:ss",
+            "hora_saida":"*string format hh:mm:ss",
+            "matricula_discente":"*string",
+            "solicitacao_acesso_id_solicitacao_acesso":<integer>,
+            "campus_instituto_id_campus_instituto":<*integer>
         }
      
      ``` 
@@ -646,21 +646,21 @@ Endpoints disponíveis:
      ```json
      
         {
-            "id_acesso_permitido":"*integer",
-            "temperatura":"float",
-            "hora_entrada":"string format hh:mm:ss",
-            "hora_saida":"string format hh:mm:ss",
-            "matricula_discente":"string(45)",
-            "solicitacao_acesso_id_solicitacao_acesso":"integer",
-            "campus_instituto_id_campus_instituto":"integer"
+            "id_acesso_permitido":<*integer>,
+            "temperatura":<float>,
+            "hora_entrada":"*string format hh:mm:ss",
+            "hora_saida":"*string format hh:mm:ss",
+            "matricula_discente":"*string",
+            "solicitacao_acesso_id_solicitacao_acesso":<integer>,
+            "campus_instituto_id_campus_instituto":<integer>
         }
      
      ``` 
 
    - Uso do **DELETE**: Delteta o acesso ao campus permitido correspondente ao *id_acesso_permitido* enviado como query string na requisição.
-     - Query string: *id_acesso_permitido*
+     - Query string: *id_acesso_permitido = <integer>
      - Routes:
-       - `/acessos_permitidos/acesso_permitido?id_acesso_permitido=value`
+       - `/acessos_permitidos/acesso_permitido?id_acesso_permitido=<integer>`
 
  - `/acessos_permitidos`: Usado para **ver** os dados de acessos autorizados na tabela *acesso_permitido*. 
    - Metodo(s) disponíveis: Você pode apenas usar o método **GET** para acessar esta rota.
@@ -669,21 +669,21 @@ Endpoints disponíveis:
      ```json
         [
           {
-            "id_acesso_permitido": 1,
-            "temperatura": 33.45,
-            "hora_entrada": "10:30:38",
-            "hora_saida": "11:20:00",
-            "matricula_discente":"423543252254",
-            "solicitacao_acesso_id_solicitacao_acesso": 1
+            "id_acesso_permitido": <*integer>,
+            "temperatura": <float>,
+            "hora_entrada": "string format hh:mm:ss",
+            "hora_saida": "hh:mm:ss",
+            "matricula_discente":"*string",
+            "solicitacao_acesso_id_solicitacao_acesso": <insteger>
           },
           ...
           {
-            "id_acesso_permitido": 3,
-            "temperatura": 34.65,
-            "hora_entrada": "09:30:38",
-            "hora_saida": "10:20:00",
-            "matricula_discente":"5454542545",
-            "solicitacao_acesso_id_solicitacao_acesso": 3
+            "id_acesso_permitido": <*integer>,
+            "temperatura": <float>,
+            "hora_entrada": "string format hh:mm:ss",
+            "hora_saida": "hh:mm:ss",
+            "matricula_discente":"*string",
+            "solicitacao_acesso_id_solicitacao_acesso": <insteger>
           }
         ]
      ``` 
@@ -696,31 +696,31 @@ Endpoints disponíveis:
       
      ```json
         {
-          "id_docente": "integer",
+          "id_docente": <*integer>,
           "siape": "string",
           "nome": "string",
-          "data_nascimento": "string format yy-mm-dd",
-          "status_covid": "integer",
-          "status_afastamento": "integer",
+          "data_nascimento": "string format yyyy-dd-mm",
+          "status_covid": <integer>,
+          "status_afastamento": <integer>,
           "situacao": "string",
-          "sexo":"string(2)",
-          "quantidade_pessoas":"integer",
-          "quantidade_vacinas":"integer",
-          "fabricantes":"string(45)",
+          "sexo":"string",
+          "quantidade_pessoas":<integer>,
+          "quantidade_vacinas":<integer>,
+          "fabricantes":"string",
           "justificativa":"text",
-          "carteirinha_vacinacao":"bytes",
-          "usuario_id_usuario": "integer",
+          "carteirinha_vacinacao":"text",
+          "usuario_id_usuario": <integer>,
           "usuario": {
-            "id_usuario":"integer",
+            "id_usuario":<*integer>,
             "login":"*string(45)",
             "cpf":"string(15)",
             "email":"*string(45)",
-            "tipo":"*integer",
-            "campus_instituto_id_campus_instituto":"*integer"
+            "tipo":<integer>,
+            "campus_instituto_id_campus_instituto":<*integer>
           },
-          "curso_id_curso": "integer",
+          "curso_id_curso": <*integer>,
           "curso": "string",
-          "campus_instituto_id_campus_instituto": "integer",
+          "campus_instituto_id_campus_instituto": <*integer>,
           "campus_instituto": "string"
         }
      
@@ -734,26 +734,26 @@ Endpoints disponíveis:
           "docente":{
           "siape": "string",
           "nome": "string",
-          "data_nascimento": "string format dd-mm-yy",
-          "status_covid": "integer",
-          "status_afastamento": "integer",
+          "data_nascimento": "string format yyyy-dd-mm",
+          "status_covid": <integer>,
+          "status_afastamento": <integer>,
           "situacao": "string",
-          "sexo":"string(2)",
-          "quantidade_pessoas":"integer",
-          "quantidade_vacinas":"integer",
-          "fabricantes":"string(45)",
+          "sexo":"string",
+          "quantidade_pessoas":<integer>,
+          "quantidade_vacinas":<integer>,
+          "fabricantes":"string",
           "justificativa":"text",
-          "carteirinha_vacinacao":"bytes",
-          "usuario_id_usuario": "integer",
-          "curso_id_curso": "integer",
-          "campus_id_campus": "integer"
+          "carteirinha_vacinacao":"text",
+          "usuario_id_usuario": <integer>,
+          "curso_id_curso": <integer>,
+          "campus_id_campus": <integer>
           },
           "usuario": {
             "login":"*string(45)",
             "cpf":"string(15)",
             "email":"*string(45)",
-            "tipo":"*integer",
-            "campus_instituto_id_campus_instituto":"*integer"
+            "tipo":<*integer>,
+            "campus_instituto_id_campus_instituto":<*integer>
           }
         }
 
@@ -765,30 +765,30 @@ Endpoints disponíveis:
      ```json
 
         {
-          "id_docente": "*integer",
-          "siape": "string",
-          "nome": "string",
-          "data_nascimento": "string format dd-mm-yy",
-          "status_covid": "integer",
-          "status_afastamento": "integer",
-          "situacao": "string",
-          "sexo":"string(2)",
-          "quantidade_pessoas":"integer",
-          "quantidade_vacinas":"integer",
-          "fabricantes":"string(45)",
-          "justificativa":"text",
-          "carteirinha_vacinacao":"bytes",
-          "usuario_id_usuario": "integer",
-          "curso_id_curso": "integer",
-          "campus_id_campus": "integer"
+            "id_docente": <*integer>,
+            "siape": "string",
+            "nome": "string",
+            "data_nascimento": "string format yyyy-dd-mm",
+            "status_covid": <integer>,
+            "status_afastamento": <integer>,
+            "situacao": "string",
+            "sexo":"string",
+            "quantidade_pessoas":<integer>,
+            "quantidade_vacinas":<integer>,
+            "fabricantes":<string>,
+            "justificativa":"text",
+            "carteirinha_vacinacao":"text",
+            "usuario_id_usuario": <integer>,
+            "curso_id_curso": <integer>,
+            "campus_id_campus": <integer>
         }
 
      ``` 
 
-   - Uso do **DELETE**: Delete o usário técnico correspondente ao *id_docente* enviado como query string  na requisição.
+   - Uso do **DELETE**: Delete o usário docente correspondente ao *id_docente* enviado como query string  na requisição.
      - Query string: *id_docente = integer*
      - Route: 
-       - `/docentes/docente?id_docente=value`
+       - `/docentes/docente?id_docente=<integer>`
 
  - `/docentes`: Use para **ver** os técnicos cadastrados na base de dados, na tabela _docente_. 
    - Método(s) disponíveis: Você pode apenas usar o método **GET** para acessar esta rota.
@@ -797,20 +797,20 @@ Endpoints disponíveis:
      ```json
         [
           {
-          "nome": "DAVIA MARCIANA TALGATTI",
-          "id": 1,
-          "siape": "2391001"
+            "nome": "*string",
+            "id": <*unteger>,
+            "siape": "*string"
           },
           {
-          "nome": "ELDRA CARVALHO DA SILVA",
-          "id": 2,
-          "siape": "1995687"
+            "nome": "*string",
+            "id": <*unteger>,
+            "siape": "*string"
           },
           ...
           {
-          "nome": "JOSIVAN RODRIGUES DOS REIS",
-          "id": 6,
-          "siape": "3004452"
+            "nome": "*string",
+            "id": <*unteger>,
+            "siape": "*string"
           }
         ]
      ```
@@ -821,29 +821,29 @@ Endpoints disponíveis:
      - Resposta:
      ```json
      {
-      "id_tecnico":"integer",
+      "id_tecnico":<*integer>,
       "siape":"string", 
       "nome":"string", 
-      "data_nascimento":"string format yy-mm-dd", 
+      "data_nascimento":"string format yyyy-dd-mm", 
       "cargo":"string",
-      "status_covid":"integer", 
-      "status_afastamento":"integer",
-      "sexo":"string(2)",
-      "quantidade_pessoas":"integer",
-      "quantidade_vacinas":"integer",
-      "fabricantes":"string(45)",
+      "status_covid":<integer>, 
+      "status_afastamento":<integer>,
+      "sexo":"string",
+      "quantidade_pessoas":<integer>,
+      "quantidade_vacinas":<integer>,
+      "fabricantes":"string",
       "justificativa":"text",
-      "carteirinha_vacinacao":"bytes", 
-      "usuario_id_usuario":"integer",
+      "carteirinha_vacinacao":"text", 
+      "usuario_id_usuario":<*integer>,
       "usuario": {
-          "id_usuario":"integer",
-          "login":"*string(45)",
-          "cpf":"string(15)",
-          "email":"*string(45)",
-          "tipo":"*integer",
-          "campus_instituto_id_campus_instituto":"*integer"
+          "id_usuario":<*integer>,
+          "login":"*string",
+          "cpf":"string",
+          "email":"*string",
+          "tipo":<*integer>,
+          "campus_instituto_id_campus_instituto":<*integer>
       },
-      "campus_instituto_id_campus_instituto":"integer",
+      "campus_instituto_id_campus_instituto":<*integer>,
       "campus_instituto": "string"
       }
      
@@ -857,25 +857,25 @@ Endpoints disponíveis:
         "tecnico":{
         "siape":"string", 
         "nome":"string", 
-        "data_nascimento":"string format dd-mm-yy", 
+        "data_nascimento":"string format yyyy-dd-mm", 
         "cargo":"string",
-        "status_covid":"integer", 
-        "status_afastamento":"integer",
-        "sexo":"string(2)",
-        "quantidade_pessoas":"integer",
-        "quantidade_vacinas":"integer",
-        "fabricantes":"string(45)",
+        "status_covid":<integer>, 
+        "status_afastamento":<integer>,
+        "sexo":"string",
+        "quantidade_pessoas":<integer>,
+        "quantidade_vacinas":<integer>,
+        "fabricantes":"string",
         "justificativa":"text",
-        "carteirinha_vacinacao":"bytes", 
-        "usuario_id_usuario":"integer",
-        "campus_instituto_id_campus_instituto":"integer"
+        "carteirinha_vacinacao":"text", 
+        "usuario_id_usuario":<integer>,
+        "campus_instituto_id_campus_instituto":<*integer>
         },
         "usuario": {
-            "login":"*string(45)",
-            "cpf":"string(15)",
-            "email":"*string(45)",
-            "tipo":"*integer",
-            "campus_instituto_id_campus_instituto":"*integer"
+            "login":"*string",
+            "cpf":"string",
+            "email":"*string",
+            "tipo":<*integer>,
+            "campus_instituto_id_campus_instituto":<*integer>
         }
       }
 
@@ -886,10 +886,10 @@ Endpoints disponíveis:
      
      ```json
       {
-        "id_tecnico":"*integer",
+        "id_tecnico":<*integer>,
         "siape":"string", 
         "nome":"string", 
-        "data_nascimento":"string format dd-mm-yy", 
+        "data_nascimento":"string format yyyy-dd-mm", 
         "cargo":"string",
         "status_covid":"integer", 
         "status_afastamento":"integer",
@@ -906,9 +906,9 @@ Endpoints disponíveis:
      ``` 
 
    - Uso do **DELETE**: Delete o usário técnico correspondente ao *id_tecnico* enviado como query string  na requisição.
-     - Query string: *id_tecnico = integer*
+     - Query string: *id_tecnico = <integer>
      - Route: 
-       - `/tecnicos/tecnico?id_tecnico=value`
+       - `/tecnicos/tecnico?id_tecnico=<integer>`
 
 
 
@@ -919,25 +919,25 @@ Endpoints disponíveis:
    ```json
       [
         {
-          "nome": "ANDREA NUNES FIGUEIRA",
-          "id": 1,
-          "siape": "2177569"
+          "nome": "*string",
+          "id": <*integer>,
+          "siape": "*string"
         },
         {
-          "nome": "DANIELE PRINTES BARRETO",
-          "id": 2,
-          "siape": "1972586"
+          "nome": "*string",
+          "id": <*integer>,
+          "siape": "*string"
         },
         ...
         {
-          "nome": "DILCRIANE DOS SANTOS BATISTA",
-          "id": 3,
-          "siape": "1695149"
+          "nome": "*string",
+          "id": <*integer>,
+          "siape": "*string"
         },
         {
-          "nome": "EDIEGO DE SOUSA BATISTA",
-          "id": 4,
-          "siape": "1825851"
+          "nome": "*string",
+          "id": <*integer>,
+          "siape": "*string"
         }
       ]
   
@@ -952,19 +952,19 @@ Endpoints disponíveis:
      ```json
      {
    
-        "id_ponto_verificacao":"integer",
-        "nome":"string(45)",
+        "id_ponto_verificacao":<*integer>,
+        "nome":"string",
         "descricao":"Text",
-        "campus_instituto_id_campus_instituto":"integer",
-        "campus_instituto":"string(45)",
-        "usuario_id_usuario":"integer",
+        "campus_instituto_id_campus_instituto":<integer>,
+        "campus_instituto":"string",
+        "usuario_id_usuario":<integer>,
         "usuario": {
-            "id_usuario":"integer",
+            "id_usuario":<integer>,
             "login":"*string(45)",
             "cpf":"string(15)",
             "email":"*string(45)",
-            "tipo":"*integer",
-            "campus_instituto_id_campus_instituto":"*integer"
+            "tipo":<*integer>,
+            "campus_instituto_id_campus_instituto":<*integer>
         }
      }
      
@@ -976,16 +976,16 @@ Endpoints disponíveis:
      ```json
       {
         "ponto_verificacao":{
-            "nome":"string(45)",
+            "nome":"string",
             "descricao":"Text",
-            "campus_instituto_id_campus_instituto":"integer",
-            "usuario_id_usuario":"integer",
+            "campus_instituto_id_campus_instituto":<integer>,
+            "usuario_id_usuario":<*integer>,
         "usuario": {
-            "login":"*string(45)",
-            "cpf":"string(15)",
-            "email":"*string(45)",
-            "tipo":"*integer",
-            "campus_instituto_id_campus_instituto":"*integer"
+            "login":"*string",
+            "cpf":"string",
+            "email":"*string",
+            "tipo":<*integer>,
+            "campus_instituto_id_campus_instituto":<*integer>
           }
       }
 
@@ -996,19 +996,19 @@ Endpoints disponíveis:
      
      ```json
       {
-        "id_ponto_verificacao":"*integer",
-        "nome":"string(45)",
+        "id_ponto_verificacao":<*integer>,
+        "nome":"*string",
         "descricao":"Text",
-        "campus_instituto_id_campus_instituto":"integer",
-        "usuario_id_usuario":"integer",
+        "campus_instituto_id_campus_instituto":<*integer>,
+        "usuario_id_usuario":<*integer>,
       }
 
      ``` 
 
    - Uso do **DELETE**: Delete o usário ponto_varificacao correspondente ao *id_ponto_verificacao* enviado como query string  na requisição.
-     - Query string: *id_ponto_verificacao = integer*
+     - Query string: *id_ponto_verificacao = <integer>
      - Route: 
-       - `/pontos_verificacao/ponto_verificacao?id_ponto_verificacao=value`
+       - `/pontos_verificacao/ponto_verificacao?id_ponto_verificacao=<integer>`
 
 
  - `/pontos_verificacao`: Use para **ver** os técnicos cadastrados na base de dados, na *pontos_verificacao*. 
@@ -1018,16 +1018,15 @@ Endpoints disponíveis:
    ```json
       [
         {
-          "nome": "ANDREA NUNES FIGUEIRA",
-          "id": 1,
+          "nome": "string",
+          "id": <*integer>
           
         },
         ,
         ...
         {
-          "nome": "DILCRIANE DOS SANTOS BATISTA",
-          "id": 3,
-          "matricula": "1695149"
+          "nome": "string",
+          "id": <*integer>
         }
       ]
   
@@ -1254,11 +1253,11 @@ Endpoints disponíveis:
      ```json
 
         {
-          "id_campus":"integer",
+          "id_campus":<*integer>,
           "nome":"string(45)",
           "abertura_total":"boolean(1-sim ou 0-não)",
           "ano_fundacao":"string format yy-mm-dd",
-          "direcao_id_direcao": "integer",
+          "direcao_id_direcao": <*integer>,
           "direcao": "string(45)" 
         }
      
@@ -1273,7 +1272,7 @@ Endpoints disponíveis:
           "nome":"string(45)",
           "ano_fundacao":"string format dd-mm-yy",
           "abertura_total":"boolean(1-sim ou 0-não)",
-          "direcao_id_direcao": "integer",
+          "direcao_id_direcao": <integer>,
         }
       
       ``` 
@@ -1284,11 +1283,11 @@ Endpoints disponíveis:
         ```json
 
           {
-            "id_campus":"*integer",
+            "id_campus":<*integer>,
             "nome":"string",
             "abertura_total":"boolean(1 ou 0)",
             "ano_fundacao":"string format dd-mm-yy",
-            "direcao_id_direcao": "integer"
+            "direcao_id_direcao": <integer>
           }
       
         ``` 
@@ -1333,11 +1332,11 @@ Endpoints disponíveis:
      ```json
 
         {
-          "id_discente":"integer",
-          "nome":"string(45)",
-          "fabricante":"string(45)",
+          "id_discente":<*integer>,
+          "nome":"string",
+          "fabricante":"string",
           "status_covid":"boolean(1 ou 0)",
-          "quantidade_vacinas":"integer"
+          "quantidade_vacinas":<integer>
         }
      
      ``` 
@@ -1583,6 +1582,103 @@ Endpoints disponíveis:
     },
    
    ```
+
+- `/portarias/portaria`: ​​Use para **ver**, **editar**, **criar**, **excluir** os dados de um usuário portaria específico do banco. 
+   - Método(s) disponíveis: **GET**, **POST**, **PUT**, **DELETE** 
+   - Uso do **GET**: Obtém o usuário portaria logado no webservice.
+     - Resposta:
+      
+     ```json
+        {
+          "id_portaria": <*integer>,
+          "nome": "*string",
+          "data_nascimento": "string format yy-mm-dd",
+          "funcao":"string",
+          "turno_trabalho":"string",
+          "usuario_id_usuario": <*integer>,
+          "campus_instituto_id_campus_instituto": <*integer>,
+          "usuario": {
+            "id_usuario":<*integer>,
+            "login":"*string",
+            "cpf":"string",
+            "email":"*string",
+            "tipo":<*integer>,
+            "campus_instituto_id_campus_instituto":<*integer>
+          },
+          
+        }
+     
+     ``` 
+
+   - Uso do **POST**: Cria um usuário portaria de acordo com os dados enviado no body na requisição.
+     - Requisição: Campos que podem ser enviados no body.
+     
+     ```json
+        {
+          "portaria":{
+            "nome": "*string",
+            "data_nascimento": "string format yy-mm-dd",
+            "funcao":"string",
+            "turno_trabalho":"string",
+            "usuario_id_usuario": <*integer>,
+            "campus_instituto_id_campus_instituto": <*integer>
+          },
+          "usuario": {
+            "id_usuario":<*integer>,
+            "login":"*string",
+            "cpf":"string",
+            "email":"*string",
+            "tipo":<*integer>,
+            "campus_instituto_id_campus_instituto":<*integer>
+          },
+        }
+
+     ```  
+
+   - Uso do **PUT**: Atualiza um usuário portaria corresponente ao *id_portaria* enviado no body da requisição junto com os dados que serão atualizados.
+     - Body da requisição:
+     
+     ```json
+
+        {   
+          "id_portaria":<*integer>,
+          "nome": "*string",
+          "data_nascimento": "string format YYYY-mm-dd",
+          "funcao":"string",
+          "turno_trabalho":"string",
+          "usuario_id_usuario": <*integer>,
+          "campus_instituto_id_campus_instituto": <*integer>
+        }
+
+     ``` 
+
+   - Uso do **DELETE**: Delete o usário portaria correspondente ao *id_portaria* enviado como query string  na requisição.
+     - Query string: *id_portaria = <integer>
+     - Route: 
+       - `/portarias/portaria?id_portaria=<integer>`
+
+ - `/portarias`: Use para **ver** os porteiros cadastrados na base de dados, na tabela _portaria_. 
+   - Método(s) disponíveis: Você pode apenas usar o método **GET** para acessar esta rota.
+     - Resposta:
+     
+     ```json
+        [
+          {
+          "nome": "*string",
+          "id": <*insteger>,
+          },
+          {
+          "nome": "*string",
+          "id": 2,
+          },
+          ...
+          {
+          "nome": "*string",
+          "id": 6,
+          }
+        ]
+     ```
+
 ### Para tela de Estatísticas
 
 - `/discentes/quantidade_vacinados_por_curso` : Para **Ver**, a quantidade de alunos vacinados por curso e a quantidade total de alunos por curso. 

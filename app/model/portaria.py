@@ -90,13 +90,14 @@ class PortariaModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
 
         finally:
             return {
+                "id_portaria": self.id_portaria,
                 "nome": self.nome,
                 "data_nascimento": self.data_nascimento,
                 "funcao": self.funcao,
                 "turno_trabalho": self.turno_trabalho,
+                "campus_instituto_id_campus_instituto":self.campus_instituto_id_campus_instituto,
                 "usuario_id_usuario": self.usuario_id_usuario,
                 "usuario": usuario_dict if usuario_dict else None,
-                "id_portaria": self.id_portaria
             }
     
     @classmethod
