@@ -13,7 +13,7 @@ class BaseController:
         if not model:
             return {"message":"Recurso não encontrado."}, NOT_FOUND_REQUEST
       
-        return model.serialize(), OK
+        return model, OK
     
     @classmethod
     def post(cls, body, Model):

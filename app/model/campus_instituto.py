@@ -52,7 +52,7 @@ class CampusInstitutoModel(BaseHasNameModel, db.Model):
 
     @property
     def ano_fundacao(self):
-        return str(self.__ano_fundacao)
+        return self.__ano_fundacao
 
     @ano_fundacao.setter
     def ano_fundacao(self, data):
@@ -85,7 +85,7 @@ class CampusInstitutoModel(BaseHasNameModel, db.Model):
                 "abertura_total":self.abertura_total,
                 "ano_fundacao":self.ano_fundacao,
                 'direcao_id_direcao': self.direcao_id_direcao,
-                "direcao": docente_dict if docente_dict else None 
+                "direcao": docente_dict if docente_dict else None
             }
 
     @classmethod

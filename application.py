@@ -1,4 +1,4 @@
-from app import api
+from app import app
 from app import AuthorizationResource, AuthorizationBotResource
 from app import UsuarioResource, ListaUsuarioResource
 from app import DocenteResource, ListaDocenteResource, DocenteVacinacaoResource
@@ -22,68 +22,95 @@ from app import HomeResource
 from app.resources.discente_resource import DiscenteVacinadosPorCursoResource
 from app.resources.notificacao_covid_resource import NotificacaoCovidQuantidadePorCampusResource, NotificacaoCovidQuantidadePorCursoResource
 
+from flask_restful import Api
+
+from apispec import APISpec
+from apispec.ext.marshmallow import MarshmallowPlugin
+from flask_apispec.extension import FlaskApiSpec
+
+# Adding to restful lib
+api = Api(app)
+# api.prefix = '/api.paem'
+
+
+
+api.add_resource(CampusInstitutoResource, CampusInstitutoResource.ROUTE, endpoint=CampusInstitutoResource.ENDPOINT)
+
+spec = APISpec(
+        title='Webservice Minha Vida Academica',
+        version='v2',
+        plugins=[MarshmallowPlugin()],
+        openapi_version='3.0.2')
+app.config.update({
+    'APISPEC_SPEC': spec,
+    'APISPEC_SWAGGER_URL': '/docs-json/',  # URI to access API Doc JSON 
+    'APISPEC_SWAGGER_UI_URL': '/docs/'  # URI to access UI of 
+    })
+docs = FlaskApiSpec(app)
+docs.register(CampusInstitutoResource, CampusInstitutoResource.ENDPOINT)
+
 # Just to aws know the variable of flask app.
 
 def adicionar_recurso(Recurso):
-    api.add_resource(Recurso, Recurso.ROUTE, endpoint=Recurso.ENDPOINT)
+    api.add_resource(Recurso, Recurso.ROUTE)
 
-adicionar_recurso(HomeResource)
-    # Login and get token
-adicionar_recurso(AuthorizationResource)
-adicionar_recurso(AuthorizationBotResource)
+# adicionar_recurso(HomeResource)
+#     # Login and get token
+# adicionar_recurso(AuthorizationResource)
+# adicionar_recurso(AuthorizationBotResource)
 
-adicionar_recurso(UsuarioResource)
-adicionar_recurso(ListaUsuarioResource)
+# adicionar_recurso(UsuarioResource)
+# adicionar_recurso(ListaUsuarioResource)
 
-adicionar_recurso(TecnicoResource)
-adicionar_recurso(ListaTecnicoResource)
-adicionar_recurso(TecnicoVacinacaoResource)
+# adicionar_recurso(TecnicoResource)
+# adicionar_recurso(ListaTecnicoResource)
+# adicionar_recurso(TecnicoVacinacaoResource)
 
-adicionar_recurso(SolicitacaoAcessoResource)
-adicionar_recurso(ListaSolicitacaoAcessoResource)
-adicionar_recurso(SolicitacaoAcessoQuantidadePorCampusResource)
-adicionar_recurso(SolicitacaoAcessoQuantidadePorRecursoCampusResource)
-adicionar_recurso(SolicitacaoAcessoPorCursoResource)
-adicionar_recurso(SolicitacaoDisciplina)
+# adicionar_recurso(SolicitacaoAcessoResource)
+# adicionar_recurso(ListaSolicitacaoAcessoResource)
+# adicionar_recurso(SolicitacaoAcessoQuantidadePorCampusResource)
+# adicionar_recurso(SolicitacaoAcessoQuantidadePorRecursoCampusResource)
+# adicionar_recurso(SolicitacaoAcessoPorCursoResource)
+# adicionar_recurso(SolicitacaoDisciplina)
 
-adicionar_recurso(AcessoPermitidoResource)
-adicionar_recurso(ListaAcessoPermitidoResource)
+# adicionar_recurso(AcessoPermitidoResource)
+# adicionar_recurso(ListaAcessoPermitidoResource)
 
-adicionar_recurso(DiscenteResource)
-adicionar_recurso(ListaDiscenteResource)
-adicionar_recurso(DiscenteVacinacaoResource)
-adicionar_recurso(DiscenteVacinadosPorCursoResource)
-adicionar_recurso(ListaDiscenteVacinacaoResource)
+# adicionar_recurso(DiscenteResource)
+# adicionar_recurso(ListaDiscenteResource)
+# adicionar_recurso(DiscenteVacinacaoResource)
+# adicionar_recurso(DiscenteVacinadosPorCursoResource)
+# adicionar_recurso(ListaDiscenteVacinacaoResource)
 
-adicionar_recurso(RecursoCampusResource)
-adicionar_recurso(ListaRecursoCampusResource)
+# adicionar_recurso(RecursoCampusResource)
+# adicionar_recurso(ListaRecursoCampusResource)
 
-adicionar_recurso(CampusInstitutoResource)
-adicionar_recurso(ListaCampusInstitutoResource)
+# adicionar_recurso(CampusInstitutoResource)
+# adicionar_recurso(ListaCampusInstitutoResource)
 
-adicionar_recurso(DocenteResource)
-adicionar_recurso(ListaDocenteResource)
-adicionar_recurso(DocenteVacinacaoResource)
+# adicionar_recurso(DocenteResource)
+# adicionar_recurso(ListaDocenteResource)
+# adicionar_recurso(DocenteVacinacaoResource)
 
-adicionar_recurso(CursoResource)
-adicionar_recurso(ListaCursoResource)
+# adicionar_recurso(CursoResource)
+# adicionar_recurso(ListaCursoResource)
 
-adicionar_recurso(ProtocoloResource)
-adicionar_recurso(ListaProtocolosResource)
+# adicionar_recurso(ProtocoloResource)
+# adicionar_recurso(ListaProtocolosResource)
 
-adicionar_recurso(DisciplinaResource)
-adicionar_recurso(ListaDisciplinaResource)
+# adicionar_recurso(DisciplinaResource)
+# adicionar_recurso(ListaDisciplinaResource)
 
-adicionar_recurso(PontoVerificacaoResource)
-adicionar_recurso(ListaPontoVerificacaoResource)
+# adicionar_recurso(PontoVerificacaoResource)
+# adicionar_recurso(ListaPontoVerificacaoResource)
 
-adicionar_recurso(NotificacaoCovidResource)
-adicionar_recurso(ListaNotificacaoCovidResource)
-adicionar_recurso(NotificacaoCovidQuantidadePorCampusResource)
-adicionar_recurso(NotificacaoCovidQuantidadePorCursoResource)
+# adicionar_recurso(NotificacaoCovidResource)
+# adicionar_recurso(ListaNotificacaoCovidResource)
+# adicionar_recurso(NotificacaoCovidQuantidadePorCampusResource)
+# adicionar_recurso(NotificacaoCovidQuantidadePorCursoResource)
 
-adicionar_recurso(PortariaResource)
-adicionar_recurso(ListaPortariaResource)
+# adicionar_recurso(PortariaResource)
+# adicionar_recurso(ListaPortariaResource)
 
 # Objeto flask que será obtido para realizar o deploy na AWS
 # Ele está localizado abaixo dos recursos para ser
@@ -92,5 +119,5 @@ application = api.app
 
 if __name__=='__main__':
 
-    # application.debug = True
+    application.debug = True
     application.run()

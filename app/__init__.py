@@ -23,8 +23,3 @@ from .resources import PortariaResource, ListaPortariaResource
 from .resources import HomeResource
 
 from .resources import app
-
-from flask_restful import Api
-
-api = Api(app)
-api.prefix = '/api.paem'
