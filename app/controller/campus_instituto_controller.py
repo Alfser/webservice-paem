@@ -9,11 +9,11 @@ class CampusInstitutoController(BaseHasNameController):
 
     @classmethod
     def post(cls, body):
-        return super().post(body, CampusInstitutoModel)
+        return super().post(CampusInstitutoModel, body)
 
     @classmethod
-    def put(cls, body):
-        return super().put(body, CampusInstitutoModel)
+    def put(cls,id, body):
+        return super().put(id, body, CampusInstitutoModel)
 
     @classmethod
     def delete(cls, id):

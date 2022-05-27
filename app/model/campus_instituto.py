@@ -43,50 +43,12 @@ class CampusInstitutoModel(BaseHasNameModel, db.Model):
     __tablename__ = "campus_instituto"
 
     id_campus_instituto = db.Column(db.Integer, primary_key=True)
-    __ano_fundacao = db.Column('ano_fundacao', db.Date, nullable=False)
+    ano_fundacao = db.Column('ano_fundacao', db.Date, nullable=False)
     nome = db.Column(db.String(255), nullable=False)
     abertura_total = db.Column(db.SmallInteger, nullable=False)
 
     direcao_id_direcao = db.Column(db.Integer, db.ForeignKey('direcao.id_direcao'), nullable=True)
     direcao = db.relationship('DirecaoModel', uselist=False, lazy='select')
-
-    @property
-    def ano_fundacao(self):
-        return self.__ano_fundacao
-
-    @ano_fundacao.setter
-    def ano_fundacao(self, data):
-        if isinstance(data, str) and data.find("-")!=-1:
-            try:
-                data = datetime.strptime(data, "%Y-%m-%d")
-            except ValueError:
-                raise ValueError("Erro: A data deve ser enviada no formato 'YYYY-mm-dd'")    
-
-
-        self.__ano_fundacao = data
-
-    def serialize(self):
-        '''
-            Retorna um dicionário com os dados da tabela, identificada pelo objeto-modelo, para API expor como JSON.
-
-            Retorno
-            -------
-            dicionário `dict` com os dados da tabela `campus_instituto`.
-        '''
-        
-        try:
-            docente_dict = self.direcao.docente.serialize()
-        except AttributeError as msg:
-            docente_dict = None
-        finally:
-            return {
-                "id_campus_instituto":self.id_campus_instituto,
-                "nome":self.nome,
-                "abertura_total":self.abertura_total,
-                "ano_fundacao":self.ano_fundacao,
-                'direcao_id_direcao': self.direcao_id_direcao,
-                "direcao": docente_dict if docente_dict else None
-            }
 
     @classmethod
     def query_all_names(cls, campus_instituto=None):

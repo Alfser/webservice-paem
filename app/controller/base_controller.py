@@ -16,7 +16,7 @@ class BaseController:
         return model, OK
     
     @classmethod
-    def post(cls, body, Model):
+    def post(cls, Model, body):
 
         if not body:
             return {"message":"Não encontrado dados no corpo da requisição."}, BAD_REQUEST
@@ -29,20 +29,13 @@ class BaseController:
             return {"message":msg.args[0]}, BAD_REQUEST
         except Exception:
             return {"message":msg.args[0]}, BAD_REQUEST
-        return new_model.serialize(), CREATED
+        return new_model, CREATED
 
     @classmethod
-    def put(cls, body, Model):
+    def put(cls, id, body, Model):
 
         if not body:
             return {"message":"Dados não encontrado no corpo da requisição."}, BAD_REQUEST
-        
-        try:
-            id_key = list(filter(lambda k: k.startswith("id_"), body.keys()))[0]
-        except IndexError:
-            return {"message":"id não encontrado. O id do recurso deve ser enviado na requisição para realizar a atualização."}, BAD_REQUEST
-        
-        id = body.get(id_key)
 
         model = Model.find_by_id(id)
         if not model:
@@ -103,12 +96,9 @@ class BaseHasNameController(BaseController):
         
         # models_names receve a tuple of (nome , id)
         model_names = Model.query_all_names(campus_instituto_id_campus_instituto)
-
-        #create a dict with nome as key and id as a value
-        names_dict = [{"nome":row.nome, "id":row.id} for row in model_names]
-        
-        return names_dict
-
+        if model_names:
+            return model_names
+        return {}
 class BaseHasCursoController(BaseController):
     
     @classmethod

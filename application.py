@@ -1,3 +1,4 @@
+from tokenize import endpats
 from app import app
 from app import AuthorizationResource, AuthorizationBotResource
 from app import UsuarioResource, ListaUsuarioResource
@@ -34,25 +35,22 @@ api = Api(app)
 
 
 
-api.add_resource(CampusInstitutoResource, CampusInstitutoResource.ROUTE, endpoint=CampusInstitutoResource.ENDPOINT)
-
 spec = APISpec(
         title='Webservice Minha Vida Academica',
         version='v2',
         plugins=[MarshmallowPlugin()],
-        openapi_version='3.0.2')
+        openapi_version='2.0.0')
 app.config.update({
     'APISPEC_SPEC': spec,
     'APISPEC_SWAGGER_URL': '/docs-json/',  # URI to access API Doc JSON 
     'APISPEC_SWAGGER_UI_URL': '/docs/'  # URI to access UI of 
     })
 docs = FlaskApiSpec(app)
-docs.register(CampusInstitutoResource, CampusInstitutoResource.ENDPOINT)
 
 # Just to aws know the variable of flask app.
 
 def adicionar_recurso(Recurso):
-    api.add_resource(Recurso, Recurso.ROUTE)
+    api.add_resource(Recurso, Recurso.ROUTE, endpoint=Recurso.ENDPOINT)
 
 # adicionar_recurso(HomeResource)
 #     # Login and get token
@@ -85,8 +83,8 @@ def adicionar_recurso(Recurso):
 # adicionar_recurso(RecursoCampusResource)
 # adicionar_recurso(ListaRecursoCampusResource)
 
-# adicionar_recurso(CampusInstitutoResource)
-# adicionar_recurso(ListaCampusInstitutoResource)
+adicionar_recurso(CampusInstitutoResource)
+adicionar_recurso(ListaCampusInstitutoResource)
 
 # adicionar_recurso(DocenteResource)
 # adicionar_recurso(ListaDocenteResource)
@@ -115,6 +113,9 @@ def adicionar_recurso(Recurso):
 # Objeto flask que será obtido para realizar o deploy na AWS
 # Ele está localizado abaixo dos recursos para ser
 # obtido depois que os recursos são adicionados
+docs.register(CampusInstitutoResource, CampusInstitutoResource.ENDPOINT)
+docs.register(ListaCampusInstitutoResource, ListaCampusInstitutoResource.ENDPOINT)
+
 application = api.app
 
 if __name__=='__main__':

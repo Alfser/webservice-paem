@@ -1,0 +1,22 @@
+from .usuario_serializer import UsuarioSerializer
+from .discente_serializer import DiscenteSerializer
+from .docente_serializer import DocenteModel
+from .tecnico_serializer import TecnicoSerializer
+from .portaria_serializer import PortariaSerializer
+from .coordenacao_serializer import CoordenacaoSerializer
+from .curso_serializer import CursoSerializer
+from .campus_instituto_serializer import CampusInstitutoSerializer
+from .solicitacao_acesso_serializer import SolicitacaoAcessoSerializer
+from .acesso_permitido_serializer import AcessoPermitidoSerializer
+from .recurso_campus_serializer import RecursoCampusSerializer
+from .reserva_recurso_servidores_serializer import ReservaRecursoServidoreserializer
+from .direcao_serializer import DirecaoSerializer
+from .protocolo_serializer import ProtocoloSerializer
+from .ponto_verificacao_serializer import PontoVerificacaoSerializer
+from .disciplina_serializer import DisciplinaSerializer
+from .notificacao_covid_serializer import NotificacaoCovidSerializer
+
+
+
+
+
