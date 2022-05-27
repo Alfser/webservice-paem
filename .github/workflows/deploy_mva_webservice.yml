@@ -1,0 +1,24 @@
+name: Deployment Workflow
+
+on:
+  push:
+    branches:
+      - develop-v2
+    
+jobs:
+  job_mva:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Running server ssh connection
+      uses: appleboy/ssh-action@master
+      with: 
+        host: ${{secret.SERVER_HOST}}
+        port: ${{sercret.SERVER_PORT}}
+        username: ${{secret.SERVER_USER}}
+        password: ${{secret.SERVER_PASSWORD}}
+        script: |
+          touch hello_world.py
+
+
+
