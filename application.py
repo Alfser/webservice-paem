@@ -1,3 +1,5 @@
+""" JUSTO TO TESTE ACTION"""
+
 from tokenize import endpats
 from app import app
 from app import AuthorizationResource, AuthorizationBotResource

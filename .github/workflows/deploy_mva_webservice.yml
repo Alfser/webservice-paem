@@ -18,7 +18,8 @@ jobs:
         username: ${{secrets.SERVER_USER}}
         password: ${{secrets.SERVER_PASSWORD}}
         script: |
-          touch hello_world.py
+          cd app_test/webservice-paem
+          git pull
 
 
 
