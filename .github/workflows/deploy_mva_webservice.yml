@@ -13,10 +13,10 @@ jobs:
     - name: Running server ssh connection
       uses: appleboy/ssh-action@master
       with: 
-        host: ${{secret.SERVER_HOST}}
-        port: ${{sercret.SERVER_PORT}}
-        username: ${{secret.SERVER_USER}}
-        password: ${{secret.SERVER_PASSWORD}}
+        host: ${{secrets.SERVER_HOST}}
+        port: ${{sercrets.SERVER_PORT}}
+        username: ${{secrets.SERVER_USER}}
+        password: ${{secrets.SERVER_PASSWORD}}
         script: |
           touch hello_world.py
 
