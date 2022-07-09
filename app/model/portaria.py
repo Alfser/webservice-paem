@@ -6,6 +6,7 @@
 '''
 from ..database import db
 from .usuario import UsuarioModel
+from .campus_instituto import CampusInstitutoModel
 from .base_model import BaseHasUsuarioModel, BaseHasSiape
 
 from datetime import datetime
@@ -89,6 +90,10 @@ class PortariaModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
             usuario_dict = None
 
         finally:
+            campus_instituto = db.session.query(
+                CampusInstitutoModel.nome
+            ).filter_by(id_campus_instituto=self.campus_instituto_id_campus_instituto).first()
+            
             return {
                 "id_portaria": self.id_portaria,
                 "nome": self.nome,
@@ -96,6 +101,7 @@ class PortariaModel(BaseHasUsuarioModel, BaseHasSiape, db.Model):
                 "funcao": self.funcao,
                 "turno_trabalho": self.turno_trabalho,
                 "campus_instituto_id_campus_instituto":self.campus_instituto_id_campus_instituto,
+                "campus_instituto":campus_instituto.nome if campus_instituto else None,
                 "usuario_id_usuario": self.usuario_id_usuario,
                 "usuario": usuario_dict if usuario_dict else None,
             }
