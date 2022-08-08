@@ -1,6 +1,8 @@
 import json
 import os
 import sys
+from configparser import ConfigParser
+import logging
 
 if os.path.isfile('/etc/config.json'):
     with open('/etc/config.json') as file:
@@ -51,3 +53,23 @@ class Config:
     DATABASE = database
     SECRET_KEY = secret_key
     PASSWORD = password
+
+class OAuth2Credentials:
+    _filename = 'credentials.api.ini'
+    _section = 'ctic-api'
+
+    @classmethod
+    def get_api_credentials(cls):
+        
+        parser = ConfigParser()
+
+        try:
+            parser.read(filenames=cls._filename)
+        except:
+            logging.error('Erro durante a leitura do arquivo .ini com as configurações do banco.')
+
+        if not parser.has_section(cls._section):
+             raise ValueError(f"A sessão {cls._section} não existe no arquivo {cls._filename}.")
+        
+        api_credentials = dict(parser.items(cls._section))
+        return api_credentials

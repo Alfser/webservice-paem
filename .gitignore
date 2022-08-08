@@ -21,3 +21,5 @@ app/database/connection.json
 app/database/inputs/*
 mydbpaem.sql
 update_portaria.sql
+usuarios.json
+credentials.api.ini
