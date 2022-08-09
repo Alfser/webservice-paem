@@ -20,3 +20,4 @@ from .disciplina_resource import DisciplinaResource, ListaDisciplinaResource
 from .notificacao_covid_resource import NotificacaoCovidResource, ListaNotificacaoCovidResource, NotificacaoCovidQuantidadePorCampusResource, NotificacaoCovidQuantidadePorCursoResource
 from .portaria_resource import PortariaResource, ListaPortariaResource
 from .home import HomeResource
+from .oauth_login_resource import OAuth2LoginResource

@@ -19,6 +19,7 @@ from app import PontoVerificacaoResource, ListaPontoVerificacaoResource
 from app import NotificacaoCovidResource, ListaNotificacaoCovidResource
 from app import PortariaResource, ListaPortariaResource
 from app import HomeResource
+from app import OAuth2LoginResource
 from app.resources.discente_resource import DiscenteVacinadosPorCursoResource
 from app.resources.notificacao_covid_resource import NotificacaoCovidQuantidadePorCampusResource, NotificacaoCovidQuantidadePorCursoResource
 
@@ -84,6 +85,8 @@ adicionar_recurso(NotificacaoCovidQuantidadePorCursoResource)
 
 adicionar_recurso(PortariaResource)
 adicionar_recurso(ListaPortariaResource)
+
+adicionar_recurso(OAuth2LoginResource)
 
 # Objeto flask que será obtido para realizar o deploy na AWS
 # Ele está localizado abaixo dos recursos para ser

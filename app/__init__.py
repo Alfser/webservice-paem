@@ -21,6 +21,7 @@ from .resources import DisciplinaResource, ListaDisciplinaResource
 from .resources import NotificacaoCovidResource, ListaNotificacaoCovidResource, NotificacaoCovidQuantidadePorCampusResource, NotificacaoCovidQuantidadePorCursoResource
 from .resources import PortariaResource, ListaPortariaResource
 from .resources import HomeResource
+from .resources import OAuth2LoginResource
 
 from .resources import app
 
