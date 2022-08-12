@@ -1,4 +1,6 @@
 from ..database.config import OAuth2Credentials
+from ..controller.usuario_controller import UsuarioController
+from ..util.authorization import Authorization
 
 from flask_restful import Resource, request, reqparse
 from requests_oauthlib import OAuth2Session
@@ -57,7 +59,16 @@ class OAuth2LoginResource(Resource):
             'https://api.ufopa.edu.br/usuario/v1/usuarios?login=francisco.nunes', 
             verify=False, 
             headers={'x-api-key':api_credentials['x_api_key']}
-        )
+        )[0] # FIXME: trocar o serviço para consultar os dados do usuário que logou.
+
+        usuario = UsuarioController.get_by_login(api_response.get('login')) #TODO:and usuario_ctic==True verificar se o usuário foi cadastrado com o acesso do ctic. 
+        esta_cadastrado = usuario or UsuarioController.get_by_email(api_response.get('email'))
+        if esta_cadastrado:
+            return Authorization.get_token(usuario.login)
         
         return api_response, 200
+
+
+
+
 
