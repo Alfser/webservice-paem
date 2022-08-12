@@ -64,7 +64,7 @@ class OAuth2LoginResource(Resource):
         usuario = UsuarioController.get_by_login(api_response.get('login')) #TODO:and usuario_ctic==True verificar se o usuário foi cadastrado com o acesso do ctic. 
         esta_cadastrado = usuario or UsuarioController.get_by_email(api_response.get('email'))
         if esta_cadastrado:
-            return Authorization.get_token(usuario.login)
+            return Authorization.get_token(usuario.login), 200
         
         return api_response, 200
 
